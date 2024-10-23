@@ -12,24 +12,35 @@ include 'config.php';
     <title>Log-in</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <?php if (!empty($_SESSION['message'])): ?>
-        <?php
-        $alert_class = 'alert-warning';
-        if (strpos($_SESSION['message'], 'successful') !== false) {
-            $alert_class = 'alert-success';
+    <style>
+        .alert-container {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+            /* ให้มันอยู่ด้านบนสุด */
         }
-        ?>
-        <div class="alert <?php echo $alert_class; ?> alert-dismissible fade show my-5" role="alert">
-            <?php echo $_SESSION['message']; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php unset($_SESSION['message']); ?>
-    <?php endif; ?>
+    </style>
+</head>
+<body>
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100 min-vw-100">
+        <div class="alert-container">
+            <?php if (!empty($_SESSION['message'])): ?>
+                <?php
+                $alert_class = 'alert-warning';
+                if (strpos($_SESSION['message'], 'successful') !== false) {
+                    $alert_class = 'alert-success';
+                }
+                ?>
+                <div class="alert <?php echo $alert_class; ?> alert-dismissible fade show " role="alert">
+                    <?php echo $_SESSION['message']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php unset($_SESSION['message']); ?>
+            <?php endif; ?>
+        </div>
+
         <div class="row w-100">
             <!-- Left side: Image -->
             <div class="col-md-7 d-none d-md-flex align-items-center">
