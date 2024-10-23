@@ -97,14 +97,13 @@
 <script>
         // ตัวอย่างข้อมูลสินค้า
         const products = [
-            { name: 'สินค้า 1', image: 'https://via.placeholder.com/150', price: '1000 บาท' },
-            { name: 'สินค้า 2', image: 'https://via.placeholder.com/150', price: '2000 บาท' },
-            { name: 'สินค้า 3', image: 'https://via.placeholder.com/150', price: '1500 บาท' },
-            { name: 'สินค้า 4', image: 'https://via.placeholder.com/150', price: '3000 บาท' },
-            { name: 'สินค้า 5', image: 'https://via.placeholder.com/150', price: '1200 บาท' },
-            { name: 'สินค้า 6', image: 'https://via.placeholder.com/150', price: '1800 บาท' },
-        ];
-
+    { name: 'Mechanical Keyboard', image: 'https://via.placeholder.com/150', price: '1000 บาท', category: 'keyboard' },
+    { name: 'Gaming Mouse', image: 'https://via.placeholder.com/150', price: '2000 บาท', category: 'mouse' },
+    { name: 'Wireless Headset', image: 'https://via.placeholder.com/150', price: '1500 บาท', category: 'headset' },
+    { name: 'Curved Monitor', image: 'https://via.placeholder.com/150', price: '3000 บาท', category: 'monitor' },
+    { name: 'Gaming Chair', image: 'https://via.placeholder.com/150', price: '1200 บาท', category: 'chair' },
+    { name: 'Gaming Desk', image: 'https://via.placeholder.com/150', price: '1800 บาท', category: 'desk' },
+];
         // ฟังก์ชันค้นหาและแสดงสินค้า
         function searchProducts() {
             const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();

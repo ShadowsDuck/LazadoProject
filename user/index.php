@@ -306,20 +306,19 @@
             </div>
             <div class="col-md-3">
                 <!-- Search Box -->
-                <input type="text" class="form-control" placeholder="Search products..." aria-label="Search">
+                <input type="text" class="form-control" placeholder="Search products..." aria-label="Search1" id="gamingSearchInput">
             </div>
             <div class="col-md-3">
-                <!-- Category Dropdown -->
-                <select class="form-select" aria-label="Category Filter">
-                    <option selected>Gaming Gear (All)</option>
-                    <option value="1">Keyboard</option>
-                    <option value="2">Mouse</option>
-                    <option value="3">Headset</option>
-                    <option value="4">Monitor</option>
-                    <option value="5">Chair</option>
-                    <option value="6">Streaming</option>
-                    <option value="7">Other</option>
+                <!-- Search and Dropdown section in Gaming Gear -->
+                
+                <select class="form-select" id="gamingCategorySelect">
+                    <option value="all">Gaming Gear (All)</option>
+                    <option value="keyboard">Keyboard</option>
+                    <option value="mouse">Mouse</option>
+                    <option value="headset">Headset</option>
+                    <option value="monitor">Monitor</option>
                 </select>
+                
             </div>
         </div>
 
@@ -336,40 +335,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Product Item -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
-                    <img src="images/mouse.jpg" class="card-img-top" alt="Mouse">
-                    <div class="card-body">
-                        <h5 class="card-title">Gaming Mouse</h5>
-                        <p class="text-danger"><del>$50</del> $45</p>
-                        <p>⭐⭐⭐⭐ (85)</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Product Item -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
-                    <img src="images/headset.jpg" class="card-img-top" alt="Headset">
-                    <div class="card-body">
-                        <h5 class="card-title">Wireless Headset</h5>
-                        <p class="text-danger"><del>$80</del> $70</p>
-                        <p>⭐⭐⭐⭐⭐ (95)</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Product Item -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
-                    <img src="images/monitor.jpg" class="card-img-top" alt="Monitor">
-                    <div class="card-body">
-                        <h5 class="card-title">Curved Monitor</h5>
-                        <p class="text-danger"><del>$400</del> $350</p>
-                        <p>⭐⭐⭐⭐⭐ (150)</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more products as needed -->
+            
         </div>
     </div>
 
@@ -404,9 +370,28 @@
     <!-- Custom JS for Flash Sale -->
     <script src="script/flash_sale.js"></script>
 
+
+
+
+
     <script>
-    // Function for searching products
+    // รับค่าที่กรอกในช่องค้นหา
     function searchProducts() {
+        var query = document.querySelector('input[aria-label="Search1"]').value;
+        if (query) {
+            // Redirect to search results page with the query as a URL parameter
+            window.location.href = `allitem.php?query=${encodeURIComponent(query)}`;
+        }
+    }
+
+    // กด Enter ส่งค่า
+    document.querySelector('input[aria-label="Search1"]').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            searchProducts();
+        }
+    });
+
+    function searchProducts2() {
         var query = document.querySelector('input[aria-label="Search"]').value;
         if (query) {
             // Redirect to search results page with the query as a URL parameter
@@ -414,13 +399,70 @@
         }
     }
 
-    // Event listener for the enter key on search input
+    // กด Enter ส่งค่า
     document.querySelector('input[aria-label="Search"]').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-            searchProducts();
+            searchProducts2();
         }
     });
+
+
+
 </script>
+
+<script>
+    const gamingProducts = [
+        { name: 'Mechanical Keyboard', category: 'keyboard', price: '$99', image: 'keyboard_image_url' },
+        { name: 'Gaming Mouse', category: 'mouse', price: '$45', image: 'mouse_image_url' },
+        { name: 'Wireless Headset', category: 'headset', price: '$70', image: 'headset_image_url' },
+        { name: 'Curved Monitor', category: 'monitor', price: '$350', image: 'monitor_image_url' }
+    ];
+
+    // ฟังก์ชันค้นหาสินค้าจากช่องค้นหาและหมวดหมู่
+    function searchGamingProducts() {
+        const searchTerm = document.getElementById('gamingSearchInput').value.trim().toLowerCase();
+        const selectedCategory = document.getElementById('gamingCategorySelect').value;
+        const searchResults = document.getElementById('gamingProductResults'); // แก้ไขให้ตรงกับส่วนที่แสดงผลสินค้า
+
+        searchResults.innerHTML = ''; // ล้างผลลัพธ์เก่า
+
+        const filteredProducts = gamingProducts.filter(product => {
+            const matchesSearch = product.name.toLowerCase().includes(searchTerm);
+            const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+            return matchesSearch && matchesCategory;
+        });
+
+        if (filteredProducts.length === 0) {
+            searchResults.innerHTML = '<p>No products found</p>';
+        } else {
+            filteredProducts.forEach(product => {
+                searchResults.innerHTML += `
+                    <div class="col-md-3">
+                        <div class="product-card">
+                            <img src="${product.image}" alt="${product.name}">
+                            <h5>${product.name}</h5>
+                            <p>${product.price}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    // เรียกใช้ฟังก์ชัน searchGamingProducts เมื่อมีการพิมพ์ในช่องค้นหา หรือเลือกหมวดหมู่ใน Dropdown
+
+    document.getElementById('gamingSearchInput').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // ป้องกันการ reload หน้า
+        searchProducts2(); // เรียกฟังก์ชันค้นหา
+    }
+    });
+
+// เรียกฟังก์ชัน searchProducts เมื่อคลิกที่ไอคอนค้นหาของ gamingSearchInput
+    document.querySelector('.gaming-search-btn').addEventListener('click', function () {
+        searchProducts2();
+    });
+    </script>
 
 </body>
 
