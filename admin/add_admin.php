@@ -1,35 +1,43 @@
-<?php include('partials/header.php'); ?>
+<?php
+include('../config.php');
 
-<div class="container mt-5">
-    <h1> Add Admin </h1>
+$username = mysqli_real_escape_string($conn, $_POST['username']);
+$password = mysqli_real_escape_string($conn, $_POST['password']);
+$fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
 
-    <form action="" method="POST">
-        <table class=" table table-striped table-hover">
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Fullname</th>
-                <th>Email</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>admin</td>
-                <td>John Doe</td>
-                <td>john@example.com</td>
-                <td>
-                    <a href="#" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="text" name="username" placeholder="Username"></td>
-                <td><input type="text" name="fullname" placeholder="Fullname"></td>
-                <td><input type="email" name="email" placeholder="Email"></td>
-            </tr>
-        </table>
-    </form>
-</div>
+// Check if username already exists
+$query = mysqli_query($conn, "SELECT * FROM users WHERE username='{$username}'");
+$row = mysqli_num_rows($query);
 
-<?php include('partials/footer.php'); ?>
+if ($row > 0) {
+    // Username is already taken
+    $_SESSION['message'] = 'Username is already taken! Please use another.';
+    header("Location: {$base_url}/login/signup.php");
+    exit;
+}
+
+if (strlen($_POST['password']) < 6) {
+    $_SESSION['message'] = 'Password required 6 digits at least!';
+    header("Location: {$base_url}/login/signup.php");
+    exit;
+
+} else {
+
+    if (!empty($username) && !empty($password) && !empty($fullname)) {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = mysqli_query($conn, "INSERT INTO users (username, password, fullname, usertype) 
+        VALUES ('{$username}','{$hash}','{$fullname}','admin')") or die("query failed!");
+
+        if ($query) {
+            $_SESSION['message'] = 'Sign-up successful!';
+            header("Location:{$base_url}/admin/manage_admin.php");
+        } else {
+            $_SESSION['message'] = 'Sign-up failed!';
+            header("Location:{$base_url}/admin/manage_admin.php");
+        }
+    } else {
+        $_SESSION['message'] = 'Input is required';
+        header("Location:{$base_url}/admin/manage_admin.php");
+    }
+}
