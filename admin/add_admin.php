@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../config.php');
 
 $username = mysqli_real_escape_string($conn, $_POST['username']);

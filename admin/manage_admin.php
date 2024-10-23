@@ -77,7 +77,7 @@
                         <td>
                             <!-- <a href="#" class="btn btn-info btn-sm view_admin"> View </a> -->
                             <a href="#" class="btn btn-success btn-sm ms-2 update_admin"> Update </a>
-                            <a href="<?php echo "{$base_url}/admin/delete_admin.php?id={$id}"; ?>" class="btn btn-danger btn-sm ms-2 delete_admin"> Delete </a>
+                            <a href="<?php echo "{$base_url}/admin/del_admin.php?id={$id}"; ?>" class="btn btn-danger btn-sm ms-2 delete_admin"> Delete </a>
                         </td>
                     </tr>
                 <?php
