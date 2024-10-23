@@ -47,25 +47,65 @@
             </div>
         </div>
     </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>S.N.</th>
+                <th>Fullname</th>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            include('../config.php');
+            $sql = "SELECT * FROM users WHERE usertype='admin'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_num_rows($result);
+            $sn = 1;
 
-    <table class=" table table-striped table-hover">
-        <tr>
-            <th>S.N.</th>
-            <th>Fullname</th>
-            <th>Username</th>
-            <th>Actions</th>
-        </tr>
+            if ($row > 0) {
+                while ($data = mysqli_fetch_array($result)) {
+                    $id = $data['id'];
+                    $fullname = $data['fullname'];
+                    $username = $data['username'];
+            ?>
+                    <tr>
+                        <td><?php echo $sn++; ?></td>
+                        <td><?php echo $fullname; ?></td>
+                        <td><?php echo $username; ?></td>
+                        <td>
+                            <!-- <a href="#" class="btn btn-info btn-sm view_admin"> View </a> -->
+                            <a href="#" class="btn btn-success btn-sm ms-2 update_admin"> Update </a>
+                            <a href="<?php echo "{$base_url}/admin/del_admin.php?id={$id}"; ?>" class="btn btn-danger btn-sm ms-2 delete_admin"> Delete </a>
+                        </td>
+                    </tr>
+                <?php
 
-        <tr>
-            <td>1. </td>
-            <td>Tanaphat Partoom</td>
-            <td>ShadowsDuck</td>
-            <td>
-                <a href="#" class="btn btn-success btn-sm"> Update Admin </a>
-                <a href="#" class="btn btn-danger btn-sm ms-1"> Delete Admin </a>
-            </td>
-        </tr>
+                }
+            } else {
+                ?>
+                <tr>
+                    <td colspan="4" class="text-center" style="vertical-align: middle;">ไม่พบข้อมูลผู้ดูแล</td>
+                </tr>
+            <?php
+            }
+
+            ?>
+
+        </tbody>
     </table>
 </div>
 
 <?php include('partials/footer.php'); ?>
+
+<!-- <script>
+    $(document).ready(function() {
+
+        $('.view_admin').click(function(e) {
+            e.preventDefault();
+
+            $(this).closest('tr').
+        });
+    });
+</script> -->

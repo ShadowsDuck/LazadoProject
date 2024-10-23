@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../config.php');
 
 $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -20,7 +21,6 @@ if (strlen($_POST['password']) < 6) {
     $_SESSION['message'] = 'Password required 6 digits at least!';
     header("Location: {$base_url}/login/signup.php");
     exit;
-
 } else {
 
     if (!empty($username) && !empty($password) && !empty($fullname)) {

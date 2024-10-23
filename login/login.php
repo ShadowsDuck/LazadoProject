@@ -22,6 +22,7 @@ include '../config.php';
         }
     </style>
 </head>
+
 <body>
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100 min-vw-100">
@@ -55,7 +56,7 @@ include '../config.php';
                     <form action="login_db.php" method="POST">
                         <div class="mb-2">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Userame">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>

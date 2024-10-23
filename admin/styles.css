@@ -57,3 +57,19 @@ footer {
     padding-right: 30px;
     /* เพิ่ม padding-right */
 }
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 100px;
+}
+
+th,
+td {
+    text-align: start;
+    word-wrap: break-word;
+}
