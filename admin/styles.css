@@ -73,3 +73,7 @@ td {
     text-align: start;
     word-wrap: break-word;
 }
+
+.input-group-text {
+    cursor: pointer;
+}
