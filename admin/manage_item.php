@@ -2,7 +2,7 @@
 
 <!-- Body -->
 <div class="container mt-5">
-    <h2>Manage Item</h2>
+    <h1>Manage Item</h1>
 
 </div>
 

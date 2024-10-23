@@ -2,7 +2,7 @@
 
 <!-- Body -->
 <div class="container mt-5">
-    <h2>Dashboard</h2>
+    <h1>Dashboard</h1>
     <div class="row mt-4 text-center">
         <div class="col-md-3">
             <div class="card p-3">

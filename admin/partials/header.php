@@ -13,26 +13,28 @@
 </head>
 
 <body>
+    <?php $currentPage = basename($_SERVER['REQUEST_URI']); ?>
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item me-4 fs-6">
-                        <a class="nav-link active" href="index_admin.php">หน้าแรก</a>
-                    </li>
-                    <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="manage_admin.php">ผู้ดูแล</a>
-                    </li>
-                    <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="manage_item.php">จัดการสินค้า</a>
-                    </li>
-                    <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="manage_order.php">รายการคำสั่งซื้อ</a>
-                    </li>
-                    <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="#">ออกจากระบบ</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="container justify-content-center">
+            <ul class="nav nav-pills mx-auto mb-2 mb-lg-0">
+                <li class="nav-item ms-5 me-4 fs-6">
+                    <a class="nav-link <?php echo ($currentPage === "index_admin.php") ? 'active' : ''; ?>" href="index_admin.php" aria-current="page">หน้าแรก</a>
+                </li>
+                <li class="nav-item me-4 fs-6">
+                    <a class="nav-link <?php echo ($currentPage === 'manage_admin.php') ? 'active' : ''; ?>" href="manage_admin.php" aria-current="page">ผู้ดูแล</a>
+                </li>
+                <li class="nav-item me-4 fs-6">
+                    <a class="nav-link <?php echo ($currentPage === 'manage_item.php') ? 'active' : ''; ?>" href="manage_item.php" aria-current="page">จัดการสินค้า</a>
+                </li>
+                <li class="nav-item me-4 fs-6">
+                    <a class="nav-link <?php echo ($currentPage === 'manage_order.php') ? 'active' : ''; ?>" href="manage_order.php" aria-current="page">รายการคำสั่งซื้อ</a>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-danger">ออกจากระบบ</button>
         </div>
     </nav>
+</body>
+
+
+</html>

@@ -2,7 +2,7 @@
 
 <!-- Body -->
 <div class="container mt-5">
-    <h2>Manage Order</h2>
+    <h1>Manage Order</h1>
 
 </div>
 
