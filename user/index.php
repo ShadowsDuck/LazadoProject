@@ -109,7 +109,7 @@
             <!-- Category Menu -->
             <div class="col-md-3">
                 <div class="category-menu">
-                    <a href="#">Gaming Gear<i class="bi bi-chevron-right"></i></a>
+                    <a href="index.php">Gaming Gear<i class="bi bi-chevron-right"></i></a>
                     <a href="#">Keyboard</a>
                     <a href="#">Mouse</a>
                     <a href="#">Headset</a>
@@ -403,6 +403,24 @@
 
     <!-- Custom JS for Flash Sale -->
     <script src="script/flash_sale.js"></script>
+
+    <script>
+    // Function for searching products
+    function searchProducts() {
+        var query = document.querySelector('input[aria-label="Search"]').value;
+        if (query) {
+            // Redirect to search results page with the query as a URL parameter
+            window.location.href = `allitem.php?query=${encodeURIComponent(query)}`;
+        }
+    }
+
+    // Event listener for the enter key on search input
+    document.querySelector('input[aria-label="Search"]').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            searchProducts();
+        }
+    });
+</script>
 
 </body>
 
