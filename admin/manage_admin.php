@@ -66,14 +66,18 @@
 
             if ($row > 0) {
                 while ($data = mysqli_fetch_array($result)) {
+                    $id = $data['id'];
+                    $fullname = $data['fullname'];
+                    $username = $data['username'];
             ?>
                     <tr>
                         <td><?php echo $sn++; ?></td>
-                        <td><?php echo $data['fullname']; ?></td>
-                        <td><?php echo $data['username']; ?></td>
+                        <td><?php echo $fullname; ?></td>
+                        <td><?php echo $username; ?></td>
                         <td>
-                            <a href="#" class="btn btn-success btn-sm"> Update Admin </a>
-                            <a href="#" class="btn btn-danger btn-sm ms-1"> Delete Admin </a>
+                            <!-- <a href="#" class="btn btn-info btn-sm view_admin"> View </a> -->
+                            <a href="#" class="btn btn-success btn-sm ms-2 update_admin"> Update </a>
+                            <a href="<?php echo "{$base_url}/admin/delete_admin.php?id={$id}"; ?>" class="btn btn-danger btn-sm ms-2 delete_admin"> Delete </a>
                         </td>
                     </tr>
                 <?php
@@ -92,3 +96,14 @@
 </div>
 
 <?php include('partials/footer.php'); ?>
+
+<!-- <script>
+    $(document).ready(function() {
+
+        $('.view_admin').click(function(e) {
+            e.preventDefault();
+
+            $(this).closest('tr').
+        });
+    });
+</script> -->
