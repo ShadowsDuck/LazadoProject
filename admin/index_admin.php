@@ -82,9 +82,6 @@
                         <a class="nav-link active" href="#">หน้าแรก</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="#">จัดการบัญชี</a>
-                    </li>
-                    <li class="nav-item me-4 fs-6">
                         <a class="nav-link" href="#">จัดการสินค้า</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
