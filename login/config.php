@@ -1,13 +1,13 @@
 <?php
 
 // var url
-$base_url = 'http://localhost/mylogin';
+$base_url = 'http://localhost/LazadoProject';
 
 // var database
 $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
-$db_name = 'mylogin';
+$db_name = 'lazado';
 
 // connect database
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die('connection failed');
