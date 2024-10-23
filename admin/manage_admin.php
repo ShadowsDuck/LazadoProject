@@ -1,7 +1,18 @@
-<?php include('partials/header.php'); ?>
+<?php session_start();
+include('partials/header.php'); ?>
 
 <!-- Body -->
 <div class="container mt-5">
+    <div class="alert-container">
+        <?php if (!empty($_SESSION['message'])): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['message']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['message']); ?>
+        <?php endif; ?>
+    </div>
+
     <h1>Manage Admin</h1>
 
     <!-- Button to Add Admin -->
@@ -69,7 +80,7 @@
                     $id = $data['id'];
                     $fullname = $data['fullname'];
                     $username = $data['username'];
-            ?>
+                    ?>
                     <tr>
                         <td><?php echo $sn++; ?></td>
                         <td><?php echo $fullname; ?></td>
@@ -77,10 +88,11 @@
                         <td>
                             <!-- <a href="#" class="btn btn-info btn-sm view_admin"> View </a> -->
                             <a href="#" class="btn btn-success btn-sm ms-2 update_admin"> Update </a>
-                            <a href="<?php echo "{$base_url}/admin/del_admin.php?id={$id}"; ?>" class="btn btn-danger btn-sm ms-2 delete_admin"> Delete </a>
+                            <a href="<?php echo "{$base_url}/admin/del_admin.php?id={$id}"; ?>"
+                                class="btn btn-danger btn-sm ms-2 delete_admin"> Delete </a>
                         </td>
                     </tr>
-                <?php
+                    <?php
 
                 }
             } else {
@@ -88,7 +100,7 @@
                 <tr>
                     <td colspan="4" class="text-center" style="vertical-align: middle;">ไม่พบข้อมูลผู้ดูแล</td>
                 </tr>
-            <?php
+                <?php
             }
 
             ?>

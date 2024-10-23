@@ -13,13 +13,13 @@ $row = mysqli_num_rows($query);
 if ($row > 0) {
     // Username is already taken
     $_SESSION['message'] = 'Username is already taken! Please use another.';
-    header("Location: {$base_url}/login/signup.php");
+    header("Location: {$base_url}/admin/manage_admin.php");
     exit;
 }
 
 if (strlen($_POST['password']) < 6) {
     $_SESSION['message'] = 'Password required 6 digits at least!';
-    header("Location: {$base_url}/login/signup.php");
+    header("Location: {$base_url}/admin/manage_admin.php");
     exit;
 } else {
 
@@ -30,10 +30,10 @@ if (strlen($_POST['password']) < 6) {
         VALUES ('{$username}','{$hash}','{$fullname}','admin')") or die("query failed!");
 
         if ($query) {
-            $_SESSION['message'] = 'Sign-up successful!';
+            $_SESSION['message'] = 'Add admin successful!';
             header("Location:{$base_url}/admin/manage_admin.php");
         } else {
-            $_SESSION['message'] = 'Sign-up failed!';
+            $_SESSION['message'] = 'Add admin failed!';
             header("Location:{$base_url}/admin/manage_admin.php");
         }
     } else {

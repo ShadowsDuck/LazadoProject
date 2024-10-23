@@ -10,6 +10,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .alert-container {
+            position: absolute;
+            top: 0;
+            /* width: 30%; */
+            margin: auto;
+            z-index: 9999;
+            /* ให้มันอยู่ด้านบนสุด */
+        }
+    </style>
 </head>
 
 <body>
