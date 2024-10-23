@@ -1,0 +1,59 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbar-nav {
+    margin: auto;
+}
+
+.input-group-text {
+    cursor: pointer;
+}
+
+.category-menu {
+    padding-top: 0px;
+}
+
+.category-menu a {
+    display: block;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    filter: invert(100%);
+    /* ทำให้ลูกศรสีขาวมองเห็นได้ดีขึ้น */
+}
+
+.container-fluid {
+    padding-left: 30px;
+    /* เพิ่ม padding-left */
+    padding-right: 30px;
+    /* เพิ่ม padding-right */
+}
