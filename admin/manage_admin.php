@@ -85,7 +85,9 @@
                 }
             } else {
                 ?>
-                <tr colspan="4">No Record Found</tr>
+                <tr>
+                    <td colspan="4" class="text-center" style="vertical-align: middle;">ไม่พบข้อมูลผู้ดูแล</td>
+                </tr>
             <?php
             }
 
