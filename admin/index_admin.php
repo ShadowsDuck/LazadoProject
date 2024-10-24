@@ -40,7 +40,7 @@
         <div class="col-md-3">
             <div class="card p-4">
                 <?php
-                $sql4 = "SELECT SUM(total) AS Total FROM orders WHERE status='order'";
+                $sql4 = "SELECT SUM(total) AS Total FROM orders WHERE status='จัดส่งสำเร็จ'";
                 $result4 = mysqli_query($conn, $sql4);
                 $row4 = mysqli_fetch_assoc($result4);
                 $total_revenue = $row4['Total'];
