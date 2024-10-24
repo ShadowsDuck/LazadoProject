@@ -1,3 +1,17 @@
+<?php
+session_start();
+$open_connect = 1;
+require('connect.php');
+
+if(!isset($_SESSION['id']) || !isset($_SESSION['usertype'])){
+    die(header("location:{$base_url}/login/login.php"));       //ถ้าไม่มี session id || usertype จะถูกส่งไป login.php
+}elseif(isset($_GET['logout'])) {
+    session_destroy();
+    die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +57,7 @@
                     <a class="nav-link <?php echo ($currentPage === 'manage_order.php') ? 'active' : ''; ?>" href="manage_order.php" aria-current="page">รายการคำสั่งซื้อ</a>
                 </li>
             </ul>
-            <button type="button" class="btn btn-danger">ออกจากระบบ</button>
+            <a href="../index_admin.php"><button type="button" class="btn btn-danger">ออกจากระบบ</button></a>
         </div>
     </nav>
 </body>
