@@ -5,10 +5,7 @@
     <h1>จัดการสินค้า</h1>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-        data-bs-target="#addProductModal">
-        เพิ่มสินค้า
-    </button>
+    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addProductModal">เพิ่มสินค้า</button>
 
     <!-- Modal for Add Product -->
     <div class="modal fade" id="addProductModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">

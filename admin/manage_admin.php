@@ -14,9 +14,7 @@
     <h1>จัดการผู้ดูแล</h1>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary mt-2 mb-4 float-end" data-bs-toggle="modal" data-bs-target="#addAdminModal">
-        เพิ่มผู้ดูแล
-    </button>
+    <button type="button" class="btn btn-primary mt-2 mb-4 float-end" data-bs-toggle="modal" data-bs-target="#addAdminModal">เพิ่มผู้ดูแล</button>
 
     <!-- Modal for Add Admin -->
     <div class="modal fade" id="addAdminModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
