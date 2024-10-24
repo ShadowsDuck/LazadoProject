@@ -98,7 +98,7 @@
                             <i class="bi bi-search col-md-auto"></i> 
                         </span>
                     </div>
-                    <a href="#" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
+                    <a href="kart.php" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
                 </div>
             </div>
         </div>
