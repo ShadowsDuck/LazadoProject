@@ -1,6 +1,6 @@
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
+    <footer class="bg-dark text-white py-4 ">
+        <div class="container mb-0">
             <div class="row">
                 <div class="col-md-3">
                     <h5>Exclusive</h5>
@@ -23,9 +23,8 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <!-- Custom JS for Flash Sale -->
-    <script src="script/flash_sale.js"></script>
-    <script src="script/search.js"></script>
+
+    
 
 
 </body>

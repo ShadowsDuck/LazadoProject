@@ -193,6 +193,9 @@
     </section>
 
 
-    
+    <script src="script/flash_sale.js"></script>
+    <script src="script/search.js"></script>
+    <script src="script/search_result.js"></script>
+
     <?php include('partials/footer.php'); ?>
 
