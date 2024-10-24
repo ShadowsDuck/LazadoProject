@@ -250,7 +250,7 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
         <div class="container mt-4">
-            <a class="navbar-brand fw-bold fs-3" href="#">Lazado</a>
+            <a class="navbar-brand fw-bold fs-3" href="index.php">Lazado</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

@@ -92,6 +92,7 @@
                     </li>
                 </ul>
                 <div class="d-flex">
+
                 <div class="input-group">
     <input type="text" aria-label="Search" class="form-control" placeholder="ค้นหาสินค้า">
     <div class="input-group-text search-icon-class">
@@ -99,6 +100,16 @@
     </div>
 </div>
                     <a href="#" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="ค้นหาสินค้า" aria-label="Search">
+                        <span class="input-group-text">
+
+                            <i class="bi bi-search col-md-auto"></i> 
+                        </span>
+                    </div>
+                    <a href="kart.php" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
+
                 </div>
             </div>
         </div>

@@ -1,5 +1,4 @@
-<?php session_start();
-include('partials/header.php'); ?>
+<?php include('partials/header.php'); ?>
 
 <!-- Body -->
 <div class="container mt-5">
@@ -20,7 +19,7 @@ include('partials/header.php'); ?>
         Add Admin
     </button>
 
-    <!-- Modal -->
+    <!-- Modal for Add Admin -->
     <div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -30,18 +29,28 @@ include('partials/header.php'); ?>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
+                    <!-- Fullname field -->
                     <div class="modal-body">
                         <div class="form-group mb-3">
-                            <label for="">Fullname</label>
+                            <label for="fullname">Fullname</label>
                             <input type="text" class="form-control" placeholder="Full Name" name="fullname">
                         </div>
+
+                        <!-- Username field -->
                         <div class="form-group mb-3">
-                            <label for="">Username</label>
+                            <label for="username">Username</label>
                             <input type="text" class="form-control" placeholder="Username" name="username">
                         </div>
+
+                        <!-- Password field -->
                         <div class="form-group mb-3">
-                            <label for="">Password</label>
-                            <input type="text" class="form-control" placeholder="Password" name="password">
+                            <label for="admin_password">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Password">
+                                <span class="input-group-text">
+                                    <i class="fa fa-eye" id="toggleAdminPassword"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -109,7 +118,7 @@ include('partials/header.php'); ?>
                         <div class="form-group mb-3">
                             <label for="current_password">Current Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="current_password" name="password" placeholder="Current Password">
+                                <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Current Password">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="toggleCurrentPassword"></i>
                                 </span>
@@ -162,7 +171,7 @@ include('partials/header.php'); ?>
         </thead>
         <tbody>
             <?php
-            include('../config.php');
+            include('../connect.php');
             $sql = "SELECT * FROM users WHERE usertype='admin'";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_num_rows($result);
@@ -216,4 +225,3 @@ include('partials/header.php'); ?>
 </div>
 
 <?php include('partials/footer.php'); ?>
-<script src="script.js"></script>

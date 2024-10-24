@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config.php';
+include '../connect.php';
 
 $username = mysqli_real_escape_string($conn, $_POST['username']);
 $password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -20,14 +20,18 @@ if (strlen($password) < 6) {
             // เช็คว่า รหัสผ่านที่ป้อนเข้ามาตรงกับฐานข้อมูลหรือไม่ 
             if (password_verify($password, $user['password'])) {
                 // เก็บ session login
-                $_SESSION[WP . 'checklogin'] = true;
-                $_SESSION[WP . 'id'] = $user['id'];
-                $_SESSION[WP . 'fullname'] = $user['fullname'];
+                // $_SESSION[WP . 'checklogin'] = true;
+                // $_SESSION[WP . 'id'] = $user['id'];
+                // $_SESSION[WP . 'fullname'] = $user['fullname'];
 
                 // ตรวจสอบบทบาทของผู้ใช้จาก username
                 if ($user['usertype'] == 'admin') {
+                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['usertype'] = $user['usertype'];
                     header("location:{$base_url}/admin/index_admin.php");
                 } elseif ($user['usertype'] == 'user') {
+                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['usertype'] = $user['usertype'];
                     header("location:{$base_url}/user/index.php");
                 } else {
                     header("location:{$base_url}/user/index.php");
