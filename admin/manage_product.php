@@ -74,7 +74,7 @@
 
     <!-- Browse By Category Section -->
     <section class="container my-5">
-        <h2 class="text-center mb-4">หมวดหมูสินค้า</h2>
+        <h2 class="text-center mb-4">หมวดหมู่สินค้า</h2>
         <div class="row text-center">
             <div class="col-md-2">
                 <div class="category-item p-4" onclick="searchByCategory('keyboard')">
