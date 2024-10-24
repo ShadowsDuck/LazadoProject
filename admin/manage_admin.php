@@ -46,7 +46,7 @@
                         <div class="form-group mb-3">
                             <label for="admin_password">Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="admin_password" name="admin_password" placeholder="Password">
+                                <input type="password" class="form-control" id="admin_password" name="password" placeholder="Password">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="toggleAdminPassword"></i>
                                 </span>

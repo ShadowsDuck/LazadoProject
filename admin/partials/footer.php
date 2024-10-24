@@ -25,7 +25,7 @@
     crossorigin="anonymous"></script>
 
 <!-- Load custom script.js -->
-<script src="/LazadoProject/admin/script.js"></script>
+<script src="script.js"></script>
 
 </body>
 
