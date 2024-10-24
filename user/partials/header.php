@@ -38,7 +38,8 @@
         }
 
         .container {
-            flex: 1;
+            /* flex: 1; */
+            
         }
 
         footer {
@@ -107,7 +108,7 @@
                         <a class="nav-link" href="contact.php">ติดต่อเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="#">เกี่ยวกับเรา</a>
+                        <a class="nav-link" href="about.php">เกี่ยวกับเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
                         <a class="nav-link" href="../login/signup.php">สมัครสมาชิก</a>
