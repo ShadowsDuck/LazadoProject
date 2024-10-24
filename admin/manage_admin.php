@@ -172,7 +172,7 @@ include('partials/header.php'); ?>
         </thead>
         <tbody>
             <?php
-            include('../config.php');
+            include('../connect.php');
             $sql = "SELECT * FROM users WHERE usertype='admin'";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_num_rows($result);
