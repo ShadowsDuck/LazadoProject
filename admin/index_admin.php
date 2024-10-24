@@ -17,7 +17,12 @@
         </div>
         <div class="col-md-3">
             <div class="card p-4">
-                <h4 class="fw-bold"></h4>
+                <?php
+                $sql2 = "SELECT * FROM products";
+                $result2 = mysqli_query($conn, $sql2);
+                $row2 = mysqli_num_rows($result2);
+                ?>
+                <h4 class="fw-bold"><?php echo $row2 ?></h4>
                 <p>สินค้า</p>
             </div>
         </div>
