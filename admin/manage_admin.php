@@ -1,5 +1,4 @@
-<?php session_start();
-include('partials/header.php'); ?>
+<?php include('partials/header.php'); ?>
 
 <!-- Body -->
 <div class="container mt-5">

@@ -3,9 +3,9 @@ session_start();
 $open_connect = 1;
 require('../connect.php');
 
-if(!isset($_SESSION['id']) || !isset($_SESSION['usertype'])){
+if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
     die(header("location:{$base_url}/login/login.php"));       //ถ้าไม่มี session id || usertype จะถูกส่งไป login.php
-}elseif(isset($_GET['logout'])) {
+} elseif (isset($_GET['logout'])) {
     session_destroy();
     die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
 }
