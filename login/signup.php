@@ -11,7 +11,8 @@ include '../connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../admin/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .alert-container {
             position: absolute;
@@ -22,6 +23,7 @@ include '../connect.php';
         }
     </style>
 </head>
+
 <body>
 
     <div class="container min-vh-100 min-vw-100 d-flex justify-content-center align-items-center">
@@ -67,14 +69,25 @@ include '../connect.php';
                         </div>
                         <div class="mb-2">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password" required>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required>
+                                <span class="input-group-text">
+                                    <i class="fa fa-eye" id="togglePassword"></i>
+                                </span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="c-password" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="c-password" name="c-password"
-                                placeholder="Confirm Password" required>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="c-password" name="c-password"
+                                    placeholder="Confirm Password" required>
+                                <span class="input-group-text">
+                                    <i class="fa fa-eye" id="toggleConfirmPassword"></i>
+                                </span>
+                            </div>
                         </div>
+
                         <div class="d-grid mb-3">
                             <button type="submit" class="btn btn-primary">Create Account</button>
                         </div>
@@ -88,6 +101,7 @@ include '../connect.php';
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
