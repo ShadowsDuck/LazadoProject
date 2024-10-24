@@ -80,6 +80,10 @@ include '../connect.php';
                                 Account</a>
                         </p>
                     </div>
+                    <div class="text-center">
+                        <p class="mb-0">or <a href="../user" class="text-primary">Continue without logging-in</a>
+                        </p>
+                    </div>
                 </div>
             </div>
 
