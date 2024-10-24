@@ -34,6 +34,7 @@
 
         .navbar-nav {
             margin: auto;
+            margin-
         }
 
         .input-group-text {
@@ -70,7 +71,7 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
         <div class="container mt-4">
-            <a class="navbar-brand fw-bold fs-3" href="#">Lazado Gaming</a>
+            <a class="navbar-brand fw-bold fs-3" href="index.php">Lazado Gaming</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -78,10 +79,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link active" href="#">หน้าแรก</a>
+                        <a class="nav-link active" href="index.php">หน้าแรก</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="#">ติดต่อเรา</a>
+                        <a class="nav-link" href="contact.php">ติดต่อเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
                         <a class="nav-link" href="#">เกี่ยวกับเรา</a>
@@ -91,13 +92,12 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="ค้นหาสินค้า" aria-label="Search">
-                        <span class="input-group-text">
-
-                            <i class="bi bi-search col-md-auto"></i> 
-                        </span>
-                    </div>
+                <div class="input-group">
+    <input type="text" aria-label="Search" class="form-control" placeholder="ค้นหาสินค้า">
+    <div class="input-group-text search-icon-class">
+        <i class="bi bi-search"></i> <!-- หรือไอคอนค้นหาอื่น ๆ -->
+    </div>
+</div>
                     <a href="#" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
                 </div>
             </div>
@@ -110,15 +110,14 @@
             <!-- Category Menu -->
             <div class="col-md-3">
                 <div class="category-menu">
-                    <a href="index.php">Gaming Gear<i class="bi bi-chevron-right"></i></a>
-                    <a href="#">Keyboard</a>
-                    <a href="#">Mouse</a>
-                    <a href="#">Headset</a>
-                    <a href="#">Monitor</a>
-                    <a href="#">Chair</a>
-                    <a href="#">Streaming </a>
-                    <a href="#">Other<i class="bi bi-chevron-right"></i></a>
-
+                    <a href="allitem.php" >Gaming Gear<i class="bi bi-chevron-right"></i></a>
+                    <a href="allitem.php?category=keyboard">Keyboard</a>
+                    <a href="allitem.php?category=mouse">Mouse</a>
+                    <a href="allitem.php?category=headset">Headset</a>
+                    <a href="allitem.php?category=monitor">Monitor</a>
+                    <a href="allitem.php?category=chair">Chair</a>
+                    <a href="allitem.php?category=streaming">Streaming</a>
+                    <a href="allitem.php?category=other">Other<i class="bi bi-chevron-right"></i></a>
                 </div>
             </div>
     
@@ -258,38 +257,37 @@
     <h2 class="text-center mb-4">Browse By Category</h2>
     <div class="row text-center">
         <div class="col-md-2">
-            <div class="category-item p-4">
+            <div class="category-item p-4" onclick="searchByCategory('keyboard')">
                 <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
                 <p>Keyboard</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4">
+            <div class="category-item p-4" onclick="searchByCategory('mouse')">
                 <i class="bi bi-mouse" style="font-size: 2rem;"></i>
                 <p>Mouse</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4">
+            <div class="category-item p-4" onclick="searchByCategory('headset')">
                 <i class="bi bi-headset" style="font-size: 2rem;"></i>
                 <p>Headset</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4">
+            <div class="category-item p-4" onclick="searchByCategory('monitor')">
                 <i class="bi bi-display" style="font-size: 2rem;"></i>
                 <p>Monitor</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4">
+            <div class="category-item p-4" onclick="searchByCategory('chair')">
                 <i class="bi bi-chair" style="font-size: 2rem;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSitzzI-H5Sdgz6VdbHhEwcubyUv0kmiO57ZA&s" style="height: 25%; width: 26%;"></i>
-
                 <p>Chair</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4">
+            <div class="category-item p-4" onclick="searchByCategory('streaming')">
                 <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
                 <p>Steaming</p>
             </div>
@@ -297,55 +295,10 @@
     </div>
 </section>
 
-<!-- Best Selling Products Section -->
+<!--Best Selling Products Section-->
 
 
-<div class="container my-5">
-        <!-- Search and Category Filter -->
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <h2>Gaming Gear</h2>
-            </div>
-            <div class="col-md-3">
-                <!-- Search Box -->
-                <input type="text" class="form-control" placeholder="Search products..." aria-label="Search1" id="gamingSearchInput">
-            </div>
-            <div class="col-md-3">
-                <!-- Search and Dropdown section in Gaming Gear -->
-                <div class="input-group">
-                    <select id="categorySelect" class="form-select"  >
-                        <option value="">เลือกหมวดหมู่</option>
-                        <option value="keyboard">Keyboard</option>
-                        <option value="mouse">Mouse</option>
-                        <option value="headset">Headset</option>
-                        <option value="monitor">Monitor</option>
-                        <option value="chair">Chair</option>
-                        <option value="desk">Desk</option>
-                    </select>
-                    <!-- <input type="text" class="form-control" placeholder="ค้นหาสินค้า" aria-label="Search" id="searchInput">
-                    <span class="input-group-text" onclick="searchProducts()">
-                        <i class="bi bi-search col-md-auto"></i>
-                    </span> -->
-                </div>
-            </div>
-        </div>
 
-        <!-- Products Grid -->
-        <div class="row">
-            <!-- Product Item -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
-                    <img src="images/keyboard.jpg" class="card-img-top" alt="Keyboard">
-                    <div class="card-body">
-                        <h5 class="card-title">Mechanical Keyboard</h5>
-                        <p class="text-danger"><del>$120</del> $99</p>
-                        <p>⭐⭐⭐⭐⭐ (120)</p>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
 
 
 
@@ -383,29 +336,8 @@
 
 
     <script>
-    // รับค่าที่กรอกในช่องค้นหา
-    function searchProducts() {
-        var query = document.querySelector('input[aria-label="Search1"]').value;
-        if (query) {
-            // Redirect to search results page with the query as a URL parameter
-            window.location.href = `allitem.php?query=${encodeURIComponent(query)}`;
-        }
-    }
 
-    // กด Enter ส่งค่า
-    document.querySelector('input[aria-label="Search1"]').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            searchProducts();
-        }
-        if (condition) {
-            
-        } else {
-            
-        }
-    });
-
-
-    //ช่องค้นหาข้างล่างสุดดด
+    //ช่องค้นหาข้างบนสุดบน Navbar
     function searchProducts2() {
         var query = document.querySelector('input[aria-label="Search"]').value;
         if (query) {
@@ -420,18 +352,22 @@
             searchProducts2();
         }
     });
+    // เรียกฟังก์ชัน searchProducts2 เมื่อคลิกที่ไอคอนค้นหาของ Navbar
+    document.querySelector('.search-icon-class').addEventListener('click', function () {
+        searchProducts2();
+    });
+
+
+    //ค้นหาผ่านไอคอนcategory
+    function searchByCategory(category) {
+        window.location.href = `allitem.php?category=${category}`;
+    }
 
 
 
 </script>
 
 <script>
-    const gamingProducts = [
-        { name: 'Mechanical Keyboard', category: 'keyboard', price: '$99', image: 'keyboard_image_url' },
-        { name: 'Gaming Mouse', category: 'mouse', price: '$45', image: 'mouse_image_url' },
-        { name: 'Wireless Headset', category: 'headset', price: '$70', image: 'headset_image_url' },
-        { name: 'Curved Monitor', category: 'monitor', price: '$350', image: 'monitor_image_url' }
-    ];
 
     // ฟังก์ชันค้นหาสินค้าจากช่องค้นหาและหมวดหมู่
     function searchGamingProducts() {
