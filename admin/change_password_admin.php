@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../config.php');
+include('../connect.php');
 
 // รับข้อมูลจากฟอร์ม
 $id = mysqli_real_escape_string($conn, $_POST['id']);

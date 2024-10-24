@@ -1,5 +1,9 @@
 <?php
 
+// if ($open_connect != 1) {
+//     die(header("Loacation: /login/login.php"));
+// }
+
 // var url
 $base_url = 'http://localhost/LazadoProject';
 
@@ -13,4 +17,4 @@ $db_name = 'lazado';
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die('connection failed');
 
 // prefix session
-define('WP', 'mylogin2024');
+// define('WP', 'mylogin2024');

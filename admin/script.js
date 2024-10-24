@@ -20,6 +20,7 @@ updateAdminModal.addEventListener('show.bs.modal', function (event) {
 });
 
 // "Change Password" Modal Setup
+const adminPasswordInput = document.getElementById('admin_password');
 const currentPasswordInput = document.getElementById('current_password');
 const newPasswordInput = document.getElementById('new_password');
 const confirmPasswordInput = document.getElementById('confirm_password');
@@ -75,27 +76,46 @@ function toggleVisibility(toggleElement, inputElement) {
     });
 }
 
+toggleVisibility(document.querySelector('#toggleAdminPassword'), adminPasswordInput);
 toggleVisibility(document.querySelector('#toggleCurrentPassword'), currentPasswordInput);
 toggleVisibility(document.querySelector('#toggleNewPassword'), newPasswordInput);
 toggleVisibility(document.querySelector('#toggleConfirmPassword'), confirmPasswordInput);
 
-// Setup for the "Change Password" Modal
-var changePasswordAdminModal = document.getElementById('changePasswordAdminModal');
+// "Add Admin" Modal Setup
+var addAdminModal = document.getElementById('addAdminModal');
+addAdminModal.addEventListener('hidden.bs.modal', function () {
+    // Reset the form when the modal is closed
+    addAdminModal.querySelector('form').reset();
 
-// เมื่อ modal ถูกแสดง (เปิด)
-changePasswordAdminModal.addEventListener('show.bs.modal', function (event) {
-    var button = event.relatedTarget;
-    var id = button.getAttribute('data-id');
-    var modalId = changePasswordAdminModal.querySelector('#change_password_admin_id');
-
-    // Set the admin ID to the hidden input field
-    modalId.value = id;
+    // Reset toggle eye to default
+    const adminPasswordInput = document.getElementById('admin_password');
+    const toggleAdminPassword = document.querySelector('#toggleAdminPassword');
+    adminPasswordInput.setAttribute('type', 'password'); // Reset input type
+    toggleAdminPassword.classList.remove('fa-eye-slash'); // Reset icon
 });
+
+// "Change Password" Modal Setup
+var changePasswordAdminModal = document.getElementById('changePasswordAdminModal');
 
 // เมื่อ modal ถูกปิด
 changePasswordAdminModal.addEventListener('hidden.bs.modal', function () {
     // Reset the form when the modal is closed
     changePasswordAdminModal.querySelector('form').reset();
+
+    // Reset password visibility toggle to default
+    const currentPasswordInput = document.getElementById('current_password');
+    const newPasswordInput = document.getElementById('new_password');
+    const confirmPasswordInput = document.getElementById('confirm_password');
+
+    // Reset input types
+    currentPasswordInput.setAttribute('type', 'password');
+    newPasswordInput.setAttribute('type', 'password');
+    confirmPasswordInput.setAttribute('type', 'password');
+
+    // Reset icons
+    document.querySelector('#toggleCurrentPassword').classList.remove('fa-eye-slash');
+    document.querySelector('#toggleNewPassword').classList.remove('fa-eye-slash');
+    document.querySelector('#toggleConfirmPassword').classList.remove('fa-eye-slash');
 
     // Optionally, reset password error message and button state
     passwordError.style.display = 'none'; // Hide error message

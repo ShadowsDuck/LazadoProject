@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config.php");
+include('../connect.php');
 
 $userID = $_GET['id'];
 $sql = 'DELETE FROM users WHERE id = "' . $userID . '"';
