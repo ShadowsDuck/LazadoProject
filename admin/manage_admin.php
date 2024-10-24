@@ -3,15 +3,14 @@ include('partials/header.php'); ?>
 
 <!-- Body -->
 <div class="container mt-5">
-    <div class="alert-container">
-        <?php if (!empty($_SESSION['message'])): ?>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <?php echo $_SESSION['message']; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php unset($_SESSION['message']); ?>
-        <?php endif; ?>
-    </div>
+    <!-- Alert message should be displayed right here -->
+    <?php if (!empty($_SESSION['message'])): ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['message']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>
 
     <h1>Manage Admin</h1>
 
@@ -34,15 +33,15 @@ include('partials/header.php'); ?>
                     <div class="modal-body">
                         <div class="form-group mb-3">
                             <label for="">Fullname</label>
-                            <input type="text" class="form-control" placeholder="Enter Fullname" name="fullname">
+                            <input type="text" class="form-control" placeholder="Full Name" name="fullname">
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Username</label>
-                            <input type="text" class="form-control" placeholder="Enter Username" name="username">
+                            <input type="text" class="form-control" placeholder="Username" name="username">
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Password</label>
-                            <input type="text" class="form-control" placeholder="Enter Password" name="password">
+                            <input type="text" class="form-control" placeholder="Password" name="password">
                         </div>
                     </div>
 
@@ -81,12 +80,36 @@ include('partials/header.php'); ?>
                             <label for="update_username">Username</label>
                             <input type="text" class="form-control" id="update_username" name="username">
                         </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="updateAdminBtn" disabled>Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Change Password Admin -->
+    <div class="modal fade" id="changePasswordAdminModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="changePasswordForm" action="change_password_admin.php" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordModalLabel">Change Password Admin</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <!-- Hidden field to hold admin id for change password -->
+                        <input type="hidden" name="id" id="change_password_admin_id">
 
                         <!-- Current Password field -->
                         <div class="form-group mb-3">
                             <label for="current_password">Current Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="current_password" name="password" placeholder="Enter Current Password">
+                                <input type="password" class="form-control" id="current_password" name="password" placeholder="Current Password">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="toggleCurrentPassword"></i>
                                 </span>
@@ -97,7 +120,7 @@ include('partials/header.php'); ?>
                         <div class="form-group mb-3">
                             <label for="new_password">New Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Enter New Password">
+                                <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="toggleNewPassword"></i>
                                 </span>
@@ -121,7 +144,7 @@ include('partials/header.php'); ?>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="updateAdminBtn" disabled>Update</button>
+                        <button type="submit" class="btn btn-primary" id="changePasswordBtn" disabled>Change</button>
                     </div>
                 </form>
             </div>
@@ -165,7 +188,14 @@ include('partials/header.php'); ?>
                                 Update
                             </button>
                             <a href="<?php echo "{$base_url}/admin/del_admin.php?id={$id}"; ?>"
-                                class="btn btn-danger btn-sm ms-2 delete_admin"> Delete </a>
+                                class="btn btn-danger btn-sm ms-2 me-2 delete_admin"> Delete </a>
+                            <button type="button" class="btn btn-info btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#changePasswordAdminModal"
+                                data-id="<?php echo $id; ?>">
+                                Change Password
+                            </button>
+
                         </td>
                     </tr>
                 <?php

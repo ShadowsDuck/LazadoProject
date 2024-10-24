@@ -1,76 +1,103 @@
-// เมื่อ modal จะถูกแสดง
+// "Update Admin" Modal Setup
 var updateAdminModal = document.getElementById('updateAdminModal');
 updateAdminModal.addEventListener('show.bs.modal', function (event) {
-    // ปุ่มที่กดเปิด modal
     var button = event.relatedTarget;
 
-    // ดึงข้อมูลจาก data-* attributes
     var id = button.getAttribute('data-id');
     var fullname = button.getAttribute('data-fullname');
     var username = button.getAttribute('data-username');
 
-    // หา element ของ input fields ใน modal
     var modalFullname = updateAdminModal.querySelector('#update_fullname');
     var modalUsername = updateAdminModal.querySelector('#update_username');
     var modalId = updateAdminModal.querySelector('#update_admin_id');
 
-    // ตั้งค่า value ให้ input fields
     modalFullname.value = fullname;
     modalUsername.value = username;
     modalId.value = id;
+
+    // Enable the update button in case it was disabled previously
+    document.getElementById('updateAdminBtn').disabled = false;
 });
 
-// JavaScript to check password match and empty fields
+// "Change Password" Modal Setup
+const currentPasswordInput = document.getElementById('current_password');
 const newPasswordInput = document.getElementById('new_password');
 const confirmPasswordInput = document.getElementById('confirm_password');
-const updateButton = document.getElementById('updateAdminBtn');
+const changePasswordButton = document.getElementById('changePasswordBtn');
 const passwordError = document.getElementById('passwordMismatchError');
 
-// Function to check if passwords match and are not empty
-function checkPasswords() {
-    const newPasswordValue = newPasswordInput.value.trim();
-    const confirmPasswordValue = confirmPasswordInput.value.trim();
+// Function to validate passwords for the "Change Password" form
+function validateChangePassword() {
+    const currentPassword = currentPasswordInput.value.trim();
+    const newPassword = newPasswordInput.value.trim();
+    const confirmPassword = confirmPasswordInput.value.trim();
 
-    if (newPasswordValue === confirmPasswordValue && newPasswordValue !== '' && confirmPasswordValue !== '') {
-        passwordError.style.display = 'none'; // Hide error message
-        updateButton.disabled = false; // Enable the button
-    } else {
-        passwordError.style.display = 'block'; // Show error message
-        updateButton.disabled = true; // Disable the button
+    // Resetting error message and button state
+    passwordError.style.display = 'none';
+    changePasswordButton.disabled = true; // Disable by default
+
+    // Checking if current password is empty
+    if (!currentPassword) {
+        passwordError.textContent = 'Current password is required.';
+        passwordError.style.display = 'block';
+        return;
     }
+
+    // Checking if new password is at least 6 characters long
+    if (newPassword.length < 6) {
+        passwordError.textContent = 'New password must be at least 6 characters long.';
+        passwordError.style.display = 'block';
+        return;
+    }
+
+    // Checking if new password and confirm password match
+    if (newPassword !== confirmPassword) {
+        passwordError.textContent = 'Passwords do not match.';
+        passwordError.style.display = 'block';
+        return;
+    }
+
+    // If everything is correct, enable the change password button
+    changePasswordButton.disabled = false;
 }
 
-// Add event listeners to both password fields
-newPasswordInput.addEventListener('input', checkPasswords);
-confirmPasswordInput.addEventListener('input', checkPasswords);
+// Attach the event listeners for validating passwords
+currentPasswordInput.addEventListener('input', validateChangePassword);
+newPasswordInput.addEventListener('input', validateChangePassword);
+confirmPasswordInput.addEventListener('input', validateChangePassword);
 
-// Toggle visibility for current password
-const toggleCurrentPassword = document.querySelector('#toggleCurrentPassword');
-const currentPassword = document.querySelector('#current_password');
+// Password visibility toggling
+function toggleVisibility(toggleElement, inputElement) {
+    toggleElement.addEventListener('click', function () {
+        const type = inputElement.getAttribute('type') === 'password' ? 'text' : 'password';
+        inputElement.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+}
 
-toggleCurrentPassword.addEventListener('click', function () {
-    // Toggle the type attribute
-    const type = currentPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-    currentPassword.setAttribute('type', type);
-    // Toggle the eye icon
-    this.classList.toggle('fa-eye-slash');
+toggleVisibility(document.querySelector('#toggleCurrentPassword'), currentPasswordInput);
+toggleVisibility(document.querySelector('#toggleNewPassword'), newPasswordInput);
+toggleVisibility(document.querySelector('#toggleConfirmPassword'), confirmPasswordInput);
+
+// Setup for the "Change Password" Modal
+var changePasswordAdminModal = document.getElementById('changePasswordAdminModal');
+
+// เมื่อ modal ถูกแสดง (เปิด)
+changePasswordAdminModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var id = button.getAttribute('data-id');
+    var modalId = changePasswordAdminModal.querySelector('#change_password_admin_id');
+
+    // Set the admin ID to the hidden input field
+    modalId.value = id;
 });
 
-// Existing code for new password and confirm password toggles
-const toggleNewPassword = document.querySelector('#toggleNewPassword');
-const newPassword = document.querySelector('#new_password');
+// เมื่อ modal ถูกปิด
+changePasswordAdminModal.addEventListener('hidden.bs.modal', function () {
+    // Reset the form when the modal is closed
+    changePasswordAdminModal.querySelector('form').reset();
 
-toggleNewPassword.addEventListener('click', function () {
-    const type = newPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-    newPassword.setAttribute('type', type);
-    this.classList.toggle('fa-eye-slash');
-});
-
-const toggleConfirmPassword = document.querySelector('#toggleConfirmPassword');
-const confirmPassword = document.querySelector('#confirm_password');
-
-toggleConfirmPassword.addEventListener('click', function () {
-    const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-    confirmPassword.setAttribute('type', type);
-    this.classList.toggle('fa-eye-slash');
+    // Optionally, reset password error message and button state
+    passwordError.style.display = 'none'; // Hide error message
+    changePasswordButton.disabled = true; // Disable the button
 });

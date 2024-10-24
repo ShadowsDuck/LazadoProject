@@ -22,7 +22,6 @@ if (strlen($_POST['password']) < 6) {
     header("Location: {$base_url}/admin/manage_admin.php");
     exit;
 } else {
-
     if (!empty($username) && !empty($password) && !empty($fullname)) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -37,7 +36,7 @@ if (strlen($_POST['password']) < 6) {
             header("Location:{$base_url}/admin/manage_admin.php");
         }
     } else {
-        $_SESSION['message'] = 'Input is required';
+        $_SESSION['message'] = 'Input is required.';
         header("Location:{$base_url}/admin/manage_admin.php");
     }
 }
