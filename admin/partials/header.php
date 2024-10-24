@@ -57,7 +57,7 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
                     <a class="nav-link <?php echo ($currentPage === 'manage_order.php') ? 'active' : ''; ?>" href="manage_order.php" aria-current="page">รายการคำสั่งซื้อ</a>
                 </li>
             </ul>
-            <a href="../index_admin.php"><button type="button" class="btn btn-danger">ออกจากระบบ</button></a>
+            <a href="index_admin.php?logout=1"><button type="button" class="btn btn-danger">ออกจากระบบ</button></a>
         </div>
     </nav>
 </body>
