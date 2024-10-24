@@ -79,6 +79,50 @@
         </div>
     </nav>
 
+<!-- Icon หมวดหมู่-->
+<section class="container md-0 mt-0">
+    <div class="row text-center">
+        <div class="col-md-2">
+            <div class="category-item p-4">
+                <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
+                <p>Keyboard</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="category-item p-4">
+                <i class="bi bi-mouse" style="font-size: 2rem;"></i>
+                <p>Mouse</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="category-item p-4">
+                <i class="bi bi-headset" style="font-size: 2rem;"></i>
+                <p>Headset</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="category-item p-4">
+                <i class="bi bi-display" style="font-size: 2rem;"></i>
+                <p>Monitor</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="category-item p-4">
+                <i class="bi bi-chair" style="font-size: 2rem;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSitzzI-H5Sdgz6VdbHhEwcubyUv0kmiO57ZA&s" style="height: 25%; width: 26%;"></i>
+
+                <p>Chair</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="category-item p-4">
+                <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
+                <p>Steaming</p>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    
     <!-- Search Results Section -->
     <div class="container">
         <div class="row search-container">

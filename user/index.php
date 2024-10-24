@@ -94,7 +94,8 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="ค้นหาสินค้า" aria-label="Search">
                         <span class="input-group-text">
-                            <i class="bi bi-search col-md-auto"></i>
+
+                            <i class="bi bi-search col-md-auto"></i> 
                         </span>
                     </div>
                     <a href="#" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
@@ -258,38 +259,39 @@
     <div class="row text-center">
         <div class="col-md-2">
             <div class="category-item p-4">
-                <i class="bi bi-phone" style="font-size: 2rem;"></i>
-                <p>Phones</p>
+                <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
+                <p>Keyboard</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4">
-                <i class="bi bi-laptop" style="font-size: 2rem;"></i>
-                <p>Computers</p>
+                <i class="bi bi-mouse" style="font-size: 2rem;"></i>
+                <p>Mouse</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4">
-                <i class="bi bi-watch" style="font-size: 2rem;"></i>
-                <p>SmartWatch</p>
+                <i class="bi bi-headset" style="font-size: 2rem;"></i>
+                <p>Headset</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4">
-                <i class="bi bi-camera" style="font-size: 2rem;"></i>
-                <p>Camera</p>
+                <i class="bi bi-display" style="font-size: 2rem;"></i>
+                <p>Monitor</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4">
-                <i class="bi bi-headphones" style="font-size: 2rem;"></i>
-                <p>HeadPhones</p>
+                <i class="bi bi-chair" style="font-size: 2rem;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSitzzI-H5Sdgz6VdbHhEwcubyUv0kmiO57ZA&s" style="height: 25%; width: 26%;"></i>
+
+                <p>Chair</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4">
-                <i class="bi bi-controller" style="font-size: 2rem;"></i>
-                <p>Gaming</p>
+                <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
+                <p>Steaming</p>
             </div>
         </div>
     </div>
@@ -310,15 +312,21 @@
             </div>
             <div class="col-md-3">
                 <!-- Search and Dropdown section in Gaming Gear -->
-                
-                <select class="form-select" id="gamingCategorySelect">
-                    <option value="all">Gaming Gear (All)</option>
-                    <option value="keyboard">Keyboard</option>
-                    <option value="mouse">Mouse</option>
-                    <option value="headset">Headset</option>
-                    <option value="monitor">Monitor</option>
-                </select>
-                
+                <div class="input-group">
+                    <select id="categorySelect" class="form-select"  >
+                        <option value="">เลือกหมวดหมู่</option>
+                        <option value="keyboard">Keyboard</option>
+                        <option value="mouse">Mouse</option>
+                        <option value="headset">Headset</option>
+                        <option value="monitor">Monitor</option>
+                        <option value="chair">Chair</option>
+                        <option value="desk">Desk</option>
+                    </select>
+                    <!-- <input type="text" class="form-control" placeholder="ค้นหาสินค้า" aria-label="Search" id="searchInput">
+                    <span class="input-group-text" onclick="searchProducts()">
+                        <i class="bi bi-search col-md-auto"></i>
+                    </span> -->
+                </div>
             </div>
         </div>
 
@@ -389,8 +397,15 @@
         if (e.key === 'Enter') {
             searchProducts();
         }
+        if (condition) {
+            
+        } else {
+            
+        }
     });
 
+
+    //ช่องค้นหาข้างล่างสุดดด
     function searchProducts2() {
         var query = document.querySelector('input[aria-label="Search"]').value;
         if (query) {
