@@ -32,13 +32,14 @@ include("partials/header.php");
                     numquam dolorem expedita.</p>
 
                 <!-- Colour Options -->
-                <p>Colours:</p>
-                <div>
+                <div class="d-flex align-items-center">
+                    <p class="mb-0 me-2">Colours:</p>
+                    <button class="btn btn-outline-dark btn-sm rounded-circle me-2"
+                        style="background-color: #ff0000; width: 20px; height: 20px;"></button>
                     <button class="btn btn-outline-dark btn-sm rounded-circle"
-                        style="background-color: #ff0000;"></button>
-                    <button class="btn btn-outline-dark btn-sm rounded-circle"
-                        style="background-color: #c0c0c0;"></button>
+                        style="background-color: #c0c0c0; width: 20px; height: 20px;"></button>
                 </div>
+
 
                 <!-- Size Options -->
                 <p class="mt-3">Size:</p>
@@ -51,20 +52,36 @@ include("partials/header.php");
                 </div>
 
                 <!-- Quantity and Buy Now -->
-                <div class="mt-3">
+                <div class="mt-3 mb-3">
+                    <?php $quantity = 1; ?>
                     <div class="input-group mb-3" style="max-width: 120px;">
-                        <button class="btn btn-outline-secondary" type="button">-</button>
-                        <input type="text" class="form-control text-center" value="2">
-                        <button class="btn btn-outline-secondary" type="button">+</button>
+                        <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button>
+                        <input type="text" id="quantity" class="form-control text-center"
+                            value="<?php echo $quantity; ?>">
+                        <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity()">+</button>
                     </div>
-                    <button class="btn btn-danger">Buy Now</button>
-                    <button class="btn btn-outline-secondary"><i class="bi bi-heart"></i></button>
                 </div>
-
+                <button class="btn btn-danger">Buy Now</button>
+                <button class="btn btn-outline-secondary"><i class="bi bi-heart"></i></button>
             </div>
         </div>
     </div>
 </body>
+<script>
+    function increaseQuantity() {
+        var quantityInput = document.getElementById("quantity");
+        var currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    }
+
+    function decreaseQuantity() {
+        var quantityInput = document.getElementById("quantity");
+        var currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) { // ตรวจสอบไม่ให้ค่าเป็น 0 หรือต่ำกว่า
+            quantityInput.value = currentValue - 1;
+        }
+    }
+</script>
 
 <?php
 include("partials/footer.php");
