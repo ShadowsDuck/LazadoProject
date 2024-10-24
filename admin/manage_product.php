@@ -21,6 +21,8 @@
                     </div>
 
                     <div class="modal-body">
+                        <input type="hidden" name="id" id="order_id">
+
                         <!-- Product Name field -->
                         <div class="form-group mb-3">
                             <label for="product_name">ชื่อสินค้า</label>
