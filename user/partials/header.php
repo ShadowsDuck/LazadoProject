@@ -38,7 +38,7 @@
         }
 
         .container {
-            /* flex: 1; */
+            flex: 1;
             
         }
 

@@ -35,19 +35,19 @@ include("partials/header.php");
                     <!-- Colour Options -->
                     <div class="d-flex align-items-center">
                         <p class="mb-0 me-2">Colours:</p>
-                        <div id="btn">
-                            <button class="btn btn-outline-light btn-sm rounded-circle me-2"
-                                style="background-color: #ff0000; width: 20px; height: 20px;"
+                        <div class="d-flex align-items-center" id="btn">
+                            <button
+                                style="background-color: #ff0000; width: 20px; height: 20px; border: 0; border-radius: 50%; margin-right: 5px;"
                                 onclick="setActive(event, this)"></button>
-                            <button class="btn btn-outline-light btn-sm rounded-circle"
-                                style="background-color: #c0c0c0; width: 20px; height: 20px;"
+                            <button
+                                style="background-color: #c0c0c0; width: 20px; height: 20px; border: 0; border-radius: 50%; margin-right: 5px;"
                                 onclick="setActive(event, this)"></button>
                         </div>
                     </div>
 
                     <!-- Quantity and Buy Now -->
                     <div class="mt-3 mb-3">
-                        <div class="input-group mb-3" style="max-width: 120px;">
+                        <div class="input-group mb-3 " style="max-width: 120px;">
                             <button class="btn btn-outline-secondary" type="button"
                                 onclick="decreaseQuantity()">-</button>
                             <input type="text" id="quantity" class="form-control text-center" value="1"
@@ -93,12 +93,9 @@ include("partials/header.php");
 
         var buttons = document.querySelectorAll('#btn button');
         buttons.forEach(function (btn) {
-            btn.classList.remove('btn-outline-dark');
-            btn.classList.add('btn-outline-light');
+            btn.style.border = '0';
         });
-
-        button.classList.remove('btn-outline-light');
-        button.classList.add('btn-outline-dark');
+        button.style.border = '2px solid black';
     }
 </script>
 
