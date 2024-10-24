@@ -31,38 +31,34 @@ include("partials/header.php");
                     nobis veritatis corporis, quas eum? Deleniti hic nesciunt eos. Similique hic qui, tenetur mollitia
                     numquam dolorem expedita.</p>
 
-                <!-- Colour Options -->
-                <div class="d-flex align-items-center">
-                    <p class="mb-0 me-2">Colours:</p>
-                    <button class="btn btn-outline-dark btn-sm rounded-circle me-2"
-                        style="background-color: #ff0000; width: 20px; height: 20px;"></button>
-                    <button class="btn btn-outline-dark btn-sm rounded-circle"
-                        style="background-color: #c0c0c0; width: 20px; height: 20px;"></button>
-                </div>
-
-
-                <!-- Size Options -->
-                <p class="mt-3">Size:</p>
-                <div>
-                    <button class="btn btn-outline-dark btn-sm">XS</button>
-                    <button class="btn btn-outline-dark btn-sm">S</button>
-                    <button class="btn btn-dark btn-sm">M</button>
-                    <button class="btn btn-outline-dark btn-sm">L</button>
-                    <button class="btn btn-outline-dark btn-sm">XL</button>
-                </div>
-
-                <!-- Quantity and Buy Now -->
-                <div class="mt-3 mb-3">
-                    <?php $quantity = 1; ?>
-                    <div class="input-group mb-3" style="max-width: 120px;">
-                        <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button>
-                        <input type="text" id="quantity" class="form-control text-center"
-                            value="<?php echo $quantity; ?>">
-                        <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity()">+</button>
+                <form action="" method="get">
+                    <!-- Colour Options -->
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0 me-2">Colours:</p>
+                        <div id="btn">
+                            <button class="btn btn-outline-light btn-sm rounded-circle me-2"
+                                style="background-color: #ff0000; width: 20px; height: 20px;"
+                                onclick="setActive(event, this)"></button>
+                            <button class="btn btn-outline-light btn-sm rounded-circle"
+                                style="background-color: #c0c0c0; width: 20px; height: 20px;"
+                                onclick="setActive(event, this)"></button>
+                        </div>
                     </div>
-                </div>
-                <button class="btn btn-danger">Buy Now</button>
-                <button class="btn btn-outline-secondary"><i class="bi bi-heart"></i></button>
+
+                    <!-- Quantity and Buy Now -->
+                    <div class="mt-3 mb-3">
+                        <div class="input-group mb-3" style="max-width: 120px;">
+                            <button class="btn btn-outline-secondary" type="button"
+                                onclick="decreaseQuantity()">-</button>
+                            <input type="text" id="quantity" class="form-control text-center" value="1"
+                                oninput="validateQuantity()">
+                            <button class="btn btn-outline-secondary" type="button"
+                                onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger" value="submit">Buy Now</button>
+                    <button class="btn btn-outline-secondary"><i class="bi bi-heart"></i></button>
+                </form>
             </div>
         </div>
     </div>
@@ -80,6 +76,29 @@ include("partials/header.php");
         if (currentValue > 1) { // ตรวจสอบไม่ให้ค่าเป็น 0 หรือต่ำกว่า
             quantityInput.value = currentValue - 1;
         }
+    }
+
+    function validateQuantity() {
+        var quantityInput = document.getElementById("quantity");
+        var value = quantityInput.value;
+
+        // ถ้าไม่ใช่ตัวเลข หรือเป็นเลขติดลบ ให้คืนค่าเป็น 1
+        if (isNaN(value) || value <= 0) {
+            quantityInput.value = 1;
+        }
+    }
+
+    function setActive(event, button) {
+        event.preventDefault(); // ป้องกันการ submit form
+
+        var buttons = document.querySelectorAll('#btn button');
+        buttons.forEach(function (btn) {
+            btn.classList.remove('btn-outline-dark');
+            btn.classList.add('btn-outline-light');
+        });
+
+        button.classList.remove('btn-outline-light');
+        button.classList.add('btn-outline-dark');
     }
 </script>
 
