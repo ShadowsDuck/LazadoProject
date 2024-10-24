@@ -57,6 +57,7 @@
         </div>
     </div>
 
-
+    <script src="script/search_result.js"></script>
+    <script src="http://localhost/LazadoProject/user/script/search.js"></script>
 
     <?php include('partials/footer.php'); ?>
