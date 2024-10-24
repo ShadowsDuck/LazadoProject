@@ -7,7 +7,7 @@
 <div class="row text-center">
         <div class="col-md-2">
             <div class="category-item p-4" onclick="searchByCategory('keyboard')">
-                <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
+                <i class="bi bi-keyboard " style="font-size: 2rem; "></i>
                 <p>Keyboard</p>
             </div>
         </div>
@@ -42,18 +42,14 @@
             </div>
         </div>
     </div>
-    </section>
-
-    
-    <!-- Search Results Section -->
-    <div class="container mt-1">
-        <div class="row search-container">
+    <div class="row search-container">
             <h4 id="searchResultTitle">ผลลัพธ์การค้นหา :</h4>
             <div class="row" id="searchResults">
                 <!-- สินค้าจะแสดงที่นี่ -->
             </div>
         </div>
-    </div>
+    </section>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

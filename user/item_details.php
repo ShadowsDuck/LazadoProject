@@ -47,7 +47,7 @@ include("partials/header.php");
 
                     <!-- Quantity and Buy Now -->
                     <div class="mt-3 mb-3">
-                        <div class="input-group mb-3" style="max-width: 120px;">
+                        <div class="input-group mb-3 " style="max-width: 120px;">
                             <button class="btn btn-outline-secondary" type="button"
                                 onclick="decreaseQuantity()">-</button>
                             <input type="text" id="quantity" class="form-control text-center" value="1"
