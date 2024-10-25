@@ -7,7 +7,8 @@ require('../connect.php');
 <style>
     .category-item {
         cursor: pointer;
-        border: 2px solid transparent; /* ขอบโปร่งใสที่ช่วยให้ขนาดคงที่ */
+        border: 2px solid transparent;
+        /* ขอบโปร่งใสที่ช่วยให้ขนาดคงที่ */
         border-radius: 8px;
     }
 
@@ -74,7 +75,7 @@ require('../connect.php');
         $c = '';
         $keyword = '';
         $sql = "SELECT * FROM products";
-        
+
         if (isset($_GET["c"])) {
             $c = $_GET['c'];
         }
@@ -103,7 +104,7 @@ require('../connect.php');
         $result = mysqli_query($conn, $sql);
         $numrows = $result->num_rows;
         ?>
-        <h4 id="searchResultTitle">ผลลัพธ์การค้นหา: <?php echo $numrows ?> รายการ
+        <h4>ผลลัพธ์การค้นหา: <?php echo $numrows ?> รายการ
         </h4>
         <div class="container my-5">
             <div class="row">
@@ -142,11 +143,20 @@ require('../connect.php');
                     while ($row = $result->fetch_assoc()) {
                         ?>
                         <div class="col-lg-3 mb-4">
-                            <div class="card h-100" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'" style="cursor: pointer;">
-                                <img src="https://placehold.co/200" class="card-img-top" alt="Image">
-                                <div class="card-body">
+                            <div class="card h-100"
+                                
+                                style="background-color: rgba(0, 0, 0, 0.02);">
+                                <div class="card-body" 
+                                    style="cursor: pointer;"
+                                    onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
+                                    <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
                                     <h5 class="card-title"><?php echo $row['name']; ?></h5>
-                                    <p class="card-text"><?php echo "฿".number_format($row['price'],2); ?></p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 20px;">
+                                        <?php echo "฿" . number_format($row['price'], 2); ?>
+                                    </div>
+                                    <button class="btn"><i style="color:red;" class="bi bi-cart3 h4"></i></button>
                                 </div>
                             </div>
                         </div>
