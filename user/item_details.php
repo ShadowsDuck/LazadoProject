@@ -33,7 +33,7 @@ $row = mysqli_fetch_assoc($result);
                 <h3><?php echo $row['name'] ?></h3>
                 <p><span class="text-warning">★★★★☆</span> (n Reviews) | <span class="text-success">In Stock</span>
                 </p>
-                <h4><?php echo $row['price']." ฿" ?></h4>
+                <h4><?php echo "฿".number_format($row['price'],2); ?></h4>
                 <p><?php echo $row['description']?></p>
 
                 <form action="" method="get">
