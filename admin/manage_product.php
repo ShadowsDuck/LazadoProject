@@ -31,7 +31,7 @@
 
     <!-- Modal for Add Product -->
     <div class="modal fade" id="addProductModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form action="add_product.php" method="post">
                     <div class="modal-header">
@@ -45,31 +45,31 @@
                         <!-- Product Name field -->
                         <div class="form-group mb-3">
                             <label for="product_name">ชื่อสินค้า</label>
-                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อสินค้า" name="product_name">
+                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อสินค้า" name="name">
                         </div>
 
                         <!-- Description field -->
                         <div class="form-group mb-3">
                             <label for="description">รายละเอียด</label>
-                            <textarea class="form-control" name="description" placeholder="กรุณาใส่รายละเอียดสินค้า" rows="3"></textarea>
+                            <textarea class="form-control" name="description" placeholder="กรุณาใส่รายละเอียดสินค้า" rows="7"></textarea>
                         </div>
 
                         <!-- Price field -->
                         <div class="form-group mb-3">
                             <label for="price_product">ราคา</label>
-                            <input type="number" class="form-control" placeholder="กรุณาใส่ราคา" name="price_product">
+                            <input type="number" class="form-control" placeholder="กรุณาใส่ราคา" name="price">
                         </div>
 
                         <!-- Product Image field -->
                         <div class="form-group mb-3">
                             <label for="product_image" class="form-label">รูปสินค้า</label>
-                            <input class="form-control" type="file" name="product_image">
+                            <input class="form-control" type="file" name="img">
                         </div>
 
                         <!-- Product Category field -->
                         <div class="form-group mb-3">
                             <label for="product_category">หมวดหมู่สินค้า</label>
-                            <select class="form-select" aria-label="product_category">
+                            <select class="form-select" aria-label="category" name="category">
                                 <option selected>เลือกหมวดหมู่สินค้า</option>
                                 <option value="1">คีย์บอร์ด</option>
                                 <option value="2">เมาส์</option>
@@ -94,8 +94,8 @@
     </div>
 
     <!-- Modal for Product Details -->
-    <div class="modal fade" id="updateProductDetailModal" tabindex="-1" aria-labelledby="updateProductDetailModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="updateProductDetailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateProductDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form action="update_product.php" method="post">
                     <div class="modal-header">
@@ -109,31 +109,31 @@
                         <!-- Product Name field -->
                         <div class="form-group mb-3">
                             <label for="product_name">ชื่อสินค้า</label>
-                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อสินค้า" name="product_name">
+                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อสินค้า" name="name">
                         </div>
 
                         <!-- Description field -->
                         <div class="form-group mb-3">
                             <label for="description">รายละเอียด</label>
-                            <textarea class="form-control" name="description" placeholder="กรุณาใส่รายละเอียดสินค้า" rows="3"></textarea>
+                            <textarea class="form-control" name="description" placeholder="กรุณาใส่รายละเอียดสินค้า" rows="7"></textarea>
                         </div>
 
                         <!-- Price field -->
                         <div class="form-group mb-3">
                             <label for="price_product">ราคา</label>
-                            <input type="number" class="form-control" placeholder="กรุณาใส่ราคา" name="price_product">
+                            <input type="number" class="form-control" placeholder="กรุณาใส่ราคา" name="price">
                         </div>
 
                         <!-- Product Image field -->
                         <div class="form-group mb-3">
                             <label for="product_image" class="form-label">รูปสินค้า</label>
-                            <input class="form-control" type="file" name="product_image">
+                            <input class="form-control" type="file" name="img">
                         </div>
 
                         <!-- Product Category field -->
                         <div class="form-group mb-3">
                             <label for="product_category">หมวดหมู่สินค้า</label>
-                            <select class="form-select" aria-label="product_category">
+                            <select class="form-select" aria-label="category" name="category">
                                 <option selected>เลือกหมวดหมู่สินค้า</option>
                                 <option value="1">คีย์บอร์ด</option>
                                 <option value="2">เมาส์</option>
@@ -274,12 +274,8 @@
                     while ($row = $result->fetch_assoc()) {
                 ?>
                         <div class="col-lg-3 mb-4">
-                            <div class="card h-100"
-
-                                style="background-color: rgba(0, 0, 0, 0.02);">
-                                <div class="card-body"
-                                    style="cursor: pointer;"
-                                    onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
+                            <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                                <div class="card-body">
                                     <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
                                     <h5 class="card-title"><?php echo $row['name']; ?></h5>
                                 </div>
@@ -292,7 +288,10 @@
                                         data-bs-target="#updateProductDetailModal"
                                         data-id="<?php echo $row['id']; ?>"
                                         data-name="<?php echo $row['name']; ?>"
-                                        data-price="<?php echo $row['price']; ?>">
+                                        data-description="<?php echo $row['description']; ?>"
+                                        data-price="<?php echo $row['price']; ?>"
+                                        data-img="<?php echo $row['img']; ?>"
+                                        data-category="<?php echo $row['category']; ?>">
                                         อัปเดต
                                     </button>
                                 </div>
@@ -315,5 +314,37 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 </script>
 <!-- <script src="search_admin.js"></script> -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var updateProductModal = document.getElementById('updateProductDetailModal');
+
+        updateProductModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+
+            // ดึงข้อมูลจากปุ่ม
+            var productId = button.getAttribute('data-id');
+            var productName = button.getAttribute('data-name');
+            var productDescription = button.getAttribute('data-description');
+            var productPrice = button.getAttribute('data-price');
+            var productImg = button.getAttribute('data-img');
+            var productCategory = button.getAttribute('data-category');
+
+            // เติมข้อมูลลงในฟอร์มในโมดาล
+            var modal = this;
+            modal.querySelector('#order_id').value = productId;
+            modal.querySelector('input[name="name"]').value = productName;
+            modal.querySelector('textarea[name="description"]').value = productDescription;
+            modal.querySelector('input[name="price"]').value = productPrice;
+
+            // กำหนดค่าให้กับ input file (ไม่สามารถตั้งค่าได้โดยตรง)
+            // ดังนั้นไม่จำเป็นต้องทำอะไรกับ `img` ที่นี่เว้นแต่ต้องการแสดงภาพปัจจุบัน
+
+            // ตั้งค่าหมวดหมู่สินค้า
+            var categorySelect = modal.querySelector('select[name="category"]');
+            categorySelect.value = productCategory;
+        });
+    });
+</script>
 
 <?php include('partials/footer.php'); ?>
