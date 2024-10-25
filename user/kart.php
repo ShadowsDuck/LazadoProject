@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../connect.php");
 // // การเชื่อมต่อกับฐานข้อมูล
 // $host = 'localhost';
@@ -15,7 +16,7 @@ if ($conn->connect_error) {
 }
 
 // ดึงข้อมูลสินค้าในตะกร้าจากฐานข้อมูล
-$sql = "SELECT id, name, price, img AS image FROM products";
+$sql = "SELECT cart.*, products.name, products.price FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id = '{$_SESSION['id']}'";
 $result = $conn->query($sql);
 
 // เก็บข้อมูลสินค้าในอาเรย์
@@ -277,7 +278,7 @@ $conn->close();
                 <div class="header-row">
                     <div><input type="checkbox" id="select-all"></div>
                     <div>สินค้า</div>
-                    <div>ราคา</div>
+                    <div>ราคา/ชิ้น</div>
                     <div>จำนวน</div>
                     <div>รวม</div>
                     <div>ลบ</div>
@@ -295,10 +296,10 @@ $conn->close();
                         <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
                         <div class="cart-item-quantity">
                             <button class="minus-btn">-</button>
-                            <input type="text" name="quantities[<?php echo $item['id']; ?>]" value="1">
+                            <input type="text" name="quantities[<?php echo $item['id']; ?>]" value="<?php echo $item['qty'] ?>">
                             <button class="plus-btn">+</button>
                         </div>
-                        <div class="cart-item-total">฿<?php echo number_format($item['price'], 2); ?></div>
+                        <div class="cart-item-total">฿<?php echo number_format($item['price']*$item['qty'], 2); ?></div>
                         <div class="remove-btn"><i class="bi bi-trash"></i></div>
                     </div>
 

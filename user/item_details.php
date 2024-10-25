@@ -31,38 +31,24 @@ $row = mysqli_fetch_assoc($result);
             <!-- Product Details -->
             <div class="col-md-5">
                 <h3><?php echo $row['name'] ?></h3>
-                <p><span class="text-warning">★★★★☆</span> (n Reviews) | <span class="text-success">In Stock</span>
+                <!-- <p><span class="text-warning">★★★★☆</span> (n Reviews) | <span class="text-success">In Stock</span> -->
                 </p>
-                <h4><?php echo "฿".number_format($row['price'],2); ?></h4>
+                <h3><?php echo "฿".number_format($row['price'],2); ?></h3>
                 <p><?php echo $row['description']?></p>
 
-                <form action="" method="get">
-                    <!-- Colour Options -->
-                    <div class="d-flex align-items-center">
-                        <p class="mb-0 me-2">Colours:</p>
-                        <div class="d-flex align-items-center" id="btn">
-                            <button
-                                style="background-color: #ff0000; width: 20px; height: 20px; border: 0; border-radius: 50%; margin-right: 5px;"
-                                onclick="setActive(event, this)"></button>
-                            <button
-                                style="background-color: #c0c0c0; width: 20px; height: 20px; border: 0; border-radius: 50%; margin-right: 5px;"
-                                onclick="setActive(event, this)"></button>
-                        </div>
-                    </div>
-
+                <form action="add_to_cart.php?id=<?php echo $product_id ?>" method="POST">
                     <!-- Quantity and Buy Now -->
                     <div class="mt-3 mb-3">
                         <div class="input-group mb-3 " style="max-width: 120px;">
                             <button class="btn btn-outline-secondary" type="button"
                                 onclick="decreaseQuantity()">-</button>
-                            <input type="text" id="quantity" class="form-control text-center" value="1"
+                            <input type="text" id="quantity" name="quantity" class="form-control text-center" value="1"
                                 oninput="validateQuantity()">
                             <button class="btn btn-outline-secondary" type="button"
                                 onclick="increaseQuantity()">+</button>
                         </div>
                     </div>
-                    <button class="btn btn-danger" value="submit">Buy Now</button>
-                    <button class="btn btn-outline-secondary"><i class="bi bi-heart"></i></button>
+                    <button class="btn btn-danger btn-lg" value="submit">Buy Now</button>
                 </form>
             </div>
         </div>
