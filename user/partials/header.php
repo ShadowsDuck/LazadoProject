@@ -87,6 +87,7 @@
             padding-right: 30px;
             /* เพิ่ม padding-right */
         }
+        
     </style>
 </head>
 

@@ -1,5 +1,5 @@
 <?php include('partials/header.php'); ?>
-
+<script></script>
 
     <!-- Body -->
     <div class="container mt-5">
@@ -179,7 +179,7 @@
             </div>
             <div class="col-md-2">
                 <div class="category-item p-4" onclick="searchByCategory('chair')">
-                    <i class="bi bi-chair" style="font-size: 2rem;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSitzzI-H5Sdgz6VdbHhEwcubyUv0kmiO57ZA&s" style="height: 25%; width: 26%;"></i>
+                    <i class="bi bi-chair" style="font-size: 2rem;"><img src="https://www.svgrepo.com/show/281964/desk-chair-chair.svg" style="height: 2.5rem; width: 2.5rem; color:blue;"></i>
                     <p>Chair</p>
                 </div>
             </div>

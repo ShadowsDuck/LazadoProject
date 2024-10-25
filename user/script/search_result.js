@@ -6,7 +6,7 @@ const products = [
     { name: 'Wireless Headset', image: 'https://via.placeholder.com/150', price: '1500 บาท', category: 'headset' },
     { name: 'Curved Monitor', image: 'https://via.placeholder.com/150', price: '3000 บาท', category: 'monitor' },
     { name: 'Gaming Chair', image: 'https://via.placeholder.com/150', price: '1200 บาท', category: 'chair' },
-    { name: 'Gaming Desk', image: 'https://via.placeholder.com/150', price: '1800 บาท', category: 'desk' }, 
+    { name: 'Gaming Desk', image: 'https://via.placeholder.com/150', price: '1800 บาท', category: 'desk' },
     { name: 'Mechanical2 Keyboard364', image: 'https://via.placeholder.com/150', price: '1000 บาท', category: 'keyboard' },
     { name: 'Gaming Mouse2', image: 'https://via.placeholder.com/150', price: '2000 บาท', category: 'mouse' },
     { name: 'Wireless Headset2', image: 'https://via.placeholder.com/150', price: '1500 บาท', category: 'headset' },
@@ -44,10 +44,7 @@ function searchProducts() {
         });
     }
 }
-//ค้นหาผ่านไอคอนcategory ของ allitem.php
-function searchByCategory(category) {
-    window.location.href = `allitem.php?category=${category}`;
-}
+
 
 
 function displaySearchResults() {
@@ -106,6 +103,7 @@ function displaySearchResults() {
         resultTitle.innerHTML = 'ไม่พบผลลัพธ์';
         searchResults.innerHTML = '<p>กรุณาค้นหาสินค้าหรือเลือกหมวดหมู่</p>';
     }
+    
 }
 
 // ฟังก์ชันช่วยดึง query param จาก URL
@@ -129,3 +127,29 @@ document.getElementById('searchInput').addEventListener('keypress', function (ev
 document.querySelector('.input-group-text').addEventListener('click', function () {
     searchProducts();
 });
+
+
+function selectCategory(element, category) {
+    // ลบคลาส active ออกจากทุกหมวดหมู่
+    const items = document.querySelectorAll('.category-item');
+
+    
+    
+    items.forEach(item => item.classList.remove('active'));
+
+    // เพิ่มคลาส active ให้กับหมวดหมู่ที่ถูกคลิก
+    element.classList.add('active');
+
+    console.log('Active class added:', element.classList.contains('active'));
+    // เรียกใช้ฟังก์ชันการค้นหาหมวดหมู่
+    displaySearchResults(category);
+
+    
+    
+}
+
+
+//ค้นหาผ่านไอคอนcategory ของ allitem.php
+// function searchByCategory(category) {
+//     window.location.href = `allitem.php?category=${category}`;
+// }
