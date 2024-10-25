@@ -122,7 +122,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         href="
                         <?php
                         if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
-                            echo "user_edit.php?page=infoEdit&id=".$user_id;
+                            echo "user_edit.php?page=infoEdit";
                         }else {
                             echo '../login/signup.php';
                         }
