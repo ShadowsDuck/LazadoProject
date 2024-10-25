@@ -239,7 +239,7 @@ $conn->close();
                 const price = parseFloat(row.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
                 const totalPriceElement = row.querySelector('.cart-item-total');
                 const totalPrice = price * input.value;
-                totalPriceElement.textContent = `฿${totalPrice.toLocaleString()}`;
+                totalPriceElement.textContent = `฿${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             }
 
             function calculateSummary() {
@@ -257,7 +257,7 @@ $conn->close();
                 });
 
                 document.getElementById('selected-count').textContent = totalItems;
-                document.getElementById('total-price').textContent = `฿${totalPrice.toLocaleString()}`;
+                document.getElementById('total-price').textContent = `฿${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             }
         };
     </script>
@@ -300,7 +300,7 @@ $conn->close();
                 <?php endforeach; ?>
 
                 <div class="total-section">
-                    <span>จำนวนที่เลือก: <span id="selected-count">0</span> ชิ้น</span>
+                    <span>จำนวนที่เลือก: <span id="selected-count">0</span>ชิ้น</span>
                     <span>ยอดรวม: <span id="total-price">฿0.00</span></span>
                     <button type="submit" class="checkout-btn">สั่งซื้อ</button>
                 </div>
