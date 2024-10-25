@@ -3,9 +3,10 @@ session_start();
 $open_connect = 1;
 require('../connect.php');
 
-// if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
-//     die(header("location:{$base_url}/login/login.php"));       //ถ้าไม่มี session id || usertype จะถูกส่งไป login.php
-// }
+if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
+    $user_id = $_SESSION['id'];
+}
+
 if (isset($_GET['logout'])) {
     session_destroy();
     die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
@@ -120,14 +121,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <a class="nav-link" href="
                         <?php
                         if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
-                            echo 'user_edit.php';
+                            echo "user_edit.php?".$user_id;
                         }else {
                             echo '../login/signup.php';
                         }
                         ?>">
                             <?php
                             if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
-                                echo 'ข้อมูลลูกค้า';
+                                echo 'ข้อมูลส่วนตัว';
                             }else {
                                 echo 'สมัครสมาชิก';
                             }
