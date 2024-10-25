@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3 bg-light vh-100">
+        <div class="col-md-3 bg-light vh-100 " id="sidebar">
             <div class="nav flex-column nav-pills p-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php"><i class="bi bi-info-circle"></i> เกี่ยวกับเรา</a>
                 <a class="nav-link" href="about.php?page=contactSidebar" data-page="aboutpage/contactSidebar.php"><i class="bi bi-telephone"></i> ติดต่อเรา</a>
@@ -29,11 +29,19 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    // Script สำหรับการจัดการ Sidebar Content
     $(document).ready(function() {
-        $('a.nav-link').click(function(e) {
+        $('#sidebar .nav-link').click(function(e) {  // เจาะจงให้ทำงานใน #sidebar เท่านั้น
             e.preventDefault();
             var page = $(this).data('page'); // รับค่าจาก data-page เช่น aboutpage/contactSidebar.php
-            $('#sidebar-content').load(page); // โหลดเนื้อหาจากไฟล์ที่กำหนด
+
+            // โหลดเนื้อหาจากไฟล์ที่กำหนด และเพิ่ม error handling
+            $('#sidebar-content').load(page, function(response, status, xhr) {
+                if (status == "error") {
+                    $('#sidebar-content').html("<p>ไม่สามารถโหลดเนื้อหาได้</p>");
+                    console.error("Error loading page:", xhr.status, xhr.statusText);
+                }
+            });
         });
     });
 </script>

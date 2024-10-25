@@ -1,6 +1,4 @@
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-12">
+
             <h2>ติดต่อเรา</h2>
             <div class="contact-info">
                 <h4>ช่องทางการติดต่อ</h4>
@@ -21,6 +19,3 @@
                 <h4>ติดต่อฝ่ายการตลาด</h4>
                 <p>อีเมล: <a href="mailto:mkt@ihavecpu.com">mkt@ihavecpu.com</a></p>
             </div>
-        </div>
-    </div>
-</div>

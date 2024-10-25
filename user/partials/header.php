@@ -86,6 +86,11 @@
             padding-right: 30px;
             /* เพิ่ม padding-right */
         }
+
+        html {
+    overflow-y: scroll;
+}
+
     </style>
 </head>
 
@@ -126,7 +131,9 @@
             </div>
         </div>
     </nav>
-    
+
+
+
 </body>
 
 </html>
