@@ -122,14 +122,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         href="
                         <?php
                         if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
-                            echo "user_edit.php?id=".$user_id;
+                            echo "user_edit.php?page=infoEdit";
                         }else {
                             echo '../login/signup.php';
                         }
                         ?>">
                             <?php
                             if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
-                                echo 'ข้อมูลส่วนตัว';
+                                echo 'จัดการบัญชีของคุณ';
                             }else {
                                 echo 'สมัครสมาชิก';
                             }
