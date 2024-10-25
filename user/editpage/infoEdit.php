@@ -1,3 +1,12 @@
+<?php
+session_start();
+require("../../connect.php");
+$user_id = $_SESSION['id'];
+$sql = "SELECT * FROM users WHERE id=$user_id";
+$result = mysqli_query($conn, $sql) or die('connection failed');
+$row = $result->fetch_assoc();
+?>
+
 <div class="container ms-1" style="border-radius: 5px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4>ข้อมูลส่วนตัว</h4>
@@ -6,8 +15,8 @@
 
     <div class="user-info d-flex align-items-center">
         <div>
-            <h5>มาร์ค คคค</h5>
-            <p>lhwza007x2@gmail.com</p>
+            <h5><?php echo $row['fullname']; ?></h5>
+            <p><?php echo $row['email']; ?></p>
         </div>
     </div>
 
