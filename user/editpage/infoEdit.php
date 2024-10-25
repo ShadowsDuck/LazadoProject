@@ -7,22 +7,6 @@ $result = mysqli_query($conn, $sql) or die('connection failed');
 $row = $result->fetch_assoc();
 ?>
 
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    
-    // อัพเดตข้อมูลในฐานข้อมูล
-    if (mysqli_query($conn, $update_sql)) {
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
-    } else {
-        echo "Error updating record: " . mysqli_error($conn);
-    }
-}
-?>
-
 <div class="container ms-1" style="border-radius: 5px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4>ข้อมูลส่วนตัว</h4>
@@ -31,10 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="user-info d-flex align-items-center">
         <!-- ฟอร์มสำหรับแก้ไขข้อมูล -->
-        <form id="editForm" method="POST" style="display: none;">
+        <form action="<?php echo $base_url.'/user/editpage/update_info.php' ?>" id="editForm" method="POST" style="display: none;">
             <div class="mb-3">
                 <label for="fullname" class="form-label">ชื่อ-นามสกุล</label>
-                <input type="text" class="form-control" name="fullname" value="<?php echo $row['fullname']; ?>" required>
+                <input type="text" class="form-control" name="fullname" value="<?php echo $row['fullname']; ?>"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">อีเมล</label>
@@ -53,19 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <script>
-function toggleEdit() {
-    const form = document.getElementById('editForm');
-    const info = document.getElementById('userInfo');
-    const editButton = document.getElementById('editButton');
+    function toggleEdit() {
+        const form = document.getElementById('editForm');
+        const info = document.getElementById('userInfo');
+        const editButton = document.getElementById('editButton');
 
-    if (form.style.display === 'none') {
-        form.style.display = 'block';
-        info.style.display = 'none';
-        editButton.style.display = 'none';
-    } else {
-        form.style.display = 'none';
-        info.style.display = 'block';
-        editButton.style.display = 'inline-block';
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+            info.style.display = 'none';
+            editButton.style.display = 'none';
+        } else {
+            form.style.display = 'none';
+            info.style.display = 'block';
+            editButton.style.display = 'inline-block';
+        }
     }
-}
 </script>
