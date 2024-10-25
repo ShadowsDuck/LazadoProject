@@ -63,11 +63,6 @@ table {
     width: 100%;
 }
 
-th:nth-child(1),
-td:nth-child(1) {
-    width: 100px;
-}
-
 th,
 td {
     text-align: start;
@@ -76,4 +71,8 @@ td {
 
 .input-group-text {
     cursor: pointer;
+}
+
+textarea {
+    resize: none;
 }

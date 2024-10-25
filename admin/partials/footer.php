@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="bg-dark text-white py-4">
+<footer class="bg-dark text-white py-3">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -10,7 +10,6 @@
                 <h5>Support</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-white">FAQ</a></li>
-                    <li><a href="#" class="text-white">Contact Us</a></li>
                 </ul>
             </div>
             <!-- เพิ่มเนื้อหาส่วนท้ายเพิ่มเติมได้ที่นี่ -->
@@ -26,7 +25,7 @@
 
 <!-- Load custom script.js -->
 <script src="script.js"></script>
-
+<script src="search_admin.js"></script>
 </body>
 
 </html>
