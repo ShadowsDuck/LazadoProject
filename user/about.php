@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3 bg-light vh-100 " id="sidebar">
+        <div class="col-md-3 bg-light vh-auto " id="sidebar">
             <div class="nav flex-column nav-pills p-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php"><i class="bi bi-info-circle"></i> เกี่ยวกับเรา</a>
                 <a class="nav-link" href="about.php?page=contactSidebar" data-page="aboutpage/contactSidebar.php"><i class="bi bi-telephone"></i> ติดต่อเรา</a>
@@ -20,18 +20,22 @@
         </div>
 
         <!-- Content Area -->
-        <div class="col-md-9">
-            <div id="sidebar-content" class="p-3">
-                <!-- เนื้อหาจะถูกโหลดมาแสดงที่นี่ -->
+
+        <div class="col-md-9 ">
+            <div class="cus" style="margin-left:3rem; background-color:#f8f9fa;">
+                <div id="sidebar-content" class="p-3">
+                    <!-- เนื้อหาจะถูกโหลดมาแสดงที่นี่ -->
+                </div>
             </div>
         </div>
+
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Script สำหรับการจัดการ Sidebar Content
     $(document).ready(function() {
-        $('#sidebar .nav-link').click(function(e) {  // เจาะจงให้ทำงานใน #sidebar เท่านั้น
+        $('#sidebar .nav-link').click(function(e) { // เจาะจงให้ทำงานใน #sidebar เท่านั้น
             e.preventDefault();
             var page = $(this).data('page'); // รับค่าจาก data-page เช่น aboutpage/contactSidebar.php
 

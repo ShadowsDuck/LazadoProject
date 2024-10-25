@@ -112,7 +112,7 @@
                         <a class="nav-link" href="contact.php">ติดต่อเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="about.php">เกี่ยวกับเรา</a>
+                        <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
                         <a class="nav-link" href="../login/signup.php">สมัครสมาชิก</a>
