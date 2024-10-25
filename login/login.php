@@ -11,7 +11,8 @@ include '../connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log-in</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../admin/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .alert-container {
             position: absolute;
@@ -58,11 +59,18 @@ include '../connect.php';
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                         </div>
+
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password">
+                                <span class="input-group-text">
+                                    <i class="fa fa-eye" id="togglePassword"></i>
+                                </span>
+                            </div>
                         </div>
+
                         <div class="d-grid mb-3">
                             <button type="submit" class="btn btn-danger">Log-in</button>
                         </div>
@@ -70,6 +78,10 @@ include '../connect.php';
                     <div class="text-center">
                         <p class="mb-0">Did not have an account? <a href="signup.php" class="text-primary">Create
                                 Account</a>
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <p class="mb-0">or <a href="../user" class="text-primary">Continue without logging-in</a>
                         </p>
                     </div>
                 </div>
@@ -80,6 +92,7 @@ include '../connect.php';
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
