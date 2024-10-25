@@ -23,35 +23,35 @@ require('../connect.php');
 <section class="container">
     <div class="row text-center">
         <div class="col-md-2 py-4">
-            <div class="category-item m-4 <?php echo ($currentCategory === 'keyboard') ? 'active' : ''; ?>"
+            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=keyboard') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=keyboard'">
                 <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
                 <p>Keyboard</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
-            <div class="category-item m-4 <?php echo ($currentCategory === 'mouse') ? 'active' : ''; ?>"
+            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=mouse') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=mouse'">
                 <i class="bi bi-mouse" style="font-size: 2rem;"></i>
                 <p>Mouse</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
-            <div class="category-item m-4 <?php echo ($currentCategory === 'headset') ? 'active' : ''; ?>"
+            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=headset') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=headset'">
                 <i class="bi bi-headset" style="font-size: 2rem;"></i>
                 <p>Headset</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
-            <div class="category-item m-4 <?php echo ($currentCategory === 'monitor') ? 'active' : ''; ?>"
+            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=monitor') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=monitor'">
                 <i class="bi bi-display" style="font-size: 2rem;"></i>
                 <p>Monitor</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
-            <div class="category-item m-4 <?php echo ($currentCategory === 'chair') ? 'active' : ''; ?>"
+            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=chair') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=chair'">
                 <i class="bi bi-chair" style="font-size: 2rem;"><img
                         src="https://www.svgrepo.com/show/281964/desk-chair-chair.svg"
@@ -60,7 +60,7 @@ require('../connect.php');
             </div>
         </div>
         <div class="col-md-2 py-4">
-            <div class="category-item m-4 <?php echo ($currentCategory === 'streaming') ? 'active' : ''; ?>"
+            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=streaming') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=streaming'">
                 <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
                 <p>Streaming</p>
@@ -73,9 +73,15 @@ require('../connect.php');
             <div class="row">
                 <?php
                 $c = '';
+                $keyword = '';
                 $sql = "SELECT * FROM products";
                 if (isset($_GET["c"])) {
                     $c = $_GET['c'];
+                }
+                if (isset($_GET["keyword"])) {
+                    $keyword = $_GET['keyword'];
+                    $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
+                    // print($keyword);
                 }
 
                 if ($c == 'keyboard') {
@@ -91,9 +97,8 @@ require('../connect.php');
                 }elseif ($c == 'streaming') {
                     $sql = 'SELECT * FROM products WHERE category=6';
                 }else {
-                    $sql = "SELECT * FROM products";
+                    // $sql = "SELECT * FROM products";
                 }
-
 
                 $result = mysqli_query($conn, $sql);
 
