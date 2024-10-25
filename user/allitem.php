@@ -146,7 +146,7 @@ require('../connect.php');
                                 <img src="https://placehold.co/200" class="card-img-top" alt="Image">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $row['name']; ?></h5>
-                                    <p class="card-text"><?php echo $row['price']; ?></p>
+                                    <p class="card-text"><?php echo "฿".number_format($row['price'],2); ?></p>
                                 </div>
                             </div>
                         </div>
