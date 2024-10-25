@@ -35,18 +35,28 @@
 <script>
     // Script สำหรับการจัดการ Sidebar Content
     $(document).ready(function() {
-        $('#sidebar .nav-link').click(function(e) { // เจาะจงให้ทำงานใน #sidebar เท่านั้น
-            e.preventDefault();
-            var page = $(this).data('page'); // รับค่าจาก data-page เช่น aboutpage/contactSidebar.php
+    // Handle sidebar content loading
+    $('#sidebar .nav-link').click(function(e) {
+        e.preventDefault();
+        var page = $(this).data('page');
 
-            // โหลดเนื้อหาจากไฟล์ที่กำหนด และเพิ่ม error handling
-            $('#sidebar-content').load(page, function(response, status, xhr) {
-                if (status == "error") {
-                    $('#sidebar-content').html("<p>ไม่สามารถโหลดเนื้อหาได้</p>");
-                    console.error("Error loading page:", xhr.status, xhr.statusText);
-                }
-            });
+        // Load content and handle errors
+        $('#sidebar-content').load(page, function(response, status, xhr) {
+            if (status == "error") {
+                $('#sidebar-content').html("<p>ไม่สามารถโหลดเนื้อหาได้</p>");
+                console.error("Error loading page:", xhr.status, xhr.statusText);
+            }
         });
+
+        // Mark the clicked link as active
+        $('#sidebar .nav-link').removeClass('active');
+        $(this).addClass('active');
     });
+
+    // Automatically select the first sidebar item if the page is "aboutpage/aboutSidebar.php"
+    if (window.location.href.indexOf("aboutSidebar") > -1) {
+        $('#sidebar .nav-link').first().trigger('click');
+    }
+});
 </script>
 <?php include('partials/footer.php'); ?>
