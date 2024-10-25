@@ -118,7 +118,7 @@ require('../connect.php');
                         <?php
                     }
                 } else {
-                    echo "No records found.";
+                    echo "ไม่พบข้อมูล";
                 }
                 ?>
             </div>
