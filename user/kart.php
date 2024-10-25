@@ -1,4 +1,5 @@
 <?php
+include('partials/header.php');
 include("../connect.php");
 // // การเชื่อมต่อกับฐานข้อมูล
 // $host = 'localhost';
@@ -13,7 +14,6 @@ include("../connect.php");
 if ($conn->connect_error) {
     die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
 }
-
 // ดึงข้อมูลสินค้าในตะกร้าจากฐานข้อมูล
 $sql = "SELECT id, name, price, img AS image FROM products";
 $result = $conn->query($sql);
@@ -264,11 +264,6 @@ $conn->close();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-        <div class="container mt-4">
-            <a class="navbar-brand fw-bold fs-3" href="index.php">Lazado</a>
-        </div>
-    </nav>
 
     <div class="container mt-5 mb-5">
         <h2 class="text-center">ตะกร้าสินค้า</h2>
@@ -313,11 +308,6 @@ $conn->close();
         </div>
     </div>
 
-    <footer class="text-center mt-5">
-        <div class="container">
-            <p>&copy; 2024 Lazado. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
-
+<?php include('partials/footer.php'); ?>
 </html>
