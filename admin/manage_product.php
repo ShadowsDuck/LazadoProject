@@ -33,7 +33,7 @@
     <div class="modal fade" id="addProductModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="add_product.php" method="post">
+                <form action="add_product.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                     <div class="modal-header">
                         <h5 class="modal-title" id="addProductModalLabel">เพิ่มสินค้า</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -45,7 +45,10 @@
                         <!-- Product Name field -->
                         <div class="form-group mb-3">
                             <label for="product_name">ชื่อสินค้า</label>
-                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อสินค้า" name="name">
+                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อสินค้า" name="name" required>
+                            <div class="invalid-feedback">
+                                กรุณาใส่ชื่อสินค้า
+                            </div>
                         </div>
 
                         <!-- Description field -->
@@ -57,20 +60,20 @@
                         <!-- Price field -->
                         <div class="form-group mb-3">
                             <label for="price_product">ราคา</label>
-                            <input type="number" class="form-control" placeholder="กรุณาใส่ราคา" name="price">
+                            <input type="number" class="form-control" placeholder="กรุณาใส่ราคา" name="price" required>
                         </div>
 
                         <!-- Product Image field -->
                         <div class="form-group mb-3">
                             <label for="product_image" class="form-label">รูปสินค้า</label>
-                            <input class="form-control" type="file" name="img">
+                            <input type="file" class="form-control" name="img" accept="image/*">
                         </div>
 
                         <!-- Product Category field -->
                         <div class="form-group mb-3">
                             <label for="product_category">หมวดหมู่สินค้า</label>
-                            <select class="form-select" aria-label="category" name="category">
-                                <option selected>เลือกหมวดหมู่สินค้า</option>
+                            <select class="form-select" aria-label="category" name="category" required>
+                                <option value="" selected>เลือกหมวดหมู่สินค้า</option>
                                 <option value="1">คีย์บอร์ด</option>
                                 <option value="2">เมาส์</option>
                                 <option value="3">หูฟัง</option>
@@ -343,6 +346,38 @@
             // ตั้งค่าหมวดหมู่สินค้า
             var categorySelect = modal.querySelector('select[name="category"]');
             categorySelect.value = productCategory;
+        });
+    });
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var addProductModal = document.getElementById('addProductModal');
+
+        addProductModal.addEventListener('hidden.bs.modal', function() {
+            // Reset the form fields within the Add Product modal
+            var form = addProductModal.querySelector('form');
+            form.reset();
+            form.classList.remove('was-validated'); // Remove validation classes
         });
     });
 </script>
