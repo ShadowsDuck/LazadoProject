@@ -6,6 +6,7 @@ $username = mysqli_real_escape_string($conn, $_POST['username']);
 $password = mysqli_real_escape_string($conn, $_POST['password']);
 $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
 $address = mysqli_real_escape_string($conn, $_POST['address']);
+$email = mysqli_real_escape_string($conn, $_POST['email']);
 
 // Check if username already exists
 $query = mysqli_query($conn, "SELECT * FROM users WHERE username='{$username}'");
@@ -39,8 +40,8 @@ if (strlen($_POST['password']) < 6) {
     if (!empty($username) && !empty($password) && !empty($fullname)) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = mysqli_query($conn, "INSERT INTO users (username, password, fullname, address, usertype) 
-        VALUES ('{$username}','{$hash}','{$fullname}','{$address}','user')") or die("query failed!");
+        $query = mysqli_query($conn, "INSERT INTO users (username, password, email, fullname, address, usertype) 
+        VALUES ('{$username}','{$hash}','{$fullname}','{$email}','{$address}','user')") or die("query failed!");
 
         if ($query) {
             $_SESSION['message'] = 'Sign-up successful!';
