@@ -41,7 +41,7 @@ if (strlen($_POST['password']) < 6) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         $query = mysqli_query($conn, "INSERT INTO users (username, password, email, fullname, address, usertype) 
-        VALUES ('{$username}','{$hash}','{$fullname}','{$email}','{$address}','user')") or die("query failed!");
+        VALUES ('{$username}','{$hash}','{$email}','{$fullname}','{$address}','user')") or die("query failed!");
 
         if ($query) {
             $_SESSION['message'] = 'Sign-up successful!';
