@@ -1,14 +1,16 @@
 <?php
-// session_start();
-// $open_connect = 1;
-// require('../connect.php');
+session_start();
+$open_connect = 1;
+require('../connect.php');
 
 // if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
 //     die(header("location:{$base_url}/login/login.php"));       //ถ้าไม่มี session id || usertype จะถูกส่งไป login.php
-// } elseif (isset($_GET['logout'])) {
-//     session_destroy();
-//     die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
 // }
+if (isset($_GET['logout'])) {
+    session_destroy();
+    die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
+}
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 
@@ -106,16 +108,31 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link active" href="index.php">หน้าแรก</a>
+                        <a class="nav-link <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>" href="index.php">หน้าแรก</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="contact.php">ติดต่อเรา</a>
+                        <a class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>" href="contact.php">ติดต่อเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
+                        <a class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="../login/signup.php">สมัครสมาชิก</a>
+                        <a class="nav-link" href="
+                        <?php
+                        if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
+                            echo 'user_edit.php';
+                        }else {
+                            echo '../login/signup.php';
+                        }
+                        ?>">
+                            <?php
+                            if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
+                                echo 'ข้อมูลลูกค้า';
+                            }else {
+                                echo 'สมัครสมาชิก';
+                            }
+                            ?>
+                        </a>
                     </li>
                 </ul>
                 <div class="d-flex">
