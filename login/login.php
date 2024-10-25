@@ -81,7 +81,7 @@ include '../connect.php';
                         </p>
                     </div>
                     <div class="text-center">
-                        <p class="mb-0">or <a href="../user" class="text-primary">Continue without logging-in</a>
+                        <p class="mb-0">or <a href="../user/index.php" class="text-primary">Continue without logging-in</a>
                         </p>
                     </div>
                 </div>
