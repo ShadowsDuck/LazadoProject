@@ -9,6 +9,7 @@
 //     session_destroy();
 //     die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
 // }
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 
@@ -106,13 +107,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link active" href="index.php">หน้าแรก</a>
+                        <a class="nav-link <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>" href="index.php">หน้าแรก</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="contact.php">ติดต่อเรา</a>
+                        <a class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>" href="contact.php">ติดต่อเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
+                        <a class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
                         <a class="nav-link" href="../login/signup.php">สมัครสมาชิก</a>

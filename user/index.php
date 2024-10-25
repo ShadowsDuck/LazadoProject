@@ -8,13 +8,13 @@
         <div class="col-md-3">
             <div class="category-menu">
                 <a href="allitem.php">Gaming Gear<i class="bi bi-chevron-right"></i></a>
-                <a href="allitem.php?category=keyboard">Keyboard</a>
-                <a href="allitem.php?category=mouse">Mouse</a>
-                <a href="allitem.php?category=headset">Headset</a>
-                <a href="allitem.php?category=monitor">Monitor</a>
-                <a href="allitem.php?category=chair">Chair</a>
-                <a href="allitem.php?category=streaming">Streaming</a>
-                <a href="allitem.php?category=other">Other<i class="bi bi-chevron-right"></i></a>
+                <a href="allitem.php?c=keyboard">Keyboard</a>
+                <a href="allitem.php?c=mouse">Mouse</a>
+                <a href="allitem.php?c=headset">Headset</a>
+                <a href="allitem.php?c=monitor">Monitor</a>
+                <a href="allitem.php?c=chair">Chair</a>
+                <a href="allitem.php?c=streaming">Streaming</a>
+                <a href="allitem.php?c=other">Other<i class="bi bi-chevron-right"></i></a>
             </div>
         </div>
 
@@ -154,39 +154,39 @@
     <h2 class="text-center mb-4">Browse By Category</h2>
     <div class="row text-center">
         <div class="col-md-2">
-            <div class="category-item p-4" onclick="searchByCategory('keyboard')">
+            <div class="category-item p-4" onclick="window.location.href='allitem.php?c=keyboard'" style="cursor: pointer;">
                 <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
                 <p>Keyboard</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4" onclick="searchByCategory('mouse')">
+            <div class="category-item p-4" onclick="window.location.href='allitem.php?c=mouse'" style="cursor: pointer;">
                 <i class="bi bi-mouse" style="font-size: 2rem;"></i>
                 <p>Mouse</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4" onclick="searchByCategory('headset')">
+            <div class="category-item p-4" onclick="window.location.href='allitem.php?c=headset'" style="cursor: pointer;">
                 <i class="bi bi-headset" style="font-size: 2rem;"></i>
                 <p>Headset</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4" onclick="searchByCategory('monitor')">
+            <div class="category-item p-4" onclick="window.location.href='allitem.php?c=monitor'" style="cursor: pointer;">
                 <i class="bi bi-display" style="font-size: 2rem;"></i>
                 <p>Monitor</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4" onclick="searchByCategory('chair')">
+            <div class="category-item p-4" onclick="window.location.href='allitem.php?c=chair'" style="cursor: pointer;">
                 <i class="bi bi-chair" style="font-size: 2rem;"><img src="https://www.svgrepo.com/show/281964/desk-chair-chair.svg" style="height: 2.5rem; width: 2.5rem; color:blue;"></i>
                 <p>Chair</p>
             </div>
         </div>
         <div class="col-md-2">
-            <div class="category-item p-4" onclick="searchByCategory('streaming')">
+            <div class="category-item p-4" onclick="window.location.href='allitem.php?c=streaming'" style="cursor: pointer;">
                 <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
-                <p>Steaming</p>
+                <p>Streaming</p>
             </div>
         </div>
     </div>
