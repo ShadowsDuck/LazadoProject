@@ -92,6 +92,69 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal for Product Details -->
+    <div class="modal fade" id="updateProductDetailModal" tabindex="-1" aria-labelledby="updateProductDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="update_product.php" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateProductDetailModalLabel">อัปเดตรายละเอียดสินค้า</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="order_id">
+
+                        <!-- Product Name field -->
+                        <div class="form-group mb-3">
+                            <label for="product_name">ชื่อสินค้า</label>
+                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อสินค้า" name="product_name">
+                        </div>
+
+                        <!-- Description field -->
+                        <div class="form-group mb-3">
+                            <label for="description">รายละเอียด</label>
+                            <textarea class="form-control" name="description" placeholder="กรุณาใส่รายละเอียดสินค้า" rows="3"></textarea>
+                        </div>
+
+                        <!-- Price field -->
+                        <div class="form-group mb-3">
+                            <label for="price_product">ราคา</label>
+                            <input type="number" class="form-control" placeholder="กรุณาใส่ราคา" name="price_product">
+                        </div>
+
+                        <!-- Product Image field -->
+                        <div class="form-group mb-3">
+                            <label for="product_image" class="form-label">รูปสินค้า</label>
+                            <input class="form-control" type="file" name="product_image">
+                        </div>
+
+                        <!-- Product Category field -->
+                        <div class="form-group mb-3">
+                            <label for="product_category">หมวดหมู่สินค้า</label>
+                            <select class="form-select" aria-label="product_category">
+                                <option selected>เลือกหมวดหมู่สินค้า</option>
+                                <option value="1">คีย์บอร์ด</option>
+                                <option value="2">เมาส์</option>
+                                <option value="3">หูฟัง</option>
+                                <option value="4">จอมอนิเตอร์</option>
+                                <option value="5">เก้าอี้</option>
+                                <option value="6">สตรีมมิ่ง</option>
+                                <option value="7">อื่นๆ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
+                        <button type="submit" class="btn btn-primary">อัปเดตสินค้า</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- Icon หมวดหมู่-->
@@ -211,11 +274,27 @@
                     while ($row = $result->fetch_assoc()) {
                 ?>
                         <div class="col-lg-3 mb-4">
-                            <div class="card h-100" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'" style="cursor: pointer;">
-                                <img src="https://placehold.co/200" class="card-img-top" alt="Image">
-                                <div class="card-body">
+                            <div class="card h-100"
+
+                                style="background-color: rgba(0, 0, 0, 0.02);">
+                                <div class="card-body"
+                                    style="cursor: pointer;"
+                                    onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
+                                    <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
                                     <h5 class="card-title"><?php echo $row['name']; ?></h5>
-                                    <p class="card-text"><?php echo "฿" . number_format($row['price'], 2); ?></p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 20px;">
+                                        <?php echo "฿" . number_format($row['price'], 2); ?>
+                                    </div>
+                                    <button type="button" class="btn btn-success btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#updateProductDetailModal"
+                                        data-id="<?php echo $row['id']; ?>"
+                                        data-name="<?php echo $row['name']; ?>"
+                                        data-price="<?php echo $row['price']; ?>">
+                                        อัปเดต
+                                    </button>
                                 </div>
                             </div>
                         </div>
