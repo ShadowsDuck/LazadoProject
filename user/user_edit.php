@@ -11,16 +11,24 @@ include('partials/header.php');
     .sidebar {
         background-color: #fff;
         border-right: 1px solid #e0e0e0;
-        min-height: 100vh;
+        min-height: auto;
         padding-top: 20px;
     }
 
-    .sidebar a {
+    .sidebar a  {
         color: #333;
         font-weight: bold;
         display: block;
         padding: 10px 20px;
         text-decoration: none;
+    }
+    .btn{
+        color: #333;
+        font-weight: bold;
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+        
     }
 
     .sidebar a.active,
@@ -84,19 +92,20 @@ include('partials/header.php');
 
 
 <div class="container">
-    <div class="row">
+    <div class="row ">
         <!-- Sidebar -->
-        <div class="col-md-3 sidebar vh-auto" id="sidebar">
+        <div class="col-sm-3 sidebar vh-auto" id="sidebar">
             <a class="nav-link" href="user_edit.php?page=infoEdit" data-page="editpage/infoEdit.php">ข้อมูลส่วนตัว</a>
             <a class="nav-link" href="user_edit.php?page=addressEdit" data-page="editpage/addressEdit.php">ที่อยู่สำหรับจัดส่ง</a>
             <a class="nav-link" href="user_edit.php?page=payEdit" data-page="editpage/payEdit.php">ช่องทางชำระเงิน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
+            <button type="button" class="btn btn-danger my-2 mx-3 py-2">ออกจากระบบ</button>
         </div>
 
         <!-- Main Content -->
 
-        <div class="col-md-9 ">
-            <div class="cus rounded-sm" style="margin-left:3rem; background-color:#f8f9fa;">
+        <div class="col-sm-9 ">
+            <div class="cus rounded-sm " style="margin-left:3rem; background-color:#f8f9fa;">
                 <div id="sidebar-content" class="p-3">
                     <!-- เนื้อหาจะถูกโหลดมาแสดงที่นี่ -->
                 </div>

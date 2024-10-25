@@ -16,7 +16,7 @@ $row = $result->fetch_assoc();
     <div class="user-info d-flex align-items-center">
         <div>
             <h5><?php echo $row['address']; ?></h5>
-            <p><?php echo $row['email']; ?></p>
+            
         </div>
     </div>
 
