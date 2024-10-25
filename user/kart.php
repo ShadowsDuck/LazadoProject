@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('partials/header.php');
 include("../connect.php");
 // // การเชื่อมต่อกับฐานข้อมูล
