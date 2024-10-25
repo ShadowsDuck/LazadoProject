@@ -1,5 +1,12 @@
 <?php
 include("partials/header.php");
+require("../connect.php");
+
+$product_id = $_GET['id'];
+$sql = "SELECT * FROM products WHERE id = $product_id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+
 ?>
 
 <body>
@@ -23,13 +30,11 @@ include("partials/header.php");
 
             <!-- Product Details -->
             <div class="col-md-5">
-                <h3>Product's name</h3>
+                <h3><?php echo $row['name'] ?></h3>
                 <p><span class="text-warning">★★★★☆</span> (n Reviews) | <span class="text-success">In Stock</span>
                 </p>
-                <h4>$1.00</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores illo voluptas repellendus commodi
-                    nobis veritatis corporis, quas eum? Deleniti hic nesciunt eos. Similique hic qui, tenetur mollitia
-                    numquam dolorem expedita.</p>
+                <h4><?php echo "฿".number_format($row['price'],2); ?></h4>
+                <p><?php echo $row['description']?></p>
 
                 <form action="" method="get">
                     <!-- Colour Options -->

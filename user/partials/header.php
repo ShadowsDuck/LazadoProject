@@ -86,6 +86,11 @@
             padding-right: 30px;
             /* เพิ่ม padding-right */
         }
+
+        html {
+    overflow-y: scroll;
+}
+
     </style>
 </head>
 
@@ -107,28 +112,28 @@
                         <a class="nav-link" href="contact.php">ติดต่อเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="about.php">เกี่ยวกับเรา</a>
+                        <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
                         <a class="nav-link" href="../login/signup.php">สมัครสมาชิก</a>
                     </li>
                 </ul>
                 <div class="d-flex">
-
-                    <form action="<?=$_SERVER['SCRIPT_NAME'];?>" method="get" class="input-group">
+                    <form action="allitem.php" method="get" class="input-group">
                         <input type="text" aria-label="Search" class="form-control" placeholder="ค้นหาสินค้า"
                             id="keyword" name="keyword">
                         <button type="submit" class="input-group-text search-icon-class">
                             <i class="bi bi-search"></i> <!-- หรือไอคอนค้นหาอื่น ๆ -->
                         </button>
                     </form>
-
                     <a href="kart.php" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
-
                 </div>
             </div>
         </div>
     </nav>
+
+
+
 </body>
 
 </html>
