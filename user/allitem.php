@@ -106,7 +106,7 @@ require('../connect.php');
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         ?>
-                        <div class="col-lg-3 mb-4">
+                        <div class="col-lg-3 mb-4" onclick="window.location.href='item_details.php?id=<?php echo $row['id']?>'">
                             <div class="card h-100">
                                 <img src="https://placehold.co/200" class="card-img-top" alt="Image">
                                 <div class="card-body">
@@ -118,7 +118,7 @@ require('../connect.php');
                         <?php
                     }
                 } else {
-                    echo "No records found.";
+                    echo "ไม่พบข้อมูล";
                 }
                 ?>
             </div>
