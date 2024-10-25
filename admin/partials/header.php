@@ -32,16 +32,13 @@ $currentCategory = isset($_GET['c']) ? $_GET['c'] : (isset($keyword) ? $keyword 
         .alert-container {
             position: absolute;
             top: 0;
-            /* width: 30%; */
             margin: auto;
             z-index: 9999;
-            /* ให้มันอยู่ด้านบนสุด */
         }
     </style>
 </head>
 
 <body>
-
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
         <div class="container justify-content-center">
