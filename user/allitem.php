@@ -144,7 +144,6 @@ require('../connect.php');
                         ?>
                         <div class="col-lg-3 mb-4">
                             <div class="card h-100"
-                                
                                 style="background-color: rgba(0, 0, 0, 0.02);">
                                 <div class="card-body" 
                                     style="cursor: pointer;"
