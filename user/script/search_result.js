@@ -45,38 +45,12 @@ function searchProducts() {
     }
 }
 
-
-
 function displaySearchResults() {
-    var query = getQueryParam('query'); // ดึงคำค้นจาก URL
     var category = getQueryParam('category'); // ดึงหมวดหมู่จาก URL
     var resultTitle = document.getElementById('searchResultTitle');
     var searchResults = document.getElementById('searchResults');
 
-    if (query) { // ค้นหาจากชื่อ
-        resultTitle.innerHTML = `ผลลัพธ์การค้นหา: "${query}"`;
-
-        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
-
-        // แสดงสินค้า
-        searchResults.innerHTML = '';
-        if (filteredProducts.length > 0) {
-            filteredProducts.forEach(product => {
-                searchResults.innerHTML += `
-                        <div class="col-md-3">
-                            <div class="product-card">
-                                <img src="${product.image}" alt="${product.name}">
-                                <h5>${product.name}</h5>
-                                <p>${product.price}</p>
-                            </div>
-                        </div>
-                    `;
-            });
-        } else {
-            searchResults.innerHTML = '<p>ไม่พบสินค้าที่คุณค้นหา</p>';
-        }
-
-    } else if (category) { // ค้นหาจากหมวดหมู่
+    if (category) { // ค้นหาจากหมวดหมู่
         resultTitle.innerHTML = `ผลลัพธ์การค้นหาหมวดหมู่: ${category}`;
 
         const filteredProducts = products.filter(product => product.category.toLowerCase() === category.toLowerCase());
@@ -98,13 +72,12 @@ function displaySearchResults() {
         } else {
             searchResults.innerHTML = '<p>ไม่พบสินค้าที่ตรงกับหมวดหมู่ที่คุณเลือก</p>';
         }
-
     } else {
         resultTitle.innerHTML = 'ไม่พบผลลัพธ์';
-        searchResults.innerHTML = '<p>กรุณาค้นหาสินค้าหรือเลือกหมวดหมู่</p>';
+        searchResults.innerHTML = '<p>กรุณาเลือกหมวดหมู่</p>';
     }
-    
 }
+
 
 // ฟังก์ชันช่วยดึง query param จาก URL
 function getQueryParam(param) {
@@ -132,22 +105,14 @@ document.querySelector('.input-group-text').addEventListener('click', function (
 function selectCategory(element, category) {
     // ลบคลาส active ออกจากทุกหมวดหมู่
     const items = document.querySelectorAll('.category-item');
-
-    
-    
     items.forEach(item => item.classList.remove('active'));
 
     // เพิ่มคลาส active ให้กับหมวดหมู่ที่ถูกคลิก
     element.classList.add('active');
 
-    console.log('Active class added:', element.classList.contains('active'));
-    // เรียกใช้ฟังก์ชันการค้นหาหมวดหมู่
-    displaySearchResults(category);
-
-    
-    
+    // เปลี่ยน URL ตามหมวดหมู่ที่เลือก
+    window.location.href = `allitem.php?category=${category}`;
 }
-
 
 //ค้นหาผ่านไอคอนcategory ของ allitem.php
 // function searchByCategory(category) {
