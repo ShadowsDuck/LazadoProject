@@ -131,7 +131,7 @@ include('partials/header.php');
 
         // Automatically select the first sidebar item if the page is "aboutpage/aboutSidebar.php"
         if (window.location.href.indexOf("infoEdit") > -1) {
-            $('#info .nav-link').first().trigger('click');
+            $('#sidebar .nav-link').first().trigger('click');
         }
     });
 </script>
