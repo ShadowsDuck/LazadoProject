@@ -20,7 +20,7 @@
     <div class="modal fade" id="addAdminModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="add_admin.php" method="post">
+                <form action="add_admin.php" method="post" class="needs-validation" novalidate>
                     <div class="modal-header">
                         <h5 class="modal-title" id="addAdminModalLabel">เพิ่มผู้ดูแล</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -30,30 +30,39 @@
                     <div class="modal-body">
                         <div class="form-group mb-3">
                             <label for="fullname">ชื่อ-นามสกุล</label>
-                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อ-นามสกุล" name="fullname">
+                            <input type="text" class="form-control is-invalid" placeholder="กรุณาใส่ชื่อ-นามสกุล" name="fullname" required>
+                            <div class="invalid-feedback">
+                                กรุณาใส่ชื่อ-นามสกุล
+                            </div>
                         </div>
 
                         <!-- Username field -->
                         <div class="form-group mb-3">
                             <label for="username">ชื่อผู้ใช้</label>
-                            <input type="text" class="form-control" placeholder="กรุณาใส่ชื่อผู้ใช้" name="username">
+                            <input type="text" class="form-control is-invalid" placeholder="กรุณาใส่ชื่อผู้ใช้" name="username" required>
+                            <div class="invalid-feedback">
+                                กรุณาใส่ชื่อผู้ใช้
+                            </div>
                         </div>
 
                         <!-- Password field -->
                         <div class="form-group mb-3">
                             <label for="admin_password">รหัสผ่าน</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="admin_password" name="password" placeholder="กรุณาใส่รหัสผ่าน">
+                                <input type="password" class="form-control is-invalid" id="admin_password" name="password" placeholder="กรุณาใส่รหัสผ่าน" required>
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="toggleAdminPassword"></i>
                                 </span>
+                                <div class="invalid-feedback">
+                                    กรุณาใส่รหัสผ่านที่มีความยาวอย่างน้อย 6 ตัว
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
-                        <button type="submit" class="btn btn-primary">เพิ่มผู้ดูแล</button>
+                        <button type="submit" class="btn btn-primary" disabled>เพิ่มผู้ดูแล</button>
                     </div>
                 </form>
 
@@ -157,6 +166,30 @@
         </div>
     </div>
 
+    <div class="container-delete">
+        <!-- Modal for Confirm Delete -->
+        <div class="modal fade" id="confirmDelete" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icons">
+                            <i class="icon">&times;</i>
+                        </div>
+                        <h4 class="modal-title">คุณแน่ใจใช่ไหม?</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>คุณแน่ใจใช่ไหมที่จะลบผู้ดูแลคนนี้? <br>หลังจากลบไปแล้วคุณไม่สามารถกู้คืนข้อมูลได้</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                        <a href="#" class="btn btn-danger" id="confirmDeleteBtn">ลบ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -193,8 +226,7 @@
                                 data-username="<?php echo $username; ?>">
                                 อัปเดต
                             </button>
-                            <a href="<?php echo "{$base_url}/admin/del_admin.php?id={$id}"; ?>"
-                                class="btn btn-danger btn-sm ms-2 me-2 delete_admin"> ลบ </a>
+                            <a href="#" class="btn btn-danger btn-sm ms-2 me-2 delete_admin" data-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#confirmDelete"> ลบ </a>
                             <button type="button" class="btn btn-info btn-sm"
                                 data-bs-toggle="modal"
                                 data-bs-target="#changePasswordAdminModal"
@@ -220,5 +252,107 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+    // ดึงปุ่มลบหลัก และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มลบใน Modal
+    document.querySelectorAll('.delete_admin').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // ดึง id ของผู้ดูแลจากปุ่มที่คลิก
+            const adminId = button.getAttribute('data-id');
+
+            // อัปเดตลิงก์ของปุ่มลบใน Modal
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            confirmDeleteBtn.href = `del_admin.php?id=${adminId}`;
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const fullnameInput = document.querySelector('input[name="fullname"]');
+        const usernameInput = document.querySelector('input[name="username"]');
+        const passwordInput = document.getElementById('admin_password');
+        const submitButton = document.querySelector('#addAdminModal .modal-footer .btn-primary');
+        const addAdminModal = document.getElementById('addAdminModal');
+
+        // ตรวจสอบข้อมูลทุกฟิลด์เมื่อ modal เปิด
+        addAdminModal.addEventListener('shown.bs.modal', function() {
+            validateForm(); // ตรวจสอบฟิลด์เมื่อเปิด modal
+        });
+
+        // ตรวจสอบข้อมูลเมื่อผู้ใช้พิมพ์ในแต่ละฟิลด์
+        fullnameInput.addEventListener('input', validateForm);
+        usernameInput.addEventListener('input', validateForm);
+        passwordInput.addEventListener('input', validateForm);
+
+        function validateForm() {
+            let isValid = true;
+
+            // ตรวจสอบฟิลด์ชื่อ-นามสกุล
+            if (fullnameInput.value.trim() === '') {
+                fullnameInput.classList.remove('is-valid');
+                fullnameInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                fullnameInput.classList.remove('is-invalid');
+                fullnameInput.classList.add('is-valid');
+            }
+
+            // ตรวจสอบฟิลด์ชื่อผู้ใช้
+            if (usernameInput.value.trim() === '') {
+                usernameInput.classList.remove('is-valid');
+                usernameInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                usernameInput.classList.remove('is-invalid');
+                usernameInput.classList.add('is-valid');
+            }
+
+            // ตรวจสอบฟิลด์รหัสผ่าน
+            if (passwordInput.value.length < 6) {
+                passwordInput.classList.remove('is-valid');
+                passwordInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                passwordInput.classList.remove('is-invalid');
+                passwordInput.classList.add('is-valid');
+            }
+
+            // ปิดหรือเปิดปุ่ม submit ขึ้นอยู่กับว่าข้อมูลถูกต้องหรือไม่
+            submitButton.disabled = !isValid;
+        }
+
+        // รีเซ็ตฟิลด์เมื่อ modal ปิด
+        addAdminModal.addEventListener('hidden.bs.modal', function() {
+            fullnameInput.classList.remove('is-valid', 'is-invalid');
+            usernameInput.classList.remove('is-valid', 'is-invalid');
+            passwordInput.classList.remove('is-valid', 'is-invalid');
+            fullnameInput.value = '';
+            usernameInput.value = '';
+            passwordInput.value = '';
+            submitButton.disabled = true;
+        });
+    });
+</script>
 
 <?php include('partials/footer.php'); ?>
