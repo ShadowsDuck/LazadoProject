@@ -28,10 +28,10 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://via.placeholder.com/900x300.png?text=Placeholder+Image+1" alt="Slide 1">
+                        <img src="https://yt3.googleusercontent.com/NvH3G0-twMfxjeJLZOQvmaJ5loWfS6hOfIKPv2M_Gh5r3b7nLo8IljtEdjH_Ga27xxRtrErD=s900-c-k-c0x00ffffff-no-rj" alt="Slide 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://via.placeholder.com/900x300.png?text=Placeholder+Image+2" alt="Slide 2">
+                        <img src="https://s.isanook.com/ns/0/ui/1586/7930818/gal-7930818-20191022051920-a6757b1.jpg" alt="Slide 2">
                     </div>
                     <div class="carousel-item">
                         <img src="https://via.placeholder.com/900x300.png?text=Placeholder+Image+3" alt="Slide 3">
