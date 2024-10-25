@@ -86,7 +86,7 @@ include('partials/header.php');
 <div class="container">
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3 sidebar vh-auto">
+        <div class="col-md-3 sidebar vh-auto" id="sidebar">
             <a class="nav-link" href="user_edit.php?page=infoEdit" data-page="editpage/infoEdit.php">ข้อมูลส่วนตัว</a>
             <a class="nav-link" href="user_edit.php?page=addressEdit" data-page="editpage/addressEdit.php">ที่อยู่สำหรับจัดส่ง</a>
             <a class="nav-link" href="user_edit.php?page=payEdit" data-page="editpage/payEdit.php">ช่องทางชำระเงิน</a>
@@ -107,6 +107,7 @@ include('partials/header.php');
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Script สำหรับการจัดการ Sidebar Content
     $(document).ready(function() {
