@@ -1,4 +1,4 @@
-<div class="container ms-1">
+<div class="container ms-1" style="border-radius: 5px;">
     <h2>ถ้าคุณชอบเล่นเกม เราคือเพื่อนกัน!</h2>
     <div class="about-info">
         <p>Lazado Gaming ร้านจำหน่ายอุปกรณ์เกมมิ่งเกียร์ เมาส์ คีย์บอร์ด จอคอมพิวเตอร์ อุปกรณ์เสริม และอุปกรณ์เกมมิ่งเกียร์อื่น ๆ รับประกันทุกชิ้น </p>

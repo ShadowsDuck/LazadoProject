@@ -22,7 +22,7 @@
         <!-- Content Area -->
 
         <div class="col-md-9 ">
-            <div class="cus" style="margin-left:3rem; background-color:#f8f9fa;">
+            <div class="cus rounded-sm" style="margin-left:3rem; background-color:#f8f9fa;">
                 <div id="sidebar-content" class="p-3">
                     <!-- เนื้อหาจะถูกโหลดมาแสดงที่นี่ -->
                 </div>
