@@ -48,14 +48,11 @@ footer {
 .carousel-control-prev,
 .carousel-control-next {
     filter: invert(100%);
-    /* ทำให้ลูกศรสีขาวมองเห็นได้ดีขึ้น */
 }
 
 .container-fluid {
     padding-left: 30px;
-    /* เพิ่ม padding-left */
     padding-right: 30px;
-    /* เพิ่ม padding-right */
 }
 
 table {
