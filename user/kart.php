@@ -1,3 +1,34 @@
+<?php
+// การเชื่อมต่อกับฐานข้อมูล
+$host = 'localhost';
+$db = 'lazado_db';
+$user = 'root';
+$password = '';
+
+// สร้างการเชื่อมต่อกับฐานข้อมูล
+$conn = new mysqli($host, $user, $password, $db);
+
+// ตรวจสอบการเชื่อมต่อ
+if ($conn->connect_error) {
+    die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
+}
+
+// ดึงข้อมูลสินค้าในตะกร้าจากฐานข้อมูล
+$sql = "SELECT id, name, price, img AS image FROM products";
+$result = $conn->query($sql);
+
+// เก็บข้อมูลสินค้าในอาเรย์
+$cartItems = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $cartItems[] = $row;
+    }
+} else {
+    echo "ไม่มีสินค้าในตะกร้า";
+}
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +36,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         body {
@@ -149,7 +180,6 @@
             text-decoration: underline;
         }
     </style>
-
     <script>
         window.onload = function() {
             const selectAll = document.getElementById('select-all');
@@ -197,11 +227,7 @@
                     if (confirm("แน่ใจหรือไม่ว่าต้องการลบสินค้านี้?")) {
                         const row = this.closest('.cart-item-box');
                         row.remove();
-
-                        // Update itemCheckboxes after removing an item
                         itemCheckboxes = document.querySelectorAll('.item-checkbox');
-
-                        // Recalculate total
                         calculateSummary();
                     }
                 });
@@ -237,26 +263,9 @@
 </head>
 
 <body>
-    <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
         <div class="container mt-4">
             <a class="navbar-brand fw-bold fs-3" href="index.php">Lazado</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item me-4 fs-6">
-                        <a class="nav-link active" href="#">หน้าแรก</a>
-                    </li>
-                    <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="#">ติดต่อเรา</a>
-                    </li>
-                    <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="#">เข้าสู่ระบบ</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
@@ -273,49 +282,41 @@
                     <div>ลบ</div>
                 </div>
 
-                <?php
-                // สมมติว่ามีสินค้าหลายตัวในตะกร้า
-                $cartItems = [
-                    ['id' => 1, 'name' => 'Hyper X cloud 3', 'price' => 30000.00, 'image' => 'https://img.lazcdn.com/g/p/3d44752b4e2d18277dd9bb19362fadb7.jpg_2200x2200q80.jpg_.webp'],
-                    ['id' => 2, 'name' => 'จิ๋มกระป๋อง', 'price' => 1500.00, 'image' => 'https://img.lazcdn.com/g/p/d549b1b77e0607ee34641b4401756082.jpg_2200x2200q80.jpg_.webp']
-                ];
+                <?php foreach ($cartItems as $item): ?>
+                    <div class="cart-item-box">
+                        <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['id']; ?>]" value="<?php echo $item['id']; ?>"></div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-image">
+                                <img src="<?php echo $item['image']; ?>" alt="Product Image">
+                            </div>
+                            <div class="cart-item-info"><?php echo $item['name']; ?></div>
+                        </div>
+                        <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
+                        <div class="cart-item-quantity">
+                            <button class="minus-btn">-</button>
+                            <input type="text" name="quantities[<?php echo $item['id']; ?>]" value="1">
+                            <button class="plus-btn">+</button>
+                        </div>
+                        <div class="cart-item-total">฿<?php echo number_format($item['price'], 2); ?></div>
+                        <div class="remove-btn"><i class="bi bi-trash"></i></div>
+                    </div>
 
-                foreach ($cartItems as $item) {
-                    echo '<div class="cart-item-box">';
-                    echo '<div><input type="checkbox" class="item-checkbox" name="products[]" value="' . $item['id'] . '"></div>';
-                    echo '<div class="cart-item-details">';
-                    echo '<div class="cart-item-image"><img src="' . $item['image'] . '" alt="Product Image"></div>';
-                    echo '<div class="cart-item-info">' . $item['name'] . '</div>';
-                    echo '</div>';
-                    echo '<div class="cart-item-price">฿' . number_format($item['price'], 2) . '</div>';
-                    echo '<div class="cart-item-quantity"><button class="minus-btn" type="button">-</button><input type="number" name="quantity[]" min="1" value="1" readonly><button class="plus-btn" type="button">+</button></div>';
-                    echo '<div class="cart-item-total">฿' . number_format($item['price'], 2) . '</div>';
-                    echo '<div><span class="remove-btn"><i class="bi bi-trash"></i></span></div>';
-                    echo '</div>';
-                }
-                ?>
+                <?php endforeach; ?>
 
                 <div class="total-section">
-                    <span>จำนวนสินค้า: <span id="selected-count">0</span></span>
-                    <span>ราคาสุทธิ: <span id="total-price">฿0.00</span></span>
+                    <span>จำนวนที่เลือก: <span id="selected-count">0</span> ชิ้น</span>
+                    <span>ยอดรวม: <span id="total-price">฿0.00</span></span>
                     <button type="submit" class="checkout-btn">สั่งซื้อ</button>
                 </div>
             </form>
         </div>
     </div>
-            </form>
-        </div>
-    </div>
 
-    <footer>
-        <div class="container text-center">
-            <h5>เกี่ยวกับเรา</h5>
-            <p>ข้อมูลเกี่ยวกับเรา | นโยบายการคืนสินค้า | เงื่อนไขการให้บริการ</p>
-            <p>© 2024 Lazado, Inc. สงวนลิขสิทธิ์</p>
+    <footer class="text-center mt-5">
+        <div class="container">
+            <p>&copy; 2024 Lazado. All rights reserved.</p>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-Ksvz4snC3q6TyZGT3g8LHFuqen9Z3tdwkjZzO8gCPY4g1aL3Ev1Gv/OLd0PqWbpp" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-3Xtf3XhFdkCwG3jCPo/rFq1g5S9XG+Sx68H6V9dXsjOkcY+U6EkNxPpyk3t41qI0" crossorigin="anonymous"></script>
 </body>
 
 </html>

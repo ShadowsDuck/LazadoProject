@@ -118,10 +118,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <a class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link" href="
+                        <a class="nav-link <?php echo ($current_page == 'user_edit.php') ? 'active' : ''; ?>" 
+                        href="
                         <?php
                         if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
-                            echo "user_edit.php?".$user_id;
+                            echo "user_edit.php?id=".$user_id;
                         }else {
                             echo '../login/signup.php';
                         }
