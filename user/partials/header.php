@@ -129,7 +129,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         ?>">
                             <?php
                             if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
-                                echo 'ข้อมูลส่วนตัว';
+                                echo 'จัดการบัญชีของคุณ';
                             }else {
                                 echo 'สมัครสมาชิก';
                             }
