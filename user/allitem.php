@@ -7,6 +7,8 @@ require('../connect.php');
 <style>
     .category-item {
         cursor: pointer;
+        border: 2px solid transparent; /* ขอบโปร่งใสที่ช่วยให้ขนาดคงที่ */
+        border-radius: 8px;
     }
 
     .category-item.active {
@@ -130,8 +132,6 @@ require('../connect.php');
                     $sql = 'SELECT * FROM products WHERE category=5';
                 } elseif ($c == 'streaming') {
                     $sql = 'SELECT * FROM products WHERE category=6';
-                } else {
-                    // $sql = "SELECT * FROM products";
                 }
 
                 $result = mysqli_query($conn, $sql);
@@ -141,8 +141,8 @@ require('../connect.php');
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         ?>
-                        <div class="col-lg-3 mb-4" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
-                            <div class="card h-100">
+                        <div class="col-lg-3 mb-4">
+                            <div class="card h-100" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'" style="cursor: pointer;">
                                 <img src="https://placehold.co/200" class="card-img-top" alt="Image">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $row['name']; ?></h5>
