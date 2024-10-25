@@ -29,10 +29,12 @@ if (strlen($password) < 6) {
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['usertype'] = $user['usertype'];
                     header("location:{$base_url}/admin/index_admin.php");
+
                 } elseif ($user['usertype'] == 'user') {
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['usertype'] = $user['usertype'];
                     header("location:{$base_url}/user/index.php");
+
                 } else {
                     header("location:{$base_url}/user/index.php");
                 }
