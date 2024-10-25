@@ -1,12 +1,13 @@
 <?php
-// การเชื่อมต่อกับฐานข้อมูล
-$host = 'localhost';
-$db = 'lazado_db';
-$user = 'root';
-$password = '';
+include("../connect.php");
+// // การเชื่อมต่อกับฐานข้อมูล
+// $host = 'localhost';
+// $db = 'lazado_db';
+// $user = 'root';
+// $password = '';
 
-// สร้างการเชื่อมต่อกับฐานข้อมูล
-$conn = new mysqli($host, $user, $password, $db);
+// // สร้างการเชื่อมต่อกับฐานข้อมูล
+// $conn = new mysqli($host, $user, $password, $db);
 
 // ตรวจสอบการเชื่อมต่อ
 if ($conn->connect_error) {
