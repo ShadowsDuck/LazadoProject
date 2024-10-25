@@ -68,7 +68,41 @@ require('../connect.php');
         </div>
     </div>
     <div class="row search-container">
-        <h4 id="searchResultTitle">ผลลัพธ์การค้นหา :</h4>
+        <?php
+        $c = '';
+        $keyword = '';
+        $sql = "SELECT * FROM products";
+        
+        if (isset($_GET["c"])) {
+            $c = $_GET['c'];
+        }
+        if (isset($_GET["keyword"])) {
+            $keyword = $_GET['keyword'];
+            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
+            // print($keyword);
+        }
+
+        if ($c == 'keyboard') {
+            $sql = 'SELECT * FROM products WHERE category=1';
+        } elseif ($c == 'mouse') {
+            $sql = 'SELECT * FROM products WHERE category=2';
+        } elseif ($c == 'headset') {
+            $sql = 'SELECT * FROM products WHERE category=3';
+        } elseif ($c == 'monitor') {
+            $sql = 'SELECT * FROM products WHERE category=4';
+        } elseif ($c == 'chair') {
+            $sql = 'SELECT * FROM products WHERE category=5';
+        } elseif ($c == 'streaming') {
+            $sql = 'SELECT * FROM products WHERE category=6';
+        } else {
+            // $sql = "SELECT * FROM products";
+        }
+
+        $result = mysqli_query($conn, $sql);
+        $numrows = $result->num_rows;
+        ?>
+        <h4 id="searchResultTitle">ผลลัพธ์การค้นหา: <?php echo $numrows ?> รายการ
+        </h4>
         <div class="container my-5">
             <div class="row">
                 <?php
@@ -86,27 +120,28 @@ require('../connect.php');
 
                 if ($c == 'keyboard') {
                     $sql = 'SELECT * FROM products WHERE category=1';
-                }elseif ($c == 'mouse') {
+                } elseif ($c == 'mouse') {
                     $sql = 'SELECT * FROM products WHERE category=2';
-                }elseif ($c == 'headset') {
+                } elseif ($c == 'headset') {
                     $sql = 'SELECT * FROM products WHERE category=3';
-                }elseif ($c == 'monitor') {
+                } elseif ($c == 'monitor') {
                     $sql = 'SELECT * FROM products WHERE category=4';
-                }elseif ($c == 'chair') {
+                } elseif ($c == 'chair') {
                     $sql = 'SELECT * FROM products WHERE category=5';
-                }elseif ($c == 'streaming') {
+                } elseif ($c == 'streaming') {
                     $sql = 'SELECT * FROM products WHERE category=6';
-                }else {
+                } else {
                     // $sql = "SELECT * FROM products";
                 }
 
                 $result = mysqli_query($conn, $sql);
-
+                ?>
+                <?php
                 // Loop ข้อมูลแต่ละแถวในฐานข้อมูล
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         ?>
-                        <div class="col-lg-3 mb-4" onclick="window.location.href='item_details.php?id=<?php echo $row['id']?>'">
+                        <div class="col-lg-3 mb-4" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
                             <div class="card h-100">
                                 <img src="https://placehold.co/200" class="card-img-top" alt="Image">
                                 <div class="card-body">
