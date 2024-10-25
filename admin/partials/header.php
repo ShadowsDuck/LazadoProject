@@ -4,14 +4,14 @@ $open_connect = 1;
 require('../connect.php');
 
 if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
-    die(header("location:{$base_url}/login/login.php"));       //ถ้าไม่มี session id || usertype จะถูกส่งไป login.php
+    die(header("location:{$base_url}/login/login.php")); //ถ้าไม่มี session id || usertype จะถูกส่งไป login.php
 } elseif (isset($_GET['logout'])) {
     session_destroy();
-    die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
+    die(header("Location:{$base_url}/login/login.php")); //ถ้ามีการออกจากระบบ ให้ทำลาย session
 }
 
 $currentPage = basename($_SERVER['REQUEST_URI']);
-$currentCategory = isset($_GET['category']) ? $_GET['category'] : null; // Get the category from the URL
+$currentCategory = isset($_GET['c']) ? $_GET['c'] : (isset($keyword) ? $keyword : null); // Get the category from the URL
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,7 @@ $currentCategory = isset($_GET['category']) ? $_GET['category'] : null; // Get t
                     <a class="nav-link <?php echo ($currentPage === 'manage_admin.php') ? 'active' : ''; ?>" href="manage_admin.php" aria-current="page">ผู้ดูแล</a>
                 </li>
                 <li class="nav-item me-4 fs-6">
-                    <a class="nav-link <?php echo ($currentPage === 'manage_product.php' || $currentCategory) ? 'active' : ''; ?>" href="manage_product.php">จัดการสินค้า</a>
+                    <a class="nav-link <?php echo ($currentPage === 'manage_product.php' || isset($_GET['c']) || isset($_GET['keyword'])) ? 'active' : ''; ?>" href="manage_product.php">จัดการสินค้า</a>
                 </li>
                 <li class="nav-item me-4 fs-6">
                     <a class="nav-link <?php echo ($currentPage === 'manage_order.php') ? 'active' : ''; ?>" href="manage_order.php" aria-current="page">รายการคำสั่งซื้อ</a>

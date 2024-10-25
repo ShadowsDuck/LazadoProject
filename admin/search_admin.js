@@ -1,3 +1,4 @@
+
 // ตัวอย่างข้อมูลสินค้า
 const products = [
     { name: 'Mechanical Keyboard33', image: 'https://via.placeholder.com/150', price: '1000 บาท', category: 'keyboard' },
@@ -76,7 +77,6 @@ function displaySearchResults() {
         searchResults.innerHTML = '<p>กรุณาเลือกหมวดหมู่</p>';
     }
 }
-
 
 // ฟังก์ชันช่วยดึง query param จาก URL
 function getQueryParam(param) {
