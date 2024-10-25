@@ -77,37 +77,37 @@
         <div class="row text-center">
             <div class="col-md-2">
                 <div class="category-item p-4" onclick="searchByCategory('keyboard')">
-                    <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
+                    <i class="bi bi-keyboard" style="font-size: 2rem; cursor: pointer;"></i>
                     <p>Keyboard</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="category-item p-4" onclick="searchByCategory('mouse')">
-                    <i class="bi bi-mouse" style="font-size: 2rem;"></i>
+                    <i class="bi bi-mouse" style="font-size: 2rem; cursor: pointer;"></i>
                     <p>Mouse</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="category-item p-4" onclick="searchByCategory('headset')">
-                    <i class="bi bi-headset" style="font-size: 2rem;"></i>
+                    <i class="bi bi-headset" style="font-size: 2rem; cursor: pointer;"></i>
                     <p>Headset</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="category-item p-4" onclick="searchByCategory('monitor')">
-                    <i class="bi bi-display" style="font-size: 2rem;"></i>
+                    <i class="bi bi-display" style="font-size: 2rem; cursor: pointer;"></i>
                     <p>Monitor</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="category-item p-4" onclick="searchByCategory('chair')">
-                    <i class="bi bi-chair" style="font-size: 2rem;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSitzzI-H5Sdgz6VdbHhEwcubyUv0kmiO57ZA&s" style="height: 25%; width: 26%;"></i>
+                    <i class="bi bi-chair" style="font-size: 2rem; cursor: pointer;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSitzzI-H5Sdgz6VdbHhEwcubyUv0kmiO57ZA&s" style="height: 25%; width: 26%;"></i>
                     <p>Chair</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="category-item p-4" onclick="searchByCategory('streaming')">
-                    <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
+                    <i class="bi bi-broadcast-pin" style="font-size: 2rem; cursor: pointer;"></i>
                     <p>Streaming</p>
                 </div>
             </div>
@@ -283,6 +283,20 @@
     // เรียกฟังก์ชัน searchProducts เมื่อคลิกที่ไอคอนค้นหา
     document.querySelector('.input-group-text').addEventListener('click', function() {
         searchProducts();
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryItems = document.querySelectorAll('.category-item');
+
+        categoryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // ลบ class 'selected' ออกจากทุกหมวดหมู่
+                categoryItems.forEach(i => i.classList.remove('selected'));
+
+                // เพิ่ม class 'selected' ให้กับหมวดหมู่ที่คลิก
+                this.classList.add('selected');
+            });
+        });
     });
 </script>
 
