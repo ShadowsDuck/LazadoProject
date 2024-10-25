@@ -1,4 +1,3 @@
-
 <?php
 // session_start();
 // $open_connect = 1;
@@ -39,7 +38,7 @@
 
         .container {
             flex: 1;
-            
+
         }
 
         footer {
@@ -87,7 +86,6 @@
             padding-right: 30px;
             /* เพิ่ม padding-right */
         }
-        
     </style>
 </head>
 
@@ -116,16 +114,14 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-
-                    <div class="input-group">
-                        <input type="text" aria-label="Search" class="form-control" placeholder="ค้นหาสินค้า">
-                        <div class="input-group-text search-icon-class">
+                    <form action="allitem.php" method="get" class="input-group">
+                        <input type="text" aria-label="Search" class="form-control" placeholder="ค้นหาสินค้า"
+                            id="keyword" name="keyword">
+                        <button type="submit" class="input-group-text search-icon-class">
                             <i class="bi bi-search"></i> <!-- หรือไอคอนค้นหาอื่น ๆ -->
-                        </div>
-                    </div>
-
+                        </button>
+                    </form>
                     <a href="kart.php" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
-
                 </div>
             </div>
         </div>
