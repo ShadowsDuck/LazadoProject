@@ -46,7 +46,7 @@ $row = mysqli_fetch_assoc($result);
 
                 <form action="confirm.php" method="POST">
                     <input type="hidden" name="selected_products[]" value="<?php echo $product_id; ?>">
-                    <input type="hidden" name="quantities[]" value="1"> <!-- เพิ่ม input นี้เพื่อส่งปริมาณ -->
+                    <input type="hidden" name="quantities[]" value="1">
                     <div class="mt-3 mb-3">
                         <div class="input-group mb-3" style="max-width: 120px;">
                             <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button>
@@ -56,7 +56,7 @@ $row = mysqli_fetch_assoc($result);
                     </div>
 
                     <button type="submit" name="action" value="buy_now" class="btn btn-danger btn-lg">Buy Now</button>
-                    <button type="submit" formaction="add_to_cart.php" name="action" value="add_to_cart" class="btn btn-warning btn-lg ms-2">Add to Cart</button>
+                    <button type="submit" formaction="add_to_cart.php?id=<?php echo $product_id; ?>" name="action" value="add_to_cart" class="btn btn-warning btn-lg ms-2">Add to Cart</button>
                 </form>
             </div>
         </div>

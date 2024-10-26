@@ -22,6 +22,7 @@ require('../connect.php');
 
     .modal-open {
         padding-right: 0 !important;
+        overflow: visible !important;
     }
 </style>
 

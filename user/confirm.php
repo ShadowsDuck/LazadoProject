@@ -43,7 +43,7 @@ $shipping_address = $user_result->fetch_assoc();
 
 // คำนวณค่าจัดส่ง
 $unique_items_count = count($cartItems); // จำนวนสินค้าที่แตกต่าง
-$shipping_cost_per_order = $unique_items_count * 50; // 50 บาทต่อรายการ
+$shipping_cost_per_order = $unique_items_count * 25; // 25 บาทต่อรายการ
 $total_amount = $total_price + $shipping_cost_per_order;
 ?>
 
