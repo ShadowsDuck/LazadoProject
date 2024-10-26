@@ -114,7 +114,7 @@ ob_end_flush(); // ปิดการ buffer output
 <div class="container mt-5">
     <div class="row ">
         <!-- Sidebar -->
-        <div class="col-sm-3 sidebar vh-80px" id="sidebar">
+        <div class="col-sm-3 sidebar" id="sidebar" style="min-height: 500px;">
             <a class="nav-link" href="user_edit.php?page=infoEdit" data-page="editpage/infoEdit.php">ข้อมูลส่วนตัว</a>
             <a class="nav-link" href="user_edit.php?page=addressEdit" data-page="editpage/addressEdit.php">ที่อยู่สำหรับจัดส่ง</a>
             <a class="nav-link" href="user_edit.php?page=orderStatusEdit" data-page="editpage/orderStatusEdit.php">สถานะสินค้าของฉัน</a>
