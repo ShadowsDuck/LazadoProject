@@ -32,12 +32,12 @@ $row = mysqli_fetch_assoc($result);
                 <h3><?php echo $row['name'] ?></h3>
                 <?php
                 if ($row['discount'] == 1) {?>
-                    <p style="text-decoration: line-through; margin:0; font-size: 18px; color:red;"><?php echo "฿" . number_format($row['price'], 2); ?></p>
-                    <p style="margin:0;  font-size: 25px; "><?php echo "฿" . number_format($row['discounted_price'], 2); ?></p>
+                    <p style="text-decoration: line-through; margin:0; font-size: 18px;"><?php echo "฿" . number_format($row['price'], 2); ?></p>
+                    <p style="margin:0; font-size: 25px; color:red;"><?php echo "฿" . number_format($row['discounted_price'], 2); ?></p>
 
                 <?php
                 } else {?>
-                    <p style="margin:0;  font-size: 25px; "><?php echo "฿" . number_format($row['price'], 2); ?></p>
+                    <p style="margin:0;  font-size: 25px;"><?php echo "฿" . number_format($row['price'], 2); ?></p>
                 <?php
                 }?>
                 

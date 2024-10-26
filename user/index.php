@@ -101,9 +101,9 @@
                                 <!-- footer -->
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <div>
-                                        <div class="card-text text-danger" style="font-weight: bold;">
+                                        <div class="card-text">
                                             <p style="text-decoration: line-through; margin:0; font-size: 12px;"><?php echo "฿" . number_format($row1['price'], 2); ?></p>
-                                            <p style="margin:0;  font-size: 20px; "><?php echo "฿" . number_format($row1['discounted_price'], 2); ?></p>
+                                            <p style="margin:0; font-size: 20px; color:red;"><?php echo "฿" . number_format($row1['discounted_price'], 2); ?></p>
                                         </div>
                                     </div>
 

@@ -7,6 +7,8 @@ $id = mysqli_real_escape_string($conn, $_POST['id']);
 $name = mysqli_real_escape_string($conn, $_POST['name']);
 $description = mysqli_real_escape_string($conn, $_POST['description']);
 $price = mysqli_real_escape_string($conn, $_POST['price']);
+$discount = mysqli_real_escape_string($conn, $_POST['discount']);
+$discounted_price = mysqli_real_escape_string($conn, $_POST['discounted_price']);
 $category = mysqli_real_escape_string($conn, $_POST['category']);
 
 // ตรวจสอบและจัดการอัปโหลดไฟล์ภาพ
@@ -19,7 +21,7 @@ if (!empty($_FILES['file']['name'])) {
 }
 
 // ตรวจสอบว่ามีภาพใหม่ไหม เพื่อกำหนด SQL ให้เหมาะสม
-$sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', category = '$category'";
+$sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', discount = '$discount', discounted_price = '$discounted_price', category = '$category'";
 
 if ($fileName) {
     $sql .= ", file_name = '$fileName'";

@@ -129,6 +129,21 @@
                             <input type="number" class="form-control" placeholder="กรุณาใส่ราคา" name="price">
                         </div>
 
+                        <!-- Discount field -->
+                        <div class="form-group mb-3">
+                            <label for="price_product">ต้องการให้มีส่วนลดไหม</label>
+                            <select class="form-select" aria-label="discount" name="discount" id="discountSelect" onchange="toggleDiscountPrice()">
+                                <option value="0">ไม่มีส่วนลด</option>
+                                <option value="1">มีส่วนลด</option>
+                            </select>
+                        </div>
+
+                        <!-- Discounted Price field -->
+                        <div class="form-group mb-3">
+                            <label for="price_product">ราคาที่ลดแล้ว</label>
+                            <input type="number" class="form-control" placeholder="กรุณาใส่ราคาที่ลดแล้ว" name="discounted_price" id="discountedPriceInput" disabled>
+                        </div>
+
                         <!-- Product Image field -->
                         <div class="form-group mb-3">
                             <label for="product_image" class="form-label">รูปสินค้า</label>
@@ -285,7 +300,13 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <div class="card-text text-danger" style="font-weight: bold; font-size: 1rem;">
-                                        <?php echo "฿" . number_format($row['price'], 2); ?>
+                                        <?php
+                                        if ($row['discount'] == 1 && !empty($row['discounted_price'])) {
+                                            echo "฿" . number_format($row['discounted_price'], 2); // แสดงราคาที่ลดแล้ว
+                                        } else {
+                                            echo "฿" . number_format($row['price'], 2); // แสดงราคาปกติ
+                                        }
+                                        ?>
                                     </div>
                                     <div class="d-flex justify-content-end ms-auto">
                                         <button type="button" class="btn btn-success btn-vsm me-1"
@@ -295,6 +316,8 @@
                                             data-name="<?php echo $row['name']; ?>"
                                             data-description="<?php echo $row['description']; ?>"
                                             data-price="<?php echo $row['price']; ?>"
+                                            data-discount="<?php echo $row['discount']; ?>"
+                                            data-discounted_price="<?php echo $row['discounted_price']; ?>"
                                             data-file="<?php echo $row['file_name']; ?>"
                                             data-category="<?php echo $row['category']; ?>">
                                             อัปเดต
