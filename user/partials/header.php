@@ -174,7 +174,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
                         <?php if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
                             if ($numrows > 0) { ?>
-                                <i class="bi bi-dot" style="color:red; font-size:20px; position: absolute;"></i>
+                                <div class="spinner-grow spinner-grow-sm text-danger"
+                                     role="status"
+                                     style="font-size:20px; position: absolute; margin-right: 10px; width:0.5rem; height:0.5rem;">
+                                </div>
+                                <!-- <i class="bi bi-dot" style="color:red; font-size:20px; position: absolute;"></i> -->
                         <?php }
                         } ?>
                     </div>
