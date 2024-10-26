@@ -1,7 +1,6 @@
 <?php
 include('partials/header.php');
-//$update_status = $_SESSION['update_status'] ?? null; 
-var_dump($_SESSION['update_status']);
+$update_status = $_SESSION['update_status'] ?? '';
 unset($_SESSION['update_status']);
 ?>
 
@@ -187,9 +186,6 @@ unset($_SESSION['update_status']);
             $('#sidebar .nav-link').first().trigger('click');
         }
     });
-
-
-
 </script>
 <!-- Include Bootstrap Icons and CSS/JS for modal -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -197,18 +193,15 @@ unset($_SESSION['update_status']);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
-<!-- ใช้สำหรัับบเปิด Modal -->
+<!-- JavaScript เพื่อแสดง modal -->
 <script>
-    
     document.addEventListener("DOMContentLoaded", function() {
-        const updateStatus = "<?php echo $_SESSION['update_status'] ?? ''; ?>";
-        <?php unset($_SESSION['update_status']); ?> // ล้าง session หลังแสดงผล modal
+        const updateStatus = "<?php echo $update_status; ?>";
+        console.log(updateStatus);
 
         if (updateStatus) {
-            
-                const passwordUpdateModal = new bootstrap.Modal(document.getElementById('passwordUpdateModal'));
-                passwordUpdateModal.show();
-            
+            const passwordUpdateModal = new bootstrap.Modal(document.getElementById('passwordUpdateModal'));
+            passwordUpdateModal.show();
         }
     });
 </script>
