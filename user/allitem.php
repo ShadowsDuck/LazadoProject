@@ -144,9 +144,23 @@ require('../connect.php');
                                         <?php echo $row['name']; ?></h4>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 17px;">
-                                        <?php echo "฿" . number_format($row['price'], 2); ?>
-                                    </div>
+                                    <?php
+                                    
+                                    // ถ้า discount true
+                                    if ($row['discount'] == 1) { ?>
+                                        <div class="card-text text-danger" style="font-weight: bold;">
+                                            <p style="text-decoration: line-through; margin:0; font-size: 12px;"><?php echo "฿" . number_format($row['price'], 2); ?></p>
+                                            <p style="margin:0;  font-size: 17px; "><?php echo "฿" . number_format($row['discounted_price'], 2); ?></p>
+                                        </div>
+                                    <?php
+                                    } else { ?>
+                                        <div class="card-text text-danger" style="font-weight: bold; font-size: 17px;">
+                                            <?php echo "฿" . number_format($row['price'], 2); ?>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+
                                     <button class="btn addCart"
                                         onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
                                         data-bs-toggle="modal"
