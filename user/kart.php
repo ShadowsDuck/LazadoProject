@@ -277,9 +277,12 @@ $conn->close();
                         </div>
                         <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
                         <div class="cart-item-quantity">
-                            <button class="minus-btn">-</button>
-                            <input type="text" name="quantities[<?php echo $item['id']; ?>]" value="<?php echo $item['qty'] ?>">
-                            <button class="plus-btn">+</button>
+                            <div class="input-group mb-3 d-flex justify-content-center" style="max-width: 150px;">
+                                <button class="btn btn-outline-secondary minus-btn">-</button>
+                                <input type="text" name="quantities[<?php echo $item['id']; ?>]"
+                                    value="<?php echo $item['qty'] ?>">
+                                <button class="btn btn-outline-secondary plus-btn">+</button>
+                            </div>
                         </div>
                         <div class="cart-item-total">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></div>
                         <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['id']; ?>'">
