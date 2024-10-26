@@ -34,22 +34,16 @@ if ($result->num_rows > 0) {
     exit;
 }
 
-// กำหนดค่าที่อยู่จัดส่งเริ่มต้น ถ้ายังไม่มีใน session
-if (!isset($_SESSION['shipping_address'])) {
-    $_SESSION['shipping_address'] = [
-        'fullname' => 'Anonymous',
-        'phone' => '',
-        'address' => '',
-    ];
-}
+// ดึงข้อมูลผู้ใช้จากฐานข้อมูล
+$user_id = $_SESSION['id'];
+$user_sql = "SELECT fullname, address FROM users WHERE id = '$user_id'";
+$user_result = $conn->query($user_sql);
+$shipping_address = $user_result->fetch_assoc();
 
 // คำนวณค่าจัดส่ง
 $unique_items_count = count($cartItems);
 $shipping_cost_per_order = $unique_items_count * 50; // 50 บาทต่อรายการ
 $total_amount = $total_price + $shipping_cost_per_order;
-
-// ดึงข้อมูลชื่อผู้รับจาก session
-$shipping_address = $_SESSION['shipping_address'];
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +59,7 @@ $shipping_address = $_SESSION['shipping_address'];
             font-family: 'Helvetica Neue', sans-serif;
             background-color: #f8f9fa;
         }
-        .shipping-info, .payment-methods, .order-summary, .cart-item-box {
+        .shipping-info, .payment-methods, .order-summary, .cart-item-box , .shipping-options{
             background-color: white;
             padding: 20px;
             margin-bottom: 20px;
@@ -99,6 +93,18 @@ $shipping_address = $_SESSION['shipping_address'];
         .checkout-btn:hover {
             background-color: #e64300;
         }
+        .shipping-option {
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .shipping-option input[type="radio"] {
+            margin-right: 10px; /* เว้นระยะระหว่าง radio button กับข้อความ */
+        }
     </style>
 </head>
 
@@ -121,15 +127,16 @@ $shipping_address = $_SESSION['shipping_address'];
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p1>ไม่มีสินค้าในตะกร้า </p1>
+            <p>ไม่มีสินค้าในตะกร้า </p>
         <?php endif; ?>
     </div>
 
     <div class="container mt-4">
         <div class="shipping-info">
-            <h5>ที่อยู่จัดส่ง</h5>
-            <p><?php echo htmlspecialchars($shipping_address['fullname']); ?>, <?php echo htmlspecialchars($shipping_address['phone']); ?></p>
-            <textarea class="form-control" name="shipping_address" rows="3"><?php echo htmlspecialchars($shipping_address['address']); ?></textarea>
+            <h5>ผู้รับ/ที่อยู่จัดส่ง</h5>
+            <p><?php echo htmlspecialchars($shipping_address['fullname']); ?></p>
+            <p><?php echo htmlspecialchars($shipping_address['address']); ?></p>
+            <textarea class="form-control" name="shipping_address" rows="3"></textarea>
         </div>
 
         <div class="payment-methods mt-4">
@@ -141,6 +148,18 @@ $shipping_address = $_SESSION['shipping_address'];
             <div>
                 <input type="radio" id="credit_card" name="payment_method" value="credit_card">
                 <label for="credit_card">บัตรเครดิต</label>
+            </div>
+        </div>
+
+        <div class="shipping-options">
+            <h5>ตัวเลือกการจัดส่ง</h5>
+            <div class="shipping-option">
+                <input type="radio" id="standard_shipping" name="shipping_method" value="standard" >
+                <label for="standard_shipping">ส่งแบบธรรมดา (ได้รับของภายในสองวันหลังสั่งของ)</label>
+            </div>
+            <div class="shipping-option">
+                <input type="radio" id="express_shipping" name="shipping_method" value="express">
+                <label for="express_shipping">จัดส่งแบบไวมาก (ได้รับของภายใน 1 วันหลังสั่งของ)</label>
             </div>
         </div>
 

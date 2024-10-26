@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['cart'][$product_id] = ($_SESSION['cart'][$product_id] ?? 0) + $qty;
 
         // เปลี่ยนเส้นทางไปที่หน้า cart.php
-        header("Location: kart.php");
+        header("Location: cart.php");
         exit();
     } else {
         echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
