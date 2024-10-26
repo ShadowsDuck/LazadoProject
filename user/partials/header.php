@@ -163,15 +163,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </form>
                     <!-- Container สำหรับไอคอนตะกร้าและไอคอนจุดสีแดง -->
                     <div class="position-relative ms-4 mt-1">
-                        <a href="<?php
-                                    if (isset($_SESSION['id']) && isset($_SESSION['usertype'])) {
-                                        echo 'kart.php';
-                                    } else {
-                                        echo $base_url . '/login/login.php'; // ถ้าไม่ได้เข้าสู่ระบบให้ไปหน้า login.php
-                                    }
-                                    ?>">
-                            <i style="color:black;" class="bi bi-cart3 h4"></i>
-                        </a>
+                        <a href=<?php
+                                if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
+                                    echo 'kart.php';
+                                } else {
+                                    echo $base_url . '/login/login.php';
+                                }
+                                ?>><i style="color:black;" class="bi bi-cart3 h4"></i></a>
 
                         <?php if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
                             if ($numrows > 0) { ?>
