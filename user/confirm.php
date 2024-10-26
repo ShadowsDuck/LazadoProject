@@ -1,16 +1,6 @@
 <?php
-include('partials/header.php'); 
-include("../connect.php");
-//$host = 'localhost';
-///$db = 'lazado_db';
-//$user = 'root';
-//$password = '';
-
-// สร้างการเชื่อมต่อกับฐานข้อมูล
-//$conn = new mysqli($host, $user, $password, $db);
-//if ($conn->connect_error) {
-//    die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
-//}
+include("partials/header.php");
+require("../connect.php");
 
 // กำหนดค่าที่อยู่จัดส่งเริ่มต้นถ้ายังไม่มีใน session
 if (!isset($_SESSION['shipping_address'])) {
@@ -21,9 +11,9 @@ if (!isset($_SESSION['shipping_address'])) {
     ];
 }
 
-// ตรวจสอบว่ามีการส่งข้อมูลจากฟอร์มตะกร้าสินค้าหรือไม่
-if (isset($_POST['products']) && isset($_POST['quantities'])) {
-    $_SESSION['products'] = $_POST['products'];
+// ตรวจสอบว่ามีการส่งข้อมูลจากฟอร์ม
+if (isset($_POST['selected_products']) && isset($_POST['quantities'])) {
+    $_SESSION['products'] = $_POST['selected_products'];
     $_SESSION['quantities'] = $_POST['quantities'];
 
     $products = $_SESSION['products'];
@@ -166,10 +156,7 @@ $quantities = isset($_SESSION['quantities']) ? $_SESSION['quantities'] : [];
         <div class="shipping-info">
             <h5>ที่อยู่จัดส่ง</h5>
             <p><?php echo htmlspecialchars($shipping_address['fullname']); ?>, <?php echo htmlspecialchars($shipping_address['phone']); ?></p>
-            <textarea class="form-control" rows="3" readonly><?php echo htmlspecialchars($shipping_address['address']); ?></textarea>
-            <form action="edit_address.php" method="POST">
-                <button type="submit" class="btn btn-secondary mt-2">แก้ไขที่อยู่</button>
-            </form>
+            <textarea class="form-control" name="shipping_address" rows="3"><?php echo htmlspecialchars($shipping_address['address']); ?></textarea>
         </div>
 
         <div class="payment-methods mt-4">
@@ -191,15 +178,18 @@ $quantities = isset($_SESSION['quantities']) ? $_SESSION['quantities'] : [];
             <hr>
             <p class="total">ยอดรวมทั้งสิ้น: ฿<?php echo number_format($total_amount, 2); ?></p>
         </div>
+        
         <form method="POST" action="confirm_payment.php">
             <input type="hidden" name="total_amount" value="<?php echo $total_amount; ?>">
+            <input type="hidden" name="shipping_address" value="<?php echo htmlspecialchars($shipping_address['address']); ?>">
             <button type="submit" class="checkout-btn mt-3">สั่งซื้อ</button>
         </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html><br><br><br>
-<?php include('partials/footer.php'); ?>
+</html>
 
-
+<?php
+include("partials/footer.php");
+?>

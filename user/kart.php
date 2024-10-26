@@ -1,24 +1,14 @@
 <?php
 include('partials/header.php');
 include("../connect.php");
-// // การเชื่อมต่อกับฐานข้อมูล
-// $host = 'localhost';
-// $db = 'lazado_db';
-// $user = 'root';
-// $password = '';
 
-// // สร้างการเชื่อมต่อกับฐานข้อมูล
-// $conn = new mysqli($host, $user, $password, $db);
-
-// ตรวจสอบการเชื่อมต่อ
 if ($conn->connect_error) {
     die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
 }
-// ดึงข้อมูลสินค้าในตะกร้าจากฐานข้อมูล
+
 $sql = "SELECT cart.*, products.name, products.price FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id = '{$_SESSION['id']}'";
 $result = $conn->query($sql);
 
-// เก็บข้อมูลสินค้าในอาเรย์
 $cartItems = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -263,7 +253,6 @@ $conn->close();
 </head>
 
 <body>
-
     <div class="container mt-5 mb-5">
         <h2 class="text-center">ตะกร้าสินค้า</h2>
         <div class="cart-table">
@@ -279,8 +268,7 @@ $conn->close();
 
                 <?php foreach ($cartItems as $item): ?>
                     <div class="cart-item-box">
-                        <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['id']; ?>]"
-                                value="<?php echo $item['id']; ?>"></div>
+                        <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['id']; ?>]" value="<?php echo $item['id']; ?>"></div>
                         <div class="cart-item-details">
                             <div class="cart-item-image">
                                 <img src="<?php echo $item['image']; ?>" alt="Product Image">
@@ -301,7 +289,6 @@ $conn->close();
                             <i class="bi bi-trash"></i>
                         </div>
                     </div>
-
                 <?php endforeach; ?>
 
                 <div class="total-section">
@@ -313,7 +300,7 @@ $conn->close();
         </div>
     </div>
 
+    <?php include('partials/footer.php'); ?>
 </body>
-<?php include('partials/footer.php'); ?>
 
 </html>
