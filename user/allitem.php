@@ -8,18 +8,12 @@ require('../connect.php');
     .category-item {
         cursor: pointer;
         border: 2px solid transparent;
+        /* ขอบโปร่งใสที่ช่วยให้ขนาดคงที่ */
         border-radius: 8px;
     }
 
     .category-item.active {
         border: 2px solid white;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-</style>
-
-<!-- Icon หมวดหมู่-->
-<section class="container">
         /* กรอบเมื่อถูกเลือก */
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -107,7 +101,6 @@ require('../connect.php');
         <?php
         $c = '';
         $keyword = '';
-        $sql = "SELECT * FROM products";
         $sql = "SELECT * FROM products ORDER BY created_at DESC";
 
         if (isset($_GET["c"])) {
@@ -115,21 +108,6 @@ require('../connect.php');
         }
         if (isset($_GET["keyword"])) {
             $keyword = $_GET['keyword'];
-            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
-        }
-
-        if ($c == 'keyboard') {
-            $sql = "SELECT * FROM products WHERE category=1";
-        } elseif ($c == 'mouse') {
-            $sql = "SELECT * FROM products WHERE category=2";
-        } elseif ($c == 'headset') {
-            $sql = "SELECT * FROM products WHERE category=3";
-        } elseif ($c == 'monitor') {
-            $sql = "SELECT * FROM products WHERE category=4";
-        } elseif ($c == 'chair') {
-            $sql = "SELECT * FROM products WHERE category=5";
-        } elseif ($c == 'streaming') {
-            $sql = "SELECT * FROM products WHERE category=6";
             $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY created_at DESC";
         }
 
@@ -156,7 +134,6 @@ require('../connect.php');
                 <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        ?>
                 ?>
                         <div class="col col-md-2 mb-4">
                             <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
@@ -167,14 +144,6 @@ require('../connect.php');
                                         <?php echo $row['name']; ?></h4>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 18px;">
-                                        <?php echo "฿" . number_format($row['price'], 2); ?>
-                                    </div>
-                                    <button class="btn"><i style="color:red;" class="bi bi-cart3 h4"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
                                     <div class="card-text text-danger" style="font-weight: bold; font-size: 17px;">
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
                                     </div>
@@ -202,9 +171,6 @@ require('../connect.php');
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-
-
-<?php include('partials/footer.php'); ?>
 </script>
 
 <script>
