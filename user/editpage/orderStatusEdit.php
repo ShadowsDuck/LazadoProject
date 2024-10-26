@@ -38,14 +38,15 @@ while ($row = $result->fetch_assoc()) {
 ?>
 
 <div class="container mt-4">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
+    <div class="card shadow-sm border-0">
+        <div class="card-header text-white" style="background-color: #ff6666; color: #0000;">
             สถานะคำสั่งซื้อของผู้ใช้ ID: <?php echo $user_id; ?> คุณ <?php echo htmlspecialchars($fullname); ?>
         </div>
         <div class="card-body">
             <div class="row">
+                <!-- Canceled Orders Card -->
                 <div class="col-md-4">
-                    <div class="card text-white bg-danger mb-3">
+                    <div class="card border-0 shadow-sm mb-3" style="background-color: #f8d7da; color: #721c24;">
                         <div class="card-body text-center">
                             <h5 class="card-title">ถูกยกเลิก</h5>
                             <p class="card-text">
@@ -54,8 +55,10 @@ while ($row = $result->fetch_assoc()) {
                         </div>
                     </div>
                 </div>
+                
+                <!-- Shipping Orders Card -->
                 <div class="col-md-4">
-                    <div class="card text-white bg-warning mb-3">
+                    <div class="card border-0 shadow-sm mb-3" style="background-color: #fff3cd; color: #856404;">
                         <div class="card-body text-center">
                             <h5 class="card-title">กำลังจัดส่ง</h5>
                             <p class="card-text">
@@ -64,8 +67,10 @@ while ($row = $result->fetch_assoc()) {
                         </div>
                     </div>
                 </div>
+                
+                <!-- Completed Orders Card -->
                 <div class="col-md-4">
-                    <div class="card text-white bg-success mb-3">
+                    <div class="card border-0 shadow-sm mb-3" style="background-color: #d4edda; color: #155724;">
                         <div class="card-body text-center">
                             <h5 class="card-title">สำเร็จ</h5>
                             <p class="card-text">
