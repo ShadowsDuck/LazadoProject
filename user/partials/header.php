@@ -5,6 +5,9 @@ require('../connect.php');
 
 if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
     $user_id = $_SESSION['id'];
+    $sql = "SELECT * FROM cart WHERE user_id = '$user_id'";
+    $result = mysqli_query($conn, $sql);
+    $numrows = mysqli_num_rows($result);
 }
 
 if (isset($_GET['logout'])) {
@@ -13,9 +16,7 @@ if (isset($_GET['logout'])) {
 }
 $current_page = basename($_SERVER['PHP_SELF']);
 
-$sql = "SELECT * FROM cart WHERE user_id = '$user_id'";
-$result = mysqli_query($conn, $sql);
-$numrows = mysqli_num_rows($result);
+
 
 ?>
 
