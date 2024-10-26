@@ -20,3 +20,11 @@ document.addEventListener('DOMContentLoaded', function () {
             })
     })()
 });
+
+// ให้ข้อความ Alert หายไปหลังจาก 2 วินาที
+setTimeout(() => {
+    const alert = document.getElementById('session-alert');
+    if (alert) {
+        alert.classList.remove('show'); // ลบคลาส 'show' เพื่อซ่อน Alert
+    }
+}, 2000);

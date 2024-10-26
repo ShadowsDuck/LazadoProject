@@ -4,7 +4,7 @@
 <div class="container-sm mt-5">
     <!-- Alert message should be displayed right here -->
     <?php if (!empty($_SESSION['message'])): ?>
-        <div class="alert alert-warning alert-dismissible fade show alert-overlay" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show alert-overlay" id="session-alert" role="alert">
             <?php echo $_SESSION['message']; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -153,6 +153,30 @@
         </div>
     </div>
 
+    <!-- Modal for Confirm Delete -->
+    <div class="container-delete">
+        <div class="modal fade" id="confirmDelete" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icons">
+                            <i class="icon">&times;</i>
+                        </div>
+                        <h4 class="modal-title">คุณแน่ใจใช่ไหม?</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>คุณแน่ใจใช่ไหมที่จะลบผู้ดูแลคนนี้? <br>หลังจากลบไปแล้วคุณไม่สามารถกู้คืนข้อมูลได้</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                        <a href="#" class="btn btn-danger" id="confirmDeleteBtn">ลบ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- Icon หมวดหมู่-->
@@ -252,17 +276,20 @@
                                     <div class="card-text text-danger" style="font-weight: bold; font-size: 20px;">
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
                                     </div>
-                                    <button type="button" class="btn btn-success btn-sm"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#updateProductDetailModal"
-                                        data-id="<?php echo $row['id']; ?>"
-                                        data-name="<?php echo $row['name']; ?>"
-                                        data-description="<?php echo $row['description']; ?>"
-                                        data-price="<?php echo $row['price']; ?>"
-                                        data-img="<?php echo $row['img']; ?>"
-                                        data-category="<?php echo $row['category']; ?>">
-                                        อัปเดต
-                                    </button>
+                                    <div class="ms-auto">
+                                        <button type="button" class="btn btn-success btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#updateProductDetailModal"
+                                            data-id="<?php echo $row['id']; ?>"
+                                            data-name="<?php echo $row['name']; ?>"
+                                            data-description="<?php echo $row['description']; ?>"
+                                            data-price="<?php echo $row['price']; ?>"
+                                            data-img="<?php echo $row['img']; ?>"
+                                            data-category="<?php echo $row['category']; ?>">
+                                            อัปเดต
+                                        </button>
+                                        <a href="#" class="btn btn-danger btn-sm delete_product" data-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#confirmDelete"> ลบ </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

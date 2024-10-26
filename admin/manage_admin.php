@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <!-- Alert message should be displayed right here -->
     <?php if (!empty($_SESSION['message'])): ?>
-        <div class="alert alert-warning alert-dismissible fade show alert-overlay" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show alert-overlay" id="session-alert" role="alert">
             <?php echo $_SESSION['message']; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -166,8 +166,8 @@
         </div>
     </div>
 
+    <!-- Modal for Confirm Delete -->
     <div class="container-delete">
-        <!-- Modal for Confirm Delete -->
         <div class="modal fade" id="confirmDelete" data-bs-backdrop="static" data-bs-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -226,7 +226,8 @@
                                 data-username="<?php echo $username; ?>">
                                 อัปเดต
                             </button>
-                            <a href="#" class="btn btn-danger btn-sm ms-2 me-2 delete_admin" data-id="<?php echo $id; ?>" data-bs-toggle="modal" data-bs-target="#confirmDelete"> ลบ </a>
+                            <a href="#" class="btn btn-danger btn-sm ms-2 me-2 delete_admin" data-id="<?php echo $id; ?>" data-bs-toggle="modal"
+                                data-bs-target="#confirmDelete"> ลบ </a>
                             <button type="button" class="btn btn-info btn-sm"
                                 data-bs-toggle="modal"
                                 data-bs-target="#changePasswordAdminModal"
