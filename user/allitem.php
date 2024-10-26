@@ -19,11 +19,38 @@ require('../connect.php');
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         /* background-color: red; */
     }
+
+    .modal-open {
+        padding-right: 0 !important;
+    }
 </style>
 
 
 <!-- Icon หมวดหมู่-->
 <section class="container">
+
+    <!-- Modal for add to cart -->
+    <div class="container-add-to-cart">
+        <div class="modal fade" id="modalAddCart" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">เพิ่มสินค้า</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>คุณต้องการเพิ่มสินค้าไปยังตะกร้า?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                        <a href="#" id="confirmAdd" class="btn btn-danger ">เพิ่มสินค้า</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row text-center">
         <div class="col-md-2 py-4">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=keyboard') ? 'active' : ''; ?>"
@@ -107,7 +134,7 @@ require('../connect.php');
                 <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        ?>
+                ?>
                         <div class="col col-md-2 mb-4">
                             <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
                                 <div class="card-body" style="cursor: pointer;"
@@ -117,14 +144,19 @@ require('../connect.php');
                                         <?php echo $row['name']; ?></h4>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 18px;">
+                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 17px;">
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
                                     </div>
-                                    <button class="btn"><i style="color:red;" class="bi bi-cart3 h4"></i></button>
+                                    <button class="btn addCart" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modalAddCart"
+                                        data-id="<?php echo $row['id'] ?>">
+                                        <i style="color:red;" class="bi bi-cart3 h4"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <?php
+                <?php
                     }
                 } else {
                     echo "ไม่พบข้อมูล";
@@ -138,8 +170,23 @@ require('../connect.php');
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-<!-- <script src="http://localhost/LazadoProject/user/script/search_result.js"></script>
-<script src="http://localhost/LazadoProject/user/script/search.js"></script> -->
+</script>
+
+<script>
+
+    // ดึงปุ่มลบหลัก และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มลบใน Modal
+    document.querySelectorAll('.addCart').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // ดึง id ของผู้ดูแลจากปุ่มที่คลิก
+            const productId = button.getAttribute('data-id');
+
+            // อัปเดตลิงก์ของปุ่มลบใน Modal
+            const confirmDeleteBtn = document.getElementById('confirmAdd');
+            confirmDeleteBtn.href = `add_to_cart.php?id=${productId}`;
+        });
+    });
+</script>
 
 <?php include('partials/footer.php'); ?>

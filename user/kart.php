@@ -181,11 +181,11 @@ $conn->close();
         }
     </style>
     <script>
-        window.onload = function () {
+        window.onload = function() {
             const selectAll = document.getElementById('select-all');
             let itemCheckboxes = document.querySelectorAll('.item-checkbox');
 
-            selectAll.addEventListener('change', function () {
+            selectAll.addEventListener('change', function() {
                 itemCheckboxes.forEach(checkbox => {
                     checkbox.checked = this.checked;
                 });
@@ -201,7 +201,7 @@ $conn->close();
             // const removeButtons = document.querySelectorAll('.remove-btn');
 
             minusButtons.forEach(btn => {
-                btn.addEventListener('click', function (event) {
+                btn.addEventListener('click', function(event) {
                     event.preventDefault();
                     const input = this.nextElementSibling;
                     if (input.value > 1) {
@@ -213,7 +213,7 @@ $conn->close();
             });
 
             plusButtons.forEach(btn => {
-                btn.addEventListener('click', function (event) {
+                btn.addEventListener('click', function(event) {
                     event.preventDefault();
                     const input = this.previousElementSibling;
                     input.value++;
@@ -289,10 +289,12 @@ $conn->close();
                         </div>
                         <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
                         <div class="cart-item-quantity">
-                            <button class="minus-btn">-</button>
-                            <input type="text" name="quantities[<?php echo $item['id']; ?>]"
-                                value="<?php echo $item['qty'] ?>">
-                            <button class="plus-btn">+</button>
+                            <div class="input-group mb-3 d-flex justify-content-center" style="max-width: 150px;">
+                                <button class="btn btn-outline-secondary minus-btn">-</button>
+                                <input type="text" name="quantities[<?php echo $item['id']; ?>]"
+                                    value="<?php echo $item['qty'] ?>">
+                                <button class="btn btn-outline-secondary plus-btn">+</button>
+                            </div>
                         </div>
                         <div class="cart-item-total">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></div>
                         <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['id']; ?>'">
