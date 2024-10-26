@@ -121,7 +121,7 @@ $shipping_address = $_SESSION['shipping_address'];
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>ไม่มีสินค้าที่เลือกในตะกร้า</p>
+            <p1>ไม่มีสินค้าในตะกร้า </p1>
         <?php endif; ?>
     </div>
 

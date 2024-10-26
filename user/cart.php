@@ -75,15 +75,16 @@ $conn->close();
         .cart-item-image {
             width: 80px;
             height: 80px;
-            overflow: hidden;
-            border-radius: 8px;
+            object-fit: cover;
         }
 
         .cart-item-image img {
-            width: 100%;
-            height: 100%;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
         }
+
+
 
         .cart-item-info {
             font-size: 1rem;
@@ -252,7 +253,7 @@ $conn->close();
                     <div>รวม</div>
                     <div>ลบ</div>
                 </div>
-                
+
                 <?php foreach ($cartItems as $item): ?>
                     <div class="cart-item-box">
                         <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['product_id']; ?>]" value="<?php echo $item['product_id']; ?>"></div>
