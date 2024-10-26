@@ -75,11 +75,9 @@
 
 
 <div class="container mt-5">
-    <h2>Sale</h2>
-    <h4>Today's</h4>
+    <h2 class="text-center mb-4">โปรโมชั่นประจำเดือน</h2>
     <div class="d-flex justify-content-between align-items-center">
-
-        <div class="container my-5">
+        <div class="container mb-4">
             <div class="row">
                 <?php
                 // ดึงข้อมูลจากตาราง discount และ products โดยใช้ INNER JOIN เพื่อเชื่อมโยงข้อมูลทั้งสองตารางเข้าด้วยกันโดยมีเงื่อนไขที่ว่า discount.product_id ต้องเท่ากับ products.id
@@ -128,52 +126,175 @@
 
 
     <section class="container my-5">
-        <h2 class="text-center mb-4">Best Selling Products</h2>
-        <div class="row text-center">
+        <h2 class="text-center mb-4">สินค้าขายดีประจำเดือน</h2>
+        <div class="row">
+            <?php
+            $result1 = mysqli_query($conn, "SELECT * FROM products WHERE id = 3");
+            $result2 = mysqli_query($conn, "SELECT * FROM products WHERE id = 4");
+            $result3 = mysqli_query($conn, "SELECT * FROM products WHERE id = 5");
+            $result4 = mysqli_query($conn, "SELECT * FROM products WHERE id = 11");
+
+            $row1 = mysqli_fetch_assoc($result1);
+            $row2 = mysqli_fetch_assoc($result2);
+            $row3 = mysqli_fetch_assoc($result3);
+            $row4 = mysqli_fetch_assoc($result4);
+            ?>
             <!-- Product 1 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/north-coat.jpg" class="card-img-top" alt="The north coat">
-                    <div class="card-body">
-                        <h5 class="card-title">The north coat</h5>
-                        <p class="text-danger"><del>$360</del> $260</p>
-                        <p>⭐⭐⭐⭐⭐ (65)</p>
+            <div class="col col-md-3 mb-4">
+                <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                    <!-- body -->
+                    <div class="card-body" style="cursor: pointer;"
+                        onclick="window.location.href='item_details.php?id=<?php echo $row1['id'] ?>'">
+                        <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
+                        <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
+                            <?php echo $row1['name']; ?></h4>
+                    </div>
+
+                    <!-- footer -->
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <?php
+                        // ถ้า discount true
+                        if ($row1['discount'] == 1) { ?>
+                            <div class="card-text">
+                                <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row1['price'], 2); ?></p>
+                                <p style="margin:0;  font-size: 20px; color:red;"><?php echo "฿" . number_format($row1['discounted_price'], 2); ?></p>
+                            </div>
+                        <?php
+                        } else { ?>
+                            <div class="card-text" style="font-size: 20px; color:black;">
+                                <?php echo "฿" . number_format($row1['price'], 2); ?>
+                            </div>
+                        <?php
+                        }
+                        ?>
+
+                        <button class="btn addCart"
+                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalAddCart"
+                            data-id="<?php echo $row1['id'] ?>">
+                            <i style="color:red;" class="bi bi-cart3 h4"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Product 2 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/gucci-bag.jpg" class="card-img-top" alt="Gucci duffle bag">
-                    <div class="card-body">
-                        <h5 class="card-title">Gucci duffle bag</h5>
-                        <p class="text-danger"><del>$1160</del> $960</p>
-                        <p>⭐⭐⭐⭐⭐ (65)</p>
+            <div class="col col-md-3 mb-4">
+                <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                    <!-- body -->
+                    <div class="card-body" style="cursor: pointer;"
+                        onclick="window.location.href='item_details.php?id=<?php echo $row2['id'] ?>'">
+                        <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
+                        <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
+                            <?php echo $row2['name']; ?></h4>
+                    </div>
+
+                    <!-- footer -->
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                    <?php
+                        // ถ้า discount true
+                        if ($row2['discount'] == 1) { ?>
+                            <div class="card-text">
+                                <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row2['price'], 2); ?></p>
+                                <p style="margin:0;  font-size: 20px; color:red;"><?php echo "฿" . number_format($row2['discounted_price'], 2); ?></p>
+                            </div>
+                        <?php
+                        } else { ?>
+                            <div class="card-text" style="font-size: 20px; color:black;">
+                                <?php echo "฿" . number_format($row2['price'], 2); ?>
+                            </div>
+                        <?php
+                        }
+                        ?>
+
+                        <button class="btn addCart"
+                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalAddCart"
+                            data-id="<?php echo $row2['id'] ?>">
+                            <i style="color:red;" class="bi bi-cart3 h4"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Product 3 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/rgb-cpu-cooler.jpg" class="card-img-top" alt="RGB liquid CPU Cooler">
-                    <div class="card-body">
-                        <h5 class="card-title">RGB liquid CPU Cooler</h5>
-                        <p class="text-danger"><del>$170</del> $160</p>
-                        <p>⭐⭐⭐⭐⭐ (65)</p>
+            <div class="col col-md-3 mb-4">
+                <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                    <!-- body -->
+                    <div class="card-body" style="cursor: pointer;"
+                        onclick="window.location.href='item_details.php?id=<?php echo $row3['id'] ?>'">
+                        <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
+                        <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
+                            <?php echo $row3['name']; ?></h4>
+                    </div>
+
+                    <!-- footer -->
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                    <?php
+                        // ถ้า discount true
+                        if ($row3['discount'] == 1) { ?>
+                            <div class="card-text">
+                                <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row3['price'], 2); ?></p>
+                                <p style="margin:0;  font-size: 20px; color:red;"><?php echo "฿" . number_format($row3['discounted_price'], 2); ?></p>
+                            </div>
+                        <?php
+                        } else { ?>
+                            <div class="card-text" style="font-size: 20px; color:black;">
+                                <?php echo "฿" . number_format($row3['price'], 2); ?>
+                            </div>
+                        <?php
+                        }
+                        ?>
+
+                        <button class="btn addCart"
+                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalAddCart"
+                            data-id="<?php echo $row3['id'] ?>">
+                            <i style="color:red;" class="bi bi-cart3 h4"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Product 4 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/bookshelf.jpg" class="card-img-top" alt="Small BookSelf">
-                    <div class="card-body">
-                        <h5 class="card-title">Small BookSelf</h5>
-                        <p class="text-danger">$360</p>
-                        <p>⭐⭐⭐⭐⭐ (65)</p>
+            <div class="col col-md-3 mb-4">
+                <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                    <!-- body -->
+                    <div class="card-body" style="cursor: pointer;"
+                        onclick="window.location.href='item_details.php?id=<?php echo $row4['id'] ?>'">
+                        <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
+                        <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
+                            <?php echo $row4['name']; ?></h4>
+                    </div>
+
+                    <!-- footer -->
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                    <?php
+                        // ถ้า discount true
+                        if ($row4['discount'] == 1) { ?>
+                            <div class="card-text">
+                                <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row4['price'], 2); ?></p>
+                                <p style="margin:0;  font-size: 20px; color:red;"><?php echo "฿" . number_format($row4['discounted_price'], 2); ?></p>
+                            </div>
+                        <?php
+                        } else { ?>
+                            <div class="card-text" style="font-size: 20px; color:black;">
+                                <?php echo "฿" . number_format($row4['price'], 2); ?>
+                            </div>
+                        <?php
+                        }
+                        ?>
+
+                        <button class="btn addCart"
+                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalAddCart"
+                            data-id="<?php echo $row4['id'] ?>">
+                            <i style="color:red;" class="bi bi-cart3 h4"></i>
+                        </button>
                     </div>
                 </div>
             </div>
