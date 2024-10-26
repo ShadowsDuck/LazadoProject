@@ -12,6 +12,11 @@ if (isset($_GET['logout'])) {
     die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
 }
 $current_page = basename($_SERVER['PHP_SELF']);
+
+$sql = "SELECT * FROM cart WHERE user_id = '$user_id'";
+$result = mysqli_query($conn, $sql);
+$numrows = mysqli_num_rows($result);
+
 ?>
 
 
@@ -91,9 +96,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
         }
 
         html {
-    overflow-y: scroll;
-}
-
+            overflow-y: scroll;
+        }
     </style>
 </head>
 
@@ -109,28 +113,30 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>" href="index.php">หน้าแรก</a>
+                        <a class="nav-link <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>"
+                            href="index.php">หน้าแรก</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>" href="contact.php">ติดต่อเรา</a>
+                        <a class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>"
+                            href="contact.php">ติดต่อเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
+                        <a class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>"
+                            href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php">เกี่ยวกับเรา</a>
                     </li>
                     <li class="nav-item me-4 fs-6">
-                        <a class="nav-link <?php echo ($current_page == 'user_edit.php') ? 'active' : ''; ?>" 
-                        href="
+                        <a class="nav-link <?php echo ($current_page == 'user_edit.php') ? 'active' : ''; ?>" href="
                         <?php
                         if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
                             echo "user_edit.php?page=infoEdit";
-                        }else {
+                        } else {
                             echo '../login/signup.php';
                         }
                         ?>">
                             <?php
                             if (isset($_SESSION['id']) || isset($_SESSION['usertype'])) {
                                 echo 'จัดการบัญชีของคุณ';
-                            }else {
+                            } else {
                                 echo 'สมัครสมาชิก';
                             }
                             ?>
@@ -142,10 +148,18 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <input type="text" aria-label="Search" class="form-control" placeholder="ค้นหาสินค้า"
                             id="keyword" name="keyword">
                         <button type="submit" class="input-group-text search-icon-class">
-                            <i class="bi bi-search"></i> <!-- หรือไอคอนค้นหาอื่น ๆ -->
+                            <i class="bi bi-search"></i>
                         </button>
                     </form>
-                    <a href="kart.php" class="ms-4 mt-1"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
+                    <!-- Container สำหรับไอคอนตะกร้าและไอคอนจุดสีแดง -->
+                    <div class="position-relative ms-4 mt-1">
+                        <a href="kart.php"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
+
+                        <?php if ($numrows > 0) { ?>
+                            <!-- ไอคอนจุดสีแดงที่ทับอยู่บนไอคอนตะกร้า -->
+                            <i class="bi bi-dot" style="color:red; font-size:20px; position: absolute;"></i>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
