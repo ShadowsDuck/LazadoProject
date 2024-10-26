@@ -1,9 +1,16 @@
 <?php
+ob_start(); // เริ่มการ buffer output
 include('partials/header.php');
 include("../connect.php");
 
 if ($conn->connect_error) {
     die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
+}
+
+// ตรวจสอบว่ามีการเข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
+    header("Location: {$base_url}/login/login.php");
+    exit(); // ป้องกันการดำเนินการโค้ดต่อไป
 }
 
 $sql = "SELECT cart.*, products.name, products.price FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id = '{$_SESSION['id']}'";
@@ -16,6 +23,8 @@ if ($result->num_rows > 0) {
     }
 }
 $conn->close();
+
+ob_end_flush(); // ปิดการ buffer output
 ?>
 
 <!DOCTYPE html>

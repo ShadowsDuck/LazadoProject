@@ -1,9 +1,18 @@
 <?php
+ob_start(); // เริ่มการ buffer output
+
 include('partials/header.php');
 $update_status = $_SESSION['update_status'] ?? '';
 unset($_SESSION['update_status']);
-?>
 
+// ตรวจสอบว่ามีการเข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
+    header("Location: {$base_url}/login/login.php");
+    exit(); // ป้องกันการดำเนินการโค้ดต่อไป
+}
+
+ob_end_flush(); // ปิดการ buffer output
+?>
 
 <style>
     body {
