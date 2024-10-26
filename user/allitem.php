@@ -19,11 +19,6 @@ require('../connect.php');
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         /* background-color: red; */
     }
-
-    .modal-open {
-        padding-right: 0 !important;
-        overflow: visible !important;
-    }
 </style>
 
 
@@ -36,6 +31,9 @@ require('../connect.php');
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <div class="icons">
+                            <i class="icon bi bi-check-lg"></i>
+                        </div>
                         <h4 class="modal-title">เพิ่มสินค้า</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

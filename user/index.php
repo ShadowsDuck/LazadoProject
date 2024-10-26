@@ -1,11 +1,4 @@
 <?php include('partials/header.php'); ?>
-<script></script>
-<style>
-    .modal-open {
-        padding-right: 0 !important;
-        overflow: visible !important;
-    }
-</style>
 
 <!-- Body -->
 
@@ -15,12 +8,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+                    <div class="icons">
+                        <i class="icon bi bi-check-lg"></i>
+                    </div>
                     <h4 class="modal-title">เพิ่มสินค้า</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>คุณต้องการเพิ่มสินค้าไปยังตะกร้า?
-                    </p>
+                    <p>คุณต้องการเพิ่มสินค้าไปยังตะกร้า?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>

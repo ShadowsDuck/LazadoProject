@@ -15,11 +15,7 @@ if (isset($_GET['logout'])) {
     die(header("Location:{$base_url}/login/login.php"));        //ถ้ามีการออกจากระบบ ให้ทำลาย session
 }
 $current_page = basename($_SERVER['PHP_SELF']);
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,82 +30,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
         rel="stylesheet">
     <link rel="icon" href="partials/LAZADO.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .container {
-            flex: 1;
-
-        }
-
-        footer {
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
-
-        .navbar-nav {
-            margin: auto;
-
-        }
-
-        .input-group-text {
-            cursor: pointer;
-        }
-
-        .category-menu {
-            padding-top: 0px;
-        }
-
-        .category-menu a {
-            display: block;
-            margin-bottom: 15px;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 340px;
-            object-fit: cover;
-        }
-
-        .carousel-control-prev,
-        .carousel-control-next {
-            filter: invert(100%);
-            /* ทำให้ลูกศรสีขาวมองเห็นได้ดีขึ้น */
-        }
-
-        .container-fluid {
-            padding-left: 30px;
-            /* เพิ่ม padding-left */
-            padding-right: 30px;
-            /* เพิ่ม padding-right */
-        }
-
-        html {
-            overflow-y: scroll;
-        }
-
-        footer a {
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
 <body>
