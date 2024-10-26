@@ -32,6 +32,7 @@ $currentCategory = isset($_GET['c']) ? $_GET['c'] : (isset($keyword) ? $keyword 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="icon" href="partials/LAZADO.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
 </head>
 
 <body>
