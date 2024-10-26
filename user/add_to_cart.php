@@ -29,7 +29,7 @@ if (isset($_SESSION["id"]) && isset($_SESSION["usertype"])) {
         $_SESSION['cart'][$product_id] = ($_SESSION['cart'][$product_id] ?? 0) + $qty;
 
         // เปลี่ยนเส้นทางไปที่หน้า cart.php
-        header("location:{$base_url}/user/cart.php"); // เปลี่ยนเส้นทางไปยัง cart.php
+        header("location:{$_SESSION['currentpage']}"); // เปลี่ยนเส้นทางไปยัง cart.php
         exit();
     } else {
         echo "Error: " . mysqli_error($conn);

@@ -1,5 +1,10 @@
 <?php include('partials/header.php'); ?>
 <script></script>
+<style>
+    .modal-open {
+        padding-right: 0 !important;
+    }
+</style>
 
 <!-- Body -->
 
@@ -192,7 +197,7 @@
 
                     <!-- footer -->
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                    <?php
+                        <?php
                         // ถ้า discount true
                         if ($row2['discount'] == 1) { ?>
                             <div class="card-text">
@@ -232,7 +237,7 @@
 
                     <!-- footer -->
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                    <?php
+                        <?php
                         // ถ้า discount true
                         if ($row3['discount'] == 1) { ?>
                             <div class="card-text">
@@ -272,7 +277,7 @@
 
                     <!-- footer -->
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                    <?php
+                        <?php
                         // ถ้า discount true
                         if ($row4['discount'] == 1) { ?>
                             <div class="card-text">
