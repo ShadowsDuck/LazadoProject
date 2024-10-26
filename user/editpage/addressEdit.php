@@ -9,21 +9,22 @@ $row = $result->fetch_assoc();
 
 <div class="container ms-1" style="border-radius: 5px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4>ที่อยู่</h4>
-        <button id="editButton" class="btn btn-edit" onclick="toggleEdit()">แก้ไขที่อยู่</button>
+        <h4>ที่อยู่สำหรับจัดส่งสินค้า</h4>
+        <button id="editButton" class="btn btn-danger" onclick="toggleEdit()">แก้ไขที่อยู่</button>
     </div>
 
     <div class="user-info d-flex align-items-center">
         <!-- ฟอร์มสำหรับแก้ไขข้อมูล -->
         <form action="<?php echo $base_url.'/user/editpage/update_address.php' ?>" id="editForm" method="POST" style="display: none;">
             <div class="mb-3">
-                <label for="address" class="form-label">ที่อยู่</label>
-                <input type="text" class="form-control" name="address" value="<?php echo $row['address']; ?>"
+                <label for="address" class="form-label">แก้ไขที่อยู่</label>
+                
+                <input type="text-area" class="form-control" name="address" value="<?php echo $row['address']; ?>"
                     required>
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary me-2">บันทึก</button>
+                <button type="submit" class="btn btn-danger me-2">บันทึก</button>
                 <button type="button" class="btn btn-secondary" onclick="toggleEdit()">ยกเลิก</button>
             </div>
             

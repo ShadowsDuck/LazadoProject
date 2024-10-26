@@ -10,7 +10,7 @@ $row = $result->fetch_assoc();
 <div class="container ms-1" style="border-radius: 5px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4>ข้อมูลส่วนตัว</h4>
-        <button id="editButton" class="btn btn-edit" onclick="toggleEdit()">แก้ไขข้อมูลส่วนตัว</button>
+        <button id="editButton" class="btn btn-danger" onclick="toggleEdit()">แก้ไขข้อมูลส่วนตัว</button>
     </div>
 
     <div class="user-info d-flex align-items-center">
@@ -28,7 +28,7 @@ $row = $result->fetch_assoc();
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary me-2">บันทึก</button>
+                <button type="submit" class="btn btn-danger me-2">บันทึก</button>
                 <button type="button" class="btn btn-secondary" onclick="toggleEdit()">ยกเลิก</button>
             </div>
             
@@ -36,8 +36,8 @@ $row = $result->fetch_assoc();
 
         <!-- แสดงผลข้อมูลปัจจุบัน -->
         <div id="userInfo">
-            <h5><?php echo $row['fullname']; ?></h5>
-            <p><?php echo $row['email']; ?></p>
+            <h5><?php echo "ชื่อ : ".$row['fullname']; ?></h5>
+             <p><?php echo "Email : ".$row['email']; ?></p>
         </div>
     </div>
 </div>
