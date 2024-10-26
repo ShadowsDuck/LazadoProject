@@ -1,24 +1,14 @@
 <?php
 include('partials/header.php');
 include("../connect.php");
-// // การเชื่อมต่อกับฐานข้อมูล
-// $host = 'localhost';
-// $db = 'lazado_db';
-// $user = 'root';
-// $password = '';
 
-// // สร้างการเชื่อมต่อกับฐานข้อมูล
-// $conn = new mysqli($host, $user, $password, $db);
-
-// ตรวจสอบการเชื่อมต่อ
 if ($conn->connect_error) {
     die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
 }
-// ดึงข้อมูลสินค้าในตะกร้าจากฐานข้อมูล
+
 $sql = "SELECT cart.*, products.name, products.price FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id = '{$_SESSION['id']}'";
 $result = $conn->query($sql);
 
-// เก็บข้อมูลสินค้าในอาเรย์
 $cartItems = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -181,11 +171,11 @@ $conn->close();
         }
     </style>
     <script>
-        window.onload = function () {
+        window.onload = function() {
             const selectAll = document.getElementById('select-all');
             let itemCheckboxes = document.querySelectorAll('.item-checkbox');
 
-            selectAll.addEventListener('change', function () {
+            selectAll.addEventListener('change', function() {
                 itemCheckboxes.forEach(checkbox => {
                     checkbox.checked = this.checked;
                 });
@@ -201,7 +191,7 @@ $conn->close();
             // const removeButtons = document.querySelectorAll('.remove-btn');
 
             minusButtons.forEach(btn => {
-                btn.addEventListener('click', function (event) {
+                btn.addEventListener('click', function(event) {
                     event.preventDefault();
                     const input = this.nextElementSibling;
                     if (input.value > 1) {
@@ -213,7 +203,7 @@ $conn->close();
             });
 
             plusButtons.forEach(btn => {
-                btn.addEventListener('click', function (event) {
+                btn.addEventListener('click', function(event) {
                     event.preventDefault();
                     const input = this.previousElementSibling;
                     input.value++;
@@ -263,7 +253,6 @@ $conn->close();
 </head>
 
 <body>
-
     <div class="container mt-5 mb-5">
         <h2 class="text-center">ตะกร้าสินค้า</h2>
         <div class="cart-table">
@@ -279,8 +268,7 @@ $conn->close();
 
                 <?php foreach ($cartItems as $item): ?>
                     <div class="cart-item-box">
-                        <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['id']; ?>]"
-                                value="<?php echo $item['id']; ?>"></div>
+                        <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['id']; ?>]" value="<?php echo $item['id']; ?>"></div>
                         <div class="cart-item-details">
                             <div class="cart-item-image">
                                 <img src="<?php echo $item['image']; ?>" alt="Product Image">
@@ -290,8 +278,7 @@ $conn->close();
                         <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
                         <div class="cart-item-quantity">
                             <button class="minus-btn">-</button>
-                            <input type="text" name="quantities[<?php echo $item['id']; ?>]"
-                                value="<?php echo $item['qty'] ?>">
+                            <input type="text" name="quantities[<?php echo $item['id']; ?>]" value="<?php echo $item['qty'] ?>">
                             <button class="plus-btn">+</button>
                         </div>
                         <div class="cart-item-total">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></div>
@@ -299,7 +286,6 @@ $conn->close();
                             <i class="bi bi-trash"></i>
                         </div>
                     </div>
-
                 <?php endforeach; ?>
 
                 <div class="total-section">
@@ -311,7 +297,7 @@ $conn->close();
         </div>
     </div>
 
+    <?php include('partials/footer.php'); ?>
 </body>
-<?php include('partials/footer.php'); ?>
 
 </html>

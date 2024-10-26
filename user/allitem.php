@@ -8,19 +8,15 @@ require('../connect.php');
     .category-item {
         cursor: pointer;
         border: 2px solid transparent;
-        /* ขอบโปร่งใสที่ช่วยให้ขนาดคงที่ */
         border-radius: 8px;
     }
 
     .category-item.active {
         border: 2px solid white;
-        /* กรอบเมื่อถูกเลือก */
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        /* background-color: red; */
     }
 </style>
-
 
 <!-- Icon หมวดหมู่-->
 <section class="container">
@@ -74,28 +70,28 @@ require('../connect.php');
         <?php
         $c = '';
         $keyword = '';
-        $sql = "SELECT * FROM products ORDER BY created_at DESC";
+        $sql = "SELECT * FROM products";
 
         if (isset($_GET["c"])) {
             $c = $_GET['c'];
         }
         if (isset($_GET["keyword"])) {
             $keyword = $_GET['keyword'];
-            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
         }
 
         if ($c == 'keyboard') {
-            $sql = "SELECT * FROM products WHERE category=1 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=1";
         } elseif ($c == 'mouse') {
-            $sql = "SELECT * FROM products WHERE category=2 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=2";
         } elseif ($c == 'headset') {
-            $sql = "SELECT * FROM products WHERE category=3 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=3";
         } elseif ($c == 'monitor') {
-            $sql = "SELECT * FROM products WHERE category=4 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=4";
         } elseif ($c == 'chair') {
-            $sql = "SELECT * FROM products WHERE category=5 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=5";
         } elseif ($c == 'streaming') {
-            $sql = "SELECT * FROM products WHERE category=6 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=6";
         }
 
         $result = mysqli_query($conn, $sql);
@@ -137,7 +133,5 @@ require('../connect.php');
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 </script>
-<!-- <script src="http://localhost/LazadoProject/user/script/search_result.js"></script>
-<script src="http://localhost/LazadoProject/user/script/search.js"></script> -->
 
 <?php include('partials/footer.php'); ?>
