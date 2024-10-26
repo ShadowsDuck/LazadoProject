@@ -92,7 +92,7 @@ include('partials/header.php');
 </style>
 
 
-<div class="container">
+<div class="container mt-5">
     <div class="row ">
         <!-- Sidebar -->
         <div class="col-sm-3 sidebar vh-auto" id="sidebar">

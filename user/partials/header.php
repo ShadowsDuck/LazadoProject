@@ -27,11 +27,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap E-Commerce Template</title>
+    <title>LAZADO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
         rel="stylesheet">
+    <link rel="icon" href="partials/LAZADO.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
@@ -173,8 +174,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
                         <?php if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
                             if ($numrows > 0) { ?>
-                                <!-- ไอคอนจุดสีแดงที่ทับอยู่บนไอคอนตะกร้า -->
-                                <i class="bi bi-dot" style="color:red; font-size:20px; position: absolute;"></i>
+                                <div class="spinner-grow spinner-grow-sm text-danger"
+                                     role="status"
+                                     style="font-size:20px; position: absolute; margin-right: 10px; width:0.5rem; height:0.5rem; animation-duration: 1.5s;">
+                                </div>
+                                <!-- <i class="bi bi-dot" style="color:red; font-size:20px; position: absolute;"></i> -->
                         <?php }
                         } ?>
                     </div>
