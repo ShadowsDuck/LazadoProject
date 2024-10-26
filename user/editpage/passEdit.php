@@ -1,7 +1,5 @@
-<?php 
+<?php
 session_start(); // เปิด session ก่อนการใช้งาน $_SESSION
-$update_status = $_SESSION['update_status'] ?? null; // ใช้อัพเดทสเตตัสในการเปิด modal
-unset($_SESSION['update_status']); // ลบสถานะหลังจากดึงค่าแล้ว
 
 require("../../connect.php");
 $user_id = $_SESSION['id'];
@@ -17,7 +15,7 @@ $row = $result->fetch_assoc();
 
     <div class="user-info d-flex align-items-center">
         <!-- ฟอร์มสำหรับเปลี่ยนรหัสผ่าน -->
-        <form action="<?php echo $base_url.'/user/editpage/update_pass.php' ?>" id="editForm" method="POST">
+        <form action="<?php echo $base_url . '/user/editpage/update_pass.php' ?>" id="editForm" method="POST">
             <div class="mb-3">
                 <label for="newPassword" class="form-label">รหัสผ่านใหม่</label>
                 <div class="input-group">
@@ -45,42 +43,7 @@ $row = $result->fetch_assoc();
     </div>
 </div>
 
-<!-- Modal โครงสร้าง -->
-<div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="false">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="statusModalLabel">
-                    <?php
-                    if ($update_status == 'success') {
-                        echo "สำเร็จ";
-                    } else {
-                        echo "เกิดข้อผิดพลาด";
-                    }
-                    ?>
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <i class="bi <?php echo $update_status == 'success' ? 'bi-check-circle-fill text-success' : 'bi-exclamation-triangle-fill text-danger'; ?>" style="font-size: 3rem;"></i>
-                <p class="mt-3">
-                    <?php
-                    if ($update_status == 'success') {
-                        echo "เปลี่ยนรหัสผ่านสำเร็จ!";
-                    } elseif ($update_status == 'mismatch') {
-                        echo "โปรดยืนยันรหัสผ่านให้ตรงกัน";
-                    } else {
-                        echo "เกิดข้อผิดพลาดในการเปลี่ยนรหัสผ่าน";
-                    }
-                    ?>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <script>
     function togglePasswordVisibility(inputId, icon) {
@@ -89,31 +52,6 @@ $row = $result->fetch_assoc();
         input.type = isPassword ? 'text' : 'password';
         icon.innerHTML = isPassword ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
     }
-
-    // เปิด Modal ตามสถานะ
-    document.addEventListener("DOMContentLoaded", function() {
-        const updateStatus = "<?php echo $update_status; ?>";
-        if (updateStatus) {
-            const statusModal = new bootstrap.Modal(document.getElementById('statusModal'));
-            statusModal.show();
-        }
-    });
-
-    document.getElementById("editForm").addEventListener("submit", function(event) {
-        const newPassword = document.getElementById("newPassword").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
-        
-        if (newPassword.length < 6) {
-            alert("รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร");
-            event.preventDefault(); // ยกเลิกการส่งฟอร์มหากรหัสผ่านสั้นเกินไป
-            return;
-        }
-        
-        if (newPassword !== confirmPassword) {
-            alert("โปรดยืนยันรหัสผ่านให้ตรงกัน");
-            event.preventDefault();
-        }
-    });
 </script>
 
 
