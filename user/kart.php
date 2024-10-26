@@ -24,8 +24,6 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $cartItems[] = $row;
     }
-} else {
-    echo "ไม่มีสินค้าในตะกร้า";
 }
 $conn->close();
 ?>
