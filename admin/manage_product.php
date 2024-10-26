@@ -293,7 +293,7 @@
                                     <?php
                                     $imageURL = !empty($row['file_name']) ? '../uploads/' . $row['file_name'] : 'https://placehold.co/200';
                                     ?>
-                                    <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px">
+                                    <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
                                     <h5 class="card-title" style="font-weight:600; font-size:0.8rem;"><?php echo $row['name']; ?></h5>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
