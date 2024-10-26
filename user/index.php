@@ -83,16 +83,16 @@
             <div class="row">
                 <?php
                 // ดึงข้อมูลจากตาราง discount และ products โดยใช้ INNER JOIN เพื่อเชื่อมโยงข้อมูลทั้งสองตารางเข้าด้วยกันโดยมีเงื่อนไขที่ว่า discount.product_id ต้องเท่ากับ products.id
-                $sql1 = "SELECT discount.*, products.name, products.price, products.img FROM discount INNER JOIN products ON discount.product_id = products.id";
+                $sql1 = "SELECT * FROM products WHERE discount = 1";
                 $result1 = mysqli_query($conn, $sql1);
 
                 if ($result1->num_rows > 0) {
                     while ($row1 = mysqli_fetch_assoc($result1)) { ?>
-                        <div class="col col-md-2 mb-4">
+                        <div class="col col-md-3 mb-4">
                             <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
                                 <!-- body -->
                                 <div class="card-body" style="cursor: pointer;"
-                                    onclick="window.location.href='item_details.php?id=<?php echo $row1['product_id'] ?>'">
+                                    onclick="window.location.href='item_details.php?id=<?php echo $row1['id'] ?>'">
                                     <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
                                     <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
                                         <?php echo $row1['name']; ?></h4>
@@ -101,9 +101,9 @@
                                 <!-- footer -->
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <div>
-                                        <div class="card-text text-danger" style="font-weight: bold; font-size: 17px; ">
+                                        <div class="card-text text-danger" style="font-weight: bold;">
                                             <p style="text-decoration: line-through; margin:0; font-size: 12px;"><?php echo "฿" . number_format($row1['price'], 2); ?></p>
-                                            <p style="margin:0;"><?php echo "฿" . number_format($row1['discounted_price'], 2); ?></p>
+                                            <p style="margin:0;  font-size: 20px; "><?php echo "฿" . number_format($row1['discounted_price'], 2); ?></p>
                                         </div>
                                     </div>
 
@@ -111,7 +111,7 @@
                                         onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modalAddCart"
-                                        data-id="<?php echo $row1['product_id'] ?>">
+                                        data-id="<?php echo $row1['id'] ?>">
                                         <i style="color:red;" class="bi bi-cart3 h4"></i>
                                     </button>
                                 </div>
