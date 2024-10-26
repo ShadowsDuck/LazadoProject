@@ -21,12 +21,17 @@ $row = $result->fetch_assoc();
                 <input type="text" class="form-control" name="fullname" value="<?php echo $row['fullname']; ?>"
                     required>
             </div>
+            
             <div class="mb-3">
                 <label for="email" class="form-label">อีเมล</label>
                 <input type="email" class="form-control" name="email" value="<?php echo $row['email']; ?>" required>
             </div>
-            <button type="submit" class="btn btn-primary">บันทึก</button>
-            <button type="button" class="btn btn-secondary" onclick="toggleEdit()">ยกเลิก</button>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary me-2">บันทึก</button>
+                <button type="button" class="btn btn-secondary" onclick="toggleEdit()">ยกเลิก</button>
+            </div>
+            
         </form>
 
         <!-- แสดงผลข้อมูลปัจจุบัน -->

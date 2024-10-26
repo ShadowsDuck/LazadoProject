@@ -15,20 +15,21 @@ include('partials/header.php');
         padding-top: 20px;
     }
 
-    .sidebar a  {
+    .sidebar a {
         color: #333;
         font-weight: bold;
         display: block;
         padding: 10px 20px;
         text-decoration: none;
     }
-    .btn{
+
+    .btn {
         color: #333;
         font-weight: bold;
         display: block;
         padding: 10px 20px;
         text-decoration: none;
-        
+
     }
 
     .sidebar a.active,
@@ -138,13 +139,64 @@ include('partials/header.php');
             $(this).addClass('active');
         });
 
-        // Automatically select the first sidebar item if the page is "aboutpage/aboutSidebar.php"
+
+        //Automatically select the first sidebar item if the page is "aboutpage/aboutSidebar.php"
         if (window.location.href.indexOf("infoEdit") > -1) {
             $('#sidebar .nav-link').first().trigger('click');
         }
     });
-</script>
 
+
+//     $(document).ready(function() {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const page = urlParams.get('page');
+
+//     // ถ้ามีพารามิเตอร์ page ให้โหลดหน้านั้น
+//     if (page) {
+//         $('#sidebar-content').load("editpage/" + page, function(response, status, xhr) {
+//             if (status == "error") {
+//                 $('#sidebar-content').html("<p>ไม่สามารถโหลดเนื้อหาได้</p>");
+//                 console.error("Error loading page:", xhr.status, xhr.statusText);
+//             }
+//         });
+        
+//         // ทำให้ลิงก์ใน sidebar แสดงเป็น active
+//         $('#sidebar .nav-link[data-page="editpage/' + page + '"]').addClass('active');
+//     } else {
+//         // ถ้าไม่มีให้โหลดหน้าเริ่มต้น (เช่น infoEdit)
+//         $('#sidebar-content').load("editpage/infoEdit.php");
+//     }
+
+//     // Handle sidebar content loading
+//     $('#sidebar .nav-link').click(function(e) {
+//         e.preventDefault();
+//         var selectedPage = $(this).data('page');
+
+//         // โหลดเนื้อหาและจัดการข้อผิดพลาด
+//         $('#sidebar-content').load(selectedPage, function(response, status, xhr) {
+//             if (status == "error") {
+//                 $('#sidebar-content').html("<p>ไม่สามารถโหลดเนื้อหาได้</p>");
+//                 console.error("Error loading page:", xhr.status, xhr.statusText);
+//             } else {
+//                 // อัปเดต URL ให้มีพารามิเตอร์ page
+//                 window.history.pushState(null, '', 'user_edit.php?page=' + selectedPage.split('/').pop());
+//             }
+//         });
+
+//         // ทำให้ลิงก์ใน sidebar แสดงเป็น active
+//         $('#sidebar .nav-link').removeClass('active');
+//         $(this).addClass('active');
+//     });
+// });
+
+
+
+
+</script>
+<!-- Include Bootstrap Icons and CSS/JS for modal -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <?php
 include('partials/footer.php');
