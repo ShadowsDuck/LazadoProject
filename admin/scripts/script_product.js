@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var productName = button.getAttribute('data-name');
         var productDescription = button.getAttribute('data-description');
         var productPrice = button.getAttribute('data-price');
+        var productDiscount = button.getAttribute('data-discount');
+        var productDiscountedPrice = button.getAttribute('data-discounted_price');
         var productImg = button.getAttribute('data-file');
         var productCategory = button.getAttribute('data-category');
 
@@ -18,12 +20,39 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.querySelector('input[name="name"]').value = productName;
         modal.querySelector('textarea[name="description"]').value = productDescription;
         modal.querySelector('input[name="price"]').value = productPrice;
-        // modal.querySelector('img[name="image"]').src = '../uploads/' + productImg;
         modal.querySelector('#product_image_preview').src = '../uploads/' + productImg;
+        modal.querySelector('select[name="category"]').value = productCategory;
 
-        // ตั้งค่าหมวดหมู่สินค้า
-        var categorySelect = modal.querySelector('select[name="category"]');
-        categorySelect.value = productCategory;
+        // ตั้งค่าและเปิด/ปิดช่อง "ราคาที่ลดแล้ว" ตามส่วนลด
+        var discountSelect = modal.querySelector('#discountSelect');
+        var discountedPriceInput = modal.querySelector('#discountedPriceInput');
+
+        // ตั้งค่าช่องส่วนลด
+        discountSelect.value = productDiscount;
+        discountedPriceInput.value = productDiscountedPrice;
+
+        // เปิด/ปิดช่อง "ราคาที่ลดแล้ว" ตามส่วนลด
+        if (productDiscount === "1") {
+            discountedPriceInput.disabled = false; // เปิดให้กรอกข้อมูล
+            discountedPriceInput.placeholder = "กรุณาใส่ราคาที่ลดแล้ว";
+        } else {
+            discountedPriceInput.disabled = true; // ปิดไม่ให้กรอกข้อมูล
+            discountedPriceInput.value = ""; // ล้างค่าในช่อง
+            discountedPriceInput.placeholder = "ไม่สามารถใส่ราคาได้";
+        }
+    });
+
+    // กำหนดการทำงานเมื่อเปลี่ยนค่าใน select ส่วนลด
+    document.getElementById('discountSelect').addEventListener('change', function () {
+        var discountedPriceInput = document.getElementById('discountedPriceInput');
+        if (this.value === "1") {
+            discountedPriceInput.disabled = false;
+            discountedPriceInput.placeholder = "กรุณาใส่ราคาที่ลดแล้ว";
+        } else {
+            discountedPriceInput.disabled = true;
+            discountedPriceInput.value = "";
+            discountedPriceInput.placeholder = "ไม่สามารถใส่ราคาได้";
+        }
     });
 });
 
