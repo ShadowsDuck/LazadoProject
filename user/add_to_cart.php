@@ -2,39 +2,33 @@
 session_start();
 include("../connect.php");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user_id = $_SESSION['id'] ?? 'Anonymous';  // กำหนด user_id เป็น 'Anonymous' หากไม่ได้ล็อกอิน
-    $product_id = $_POST['selected_products'][0];  // รับค่า product_id ที่ส่งมาจากฟอร์ม
-    $qty = $_POST['quantity'];  // รับค่าจำนวนจากฟอร์ม
+// ตรวจสอบว่ามีการส่งข้อมูลมาหรือไม่
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id']) && isset($_POST['quantity'])) {
+    $product_id = intval($_POST['product_id']);
+    $quantity = intval($_POST['quantity']);
+    $user_id = $_SESSION['id'];
 
-    // ตรวจสอบว่ามีสินค้าในตะกร้าอยู่แล้วหรือไม่ในฐานข้อมูล
-    $sql = "SELECT * FROM cart WHERE user_id = '$user_id' AND product_id = '$product_id'";
-    $result = mysqli_query($conn, $sql);
+    // ตรวจสอบว่ามีสินค้านี้ในตะกร้าของผู้ใช้แล้วหรือไม่
+    $check_cart_query = "SELECT * FROM cart WHERE user_id = '$user_id' AND product_id = '$product_id'";
+    $check_result = $conn->query($check_cart_query);
 
-    if (mysqli_num_rows($result) > 0) {
-        // ถ้ามีอยู่แล้ว ให้อัปเดตจำนวนสินค้า
-        $sql = "UPDATE cart SET qty = qty + $qty WHERE user_id = '$user_id' AND product_id = '$product_id'";
+    if ($check_result->num_rows > 0) {
+        // ถ้ามีสินค้าอยู่แล้ว ให้เพิ่มจำนวน
+        $update_query = "UPDATE cart SET qty = qty + $quantity WHERE user_id = '$user_id' AND product_id = '$product_id'";
+        $conn->query($update_query);
     } else {
-        // ถ้าไม่มีให้เพิ่มสินค้าใหม่
-        $sql = "INSERT INTO cart (user_id, product_id, qty) VALUES ('$user_id', '$product_id', '$qty')";
+        // ถ้ายังไม่มี ให้เพิ่มสินค้าลงในตะกร้า
+        $insert_query = "INSERT INTO cart (user_id, product_id, qty) VALUES ('$user_id', '$product_id', $quantity)";
+        $conn->query($insert_query);
     }
 
-    // ดำเนินการกับฐานข้อมูล
-    if (mysqli_query($conn, $sql)) {
-        // เก็บข้อมูลสินค้าในเซสชันด้วย
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
-        // เพิ่มจำนวนสินค้าลงในเซสชัน
-        $_SESSION['cart'][$product_id] = ($_SESSION['cart'][$product_id] ?? 0) + $qty;
-
-        // เปลี่ยนเส้นทางไปที่หน้า cart.php
-        header("Location: cart.php");
-        exit();
-    } else {
-        echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
-    }
+    // เปลี่ยนเส้นทางไปยังหน้าตะกร้า
+    header("Location: cart.php");
+    exit;
+} else {
+    // หากไม่มีข้อมูลที่ถูกต้อง ให้เปลี่ยนเส้นทางไปยังหน้าหลัก
+    header("Location: index.php");
+    exit;
 }
-
-$conn->close();
 ?>
+

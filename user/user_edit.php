@@ -1,7 +1,18 @@
 <?php
-include('partials/header.php');
-?>
+ob_start(); // เริ่มการ buffer output
 
+include('partials/header.php');
+$update_status = $_SESSION['update_status'] ?? '';
+unset($_SESSION['update_status']);
+
+// ตรวจสอบว่ามีการเข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
+    header("Location: {$base_url}/login/login.php");
+    exit(); // ป้องกันการดำเนินการโค้ดต่อไป
+}
+
+ob_end_flush(); // ปิดการ buffer output
+?>
 
 <style>
     body {
@@ -116,6 +127,45 @@ include('partials/header.php');
     </div>
 </div>
 
+
+<!-- Modal สำหรับการเปลี่ยนรหัสผ่าน -->
+<div class="modal fade" id="passwordUpdateModal" tabindex="-1" aria-labelledby="passwordUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="passwordUpdateModalLabel">
+                    <?php echo ($update_status == 'success') ? "สำเร็จ" : "เกิดข้อผิดพลาด"; ?>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>
+                    <?php
+                    switch ($update_status) {
+                        case 'success':
+                            echo "เปลี่ยนรหัสผ่านสำเร็จ!";
+                            break;
+                        case 'mismatch':
+                            echo "โปรดยืนยันรหัสผ่านให้ตรงกัน";
+                            break;
+                        case 'short_password':
+                            echo "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+                            break;
+                        default:
+                            echo "เกิดข้อผิดพลาดในการเปลี่ยนรหัสผ่าน";
+                            break;
+                    }
+                    ?>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -145,58 +195,25 @@ include('partials/header.php');
             $('#sidebar .nav-link').first().trigger('click');
         }
     });
-
-
-//     $(document).ready(function() {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const page = urlParams.get('page');
-
-//     // ถ้ามีพารามิเตอร์ page ให้โหลดหน้านั้น
-//     if (page) {
-//         $('#sidebar-content').load("editpage/" + page, function(response, status, xhr) {
-//             if (status == "error") {
-//                 $('#sidebar-content').html("<p>ไม่สามารถโหลดเนื้อหาได้</p>");
-//                 console.error("Error loading page:", xhr.status, xhr.statusText);
-//             }
-//         });
-        
-//         // ทำให้ลิงก์ใน sidebar แสดงเป็น active
-//         $('#sidebar .nav-link[data-page="editpage/' + page + '"]').addClass('active');
-//     } else {
-//         // ถ้าไม่มีให้โหลดหน้าเริ่มต้น (เช่น infoEdit)
-//         $('#sidebar-content').load("editpage/infoEdit.php");
-//     }
-
-//     // Handle sidebar content loading
-//     $('#sidebar .nav-link').click(function(e) {
-//         e.preventDefault();
-//         var selectedPage = $(this).data('page');
-
-//         // โหลดเนื้อหาและจัดการข้อผิดพลาด
-//         $('#sidebar-content').load(selectedPage, function(response, status, xhr) {
-//             if (status == "error") {
-//                 $('#sidebar-content').html("<p>ไม่สามารถโหลดเนื้อหาได้</p>");
-//                 console.error("Error loading page:", xhr.status, xhr.statusText);
-//             } else {
-//                 // อัปเดต URL ให้มีพารามิเตอร์ page
-//                 window.history.pushState(null, '', 'user_edit.php?page=' + selectedPage.split('/').pop());
-//             }
-//         });
-
-//         // ทำให้ลิงก์ใน sidebar แสดงเป็น active
-//         $('#sidebar .nav-link').removeClass('active');
-//         $(this).addClass('active');
-//     });
-// });
-
-
-
-
 </script>
 <!-- Include Bootstrap Icons and CSS/JS for modal -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- JavaScript เพื่อแสดง modal -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const updateStatus = "<?php echo $update_status; ?>";
+        console.log(updateStatus);
+
+        if (updateStatus) {
+            const passwordUpdateModal = new bootstrap.Modal(document.getElementById('passwordUpdateModal'));
+            passwordUpdateModal.show();
+        }
+    });
+</script>
 
 <?php
 include('partials/footer.php');

@@ -1,5 +1,12 @@
 <?php include('partials/header.php'); ?>
 
+<style>
+    .btn-vsm {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+    }
+</style>
+
 <!-- Body -->
 <div class="container-sm mt-5">
     <!-- Alert message should be displayed right here -->
@@ -266,18 +273,18 @@
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                 ?>
-                        <div class="col-lg-3 mb-4">
+                        <div class="col col-md-2 mb-4">
                             <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
                                 <div class="card-body">
                                     <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
-                                    <h5 class="card-title"><?php echo $row['name']; ?></h5>
+                                    <h5 class="card-title" style="font-weight:600; font-size:0.8rem;"><?php echo $row['name']; ?></h5>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 20px;">
+                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 1rem;">
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
                                     </div>
-                                    <div class="ms-auto">
-                                        <button type="button" class="btn btn-success btn-sm"
+                                    <div class="d-flex justify-content-end ms-auto">
+                                        <button type="button" class="btn btn-success btn-vsm me-1"
                                             data-bs-toggle="modal"
                                             data-bs-target="#updateProductDetailModal"
                                             data-id="<?php echo $row['id']; ?>"
@@ -288,7 +295,7 @@
                                             data-category="<?php echo $row['category']; ?>">
                                             อัปเดต
                                         </button>
-                                        <a href="#" class="btn btn-danger btn-sm delete_product" data-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#confirmDelete"> ลบ </a>
+                                        <a href="#" class="btn btn-danger btn-vsm delete_product" data-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#confirmDelete"> ลบ </a>
                                     </div>
                                 </div>
                             </div>
