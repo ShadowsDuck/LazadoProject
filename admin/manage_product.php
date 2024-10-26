@@ -35,7 +35,7 @@
     <div class="modal fade" id="addProductModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="add_product.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <form action="add_product.php" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                     <div class="modal-header">
                         <h5 class="modal-title" id="addProductModalLabel">เพิ่มสินค้า</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -68,7 +68,7 @@
                         <!-- Product Image field -->
                         <div class="form-group mb-3">
                             <label for="product_image" class="form-label">รูปสินค้า</label>
-                            <input type="file" class="form-control" name="img" accept="image/*">
+                            <input type="file" class="form-control" name="file" accept="image/gif, image/jpeg, image/png">
                         </div>
 
                         <!-- Product Category field -->
@@ -90,7 +90,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
-                        <button type="submit" class="btn btn-primary">เพิ่มสินค้า</button>
+                        <button type="submit" class="btn btn-primary" name="addProduct">เพิ่มสินค้า</button>
                     </div>
                 </form>
 
@@ -98,11 +98,11 @@
         </div>
     </div>
 
-    <!-- Modal for Product Details -->
+    <!-- Modal for Update Product Details -->
     <div class="modal fade" id="updateProductDetailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateProductDetailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="update_product.php" method="post">
+                <form action="update_product.php" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title" id="updateProductDetailModalLabel">อัปเดตรายละเอียดสินค้า</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -132,7 +132,8 @@
                         <!-- Product Image field -->
                         <div class="form-group mb-3">
                             <label for="product_image" class="form-label">รูปสินค้า</label>
-                            <input class="form-control" type="file" name="img">
+                            <img id="product_image_preview" src="" alt="Current Image" class="img-thumbnail mb-2" style="max-width: 200px; display:flex;">
+                            <input type="file" class="form-control" name="file" accept="image/gif, image/jpeg, image/png">
                         </div>
 
                         <!-- Product Category field -->
@@ -276,7 +277,10 @@
                         <div class="col col-md-2 mb-4">
                             <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
                                 <div class="card-body">
-                                    <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
+                                    <?php
+                                    $imageURL = !empty($row['file_name']) ? '../uploads/' . $row['file_name'] : 'https://placehold.co/200';
+                                    ?>
+                                    <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px">
                                     <h5 class="card-title" style="font-weight:600; font-size:0.8rem;"><?php echo $row['name']; ?></h5>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
@@ -291,7 +295,7 @@
                                             data-name="<?php echo $row['name']; ?>"
                                             data-description="<?php echo $row['description']; ?>"
                                             data-price="<?php echo $row['price']; ?>"
-                                            data-img="<?php echo $row['img']; ?>"
+                                            data-file="<?php echo $row['file_name']; ?>"
                                             data-category="<?php echo $row['category']; ?>">
                                             อัปเดต
                                         </button>
