@@ -98,7 +98,24 @@ $row = $result->fetch_assoc();
             statusModal.show();
         }
     });
+
+    document.getElementById("editForm").addEventListener("submit", function(event) {
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        
+        if (newPassword.length < 6) {
+            alert("รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร");
+            event.preventDefault(); // ยกเลิกการส่งฟอร์มหากรหัสผ่านสั้นเกินไป
+            return;
+        }
+        
+        if (newPassword !== confirmPassword) {
+            alert("โปรดยืนยันรหัสผ่านให้ตรงกัน");
+            event.preventDefault();
+        }
+    });
 </script>
+
 
 <!-- Include Bootstrap Icons for eye icon -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">

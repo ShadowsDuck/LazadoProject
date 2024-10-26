@@ -8,7 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
-    if ($new_password === $confirm_password) {
+
+    if (strlen($new_password) < 6) {
+        $_SESSION['update_status'] = 'short_password';
+        header("Location: passEdit.php");
+        exit();
+    }
+    else if ($new_password === $confirm_password) {
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
         $update_sql = "UPDATE users SET password = '$hashed_password' WHERE id=$user_id";
 
