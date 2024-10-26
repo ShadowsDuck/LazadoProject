@@ -72,7 +72,6 @@ require('../connect.php');
     </div>
     <div class="row search-container">
         <?php
-
         $c = '';
         $keyword = '';
         $sql = "SELECT * FROM products ORDER BY created_at DESC";
@@ -102,50 +101,16 @@ require('../connect.php');
         $result = mysqli_query($conn, $sql);
         $numrows = $result->num_rows;
         ?>
-        <h4>ผลลัพธ์การค้นหา: <?php echo $numrows ?> รายการ
-        </h4>
+        <h4>ผลลัพธ์การค้นหา: <?php echo $numrows ?> รายการ </h4>
         <div class="container my-5">
             <div class="row">
                 <?php
-                $c = '';
-                $keyword = '';
-                $sql = "SELECT * FROM products";
-                if (isset($_GET["c"])) {
-                    $c = $_GET['c'];
-                }
-                if (isset($_GET["keyword"])) {
-                    $keyword = $_GET['keyword'];
-                    $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
-                    // print($keyword);
-                }
-
-                if ($c == 'keyboard') {
-                    $sql = 'SELECT * FROM products WHERE category=1';
-                } elseif ($c == 'mouse') {
-                    $sql = 'SELECT * FROM products WHERE category=2';
-                } elseif ($c == 'headset') {
-                    $sql = 'SELECT * FROM products WHERE category=3';
-                } elseif ($c == 'monitor') {
-                    $sql = 'SELECT * FROM products WHERE category=4';
-                } elseif ($c == 'chair') {
-                    $sql = 'SELECT * FROM products WHERE category=5';
-                } elseif ($c == 'streaming') {
-                    $sql = 'SELECT * FROM products WHERE category=6';
-                }
-
-                $result = mysqli_query($conn, $sql);
-                ?>
-                <?php
-                // Loop ข้อมูลแต่ละแถวในฐานข้อมูล
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                 ?>
                         <div class="col-lg-3 mb-4">
-                            <div class="card h-100"
-                                style="background-color: rgba(0, 0, 0, 0.02);">
-                                <div class="card-body"
-                                    style="cursor: pointer;"
-                                    onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
+                            <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                                <div class="card-body" style="cursor: pointer;" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
                                     <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
                                     <h5 class="card-title"><?php echo $row['name']; ?></h5>
                                 </div>
