@@ -6,7 +6,7 @@ if ($conn->connect_error) {
     die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
 }
 
-$sql = "SELECT cart.*, products.name, products.price FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id = '{$_SESSION['id']}'";
+$sql = "SELECT cart.*, products.name, products.price, products.img FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id = '{$_SESSION['id']}'";
 $result = $conn->query($sql);
 
 $cartItems = [];
@@ -26,8 +26,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
-        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -188,7 +187,6 @@ $conn->close();
 
             const minusButtons = document.querySelectorAll('.minus-btn');
             const plusButtons = document.querySelectorAll('.plus-btn');
-            // const removeButtons = document.querySelectorAll('.remove-btn');
 
             minusButtons.forEach(btn => {
                 btn.addEventListener('click', function(event) {
@@ -211,17 +209,6 @@ $conn->close();
                     calculateSummary();
                 });
             });
-
-            // removeButtons.forEach(btn => {
-            //     btn.addEventListener('click', function() {
-            //         if (confirm("แน่ใจหรือไม่ว่าต้องการลบสินค้านี้?")) {
-            //             const row = this.closest('.cart-item-box');
-            //             row.remove();
-            //             itemCheckboxes = document.querySelectorAll('.item-checkbox');
-            //             calculateSummary();
-            //         }
-            //     });
-            // });
 
             function updateTotalPrice(input) {
                 const row = input.closest('.cart-item-box');
@@ -265,24 +252,24 @@ $conn->close();
                     <div>รวม</div>
                     <div>ลบ</div>
                 </div>
-
+                
                 <?php foreach ($cartItems as $item): ?>
                     <div class="cart-item-box">
-                        <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['id']; ?>]" value="<?php echo $item['id']; ?>"></div>
+                        <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['product_id']; ?>]" value="<?php echo $item['product_id']; ?>"></div>
                         <div class="cart-item-details">
                             <div class="cart-item-image">
-                                <img src="<?php echo $item['image']; ?>" alt="Product Image">
+                                <img src="<?php echo $item['img']; ?>" alt="Product Image">
                             </div>
                             <div class="cart-item-info"><?php echo $item['name']; ?></div>
                         </div>
                         <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
                         <div class="cart-item-quantity">
                             <button class="minus-btn">-</button>
-                            <input type="text" name="quantities[<?php echo $item['id']; ?>]" value="<?php echo $item['qty'] ?>">
+                            <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['qty'] ?>" readonly>
                             <button class="plus-btn">+</button>
                         </div>
                         <div class="cart-item-total">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></div>
-                        <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['id']; ?>'">
+                        <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['product_id']; ?>'">
                             <i class="bi bi-trash"></i>
                         </div>
                     </div>

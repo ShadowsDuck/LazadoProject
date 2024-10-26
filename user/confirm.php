@@ -1,8 +1,40 @@
-<?php
-include("partials/header.php");
-require("../connect.php");
+<?php 
+include('partials/header.php');
+include("../connect.php");
 
-// กำหนดค่าที่อยู่จัดส่งเริ่มต้นถ้ายังไม่มีใน session
+if ($conn->connect_error) {
+    die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
+}
+
+// ตรวจสอบว่าสินค้าใดถูกเลือกจาก cart.php
+$selectedProducts = isset($_POST['products']) ? array_keys($_POST['products']) : [];
+
+if (empty($selectedProducts)) {
+    echo "<p>ไม่มีสินค้าที่เลือกในตะกร้า</p>";
+    exit;
+}
+
+// ดึงข้อมูลสินค้าเฉพาะที่ถูกเลือก
+$sql = "SELECT cart.*, products.name, products.price, products.img 
+        FROM cart 
+        INNER JOIN products ON cart.product_id = products.id 
+        WHERE cart.user_id = '{$_SESSION['id']}' 
+        AND cart.product_id IN (" . implode(',', array_map('intval', $selectedProducts)) . ")";
+$result = $conn->query($sql);
+
+$cartItems = [];
+$total_price = 0;
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $cartItems[] = $row;
+        $total_price += $row['price'] * $row['qty'];
+    }
+} else {
+    echo "<p>ไม่มีสินค้าที่เลือกในตะกร้า</p>";
+    exit;
+}
+
+// กำหนดค่าที่อยู่จัดส่งเริ่มต้น ถ้ายังไม่มีใน session
 if (!isset($_SESSION['shipping_address'])) {
     $_SESSION['shipping_address'] = [
         'fullname' => 'Anonymous',
@@ -11,87 +43,29 @@ if (!isset($_SESSION['shipping_address'])) {
     ];
 }
 
-// ตรวจสอบว่ามีการส่งข้อมูลจากฟอร์ม
-if (isset($_POST['selected_products']) && isset($_POST['quantities'])) {
-    $_SESSION['products'] = $_POST['selected_products'];
-    $_SESSION['quantities'] = $_POST['quantities'];
-
-    $products = $_SESSION['products'];
-    $quantities = $_SESSION['quantities'];
-
-    // สร้าง array สำหรับจัดเก็บข้อมูลสินค้า
-    $product_data = [];
-
-    // ดึงข้อมูลสินค้าจากฐานข้อมูล
-    if (!empty($products)) {
-        $ids_placeholder = implode(',', array_fill(0, count($products), '?'));
-        $stmt = $conn->prepare("SELECT id, name, price, img FROM products WHERE id IN ($ids_placeholder)");
-
-        // เตรียมข้อมูลให้ตรงกับ format ในการใช้ execute
-        $stmt->bind_param(str_repeat('i', count($products)), ...$products);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        // จัดเก็บข้อมูลสินค้า
-        while ($row = $result->fetch_assoc()) {
-            $product_data[$row['id']] = [
-                'name' => $row['name'],
-                'price' => $row['price'],
-                'image' => $row['img']
-            ];
-        }
-        $stmt->close();
-    }
-
-    // คำนวณยอดรวมสินค้าที่เลือก
-    $total_price = 0;
-    foreach ($products as $index => $product_id) {
-        if (isset($quantities[$index]) && is_numeric($quantities[$index]) && isset($product_data[$product_id])) {
-            $quantity = (int)$quantities[$index];
-            $item_total = $product_data[$product_id]['price'] * $quantity;
-            $total_price += $item_total;
-        }
-    }
-
-    // คำนวณค่าจัดส่งตามจำนวนรายการสินค้า
-    $unique_items_count = count(array_unique($products)); // นับจำนวนรายการสินค้าไม่ซ้ำ
-    $shipping_cost_per_order = $unique_items_count * 50; // 50 บาทต่อรายการ
-
-    // คำนวณยอดรวมทั้งหมด
-    $total_amount = $total_price + $shipping_cost_per_order;
-} else {
-    $total_price = 0;
-    $shipping_cost_per_order = 0;
-    $total_amount = 0;
-}
+// คำนวณค่าจัดส่ง
+$unique_items_count = count($cartItems);
+$shipping_cost_per_order = $unique_items_count * 50; // 50 บาทต่อรายการ
+$total_amount = $total_price + $shipping_cost_per_order;
 
 // ดึงข้อมูลชื่อผู้รับจาก session
-$shipping_address = $_SESSION['shipping_address'] ?? [
-    'fullname' => 'Anonymous',
-    'phone' => '',
-    'address' => '',
-];
-
-$products = isset($_SESSION['products']) ? $_SESSION['products'] : [];
-$quantities = isset($_SESSION['quantities']) ? $_SESSION['quantities'] : [];
+$shipping_address = $_SESSION['shipping_address'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart Summary</title>
+    <title>สรุปคำสั่งซื้อ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Helvetica Neue', sans-serif;
             background-color: #f8f9fa;
         }
-        .shipping-info,
-        .payment-methods,
-        .order-summary,
-        .cart-item-box {
+        .shipping-info, .payment-methods, .order-summary, .cart-item-box {
             background-color: white;
             padding: 20px;
             margin-bottom: 20px;
@@ -127,25 +101,24 @@ $quantities = isset($_SESSION['quantities']) ? $_SESSION['quantities'] : [];
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-4">
         <h5>สินค้าที่เลือก</h5>
-        <?php if (!empty($product_data)): ?>
-            <?php foreach ($products as $index => $product_id): ?>
-                <?php if (isset($product_data[$product_id])): ?>
-                    <div class="cart-item-box">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="<?php echo htmlspecialchars($product_data[$product_id]['image']); ?>" alt="Product">
-                                <div class="ms-3">
-                                    <p><?php echo htmlspecialchars($product_data[$product_id]['name']); ?></p>
-                                    <span class="text-muted">จำนวน: <?php echo htmlspecialchars($quantities[$index]); ?></span>
-                                </div>
+        <?php if (!empty($cartItems)): ?>
+            <?php foreach ($cartItems as $item): ?>
+                <div class="cart-item-box">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <img src="<?php echo htmlspecialchars($item['img']); ?>" alt="Product">
+                            <div class="ms-3">
+                                <p><?php echo htmlspecialchars($item['name']); ?></p>
+                                <span class="text-muted">จำนวน: <?php echo htmlspecialchars($item['qty']); ?></span>
                             </div>
-                            <span class="cart-item-price">฿<?php echo number_format($product_data[$product_id]['price'] * (int)$quantities[$index], 2); ?></span>
                         </div>
+                        <span class="cart-item-price">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></span>
                     </div>
-                <?php endif; ?>
+                </div>
             <?php endforeach; ?>
         <?php else: ?>
             <p>ไม่มีสินค้าที่เลือกในตะกร้า</p>
@@ -178,7 +151,7 @@ $quantities = isset($_SESSION['quantities']) ? $_SESSION['quantities'] : [];
             <hr>
             <p class="total">ยอดรวมทั้งสิ้น: ฿<?php echo number_format($total_amount, 2); ?></p>
         </div>
-        
+
         <form method="POST" action="confirm_payment.php">
             <input type="hidden" name="total_amount" value="<?php echo $total_amount; ?>">
             <input type="hidden" name="shipping_address" value="<?php echo htmlspecialchars($shipping_address['address']); ?>">
@@ -191,5 +164,6 @@ $quantities = isset($_SESSION['quantities']) ? $_SESSION['quantities'] : [];
 </html>
 
 <?php
-include("partials/footer.php");
+include('partials/footer.php');
+$conn->close();
 ?>
