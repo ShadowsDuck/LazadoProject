@@ -165,7 +165,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <div class="position-relative ms-4 mt-1">
                         <a href=<?php
                                 if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
-                                    echo 'kart.php';
+                                    echo 'cart.php';
                                 } else {
                                     echo $base_url . '/login/login.php';
                                 }
