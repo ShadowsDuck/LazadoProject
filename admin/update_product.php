@@ -10,19 +10,19 @@ $price = mysqli_real_escape_string($conn, $_POST['price']);
 $category = mysqli_real_escape_string($conn, $_POST['category']);
 
 // ตรวจสอบและจัดการอัปโหลดไฟล์ภาพ
-$img = '';
-if (!empty($_FILES['img']['name'])) {
+$fileName = '';
+if (!empty($_FILES['file']['name'])) {
     $target_dir = "../uploads/";
-    $img = basename($_FILES["img"]["name"]);
-    $target_file = $target_dir . $img;
-    move_uploaded_file($_FILES["img"]["tmp_name"], $target_file);
+    $fileName = basename($_FILES["file"]["name"]);
+    $target_file = $target_dir . $fileName;
+    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
 }
 
 // ตรวจสอบว่ามีภาพใหม่ไหม เพื่อกำหนด SQL ให้เหมาะสม
 $sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', category = '$category'";
 
-if ($img) {
-    $sql .= ", img = '$img'";
+if ($fileName) {
+    $sql .= ", file_name = '$fileName'";
 }
 
 $sql .= " WHERE id = '$id'";

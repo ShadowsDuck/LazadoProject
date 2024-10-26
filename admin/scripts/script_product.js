@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var productName = button.getAttribute('data-name');
         var productDescription = button.getAttribute('data-description');
         var productPrice = button.getAttribute('data-price');
-        var productImg = button.getAttribute('data-img');
+        var productImg = button.getAttribute('data-file');
         var productCategory = button.getAttribute('data-category');
 
         // เติมข้อมูลลงในฟอร์มในโมดาล
@@ -18,9 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.querySelector('input[name="name"]').value = productName;
         modal.querySelector('textarea[name="description"]').value = productDescription;
         modal.querySelector('input[name="price"]').value = productPrice;
-
-        // กำหนดค่าให้กับ input file (ไม่สามารถตั้งค่าได้โดยตรง)
-        // ดังนั้นไม่จำเป็นต้องทำอะไรกับ `img` ที่นี่เว้นแต่ต้องการแสดงภาพปัจจุบัน
+        // modal.querySelector('img[name="image"]').src = '../uploads/' + productImg;
+        modal.querySelector('#product_image_preview').src = '../uploads/' + productImg;
 
         // ตั้งค่าหมวดหมู่สินค้า
         var categorySelect = modal.querySelector('select[name="category"]');
