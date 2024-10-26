@@ -82,7 +82,6 @@
                                 <option value="4">จอมอนิเตอร์</option>
                                 <option value="5">เก้าอี้</option>
                                 <option value="6">สตรีมมิ่ง</option>
-                                <option value="7">อื่นๆ</option>
                             </select>
                         </div>
 
@@ -162,7 +161,6 @@
                                 <option value="4">จอมอนิเตอร์</option>
                                 <option value="5">เก้าอี้</option>
                                 <option value="6">สตรีมมิ่ง</option>
-                                <option value="7">อื่นๆ</option>
                             </select>
                         </div>
                     </div>
