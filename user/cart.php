@@ -273,7 +273,7 @@ ob_end_flush(); // ปิดการ buffer output
                             <button class="plus-btn">+</button>
                         </div>
                         <div class="cart-item-total">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></div>
-                        <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['product_id']; ?>'">
+                        <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['id']; ?>'">
                             <i class="bi bi-trash"></i>
                         </div>
                     </div>
