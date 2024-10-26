@@ -148,6 +148,7 @@ require('../connect.php');
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
                                     </div>
                                     <button class="btn addCart" 
+                                        onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
                                         data-bs-toggle="modal" 
                                         data-bs-target="#modalAddCart"
                                         data-id="<?php echo $row['id'] ?>">
