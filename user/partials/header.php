@@ -156,10 +156,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <div class="position-relative ms-4 mt-1">
                         <a href="kart.php"><i style="color:black;" class="bi bi-cart3 h4"></i></a>
 
-                        <?php if ($numrows > 0) { ?>
+                        <?php if(isset($_SESSION['id']) and isset($_SESSION['usertype'])){
+                            if ($numrows > 0) { ?>
                             <!-- ไอคอนจุดสีแดงที่ทับอยู่บนไอคอนตะกร้า -->
                             <i class="bi bi-dot" style="color:red; font-size:20px; position: absolute;"></i>
-                        <?php } ?>
+                        <?php } 
+                        }?>
                     </div>
                 </div>
             </div>
