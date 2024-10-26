@@ -1,12 +1,12 @@
 <?php
+
 session_start();
 include('../connect.php');
 
-// รับข้อมูลจากฟอร์ม
 $id = mysqli_real_escape_string($conn, $_POST['id']);
-$current_password = mysqli_real_escape_string($conn, $_POST['password']); // รหัสผ่านปัจจุบัน
-$new_password = mysqli_real_escape_string($conn, $_POST['new_password']); // รหัสผ่านใหม่
-$confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']); // ยืนยันรหัสผ่านใหม่
+$current_password = mysqli_real_escape_string($conn, $_POST['current_password']);
+$new_password = mysqli_real_escape_string($conn, $_POST['new_password']);
+$confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
 
 // ดึงแฮชรหัสผ่านที่เก็บไว้จากฐานข้อมูล
 $sql = "SELECT password FROM users WHERE id = '$id'";
@@ -28,24 +28,24 @@ if ($result && mysqli_num_rows($result) > 0) {
             $query = mysqli_query($conn, $update_sql);
 
             if ($query) {
-                $_SESSION['message'] = "Record updated successfully.";
+                $_SESSION['message'] = "อัปเดตรหัสผ่านสำเร็จแล้ว!";
                 header("Location: {$base_url}/admin/manage_admin.php");
             } else {
-                $_SESSION['message'] = "Error updating record: " . mysqli_error($conn);
+                $_SESSION['message'] = "อัปเดตรหัสผ่านไม่สำเร็จ!: " . mysqli_error($conn);
                 header("Location: {$base_url}/admin/manage_admin.php");
             }
         } else {
             // รหัสผ่านใหม่และยืนยันรหัสผ่านใหม่ไม่ตรงกัน
-            $_SESSION['message'] = "New password and confirm password do not match.";
+            $_SESSION['message'] = "รหัสผ่านใหม่และยืนยันรหัสผ่านไม่ตรงกัน";
             header("Location: {$base_url}/admin/manage_admin.php");
         }
     } else {
         // รหัสผ่านปัจจุบันไม่ถูกต้อง
-        $_SESSION['message'] = "Current password is incorrect.";
+        $_SESSION['message'] = "รหัสผ่านปัจจุบันไม่ถูกต้อง";
         header("Location: {$base_url}/admin/manage_admin.php");
     }
 } else {
-    $_SESSION['message'] = "Admin not found.";
+    $_SESSION['message'] = "ไม่พบผู้ดูแล";
     header("Location: {$base_url}/admin/manage_admin.php");
 }
 

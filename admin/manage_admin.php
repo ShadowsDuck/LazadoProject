@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <!-- Alert message should be displayed right here -->
     <?php if (!empty($_SESSION['message'])): ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show alert-overlay" role="alert">
             <?php echo $_SESSION['message']; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -254,25 +254,17 @@
 </div>
 
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
+    // เมื่อ modal เปลี่ยนรหัสผ่านถูกเปิดขึ้น
+    var changePasswordModal = document.getElementById('changePasswordAdminModal');
+    changePasswordModal.addEventListener('show.bs.modal', function(event) {
+        // ปุ่มที่ถูกกด (เปลี่ยนรหัสผ่าน)
+        var button = event.relatedTarget;
+        // ดึงค่า data-id
+        var userId = button.getAttribute('data-id');
+        // ตั้งค่า id ใน hidden input field
+        var userIdInput = changePasswordModal.querySelector('#change_password_admin_id');
+        userIdInput.value = userId;
+    });
 
     // ดึงปุ่มลบหลัก และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มลบใน Modal
     document.querySelectorAll('.delete_admin').forEach(button => {

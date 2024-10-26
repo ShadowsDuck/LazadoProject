@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // สร้าง SQL Query เพื่อเพิ่มข้อมูลสินค้า
-    $sql = "INSERT INTO products (name, description, price, category) VALUES ('$name', '$description', '$price', '$category')";
+    $sql = "INSERT INTO products (name, description, price, category, created_at) VALUES ('$name', '$description', '$price', '$category', NOW())";
 
     // ตรวจสอบว่าการเพิ่มข้อมูลสำเร็จหรือไม่
     if (mysqli_query($conn, $sql)) {

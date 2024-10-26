@@ -24,8 +24,11 @@
     crossorigin="anonymous"></script>
 
 <!-- Load custom script.js -->
-<script src="script.js"></script>
-<script src="search_admin.js"></script>
+<script src="scripts/script_admin.js"></script>
+<script src="scripts/script_product.js"></script>
+<script src="scripts/validation.js"></script>
+<script src="scripts/search_admin.js"></script>
+
 </body>
 
 </html>

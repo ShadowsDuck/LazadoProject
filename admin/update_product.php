@@ -29,10 +29,10 @@ $sql .= " WHERE id = '$id'";
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
-    $_SESSION['message'] = "Record updated successfully";
+    $_SESSION['message'] = "อัปเดตสินค้าสำเร็จแล้ว!";
     header("Location: {$base_url}/admin/manage_product.php");
 } else {
-    $_SESSION['message'] = "Error updating record: " . mysqli_error($conn);
+    $_SESSION['message'] = "อัปเดตสินค้าไม่สำเร็จ!" . mysqli_error($conn);
     header("Location: {$base_url}/admin/manage_product.php");
 }
 

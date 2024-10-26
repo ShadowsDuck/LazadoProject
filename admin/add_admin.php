@@ -12,13 +12,13 @@ $row = mysqli_num_rows($query);
 
 if ($row > 0) {
     // Username is already taken
-    $_SESSION['message'] = 'Username is already taken! Please use another.';
+    $_SESSION['message'] = 'ชื่อผู้ใช้งานนี้ถูกใช้ไปแล้ว กรุณาใช้ชื่ออื่น';
     header("Location: {$base_url}/admin/manage_admin.php");
     exit;
 }
 
 if (strlen($_POST['password']) < 6) {
-    $_SESSION['message'] = 'Password required 6 digits at least!';
+    $_SESSION['message'] = 'รหัสผ่านต้องประกอบด้วยตัวเลขอย่างน้อย 6 หลัก!';
     header("Location: {$base_url}/admin/manage_admin.php");
     exit;
 } else {
@@ -29,14 +29,14 @@ if (strlen($_POST['password']) < 6) {
         VALUES ('{$username}','{$hash}','{$fullname}','admin')") or die("query failed!");
 
         if ($query) {
-            $_SESSION['message'] = 'Add admin successful!';
+            $_SESSION['message'] = 'เพิ่มผู้ดูแลสำเร็จแล้ว!';
             header("Location:{$base_url}/admin/manage_admin.php");
         } else {
-            $_SESSION['message'] = 'Add admin failed!';
+            $_SESSION['message'] = 'เพิ่มผู้ดูแลไม่สำเร็จ!';
             header("Location:{$base_url}/admin/manage_admin.php");
         }
     } else {
-        $_SESSION['message'] = 'Input is required.';
+        $_SESSION['message'] = 'จำเป็นต้องมีข้อมูลครบทุกช่อง';
         header("Location:{$base_url}/admin/manage_admin.php");
     }
 }
