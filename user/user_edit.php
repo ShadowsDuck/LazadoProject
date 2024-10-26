@@ -100,7 +100,7 @@ include('partials/header.php');
             <a class="nav-link" href="user_edit.php?page=addressEdit" data-page="editpage/addressEdit.php">ที่อยู่สำหรับจัดส่ง</a>
             <a class="nav-link" href="user_edit.php?page=payEdit" data-page="editpage/payEdit.php">ช่องทางชำระเงิน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
-            <button type="button" class="btn btn-danger my-2 mx-3 py-2">ออกจากระบบ</button>
+            <a href="user_edit.php?logout=1" style="margin:0; padding:0;"><button type="button" class="btn btn-danger my-2 mx-3 py-2">ออกจากระบบ</button></a>
         </div>
 
         <!-- Main Content -->

@@ -1,4 +1,5 @@
 <?php
+include('partials/header.php');
 include("../connect.php");
 // // การเชื่อมต่อกับฐานข้อมูล
 // $host = 'localhost';
@@ -13,9 +14,8 @@ include("../connect.php");
 if ($conn->connect_error) {
     die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
 }
-
 // ดึงข้อมูลสินค้าในตะกร้าจากฐานข้อมูล
-$sql = "SELECT id, name, price, img AS image FROM products";
+$sql = "SELECT cart.*, products.name, products.price FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id = '{$_SESSION['id']}'";
 $result = $conn->query($sql);
 
 // เก็บข้อมูลสินค้าในอาเรย์
@@ -239,7 +239,7 @@ $conn->close();
                 const price = parseFloat(row.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
                 const totalPriceElement = row.querySelector('.cart-item-total');
                 const totalPrice = price * input.value;
-                totalPriceElement.textContent = `฿${totalPrice.toLocaleString()}`;
+                totalPriceElement.textContent = `฿${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             }
 
             function calculateSummary() {
@@ -257,18 +257,13 @@ $conn->close();
                 });
 
                 document.getElementById('selected-count').textContent = totalItems;
-                document.getElementById('total-price').textContent = `฿${totalPrice.toLocaleString()}`;
+                document.getElementById('total-price').textContent = `฿${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             }
         };
     </script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-        <div class="container mt-4">
-            <a class="navbar-brand fw-bold fs-3" href="index.php">Lazado</a>
-        </div>
-    </nav>
 
     <div class="container mt-5 mb-5">
         <h2 class="text-center">ตะกร้าสินค้า</h2>
@@ -277,7 +272,7 @@ $conn->close();
                 <div class="header-row">
                     <div><input type="checkbox" id="select-all"></div>
                     <div>สินค้า</div>
-                    <div>ราคา</div>
+                    <div>ราคา/ชิ้น</div>
                     <div>จำนวน</div>
                     <div>รวม</div>
                     <div>ลบ</div>
@@ -295,17 +290,17 @@ $conn->close();
                         <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
                         <div class="cart-item-quantity">
                             <button class="minus-btn">-</button>
-                            <input type="text" name="quantities[<?php echo $item['id']; ?>]" value="1">
+                            <input type="text" name="quantities[<?php echo $item['id']; ?>]" value="<?php echo $item['qty'] ?>">
                             <button class="plus-btn">+</button>
                         </div>
-                        <div class="cart-item-total">฿<?php echo number_format($item['price'], 2); ?></div>
+                        <div class="cart-item-total">฿<?php echo number_format($item['price']*$item['qty'], 2); ?></div>
                         <div class="remove-btn"><i class="bi bi-trash"></i></div>
                     </div>
 
                 <?php endforeach; ?>
 
                 <div class="total-section">
-                    <span>จำนวนที่เลือก: <span id="selected-count">0</span> ชิ้น</span>
+                    <span>จำนวนที่เลือก: <span id="selected-count">0</span>ชิ้น</span>
                     <span>ยอดรวม: <span id="total-price">฿0.00</span></span>
                     <button type="submit" class="checkout-btn">สั่งซื้อ</button>
                 </div>
@@ -313,11 +308,6 @@ $conn->close();
         </div>
     </div>
 
-    <footer class="text-center mt-5">
-        <div class="container">
-            <p>&copy; 2024 Lazado. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
-
+<?php include('partials/footer.php'); ?>
 </html>
