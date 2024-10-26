@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // อัพเดตข้อมูลในฐานข้อมูล
     if (mysqli_query($conn, $update_sql)) {
+        $_SESSION['update_status_info'] = 'success';
         header("Location: {$base_url}/user/user_edit.php?page=infoEdit");
         exit;
     } else {

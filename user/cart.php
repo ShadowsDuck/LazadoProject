@@ -30,6 +30,13 @@ ob_end_flush(); // ปิดการ buffer output
     <title>Cart Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <styl>
+        <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -269,7 +276,7 @@ ob_end_flush(); // ปิดการ buffer output
                         <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
                         <div class="cart-item-quantity">
                             <button class="minus-btn">-</button>
-                            <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['qty'] ?>" readonly>
+                            <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['qty']; ?>" readonly>
                             <button class="plus-btn">+</button>
                         </div>
                         <div class="cart-item-total">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></div>

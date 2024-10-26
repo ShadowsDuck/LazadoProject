@@ -2,8 +2,15 @@
 ob_start(); // เริ่มการ buffer output
 
 include('partials/header.php');
-$update_status = $_SESSION['update_status'] ?? '';
+$update_status = $_SESSION['update_status'] ?? '';//เอาไว้ใช้กับmodalกดบันทึกรหัส
 unset($_SESSION['update_status']);
+
+$update_status_info = $_SESSION['update_status_info'] ?? ''; //เอาไว้ใช้กับmodalกดบันทึกข้อมูล
+unset($_SESSION['update_status_info']);
+
+$update_status_address = $_SESSION['update_status_address'] ?? ''; //เอาไว้ใช้กับmodalกดบันทึกที่อยู่จัดส่ง
+unset($_SESSION['update_status_address']);
+
 
 // ตรวจสอบว่ามีการเข้าสู่ระบบหรือไม่
 if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
@@ -13,6 +20,7 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
 
 ob_end_flush(); // ปิดการ buffer output
 ?>
+
 
 <style>
     body {
@@ -106,10 +114,10 @@ ob_end_flush(); // ปิดการ buffer output
 <div class="container mt-5">
     <div class="row ">
         <!-- Sidebar -->
-        <div class="col-sm-3 sidebar vh-auto" id="sidebar">
+        <div class="col-sm-3 sidebar vh-80px" id="sidebar">
             <a class="nav-link" href="user_edit.php?page=infoEdit" data-page="editpage/infoEdit.php">ข้อมูลส่วนตัว</a>
             <a class="nav-link" href="user_edit.php?page=addressEdit" data-page="editpage/addressEdit.php">ที่อยู่สำหรับจัดส่ง</a>
-            <a class="nav-link" href="user_edit.php?page=payEdit" data-page="editpage/payEdit.php">ช่องทางชำระเงิน</a>
+            <a class="nav-link" href="user_edit.php?page=orderStatusEdit" data-page="editpage/orderStatusEdit.php">สถานะสินค้าของฉัน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
             <a href="user_edit.php?logout=1" style="margin:0; padding:0;"><button type="button" class="btn btn-danger my-2 mx-3 py-2">ออกจากระบบ</button></a>
         </div>
@@ -126,6 +134,45 @@ ob_end_flush(); // ปิดการ buffer output
 
     </div>
 </div>
+
+
+<!--  Modal บันทึกข้อมูล-->
+<div class="modal fade" id="updateInfoModal" tabindex="-1" aria-labelledby="updateInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateInfoModalLabel">อัพเดตข้อมูล</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>ข้อมูลของคุณถูกบันทึกเรียบร้อย !</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Modal บันทึก address-->
+<div class="modal fade" id="updateAddressModal" tabindex="-1" aria-labelledby="updateAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateInfoModalLabel">อัพเดตข้อมูลที่อยู่จัดส่ง</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>ที่อยู่จัดส่งของคุณถูกบันทึกเรียบร้อย !</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 <!-- Modal สำหรับการเปลี่ยนรหัสผ่าน -->
@@ -205,13 +252,29 @@ ob_end_flush(); // ปิดการ buffer output
 <!-- JavaScript เพื่อแสดง modal -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const updateStatus = "<?php echo $update_status; ?>";
-        console.log(updateStatus);
 
+        const updateStatus = "<?php echo $update_status; ?>";//ใช้กับรหัส
+        console.log(updateStatus);
         if (updateStatus) {
-            const passwordUpdateModal = new bootstrap.Modal(document.getElementById('passwordUpdateModal'));
+            const passwordUpdateModal = new bootstrap.Modal(document.getElementById('passwordUpdateModal')); //ใช้กับรหัส
             passwordUpdateModal.show();
         }
+
+
+        const updateStatus_info = "<?php echo $update_status_info; ?>";//ใช้กับข้อมูลทั่วไป
+        console.log(updateStatus_info);
+        if (updateStatus_info) {
+            const updateInfoModal = new bootstrap.Modal(document.getElementById('updateInfoModal')); 
+            updateInfoModal.show();
+        }
+
+        const updateStatus_address = "<?php echo $update_status_address; ?>";//ใช้กับที่อยู่
+        console.log(updateStatus_address);
+        if (updateStatus_address) {
+            const updateaddressModal = new bootstrap.Modal(document.getElementById('updateAddressModal')); 
+            updateaddressModal.show();
+        }
+        
     });
 </script>
 
