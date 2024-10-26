@@ -26,9 +26,9 @@ $result = $stmt->get_result();
 
 // กำหนดค่าเริ่มต้นของสถานะให้เป็น 0
 $statusCounts = [
-    'ถูกยกเลิก' => 0,
-    'กำลังจัดส่ง' => 0,
-    'สำเร็จ' => 0,
+    '0' => 0,
+    '1' => 0,
+    '2' => 0,
 ];
 
 while ($row = $result->fetch_assoc()) {
@@ -39,7 +39,7 @@ while ($row = $result->fetch_assoc()) {
 
 <div class="container mt-4">
     <div class="card shadow-sm border-0">
-        <div class="card-header text-white" style="background-color: #ff6666; color: #0000;">
+        <div class="card-header text-black" style="background-color: #dc3545;">
             สถานะคำสั่งซื้อของผู้ใช้ ID: <?php echo $user_id; ?> คุณ <?php echo htmlspecialchars($fullname); ?>
         </div>
         <div class="card-body">
@@ -50,7 +50,7 @@ while ($row = $result->fetch_assoc()) {
                         <div class="card-body text-center">
                             <h5 class="card-title">ถูกยกเลิก</h5>
                             <p class="card-text">
-                                <?php echo $statusCounts['ถูกยกเลิก']; ?> ชิ้น
+                                <?php echo $statusCounts['0']; ?> ชิ้น
                             </p>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ while ($row = $result->fetch_assoc()) {
                         <div class="card-body text-center">
                             <h5 class="card-title">กำลังจัดส่ง</h5>
                             <p class="card-text">
-                                <?php echo $statusCounts['กำลังจัดส่ง']; ?> ชิ้น
+                                <?php echo $statusCounts['1']; ?> ชิ้น
                             </p>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ while ($row = $result->fetch_assoc()) {
                         <div class="card-body text-center">
                             <h5 class="card-title">สำเร็จ</h5>
                             <p class="card-text">
-                                <?php echo $statusCounts['สำเร็จ']; ?> ชิ้น
+                                <?php echo $statusCounts['2']; ?> ชิ้น
                             </p>
                         </div>
                     </div>

@@ -36,7 +36,7 @@ $row = $result->fetch_assoc();
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary me-2">บันทึก</button>
+                <button type="submit" class="btn btn-danger me-2">บันทึก</button>
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='user_edit.php?page=infoEdit'">ยกเลิก</button>
             </div>
         </form>
