@@ -17,7 +17,8 @@ if (isset($_SESSION["id"]) and isset($_SESSION["usertype"])) {
 
         $sql = "INSERT INTO cart (user_id, product_id, qty) VALUES ('{$user_id}', '{$product_id}', '{$qty}')";
         mysqli_query($conn, $sql);
-        echo "<script>window.history.back();</script>";     // turn back page
+        // echo "<script>window.history.back();</script>";     // turn back page
+        header("location:{$_SESSION['currentpage']}");
     }
 } else {
     die(header("location:{$base_url}/login/login.php"));

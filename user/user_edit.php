@@ -2,6 +2,10 @@
 include('partials/header.php');
 $update_status = $_SESSION['update_status'] ?? '';
 unset($_SESSION['update_status']);
+
+if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
+    die('การเชื่อมต่อมึงดูงงๆนะ มึงคิดจะทำอะไร');
+}
 ?>
 
 
