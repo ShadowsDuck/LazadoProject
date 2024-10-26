@@ -1,9 +1,7 @@
-<?php
-$update_status = $_SESSION['update_status'] ?? null; //ใช้อัพเดท สเตตุ๊ด ในการเปิด modal 
-unset($_SESSION['update_status']);
-
-
-session_start();
+<?php 
+session_start(); // เปิด session ก่อนการใช้งาน $_SESSION
+$update_status = $_SESSION['update_status'] ?? null; // ใช้อัพเดทสเตตัสในการเปิด modal
+unset($_SESSION['update_status']); // ลบสถานะหลังจากดึงค่าแล้ว
 
 require("../../connect.php");
 $user_id = $_SESSION['id'];
@@ -47,16 +45,14 @@ $row = $result->fetch_assoc();
     </div>
 </div>
 
-
-
 <!-- Modal โครงสร้าง -->
-<div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+<div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="statusModalLabel">
                     <?php
-                    if ($status == 'success') {
+                    if ($update_status == 'success') {
                         echo "สำเร็จ";
                     } else {
                         echo "เกิดข้อผิดพลาด";
@@ -66,12 +62,12 @@ $row = $result->fetch_assoc();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <i class="bi <?php echo $status == 'success' ? 'bi-check-circle-fill text-success' : 'bi-exclamation-triangle-fill text-danger'; ?>" style="font-size: 3rem;"></i>
+                <i class="bi <?php echo $update_status == 'success' ? 'bi-check-circle-fill text-success' : 'bi-exclamation-triangle-fill text-danger'; ?>" style="font-size: 3rem;"></i>
                 <p class="mt-3">
                     <?php
-                    if ($status == 'success') {
+                    if ($update_status == 'success') {
                         echo "เปลี่ยนรหัสผ่านสำเร็จ!";
-                    } elseif ($status == 'confirm_fail') {
+                    } elseif ($update_status == 'mismatch') {
                         echo "โปรดยืนยันรหัสผ่านให้ตรงกัน";
                     } else {
                         echo "เกิดข้อผิดพลาดในการเปลี่ยนรหัสผ่าน";
@@ -86,9 +82,7 @@ $row = $result->fetch_assoc();
     </div>
 </div>
 
-
 <script>
-    //ยันันรหัสส
     function togglePasswordVisibility(inputId, icon) {
         const input = document.getElementById(inputId);
         const isPassword = input.type === 'password';
@@ -96,10 +90,10 @@ $row = $result->fetch_assoc();
         icon.innerHTML = isPassword ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
     }
 
- // เปิด Modal ตามสถานะ
- document.addEventListener('DOMContentLoaded', function() {
-        const status = "<?php echo $status; ?>";
-        if (status) {
+    // เปิด Modal ตามสถานะ
+    document.addEventListener("DOMContentLoaded", function() {
+        const updateStatus = "<?php echo $update_status; ?>";
+        if (updateStatus) {
             const statusModal = new bootstrap.Modal(document.getElementById('statusModal'));
             statusModal.show();
         }
@@ -107,9 +101,6 @@ $row = $result->fetch_assoc();
 </script>
 
 <!-- Include Bootstrap Icons for eye icon -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
-<!-- Include Bootstrap Icons and CSS/JS for modal -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
