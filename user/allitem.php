@@ -72,33 +72,31 @@ require('../connect.php');
     </div>
     <div class="row search-container">
         <?php
+
         $c = '';
         $keyword = '';
-        $sql = "SELECT * FROM products";
+        $sql = "SELECT * FROM products ORDER BY created_at DESC";
 
         if (isset($_GET["c"])) {
             $c = $_GET['c'];
         }
         if (isset($_GET["keyword"])) {
             $keyword = $_GET['keyword'];
-            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
-            // print($keyword);
+            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY created_at DESC";
         }
 
         if ($c == 'keyboard') {
-            $sql = 'SELECT * FROM products WHERE category=1';
+            $sql = "SELECT * FROM products WHERE category=1 ORDER BY created_at DESC";
         } elseif ($c == 'mouse') {
-            $sql = 'SELECT * FROM products WHERE category=2';
+            $sql = "SELECT * FROM products WHERE category=2 ORDER BY created_at DESC";
         } elseif ($c == 'headset') {
-            $sql = 'SELECT * FROM products WHERE category=3';
+            $sql = "SELECT * FROM products WHERE category=3 ORDER BY created_at DESC";
         } elseif ($c == 'monitor') {
-            $sql = 'SELECT * FROM products WHERE category=4';
+            $sql = "SELECT * FROM products WHERE category=4 ORDER BY created_at DESC";
         } elseif ($c == 'chair') {
-            $sql = 'SELECT * FROM products WHERE category=5';
+            $sql = "SELECT * FROM products WHERE category=5 ORDER BY created_at DESC";
         } elseif ($c == 'streaming') {
-            $sql = 'SELECT * FROM products WHERE category=6';
-        } else {
-            // $sql = "SELECT * FROM products";
+            $sql = "SELECT * FROM products WHERE category=6 ORDER BY created_at DESC";
         }
 
         $result = mysqli_query($conn, $sql);
@@ -141,11 +139,11 @@ require('../connect.php');
                 // Loop ข้อมูลแต่ละแถวในฐานข้อมูล
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        ?>
+                ?>
                         <div class="col-lg-3 mb-4">
                             <div class="card h-100"
                                 style="background-color: rgba(0, 0, 0, 0.02);">
-                                <div class="card-body" 
+                                <div class="card-body"
                                     style="cursor: pointer;"
                                     onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
                                     <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
@@ -159,7 +157,7 @@ require('../connect.php');
                                 </div>
                             </div>
                         </div>
-                        <?php
+                <?php
                     }
                 } else {
                     echo "ไม่พบข้อมูล";
@@ -173,7 +171,7 @@ require('../connect.php');
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+</script>
 <!-- <script src="http://localhost/LazadoProject/user/script/search_result.js"></script>
 <script src="http://localhost/LazadoProject/user/script/search.js"></script> -->
 
