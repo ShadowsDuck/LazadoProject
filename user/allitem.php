@@ -107,22 +107,24 @@ require('../connect.php');
                 <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                ?>
+                        ?>
                         <div class="col col-md-2 mb-4">
                             <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
-                                <div class="card-body" style="cursor: pointer;" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
+                                <div class="card-body" style="cursor: pointer;"
+                                    onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
                                     <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
-                                    <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;"><?php echo $row['name']; ?></h4>
+                                    <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
+                                        <?php echo $row['name']; ?></h4>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 20px;">
+                                    <div class="card-text text-danger" style="font-weight: bold; font-size: 18px;">
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
                                     </div>
                                     <button class="btn"><i style="color:red;" class="bi bi-cart3 h4"></i></button>
                                 </div>
                             </div>
                         </div>
-                <?php
+                        <?php
                     }
                 } else {
                     echo "ไม่พบข้อมูล";
@@ -136,7 +138,7 @@ require('../connect.php');
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-</script>
+    </script>
 <!-- <script src="http://localhost/LazadoProject/user/script/search_result.js"></script>
 <script src="http://localhost/LazadoProject/user/script/search.js"></script> -->
 
