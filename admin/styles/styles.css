@@ -39,6 +39,18 @@ footer {
     font-weight: bold;
 }
 
+.category-item {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px;
+}
+
+.category-item.active {
+    border: 2px solid white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .carousel-item img {
     width: 100%;
     height: 340px;
@@ -140,4 +152,25 @@ textarea {
             }
         }
     }
+}
+
+.alert-overlay {
+    position: fixed;
+    top: 4rem;
+    /* ขยับลงมาจากด้านบน 4rem */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    /* ให้แสดงอยู่ด้านบน */
+    width: 90%;
+    /* หรือปรับขนาดตามต้องการ */
+    max-width: 600px;
+    /* ป้องกันไม่ให้ Alert ใหญ่เกินไป */
+}
+
+.alert-container {
+    position: absolute;
+    top: 0;
+    margin: auto;
+    z-index: 9999;
 }

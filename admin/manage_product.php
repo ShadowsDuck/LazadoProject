@@ -1,21 +1,16 @@
 <?php include('partials/header.php'); ?>
 
-<style>
-    .category-item {
-        cursor: pointer;
-        border: 2px solid transparent;
-        border-radius: 8px;
-    }
-
-    .category-item.active {
-        border: 2px solid white;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-</style>
-
 <!-- Body -->
 <div class="container-sm mt-5">
+    <!-- Alert message should be displayed right here -->
+    <?php if (!empty($_SESSION['message'])): ?>
+        <div class="alert alert-warning alert-dismissible fade show alert-overlay" role="alert">
+            <?php echo $_SESSION['message']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>
+
     <h1>จัดการสินค้า</h1>
 
     <!-- Button trigger modal -->
@@ -213,28 +208,28 @@
         <?php
         $c = '';
         $keyword = '';
-        $sql = "SELECT * FROM products";
+        $sql = "SELECT * FROM products ORDER BY created_at DESC";
 
         if (isset($_GET["c"])) {
             $c = $_GET['c'];
         }
         if (isset($_GET["keyword"])) {
             $keyword = $_GET['keyword'];
-            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
+            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY created_at DESC";
         }
 
         if ($c == 'keyboard') {
-            $sql = 'SELECT * FROM products WHERE category=1';
+            $sql = "SELECT * FROM products WHERE category=1 ORDER BY created_at DESC";
         } elseif ($c == 'mouse') {
-            $sql = 'SELECT * FROM products WHERE category=2';
+            $sql = "SELECT * FROM products WHERE category=2 ORDER BY created_at DESC";
         } elseif ($c == 'headset') {
-            $sql = 'SELECT * FROM products WHERE category=3';
+            $sql = "SELECT * FROM products WHERE category=3 ORDER BY created_at DESC";
         } elseif ($c == 'monitor') {
-            $sql = 'SELECT * FROM products WHERE category=4';
+            $sql = "SELECT * FROM products WHERE category=4 ORDER BY created_at DESC";
         } elseif ($c == 'chair') {
-            $sql = 'SELECT * FROM products WHERE category=5';
+            $sql = "SELECT * FROM products WHERE category=5 ORDER BY created_at DESC";
         } elseif ($c == 'streaming') {
-            $sql = 'SELECT * FROM products WHERE category=6';
+            $sql = "SELECT * FROM products WHERE category=6 ORDER BY created_at DESC";
         }
 
         $result = mysqli_query($conn, $sql);
@@ -244,35 +239,6 @@
         <div class="container my-5">
             <div class="row">
                 <?php
-                $c = '';
-                $keyword = '';
-                $sql = "SELECT * FROM products";
-                if (isset($_GET["c"])) {
-                    $c = $_GET['c'];
-                }
-                if (isset($_GET["keyword"])) {
-                    $keyword = $_GET['keyword'];
-                    $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
-                }
-
-                if ($c == 'keyboard') {
-                    $sql = 'SELECT * FROM products WHERE category=1';
-                } elseif ($c == 'mouse') {
-                    $sql = 'SELECT * FROM products WHERE category=2';
-                } elseif ($c == 'headset') {
-                    $sql = 'SELECT * FROM products WHERE category=3';
-                } elseif ($c == 'monitor') {
-                    $sql = 'SELECT * FROM products WHERE category=4';
-                } elseif ($c == 'chair') {
-                    $sql = 'SELECT * FROM products WHERE category=5';
-                } elseif ($c == 'streaming') {
-                    $sql = 'SELECT * FROM products WHERE category=6';
-                }
-
-                $result = mysqli_query($conn, $sql);
-                ?>
-                <?php
-                // Loop ข้อมูลแต่ละแถวในฐานข้อมูล
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                 ?>
@@ -310,76 +276,5 @@
         </div>
     </div>
 </section>
-
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-</script>
-<!-- <script src="search_admin.js"></script> -->
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var updateProductModal = document.getElementById('updateProductDetailModal');
-
-        updateProductModal.addEventListener('show.bs.modal', function(event) {
-            var button = event.relatedTarget;
-
-            // ดึงข้อมูลจากปุ่ม
-            var productId = button.getAttribute('data-id');
-            var productName = button.getAttribute('data-name');
-            var productDescription = button.getAttribute('data-description');
-            var productPrice = button.getAttribute('data-price');
-            var productImg = button.getAttribute('data-img');
-            var productCategory = button.getAttribute('data-category');
-
-            // เติมข้อมูลลงในฟอร์มในโมดาล
-            var modal = this;
-            modal.querySelector('#order_id').value = productId;
-            modal.querySelector('input[name="name"]').value = productName;
-            modal.querySelector('textarea[name="description"]').value = productDescription;
-            modal.querySelector('input[name="price"]').value = productPrice;
-
-            // กำหนดค่าให้กับ input file (ไม่สามารถตั้งค่าได้โดยตรง)
-            // ดังนั้นไม่จำเป็นต้องทำอะไรกับ `img` ที่นี่เว้นแต่ต้องการแสดงภาพปัจจุบัน
-
-            // ตั้งค่าหมวดหมู่สินค้า
-            var categorySelect = modal.querySelector('select[name="category"]');
-            categorySelect.value = productCategory;
-        });
-    });
-
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var addProductModal = document.getElementById('addProductModal');
-
-        addProductModal.addEventListener('hidden.bs.modal', function() {
-            // Reset the form fields within the Add Product modal
-            var form = addProductModal.querySelector('form');
-            form.reset();
-            form.classList.remove('was-validated'); // Remove validation classes
-        });
-    });
-</script>
 
 <?php include('partials/footer.php'); ?>

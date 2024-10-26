@@ -12,10 +12,10 @@ $sql = "UPDATE users SET username = '$username', fullname = '$fullname' WHERE id
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
-    $_SESSION['message'] = "Record updated successfully";
+    $_SESSION['message'] = "อัปเดตผู้ดูแลสำเร็จแล้ว!";
     header("Location: {$base_url}/admin/manage_admin.php");
 } else {
-    $_SESSION['message'] = "Error updating record: " . mysqli_error($conn);
+    $_SESSION['message'] = "อัปเดตผู้ดูแลไม่สำเร็จ!: " . mysqli_error($conn);
     header("Location: {$base_url}/admin/manage_admin.php");
 }
 

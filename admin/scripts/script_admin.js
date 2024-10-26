@@ -39,21 +39,21 @@ function validateChangePassword() {
 
     // Checking if current password is empty
     if (!currentPassword) {
-        passwordError.textContent = 'Current password is required.';
+        passwordError.textContent = 'จำเป็นต้องใส่รหัสผ่านปัจจุบัน';
         passwordError.style.display = 'block';
         return;
     }
 
     // Checking if new password is at least 6 characters long
     if (newPassword.length < 6) {
-        passwordError.textContent = 'New password must be at least 6 characters long.';
+        passwordError.textContent = 'รหัสผ่านใหม่ต้องมีความยาวอย่างน้อย 6 ตัวอักษร';
         passwordError.style.display = 'block';
         return;
     }
 
     // Checking if new password and confirm password match
     if (newPassword !== confirmPassword) {
-        passwordError.textContent = 'Passwords do not match.';
+        passwordError.textContent = 'รหัสผ่านไม่ตรงกัน';
         passwordError.style.display = 'block';
         return;
     }
@@ -67,7 +67,7 @@ currentPasswordInput.addEventListener('input', validateChangePassword);
 newPasswordInput.addEventListener('input', validateChangePassword);
 confirmPasswordInput.addEventListener('input', validateChangePassword);
 
-// Password visibility toggling
+// เปิด-ปิด การดูรหัสผ่าน
 function toggleVisibility(toggleElement, inputElement) {
     toggleElement.addEventListener('click', function () {
         const type = inputElement.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -81,43 +81,35 @@ toggleVisibility(document.querySelector('#toggleCurrentPassword'), currentPasswo
 toggleVisibility(document.querySelector('#toggleNewPassword'), newPasswordInput);
 toggleVisibility(document.querySelector('#toggleConfirmPassword'), confirmPasswordInput);
 
-// "Add Admin" Modal Setup
+// เมื่อ Modal Admin ถูกปิดค่าทุกอย่างใน Modal จะ Reset
 var addAdminModal = document.getElementById('addAdminModal');
 addAdminModal.addEventListener('hidden.bs.modal', function () {
-    // Reset the form when the modal is closed
     addAdminModal.querySelector('form').reset();
 
-    // Reset toggle eye to default
     const adminPasswordInput = document.getElementById('admin_password');
     const toggleAdminPassword = document.querySelector('#toggleAdminPassword');
-    adminPasswordInput.setAttribute('type', 'password'); // Reset input type
-    toggleAdminPassword.classList.remove('fa-eye-slash'); // Reset icon
+    adminPasswordInput.setAttribute('type', 'password');
+    toggleAdminPassword.classList.remove('fa-eye-slash');
 });
 
-// "Change Password" Modal Setup
+// เมื่อ Modal Change Password ถูกปิดค่าทุกอย่างใน Modal จะ Reset
 var changePasswordAdminModal = document.getElementById('changePasswordAdminModal');
 
-// เมื่อ modal ถูกปิด
 changePasswordAdminModal.addEventListener('hidden.bs.modal', function () {
-    // Reset the form when the modal is closed
     changePasswordAdminModal.querySelector('form').reset();
 
-    // Reset password visibility toggle to default
     const currentPasswordInput = document.getElementById('current_password');
     const newPasswordInput = document.getElementById('new_password');
     const confirmPasswordInput = document.getElementById('confirm_password');
 
-    // Reset input types
     currentPasswordInput.setAttribute('type', 'password');
     newPasswordInput.setAttribute('type', 'password');
     confirmPasswordInput.setAttribute('type', 'password');
 
-    // Reset icons
     document.querySelector('#toggleCurrentPassword').classList.remove('fa-eye-slash');
     document.querySelector('#toggleNewPassword').classList.remove('fa-eye-slash');
     document.querySelector('#toggleConfirmPassword').classList.remove('fa-eye-slash');
 
-    // Optionally, reset password error message and button state
-    passwordError.style.display = 'none'; // Hide error message
-    changePasswordButton.disabled = true; // Disable the button
+    passwordError.style.display = 'none';
+    changePasswordButton.disabled = true;
 });
