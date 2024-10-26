@@ -147,9 +147,9 @@ require('../connect.php');
                                     <div class="card-text text-danger" style="font-weight: bold; font-size: 17px;">
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
                                     </div>
-                                    <button class="btn addCart" 
+                                    <button class="btn addCart"
                                         onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                                        data-bs-toggle="modal" 
+                                        data-bs-toggle="modal"
                                         data-bs-target="#modalAddCart"
                                         data-id="<?php echo $row['id'] ?>">
                                         <i style="color:red;" class="bi bi-cart3 h4"></i>
@@ -174,7 +174,6 @@ require('../connect.php');
 </script>
 
 <script>
-
     // ดึงปุ่มลบหลัก และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มลบใน Modal
     document.querySelectorAll('.addCart').forEach(button => {
         button.addEventListener('click', function(event) {

@@ -58,7 +58,7 @@ $row = mysqli_fetch_assoc($result);
         var currentValue = parseInt(quantityInput.value);
         quantityInput.value = currentValue + 1;
         // อัปเดตปริมาณที่ซ่อนในฟอร์ม
-        document.getElementsByName("quantities[]")[0].value = quantityInput.value; 
+        document.getElementsByName("quantities[]")[0].value = quantityInput.value;
     }
 
     function decreaseQuantity() {
@@ -67,7 +67,7 @@ $row = mysqli_fetch_assoc($result);
         if (currentValue > 1) {
             quantityInput.value = currentValue - 1;
             // อัปเดตปริมาณที่ซ่อนในฟอร์ม
-            document.getElementsByName("quantities[]")[0].value = quantityInput.value; 
+            document.getElementsByName("quantities[]")[0].value = quantityInput.value;
         }
     }
 
