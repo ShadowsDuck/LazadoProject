@@ -28,13 +28,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// สคริปต์สำหรับรีเซ็ตฟอร์มใน "Add Product" modal เมื่อปิดหน้าต่าง
 document.addEventListener('DOMContentLoaded', function () {
     var addProductModal = document.getElementById('addProductModal');
 
     addProductModal.addEventListener('hidden.bs.modal', function () {
-        // Reset the form fields within the Add Product modal
+        // รีเซ็ตฟิลด์ในฟอร์มของ Add Product modal
         var form = addProductModal.querySelector('form');
         form.reset();
-        form.classList.remove('was-validated'); // Remove validation classes
+        form.classList.remove('was-validated'); // ลบคลาสการตรวจสอบข้อมูล
+    });
+});
+
+// สคริปต์สำหรับตั้งค่าลิงก์การลบสินค้าใน Modal ยืนยันการลบเมื่อคลิกปุ่มลบสินค้า
+document.querySelectorAll('.delete_product').forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // ดึง id ของสินค้าจากปุ่มที่คลิก
+        const productId = button.getAttribute('data-id');
+
+        // ตั้งค่า href สำหรับปุ่มลบใน Modal
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        confirmDeleteBtn.href = `del_product.php?id=${productId}`;
     });
 });

@@ -23,8 +23,8 @@
                         </div>
                         <h4 class="card-title">Write To Us</h4>
                         <p>Fill out our form and we will contact you within 24 hours.</p>
-                        <p><strong>Emails: customer@exclusive.com</strong></p>
-                        <p><strong>Emails: support@exclusive.com</strong></p>
+                        <p><strong>Emails: customer@lazado.com</strong></p>
+                        <p><strong>Emails: support@lazado.com</strong></p>
                     </div>
                 </div>
             </div>

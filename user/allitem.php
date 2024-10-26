@@ -108,11 +108,11 @@ require('../connect.php');
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                 ?>
-                        <div class="col-lg-3 mb-4">
+                        <div class="col col-md-2 mb-4">
                             <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
                                 <div class="card-body" style="cursor: pointer;" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
                                     <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
-                                    <h5 class="card-title"><?php echo $row['name']; ?></h5>
+                                    <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;"><?php echo $row['name']; ?></h4>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <div class="card-text text-danger" style="font-weight: bold; font-size: 20px;">
