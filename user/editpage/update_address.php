@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // อัพเดตข้อมูลในฐานข้อมูล
     if (mysqli_query($conn, $update_sql)) {
-        header("Location:{$base_url}/user/user_edit.php?page=addressEdit");
+        header("Location:{$base_url}/user/user_edit.php?page=infoEdit");
         exit; 
     } else {
         echo "Error updating record: " . mysqli_error($conn);
