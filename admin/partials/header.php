@@ -5,7 +5,11 @@ require('../connect.php');
 
 if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
     die(header("location:{$base_url}/login/login.php")); //ถ้าไม่มี session id || usertype จะถูกส่งไป login.php
-} elseif (isset($_GET['logout'])) {
+} elseif ($_SESSION['usertype'] == 'user') {
+    die(header("location:{$base_url}/login/error.php"));
+}
+
+if (isset($_GET['logout'])) {
     session_destroy();
     die(header("Location:{$base_url}/login/login.php")); //ถ้ามีการออกจากระบบ ให้ทำลาย session
 }
