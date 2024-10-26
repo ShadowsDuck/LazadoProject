@@ -1,9 +1,21 @@
 <?php include('partials/header.php'); ?>
+<style>.nav-pills .nav-link {
+    color: #1d0507; /* สีตัวอักษรแดง */
+    background-color: #f8f9fa; /* สีพื้น */
+}
 
+.nav-pills .nav-link.active {
+    color: #fff; /* สีตัวอักษรขาวเมื่อเลือก */
+    background-color: #c82333; /* สีพื้นหลังเข้มขึ้นเมื่อเลือก */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #e0818a /* สีพื้นหลังเมื่อเอาเมาส์ชี้ */
+}</style>
 <div class="container mt-5">
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3 bg-light vh-auto " id="sidebar">
+        <div class="col-md-3 bg-light vh-auto rounded-3" id="sidebar">
             <div class="nav flex-column nav-pills p-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php"><i class="bi bi-info-circle"></i> เกี่ยวกับเรา</a>
                 <a class="nav-link" href="about.php?page=contactSidebar" data-page="aboutpage/contactSidebar.php"><i class="bi bi-telephone"></i> ติดต่อเรา</a>
@@ -22,7 +34,7 @@
         <!-- Content Area -->
 
         <div class="col-md-9 ">
-            <div class="cus rounded-sm" style="margin-left:3rem; background-color:#f8f9fa;">
+            <div class="cus rounded-3" style="margin-left:3rem; background-color:#f8f9fa;">
                 <div id="sidebar-content" class="p-3">
                     <!-- เนื้อหาจะถูกโหลดมาแสดงที่นี่ -->
                 </div>
@@ -59,4 +71,5 @@
     }
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <?php include('partials/footer.php'); ?>

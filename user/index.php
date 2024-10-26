@@ -116,7 +116,7 @@
     </section>
     <!-- View All Products Button -->
     <div class="text-center mt-4">
-        <a href="#" class="btn btn-danger">View All Products</a>
+        <a href="allitem.php" class="btn btn-danger">View All Products</a>
     </div>
 
 </div>
