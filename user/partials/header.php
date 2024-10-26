@@ -32,6 +32,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         html,
@@ -99,6 +100,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
         html {
             overflow-y: scroll;
         }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -154,21 +163,20 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </form>
                     <!-- Container สำหรับไอคอนตะกร้าและไอคอนจุดสีแดง -->
                     <div class="position-relative ms-4 mt-1">
-                        <a href=
-                        <?php
-                        if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
-                            echo 'kart.php';
-                        } else {
-                            echo $base_url.'/login/login.php';
-                        }
-                        ?>><i style="color:black;" class="bi bi-cart3 h4"></i></a>
+                        <a href=<?php
+                                if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
+                                    echo 'kart.php';
+                                } else {
+                                    echo $base_url . '/login/login.php';
+                                }
+                                ?>><i style="color:black;" class="bi bi-cart3 h4"></i></a>
 
-                        <?php if(isset($_SESSION['id']) and isset($_SESSION['usertype'])){
+                        <?php if (isset($_SESSION['id']) and isset($_SESSION['usertype'])) {
                             if ($numrows > 0) { ?>
-                            <!-- ไอคอนจุดสีแดงที่ทับอยู่บนไอคอนตะกร้า -->
-                            <i class="bi bi-dot" style="color:red; font-size:20px; position: absolute;"></i>
-                        <?php } 
-                        }?>
+                                <!-- ไอคอนจุดสีแดงที่ทับอยู่บนไอคอนตะกร้า -->
+                                <i class="bi bi-dot" style="color:red; font-size:20px; position: absolute;"></i>
+                        <?php }
+                        } ?>
                     </div>
                 </div>
             </div>
