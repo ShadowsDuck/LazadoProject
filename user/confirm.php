@@ -10,7 +10,15 @@ if ($conn->connect_error) {
 $selectedProducts = isset($_POST['products']) ? array_keys($_POST['products']) : [];
 
 if (empty($selectedProducts)) {
-    echo "<p>ไม่มีสินค้าที่เลือกในตะกร้า</p>";
+    if (mysqli_query($conn, $sql)) {
+        $_SESSION['message'] = "กรุณาเลือกสินค้าในตะกร้า!";
+        header("Location: {$base_url}/user/cart.php");
+        exit();
+    } else {
+        $_SESSION['message'] = "เกิดข้อผิดพลาดในเลือกสินค้าในตะกร้า!: " . mysqli_error($conn);
+        header("Location: {$base_url}/user/cart.php");
+        exit();
+    }
     exit;
 }
 
@@ -35,7 +43,15 @@ if ($result->num_rows > 0) {
         }
     }
 } else {
-    echo "<p>ไม่มีสินค้าที่เลือกในตะกร้า</p>";
+    if (mysqli_query($conn, $sql)) {
+        $_SESSION['message'] = "กรุณาเลือกสินค้าในตะกร้า!";
+        header("Location: {$base_url}/user/cart.php");
+        exit();
+    } else {
+        $_SESSION['message'] = "เกิดข้อผิดพลาดในเลือกสินค้าในตะกร้า!: " . mysqli_error($conn);
+        header("Location: {$base_url}/user/cart.php");
+        exit();
+    }
     exit;
 }
 

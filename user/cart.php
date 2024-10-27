@@ -176,11 +176,35 @@ ob_end_flush(); // ปิดการ buffer output
         footer a:hover {
             text-decoration: underline;
         }
+
+        .alert-overlay {
+            position: fixed;
+            top: 4rem;
+            /* ขยับลงมาจากด้านบน 4rem */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            /* ให้แสดงอยู่ด้านบน */
+            width: 90%;
+            /* หรือปรับขนาดตามต้องการ */
+            max-width: 600px;
+            /* ป้องกันไม่ให้ Alert ใหญ่เกินไป */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 
 <body>
-    <div class="container my-5">
+    <div class="container mt-5">
+        <!-- Alert message displayed above container -->
+        <?php if (!empty($_SESSION['message'])): ?>
+            <div class="alert alert-warning alert-dismissible fade show alert-overlay" id="session-alert" role="alert">
+                <?php echo $_SESSION['message']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['message']); ?>
+        <?php endif; ?>
+
         <h2 class="text-center">ตะกร้าสินค้า</h2>
         <div class="cart-table" style="margin-bottom: 250px;">
             <form action="confirm.php" method="POST">
@@ -354,6 +378,14 @@ ob_end_flush(); // ปิดการ buffer output
             // ตั้งค่าเริ่มต้นให้แสดง 0 ในช่วงเริ่มต้น
             document.getElementById('total-quantity').textContent = 0;
         });
+
+        // ให้ข้อความ Alert หายไปหลังจาก 2 วินาที
+        setTimeout(() => {
+            const alert = document.getElementById('session-alert');
+            if (alert) {
+                alert.classList.remove('show'); // ลบคลาส 'show' เพื่อซ่อน Alert
+            }
+        }, 2000);
     </script>
 
     <?php include('partials/footer.php'); ?>

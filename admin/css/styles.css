@@ -170,6 +170,7 @@ textarea {
     /* หรือปรับขนาดตามต้องการ */
     max-width: 600px;
     /* ป้องกันไม่ให้ Alert ใหญ่เกินไป */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .alert-container {
