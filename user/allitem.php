@@ -146,12 +146,11 @@ require('../connect.php');
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <?php
-
                                     // ถ้า discount true
                                     if ($row['discount'] == 1) { ?>
                                         <div class="card-text">
                                             <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row['price'], 2); ?></p>
-                                            <p style="margin:0;  font-size: 17px; color:red;"><?php echo "฿" . number_format($row['discounted_price'], 2); ?></p>
+                                            <p style="margin:0; font-size: 17px; color:red;"><?php echo "฿" . number_format($row['discounted_price'], 2); ?></p>
                                         </div>
                                     <?php
                                     } else { ?>

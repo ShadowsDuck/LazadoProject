@@ -81,7 +81,7 @@
         <div class="container mb-4">
             <div class="row">
                 <?php
-                // ดึงข้อมูลจากตาราง discount และ products โดยใช้ INNER JOIN เพื่อเชื่อมโยงข้อมูลทั้งสองตารางเข้าด้วยกันโดยมีเงื่อนไขที่ว่า discount.product_id ต้องเท่ากับ products.id
+
                 $sql1 = "SELECT * FROM products WHERE discount = 1";
                 $result1 = mysqli_query($conn, $sql1);
 
@@ -152,20 +152,23 @@
 
                         <!-- Card footer with price and add-to-cart button -->
                         <div class="card-footer d-flex justify-content-between align-items-center">
-                            <div class="card-text">
-                                <?php if ($row['discount'] == 1) { ?>
+
+                            <?php if ($row['discount'] == 1) { ?>
+                                <div class="card-text">
                                     <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;">
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
                                     </p>
                                     <p style="margin:0; font-size: 20px; color:red;">
                                         <?php echo "฿" . number_format($row['discounted_price'], 2); ?>
                                     </p>
-                                <?php } else { ?>
-                                    <p style="font-size: 20px; color:black;">
-                                        <?php echo "฿" . number_format($row['price'], 2); ?>
-                                    </p>
-                                <?php } ?>
-                            </div>
+                                </div>
+
+                            <?php } else { ?>
+                                <div class="card-text" style="font-size: 20px; color:black;">
+                                    <?php echo "฿" . number_format($row['price'], 2); ?>
+                                </div>
+                            <?php } ?>
+
 
                             <button class="btn addCart"
                                 onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
