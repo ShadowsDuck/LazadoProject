@@ -176,7 +176,7 @@ $shipping_address = $user_result->fetch_assoc();
             <h5>ผู้รับ/ที่อยู่จัดส่ง</h5>
             <p><?php echo htmlspecialchars($shipping_address['fullname']); ?></p>
             <p><?php echo htmlspecialchars($shipping_address['address']); ?></p>
-            <textarea class="form-control" name="shipping_address" rows="3"></textarea>
+            
         </div>
 
         <div class="payment-methods mt-4">

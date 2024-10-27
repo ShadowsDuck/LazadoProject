@@ -40,12 +40,14 @@ while ($row = $result->fetch_assoc()) {
 }
 ?>
 
-<div class="container mt-4">
+<div class="container mt-4 ">
+    
     <div class="card shadow-sm border-0">
-        <div class="card-header text-black" style="background-color: #dc3545;">
-            สถานะคำสั่งซื้อของผู้ใช้ ID: <?php echo $user_id; ?> คุณ <?php echo $row1['fullname']; ?>
+
+        <div class="card-header text-white bg-dark">
+            <h4>สถานะคำสั่งซื้อของฉัน ID: <?php echo $user_id; ?> คุณ <?php echo $row1['fullname']; ?></h4>
         </div>
-        <div class="card-body">
+        <div class="card-body mt-3 ">
             <div class="row">
                 <!-- Canceled Orders Card -->
                 <div class="col-md-4">
@@ -58,7 +60,7 @@ while ($row = $result->fetch_assoc()) {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Shipping Orders Card -->
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm mb-3" style="background-color: #fff3cd; color: #856404;">
@@ -70,7 +72,7 @@ while ($row = $result->fetch_assoc()) {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Completed Orders Card -->
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm mb-3" style="background-color: #d4edda; color: #155724;">
@@ -86,5 +88,3 @@ while ($row = $result->fetch_assoc()) {
         </div>
     </div>
 </div>
-
-
