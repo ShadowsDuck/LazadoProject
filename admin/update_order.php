@@ -11,10 +11,10 @@ $sql = "UPDATE orders SET status = '$status' WHERE id = '$id'";
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
-    $_SESSION['message'] = "Record updated successfully";
+    $_SESSION['message'] = "อัปเดตออเดอร์สำเร็จแล้ว!";
     header("Location: {$base_url}/admin/manage_order.php");
 } else {
-    $_SESSION['message'] = "Error updating record: " . mysqli_error($conn);
+    $_SESSION['message'] = "อัปเดตออเดอร์ไม่สำเร็จ!: " . mysqli_error($conn);
     header("Location: {$base_url}/admin/manage_order.php");
 }
 

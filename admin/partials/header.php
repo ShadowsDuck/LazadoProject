@@ -50,7 +50,7 @@ $currentCategory = isset($_GET['c']) ? $_GET['c'] : (isset($keyword) ? $keyword 
                     <a class="nav-link <?php echo ($currentPage === 'manage_product.php' || isset($_GET['c']) || isset($_GET['keyword'])) ? 'active' : ''; ?>" href="manage_product.php">จัดการสินค้า</a>
                 </li>
                 <li class="nav-item me-4 fs-6">
-                    <a class="nav-link <?php echo ($currentPage === 'manage_order.php') ? 'active' : ''; ?>" href="manage_order.php" aria-current="page">รายการคำสั่งซื้อ</a>
+                    <a class="nav-link <?php echo ($currentPage === 'manage_order.php' || isset($_GET['start_date']) || isset($_GET['end_date'])) ? 'active' : ''; ?>" href="manage_order.php">รายการคำสั่งซื้อ</a>
                 </li>
             </ul>
             <a href="index_admin.php?logout=1"><button type="button" class="btn btn-danger">ออกจากระบบ</button></a>

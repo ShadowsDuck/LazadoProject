@@ -11,13 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     foreach ($cartItems as $item) {
         $sql = "INSERT INTO `orders`
-            (`user_id`, `product_id`, `price`, `qty`, `total`, `status`, `customer_name`, `customer_email`, `customer_address`)
+            (`user_id`, `product_id`, `price`, `qty`, `total`,`order_date`, `status`, `customer_name`, `customer_email`, `customer_address`)
         SELECT 
             '$user_id', 
             '{$item['product_id']}', 
             '{$item['price']}', 
             '{$item['qty']}', 
-            '{$total_amount}', 
+            '{$item['qty']}' * '{$item['price']}', 
+            NOW(),
             '1', 
             users.fullname, 
             users.email, 
