@@ -38,7 +38,7 @@
                 <a href="allitem.php?c=monitor">Monitor</a>
                 <a href="allitem.php?c=chair">Chair</a>
                 <a href="allitem.php?c=streaming">Streaming</a>
-                <a href="allitem.php?c=other">Other<i class="bi bi-chevron-right"></i></a>
+                
             </div>
         </div>
 
