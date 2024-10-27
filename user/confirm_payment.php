@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             '{$item['price']}', 
             '{$item['qty']}', 
             '{$item['qty']}' * '{$item['price']}', 
-            '2', 
+            '1', 
             users.fullname, 
             users.email, 
             users.address
