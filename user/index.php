@@ -265,11 +265,70 @@
     </div>
 </section>
 
+<?php
+$orderSuccess = $_SESSION['orderSuccess'] ?? null;
+unset($_SESSION['orderSuccess']);
+?>
+<!-- Modal ชำระเงินเสร็จสิ้น -->
+<div class="modal fade" id="paymentSuccessModal" tabindex="-1" aria-labelledby="paymentSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="paymentSuccessModalLabel">ชำระเงินเสร็จสิ้น</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <!-- ไอคอนติ๊กถูก -->
+                <i class="bi bi-check-circle-fill" style="font-size: 3rem; color: green;"></i>
+                <p class="mt-3">ขอบคุณที่ชำระเงิน การสั่งซื้อของคุณเสร็จสมบูรณ์แล้ว!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal ชำระเงินไม่สำเร็จ -->
+<div class="modal fade" id="paymentFailedModal" tabindex="-1" aria-labelledby="paymentFailedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="paymentFailedModalLabel">ชำระเงินไม่สำเร็จ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <!-- ไอคอน X -->
+                <i class="bi bi-x-circle-fill" style="font-size: 3rem; color: red;"></i>
+                <p class="mt-3">เกิดข้อผิดพลาดในการชำระเงิน กรุณาลองใหม่อีกครั้ง</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="script/flash_sale.js"></script>
 <script src="script/search.js"></script>
 <script src="script/search_result.js"></script>
 <script>
+    //Modal =eitg'bo
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const orderSuccess = "<?php echo $orderSuccess; ?>"; //ใช้กับรหัส
+        console.log(orderSuccess);
+        if (orderSuccess == 1) {
+            const paymentSuccessModal = new bootstrap.Modal(document.getElementById('paymentSuccessModal')); //ใช้กับรหัส
+            paymentSuccessModal.show();
+        }
+
+
+
+
+    });
+
     // ดึงปุ่มเพิ่ม และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มเพิ่มใน Modal
     document.querySelectorAll('.addCart').forEach(button => {
         button.addEventListener('click', function(event) {
