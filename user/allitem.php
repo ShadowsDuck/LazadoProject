@@ -144,7 +144,7 @@ require('../connect.php');
                                     <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
                                         <?php echo $row['name']; ?></h4>
                                 </div>
-                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                <div class="card-footer d-flex justify-content-between align-items-center" style="background-color:white; border-top:none;">
                                     <?php
                                     // ถ้า discount true
                                     if ($row['discount'] == 1) { ?>

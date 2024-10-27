@@ -88,7 +88,7 @@
                 if ($result1->num_rows > 0) {
                     while ($row1 = mysqli_fetch_assoc($result1)) { ?>
                         <div class="col col-md-3 mb-4">
-                            <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                            <div class="card h-100">
                                 <!-- body -->
                                 <div class="card-body" style="cursor: pointer;"
                                     onclick="window.location.href='item_details.php?id=<?php echo $row1['id'] ?>'">
@@ -101,7 +101,7 @@
                                 </div>
 
                                 <!-- footer -->
-                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                <div class="card-footer d-flex justify-content-between align-items-center" style="background-color:white; border-top:none;">
                                     <div>
                                         <div class="card-text">
                                             <p style="text-decoration: line-through; margin:0; font-size: 12px;"><?php echo "฿" . number_format($row1['price'], 2); ?></p>
@@ -141,7 +141,7 @@
                 $imageURL = !empty($row['file_name']) ? '../uploads/' . $row['file_name'] : 'https://placehold.co/200';
             ?>
                 <div class="col col-md-3 mb-4">
-                    <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                    <div class="card h-100">
                         <!-- Card body with click-to-details -->
                         <div class="card-body" style="cursor: pointer;" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
                             <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
@@ -151,7 +151,7 @@
                         </div>
 
                         <!-- Card footer with price and add-to-cart button -->
-                        <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="card-footer d-flex justify-content-between align-items-center" style="background-color:white; border-top:none;">
 
                             <?php if ($row['discount'] == 1) { ?>
                                 <div class="card-text">
