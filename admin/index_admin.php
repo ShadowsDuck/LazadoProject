@@ -29,23 +29,23 @@
         <div class="col-md-3">
             <div class="card p-4">
                 <?php
-                $sql3 = "SELECT * FROM orders";
+                $sql3 = "SELECT * FROM orders WHERE status='1'";
                 $result3 = mysqli_query($conn, $sql3);
                 $row3 = mysqli_num_rows($result3);
                 ?>
                 <h4 class="fw-bold"><?php echo $row3 ?></h4>
-                <p>ออเดอร์</p>
+                <p>สินค้าที่กำลังจัดส่ง</p>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card p-4">
                 <?php
-                $sql4 = "SELECT SUM(total) AS Total FROM orders WHERE status='จัดส่งสำเร็จ'";
+                $sql4 = "SELECT SUM(total) AS Total FROM orders WHERE status='2'";
                 $result4 = mysqli_query($conn, $sql4);
                 $row4 = mysqli_fetch_assoc($result4);
-                $total_revenue = $row4['Total'];
+                $total_revenue = $row4['Total'] ?? 0;
                 ?>
-                <h4 class="fw-bold">฿<?php echo $total_revenue ?></h4>
+                <h4 class="fw-bold">฿<?php echo number_format($total_revenue, 2); ?></h4>
                 <p>รายได้ทั้งหมด</p>
             </div>
         </div>
