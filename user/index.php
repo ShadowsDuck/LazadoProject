@@ -31,14 +31,14 @@
         <!-- Category Menu -->
         <div class="col-md-3">
             <div class="category-menu">
-                <a href="allitem.php">Gaming Gear<i class="bi bi-chevron-right"></i></a>
-                <a href="allitem.php?c=keyboard">Keyboard</a>
-                <a href="allitem.php?c=mouse">Mouse</a>
-                <a href="allitem.php?c=headset">Headset</a>
-                <a href="allitem.php?c=monitor">Monitor</a>
-                <a href="allitem.php?c=chair">Chair</a>
-                <a href="allitem.php?c=streaming">Streaming</a>
-                
+                <a href="allitem.php">อุปกรณ์เกมมิ่งเกียร์<i class="bi bi-chevron-right"></i></a>
+                <a href="allitem.php?c=keyboard">คีย์บอร์ด</a>
+                <a href="allitem.php?c=mouse">เมาส์</a>
+                <a href="allitem.php?c=headset">หูฟัง</a>
+                <a href="allitem.php?c=monitor">จอมอนิเตอร์</a>
+                <a href="allitem.php?c=chair">เก้าอี้</a>
+                <a href="allitem.php?c=streaming">อุปกรณ์สตรีมมิ่ง</a>
+
             </div>
         </div>
 
@@ -134,7 +134,7 @@
         <div class="row">
             <?php
             // Query all featured products in one go
-            $result = mysqli_query($conn, "SELECT * FROM products WHERE id IN (3, 4, 5, 7)");
+            $result = mysqli_query($conn, "SELECT * FROM products WHERE id IN (62, 4, 5, 7)");
 
             // Loop through each product
             while ($row = mysqli_fetch_assoc($result)) {
@@ -188,7 +188,7 @@
 
     <!-- View All Products Button -->
     <div class="text-center mt-4">
-        <a href="allitem.php" class="btn btn-danger">View All Products</a>
+        <a href="allitem.php" class="btn btn-danger">ดูสินค้าทั้งหมด</a>
     </div>
 
 </div>
@@ -213,53 +213,53 @@
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#bottomCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden">ก่อนหน้า</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#bottomCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">ถัดไป</span>
         </button>
     </div>
 </div>
 
 <!-- Browse By Category Section -->
 <section class="container my-5">
-    <h2 class="text-center mb-4">Browse By Category</h2>
+    <h2 class="text-center mb-4">จัดเรียงตามประเภท</h2>
     <div class="row text-center">
         <div class="col-md-2">
             <div class="category-item p-4" onclick="window.location.href='allitem.php?c=keyboard'" style="cursor: pointer;">
                 <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
-                <p>Keyboard</p>
+                <p>คีย์บอร์ด</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4" onclick="window.location.href='allitem.php?c=mouse'" style="cursor: pointer;">
                 <i class="bi bi-mouse" style="font-size: 2rem;"></i>
-                <p>Mouse</p>
+                <p>เมาส์</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4" onclick="window.location.href='allitem.php?c=headset'" style="cursor: pointer;">
                 <i class="bi bi-headset" style="font-size: 2rem;"></i>
-                <p>Headset</p>
+                <p>หูฟัง</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4" onclick="window.location.href='allitem.php?c=monitor'" style="cursor: pointer;">
                 <i class="bi bi-display" style="font-size: 2rem;"></i>
-                <p>Monitor</p>
+                <p>จอมอนิเตอร์</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4" onclick="window.location.href='allitem.php?c=chair'" style="cursor: pointer;">
                 <i class="bi bi-chair" style="font-size: 2rem;"><img src="https://www.svgrepo.com/show/281964/desk-chair-chair.svg" style="height: 2.5rem; width: 2.5rem; color:blue;"></i>
-                <p>Chair</p>
+                <p>เก้าอี้</p>
             </div>
         </div>
         <div class="col-md-2">
             <div class="category-item p-4" onclick="window.location.href='allitem.php?c=streaming'" style="cursor: pointer;">
                 <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
-                <p>Streaming</p>
+                <p>อุปกรณ์สตรีมมิ่ง</p>
             </div>
         </div>
     </div>
