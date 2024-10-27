@@ -23,7 +23,7 @@ if (empty($selectedProducts)) {
 }
 
 // ดึงข้อมูลสินค้าเฉพาะที่ถูกเลือก
-$sql = "SELECT cart.*, products.name, products.price, products.img, products.discount, products.discounted_price 
+$sql = "SELECT cart.*, products.name, products.price, products.file_name, products.discount, products.discounted_price 
         FROM cart 
         INNER JOIN products ON cart.product_id = products.id 
         WHERE cart.user_id = '{$_SESSION['id']}' 
@@ -146,7 +146,10 @@ $shipping_address = $user_result->fetch_assoc();
                 <div class="cart-item-box">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
-                            <img src="<?php echo htmlspecialchars($item['img']); ?>" alt="Product">
+                            <?php
+                            $imageURL = !empty($item['file_name']) ? '../uploads/' . $item['file_name'] : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg';
+                            ?>
+                            <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
                             <div class="ms-3">
                                 <p><?php echo htmlspecialchars($item['name']); ?></p>
                                 <span class="text-muted">จำนวน: <?php echo htmlspecialchars($item['qty']); ?></span>

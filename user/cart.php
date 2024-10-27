@@ -8,7 +8,7 @@ if ($conn->connect_error) {
 }
 
 // ปรับการ Query ข้อมูลให้รวมข้อมูล discount และ discounted_price
-$sql = "SELECT cart.*, products.name, products.price, products.discount, products.discounted_price, products.img 
+$sql = "SELECT cart.*, products.name, products.price, products.discount, products.discounted_price, products.file_name 
         FROM cart 
         INNER JOIN products ON cart.product_id = products.id 
         WHERE cart.user_id = '{$_SESSION['id']}'";
@@ -228,7 +228,10 @@ ob_end_flush(); // ปิดการ buffer output
                         <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['product_id']; ?>]" value="<?php echo $item['product_id']; ?>"></div>
                         <div class="cart-item-details">
                             <div class="cart-item-image">
-                                <img src="<?php echo $item['img']; ?>" alt="Product Image">
+                                <?php
+                                $imageURL = !empty($item['file_name']) ? '../uploads/' . $item['file_name'] : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg';
+                                ?>
+                                <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
                             </div>
                             <div class="cart-item-info"><?php echo $item['name']; ?></div>
                         </div>
