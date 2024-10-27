@@ -5,7 +5,7 @@
     <h1>แดชบอร์ด</h1>
     <div class="row mt-5 text-center">
         <div class="col-md-3">
-            <div class="card p-4">
+            <div class="card p-5">
                 <?php
                 $sql1 = "SELECT * FROM users WHERE usertype='admin'";
                 $result1 = mysqli_query($conn, $sql1);
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card p-4">
+            <div class="card p-5">
                 <?php
                 $sql2 = "SELECT * FROM products";
                 $result2 = mysqli_query($conn, $sql2);
@@ -27,18 +27,18 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card p-4">
+            <div class="card p-5">
                 <?php
-                $sql3 = "SELECT * FROM orders WHERE status='1'";
+                $sql3 = "SELECT * FROM orders WHERE status='2'";
                 $result3 = mysqli_query($conn, $sql3);
                 $row3 = mysqli_num_rows($result3);
                 ?>
                 <h4 class="fw-bold"><?php echo $row3 ?></h4>
-                <p>สินค้าที่กำลังจัดส่ง</p>
+                <p>จัดส่งสำเร็จ</p>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card p-4">
+            <div class="card p-5">
                 <?php
                 $sql4 = "SELECT SUM(total) AS Total FROM orders WHERE status='2'";
                 $result4 = mysqli_query($conn, $sql4);
