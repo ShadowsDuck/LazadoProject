@@ -89,12 +89,11 @@ body {
     color: #fff; /* สีตัวอักษร */
     border: none; /* ลบเส้นขอบ */
     font-weight: bold;
-    font-size: 18px;
-    padding: 10px ;
-    border-radius: 5px;
-    width: 100%;
+    font-size: 14px; /* ขนาดตัวอักษรที่เล็กลง */
+    padding: 5px 10px; /* ปรับ padding ให้เล็กลง */
+    border-radius: 3px; /* ปรับ border-radius ให้เล็กลง */
+    width: auto; /* เปลี่ยนให้กว้างตามเนื้อหา */
     cursor: pointer;
-    
 }
 .buttonlogout p{
     margin-top: 10px;
@@ -135,6 +134,16 @@ body {
     color: red;
     border-radius: 5px;
 }
+.sidebar a #buttonLogout:hover {
+
+    color: red;
+    border-radius: 5px;
+}
+#buttonLogout:hover {
+    background-color: transparent; /* ไม่มีสีพื้นหลังเมื่อ hover */
+    color: white; /* คงสีตัวอักษรไว้เหมือนเดิม */
+    cursor: default; /* เปลี่ยนให้แสดงว่าไม่สามารถคลิกได้ */
+}
 </style>
 
 
@@ -148,7 +157,7 @@ body {
             <a class="nav-link" href="user_edit.php?page=orderStatusEdit" data-page="editpage/orderStatusEdit.php">สถานะสินค้าของฉัน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
             
-            <a href="user_edit.php?logout=1" style="margin:0; padding:0;" ><button type="button" class="buttonlogout btn btn-danger my-2 mx-0 py-2 w-100 " ><p>ออกจากระบบ</p></button></a>
+            <a href="user_edit.php?logout=1" style="margin:0; padding:0; " id="buttonLogout" ><button type="button" class="buttonlogout btn btn-danger my-2 mx-0 py-2 w-100 " ><p>ออกจากระบบ</p></button></a>
             
         </div>
             
