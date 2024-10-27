@@ -350,13 +350,7 @@ ob_end_flush(); // ปิดการ buffer output
         });
     </script>
 
-    <footer>
-        <div class="container text-center">
-            <h5>ข้อมูลเพิ่มเติม</h5>
-            <p>จัดทำโดยทีมงานของเรา</p>
-            <a href="#">นโยบายการคืนสินค้า</a> | <a href="#">ข้อมูลการติดต่อ</a>
-        </div>
-    </footer>
+    <?php include('partials/footer.php'); ?>  
 </body>
 
 </html>
