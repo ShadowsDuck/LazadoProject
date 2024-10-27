@@ -1,12 +1,5 @@
 <?php include('partials/header.php'); ?>
 
-<style>
-    .btn-vsm {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.75rem;
-    }
-</style>
-
 <!-- Body -->
 <div class="container-sm mt-5">
     <!-- Alert message should be displayed right here -->
@@ -253,28 +246,28 @@
         <?php
         $c = '';
         $keyword = '';
-        $sql = "SELECT * FROM products ORDER BY created_at DESC";
+        $sql = "SELECT * FROM products ORDER BY discount DESC, created_at DESC";
 
         if (isset($_GET["c"])) {
             $c = $_GET['c'];
         }
         if (isset($_GET["keyword"])) {
             $keyword = $_GET['keyword'];
-            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY discount DESC, created_at DESC";
         }
 
         if ($c == 'keyboard') {
-            $sql = "SELECT * FROM products WHERE category=1 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=1 ORDER BY discount DESC, created_at DESC";
         } elseif ($c == 'mouse') {
-            $sql = "SELECT * FROM products WHERE category=2 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=2 ORDER BY discount DESC, created_at DESC";
         } elseif ($c == 'headset') {
-            $sql = "SELECT * FROM products WHERE category=3 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=3 ORDER BY discount DESC, created_at DESC";
         } elseif ($c == 'monitor') {
-            $sql = "SELECT * FROM products WHERE category=4 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=4 ORDER BY discount DESC, created_at DESC";
         } elseif ($c == 'chair') {
-            $sql = "SELECT * FROM products WHERE category=5 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=5 ORDER BY discount DESC, created_at DESC";
         } elseif ($c == 'streaming') {
-            $sql = "SELECT * FROM products WHERE category=6 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=6 ORDER BY discount DESC, created_at DESC";
         }
 
         $result = mysqli_query($conn, $sql);

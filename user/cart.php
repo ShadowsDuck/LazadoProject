@@ -7,13 +7,19 @@ if ($conn->connect_error) {
     die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
 }
 
-$sql = "SELECT cart.*, products.name, products.price, products.img FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id = '{$_SESSION['id']}'";
+// ปรับการ Query ข้อมูลให้รวมข้อมูล discount และ discounted_price
+$sql = "SELECT cart.*, products.name, products.price, products.discount, products.discounted_price, products.img 
+        FROM cart 
+        INNER JOIN products ON cart.product_id = products.id 
+        WHERE cart.user_id = '{$_SESSION['id']}'";
 $result = $conn->query($sql);
 
 $cartItems = [];
+$totalQuantity = 0; // ตัวแปรสำหรับนับจำนวนสินค้าทั้งหมด
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $cartItems[] = $row;
+        $totalQuantity += $row['qty']; // นับจำนวนสินค้าในตะกร้า
     }
 }
 $conn->close();
@@ -25,13 +31,6 @@ ob_end_flush(); // ปิดการ buffer output
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-    <styl>
-        <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart Page</title>
@@ -93,8 +92,6 @@ ob_end_flush(); // ปิดการ buffer output
             height: 80px;
             object-fit: cover;
         }
-
-
 
         .cart-item-info {
             font-size: 1rem;
@@ -180,74 +177,6 @@ ob_end_flush(); // ปิดการ buffer output
             text-decoration: underline;
         }
     </style>
-    <script>
-        window.onload = function() {
-            const selectAll = document.getElementById('select-all');
-            let itemCheckboxes = document.querySelectorAll('.item-checkbox');
-
-            selectAll.addEventListener('change', function() {
-                itemCheckboxes.forEach(checkbox => {
-                    checkbox.checked = this.checked;
-                });
-                calculateSummary();
-            });
-
-            itemCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', calculateSummary);
-            });
-
-            const minusButtons = document.querySelectorAll('.minus-btn');
-            const plusButtons = document.querySelectorAll('.plus-btn');
-
-            minusButtons.forEach(btn => {
-                btn.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const input = this.nextElementSibling;
-                    if (input.value > 1) {
-                        input.value--;
-                        updateTotalPrice(input);
-                    }
-                    calculateSummary();
-                });
-            });
-
-            plusButtons.forEach(btn => {
-                btn.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const input = this.previousElementSibling;
-                    input.value++;
-                    updateTotalPrice(input);
-                    calculateSummary();
-                });
-            });
-
-            function updateTotalPrice(input) {
-                const row = input.closest('.cart-item-box');
-                const price = parseFloat(row.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
-                const totalPriceElement = row.querySelector('.cart-item-total');
-                const totalPrice = price * input.value;
-                totalPriceElement.textContent = `฿${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-            }
-
-            function calculateSummary() {
-                let totalItems = 0;
-                let totalPrice = 0;
-
-                itemCheckboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        const row = checkbox.closest('.cart-item-box');
-                        const quantity = parseInt(row.querySelector('.cart-item-quantity input').value);
-                        const pricePerItem = parseFloat(row.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
-                        totalItems += quantity;
-                        totalPrice += pricePerItem * quantity;
-                    }
-                });
-
-                document.getElementById('selected-count').textContent = totalItems;
-                document.getElementById('total-price').textContent = `฿${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-            }
-        };
-    </script>
 </head>
 
 <body>
@@ -264,7 +193,13 @@ ob_end_flush(); // ปิดการ buffer output
                     <div>ลบ</div>
                 </div>
 
-                <?php foreach ($cartItems as $item): ?>
+                <?php
+                $totalPrice = 0; // สำหรับเก็บราคารวมทั้งหมด
+                foreach ($cartItems as $item):
+                    $displayPrice = $item['discount'] ? $item['discounted_price'] : $item['price'];
+                    $itemTotal = $displayPrice * $item['qty'];
+                    $totalPrice += $itemTotal;
+                ?>
                     <div class="cart-item-box">
                         <div><input type="checkbox" class="item-checkbox" name="products[<?php echo $item['product_id']; ?>]" value="<?php echo $item['product_id']; ?>"></div>
                         <div class="cart-item-details">
@@ -273,13 +208,13 @@ ob_end_flush(); // ปิดการ buffer output
                             </div>
                             <div class="cart-item-info"><?php echo $item['name']; ?></div>
                         </div>
-                        <div class="cart-item-price">฿<?php echo number_format($item['price'], 2); ?></div>
+                        <div class="cart-item-price">฿<?php echo number_format($displayPrice, 2); ?></div>
                         <div class="cart-item-quantity">
-                            <button class="minus-btn">-</button>
+                            <button type="button" class="minus-btn">-</button>
                             <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['qty']; ?>" readonly>
-                            <button class="plus-btn">+</button>
+                            <button type="button" class="plus-btn">+</button>
                         </div>
-                        <div class="cart-item-total">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></div>
+                        <div class="cart-item-total">฿<?php echo number_format($itemTotal, 2); ?></div>
                         <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['id']; ?>'">
                             <i class="bi bi-trash"></i>
                         </div>
@@ -287,15 +222,118 @@ ob_end_flush(); // ปิดการ buffer output
                 <?php endforeach; ?>
 
                 <div class="total-section">
-                    <span>จำนวนที่เลือก: <span id="selected-count">0</span>ชิ้น</span>
-                    <span>ยอดรวม: <span id="total-price">฿0.00</span></span>
+                    <span>สินค้าที่เลือกแล้ว: <span id="total-quantity">0</span> ชิ้น</span>
+                    <span>ยอดรวมทั้งหมด: <span id="selected-price">฿0.00</span></span>
                     <button type="submit" class="checkout-btn">สั่งซื้อ</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <?php include('partials/footer.php'); ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cartItems = <?php echo json_encode($cartItems); ?>; // ส่งข้อมูล cartItems ไปยัง JS
+            const selectAllCheckbox = document.getElementById('select-all');
+            const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+
+            selectAllCheckbox.addEventListener('change', function() {
+                itemCheckboxes.forEach(checkbox => {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+                updateTotalQuantity(); // อัปเดตจำนวนสินค้าที่เลือก
+                updateSelectedTotal(); // อัปเดตยอดรวมของสินค้าที่เลือก
+            });
+
+            const plusButtons = document.querySelectorAll('.plus-btn');
+            const minusButtons = document.querySelectorAll('.minus-btn');
+
+            plusButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.previousElementSibling;
+                    let qty = parseInt(input.value);
+                    input.value = qty + 1;
+                    updateTotalPrice(this.closest('.cart-item-box'));
+                    updateTotalQuantity(); // อัปเดตจำนวนสินค้าทั้งหมด
+                    updateSelectedTotal(); // อัปเดตยอดรวมของสินค้าที่เลือก
+                });
+            });
+
+            minusButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.nextElementSibling;
+                    let qty = parseInt(input.value);
+                    if (qty > 1) {
+                        input.value = qty - 1;
+                        updateTotalPrice(this.closest('.cart-item-box'));
+                        updateTotalQuantity(); // อัปเดตจำนวนสินค้าทั้งหมด
+                        updateSelectedTotal(); // อัปเดตยอดรวมของสินค้าที่เลือก
+                    }
+                });
+            });
+
+            itemCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateTotalQuantity(); // อัปเดตจำนวนสินค้าทันทีเมื่อเลือก checkbox
+                    updateSelectedTotal(); // อัปเดตยอดรวมของสินค้าที่เลือก
+                });
+            });
+
+            function updateTotalQuantity() {
+                let totalQuantity = 0;
+                itemCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const qtyInput = checkbox.closest('.cart-item-box').querySelector('input[type="text"]');
+                        const qty = parseInt(qtyInput.value);
+                        if (!isNaN(qty)) {
+                            totalQuantity += qty;
+                        }
+                    }
+                });
+                document.getElementById('total-quantity').textContent = totalQuantity; // แสดงจำนวนทั้งหมด
+            }
+
+            function updateTotalPrice(cartItemBox) {
+                const price = parseFloat(cartItemBox.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
+                const qty = parseInt(cartItemBox.querySelector('input[type="text"]').value);
+                const total = price * qty;
+                cartItemBox.querySelector('.cart-item-total').textContent = '฿' + total.toFixed(2);
+                updateTotalPriceOverall(); // เรียกใช้ฟังก์ชันเพื่ออัปเดตยอดรวมทั้งหมด
+            }
+
+            function updateTotalPriceOverall() {
+                let totalPrice = 0;
+                document.querySelectorAll('.cart-item-total').forEach(total => {
+                    totalPrice += parseFloat(total.textContent.replace('฿', '').replace(',', ''));
+                });
+                document.getElementById('selected-price').textContent = '฿' + totalPrice.toFixed(2); // แสดงยอดรวมที่เลือก
+            }
+
+
+            function updateSelectedTotal() {
+                let selectedTotalPrice = 0;
+                itemCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const cartItemBox = checkbox.closest('.cart-item-box');
+                        const price = parseFloat(cartItemBox.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
+                        const qty = parseInt(cartItemBox.querySelector('input[type="text"]').value);
+                        selectedTotalPrice += price * qty; // คำนวณยอดรวม
+                    }
+                });
+                document.getElementById('selected-price').textContent = '฿' + selectedTotalPrice.toFixed(2); // แสดงยอดรวมที่เลือก
+            }
+
+            // ตั้งค่าเริ่มต้นให้แสดง 0 ในช่วงเริ่มต้น
+            document.getElementById('total-quantity').textContent = 0;
+        });
+    </script>
+
+    <footer>
+        <div class="container text-center">
+            <h5>ข้อมูลเพิ่มเติม</h5>
+            <p>จัดทำโดยทีมงานของเรา</p>
+            <a href="#">นโยบายการคืนสินค้า</a> | <a href="#">ข้อมูลการติดต่อ</a>
+        </div>
+    </footer>
 </body>
 
 </html>
