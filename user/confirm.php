@@ -25,7 +25,7 @@ $result = $conn->query($sql);
 $cartItems = [];
 $total_price = 0;
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_array()) { // $row = mysqli_fetch_array($result)
         $cartItems[] = $row;
         // คำนวณราคาทั้งหมดโดยคูณราคากับจำนวนที่ถูกเลือก
         $total_price += $row['price'] * $row['qty'];
@@ -174,7 +174,8 @@ $total_amount = $total_price + $shipping_cost_per_order;
 
         <form method="POST" action="confirm_payment.php">
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']?>"> 
-            <input type="hidden" name="total_amount" value="<?php echo $total_amount; ?>">
+                                                                                            <!-- แปลงเป็น json ให้ tag input ส่งค่าได้ -->
+            <input type="hidden" name="cartItems" value="<?php echo htmlspecialchars(json_encode($cartItems), ENT_QUOTES, 'UTF-8'); ?>">
             <input type="hidden" name="shipping_address" value="<?php echo htmlspecialchars($shipping_address['address']); ?>">
             <button type="submit" class="checkout-btn mt-3">สั่งซื้อ</button>
         </form>

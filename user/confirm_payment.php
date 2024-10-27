@@ -5,13 +5,32 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // ดึงข้อมูลจากฟอร์มโดยใช้ $_POST
     $user_id = $_POST['user_id'];
-    $qty = $_POST['total_amount'];
+    $cartItems = json_decode($_POST['cartItems'], true);
     $customer_address = $_POST['shipping_address'];
 
-    $sql = "INSERT INTO 'orders'
-            ('user_id', 'product_id', 'price', 'qty', 'total', 'order_date', 'status', 'customer_name', 'customer_email', 'customer_address')
-            VALUES ($user_id, '2', '3890', '2', '6000', '2024-10-27 19:04:06.000000', '0', 'asdasd', 'asdasd', 'asdasd');";
+    foreach ($cartItems as $item) {
+        $sql = "INSERT INTO `orders`
+            (`user_id`, `product_id`, `price`, `qty`, `total`, `status`, `customer_name`, `customer_email`, `customer_address`)
+        SELECT 
+            '$user_id', 
+            '{$item['product_id']}', 
+            '{$item['price']}', 
+            '{$item['qty']}', 
+            '{$item['qty']}' * '{$item['price']}', 
+            '2', 
+            users.fullname, 
+            users.email, 
+            users.address
+        FROM users
+        WHERE users.id = '$user_id'";
+
+        $result = mysqli_query($conn, $sql);
+        if ($result){
+            header("Location:{$base_url}/user/index.php?orderSuccess=1");
+        } else {
+            header("Location:{$base_url}/user/index.php?orderSuccess=0");
+        }
+    }
 } else {
     die(header("Location:{$base_url}/login/error.php"));
 }
-?>
