@@ -37,17 +37,17 @@
                         <form action="submit-form.php" method="POST">
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="name" placeholder="Your Name *" required>
+                                    <input type="text" class="form-control" name="name" placeholder="ชื่อ " required>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="email" class="form-control" name="email" placeholder="Your Email *" required>
+                                    <input type="email" class="form-control" name="email" placeholder="อีเมล " required>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="phone" placeholder="Your Phone *" required>
+                                    <input type="text" class="form-control" name="phone" placeholder="เบอร์โทร " required>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <textarea class="form-control" name="message" rows="5" placeholder="Your Message" required></textarea>
+                                <textarea class="form-control" name="message" rows="5" placeholder="ข้อความ . . ." required></textarea>
                             </div>
                             <button type="submit" class="btn btn-danger w-100">ส่งข้อความ</button>
                         </form>

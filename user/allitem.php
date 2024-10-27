@@ -50,6 +50,7 @@ require('../connect.php');
     </div>
 
     <div class="row text-center">
+        <h2 class="text-center mt-5">จัดเรียงตามประเภท</h2>
         <div class="col-md-2 py-4">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=keyboard') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=keyboard'">

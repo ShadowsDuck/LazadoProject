@@ -195,6 +195,7 @@
 
 <!-- Icon หมวดหมู่-->
 <section class="container">
+    <h2 class="text-center mt-4">จัดเรียงตามประเภท</h2>
     <div class="row text-center">
         <div class="col-md-2 py-4">
             <div class="category-item m-4 <?php echo ($currentPage === 'manage_product.php?c=keyboard') ? 'active' : ''; ?>"

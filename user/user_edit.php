@@ -85,15 +85,16 @@ body {
     color: #888;
 }
 .buttonlogout {
-    background-color: #dc3545; /* สีแดง */
-    color: #fff; /* สีตัวอักษร */
-    border: none; /* ลบเส้นขอบ */
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
     font-weight: bold;
-    font-size: 14px; /* ขนาดตัวอักษรที่เล็กลง */
-    padding: 5px 10px; /* ปรับ padding ให้เล็กลง */
-    border-radius: 3px; /* ปรับ border-radius ให้เล็กลง */
-    width: auto; /* เปลี่ยนให้กว้างตามเนื้อหา */
+    font-size: 14px;
+    padding: 10px 0; /* กำหนด padding ด้านบนและล่าง */
+    border-radius: 3px;
+    width: 100%; /* กำหนดให้ปุ่มยืดเต็มพื้นที่ */
     cursor: pointer;
+    text-align: center;
 }
 .buttonlogout p{
     margin-top: 10px;
