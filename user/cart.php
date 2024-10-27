@@ -180,9 +180,9 @@ ob_end_flush(); // ปิดการ buffer output
 </head>
 
 <body>
-    <div class="container mt-5 mb-5">
+    <div class="container my-5">
         <h2 class="text-center">ตะกร้าสินค้า</h2>
-        <div class="cart-table">
+        <div class="cart-table" style="margin-bottom: 250px;">
             <form action="confirm.php" method="POST">
                 <div class="header-row">
                     <div><input type="checkbox" id="select-all"></div>
