@@ -14,7 +14,12 @@ include '../connect.php';
     <link rel="stylesheet" href="../admin/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="../user/partials/LAZADO.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
     <style>
+        * {
+            font-family: "Noto Sans Thai", "Helvetica Neue", sans-serif;
+        }
+
         .alert-container {
             position: absolute;
             top: 0;
@@ -52,20 +57,20 @@ include '../connect.php';
             </div>
             <div class="col-md-5 d-md-flex align-items-center justify-content-center">
                 <div class="container p-4" style="width: 60%; max-width: 60%; min-width: 350px;">
-                    <h2 class="text-center mb-3">Log-in</h2>
+                    <h2 class="text-center mb-3">เข้าสู่ระบบ</h2>
 
                     <!-- form -->
                     <form action="login_db.php" method="POST">
                         <div class="mb-2">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                            <label for="username" class="form-label">ชื่อผู้ใช้งาน</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="ชื่อผู้ใช้งาน">
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">รหัสผ่าน</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="รหัสผ่าน"
+                                    placeholder="รหัสผ่าน">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="togglePassword"></i>
                                 </span>
@@ -73,16 +78,15 @@ include '../connect.php';
                         </div>
 
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-danger">Log-in</button>
+                            <button type="submit" class="btn btn-danger">เข้าสู่ระบบ</button>
                         </div>
                     </form>
                     <div class="text-center">
-                        <p class="mb-0">Did not have an account? <a href="signup.php" class="text-primary">Create
-                                Account</a>
+                        <p class="mb-0">ยังไม่มีบัญชี? <a href="signup.php" class="text-primary">สร้างบัญชี</a>
                         </p>
                     </div>
                     <div class="text-center">
-                        <p class="mb-0">or <a href="../user/index.php" class="text-primary">Continue without logging-in</a>
+                        <p class="mb-0">หรือ <a href="../user/index.php" class="text-primary">เข้าใช้งานโดยไม่เข้าสู่ระบบ</a>
                         </p>
                     </div>
                 </div>
