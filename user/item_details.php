@@ -13,35 +13,28 @@ $row = mysqli_fetch_assoc($result);
     <div class="container mt-5">
         <div class="row">
             <!-- Product Images -->
-            <div class="col-md-7">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="https://placehold.co/500" class="img-fluid mb-3" alt="Product Image">
-                        <img src="https://placehold.co/500" class="img-fluid mb-3" alt="Product Image">
-                        <img src="https://placehold.co/500" class="img-fluid mb-3" alt="Product Image">
-                        <img src="https://placehold.co/500" class="img-fluid mb-3" alt="Product Image">
-                    </div>
-                    <div class="col-9">
-                        <img src="https://placehold.co/500" class="img-fluid" alt="Main Product Image">
-                    </div>
-                </div>
+            <div class="col-md-7 text-center">
+                <?php
+                $imageURL = !empty($row['file_name']) ? '../uploads/' . $row['file_name'] : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg';
+                ?>
+                <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
             </div>
 
             <!-- Product Details -->
             <div class="col-md-5">
                 <h3><?php echo $row['name'] ?></h3>
                 <?php
-                if ($row['discount'] == 1) {?>
+                if ($row['discount'] == 1) { ?>
                     <p style="text-decoration: line-through; margin:0; font-size: 18px;"><?php echo "฿" . number_format($row['price'], 2); ?></p>
                     <p style="margin:0; font-size: 25px; color:red;"><?php echo "฿" . number_format($row['discounted_price'], 2); ?></p>
 
                 <?php
-                } else {?>
+                } else { ?>
                     <p style="margin:0;  font-size: 25px;"><?php echo "฿" . number_format($row['price'], 2); ?></p>
                 <?php
-                }?>
-                
-                
+                } ?>
+
+
                 <p><?php echo $row['description'] ?></p>
 
                 <form action="confirm.php" method="POST">

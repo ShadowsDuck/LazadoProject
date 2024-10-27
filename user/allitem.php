@@ -138,7 +138,7 @@ require('../connect.php');
                                 <div class="card-body" style="cursor: pointer;"
                                     onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
                                     <?php
-                                    $imageURL = !empty($row['file_name']) ? '../uploads/' . $row['file_name'] : 'https://placehold.co/200';
+                                    $imageURL = !empty($row['file_name']) ? '../uploads/' . $row['file_name'] : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg';
                                     ?>
                                     <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
                                     <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
