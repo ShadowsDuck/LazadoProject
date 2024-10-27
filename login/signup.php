@@ -14,7 +14,12 @@ include '../connect.php';
     <link rel="stylesheet" href="../admin/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="../user/partials/LAZADO.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
     <style>
+        * {
+            font-family: "Noto Sans Thai", "Helvetica Neue", sans-serif;
+        }
+
         .alert-container {
             position: absolute;
             top: 0;
@@ -49,40 +54,40 @@ include '../connect.php';
             <!-- Form -->
             <div class="col-md-5 d-md-flex align-items-center justify-content-center">
                 <div class="container p-4 mx-auto" style="width: 60%; max-width: 60%; min-width: 350px;">
-                    <h2 class="text-center mb-3">Create an account</h2>
+                    <h2 class="text-center mb-3">สร้างบัญชี</h2>
                     <form action="signup_db.php" method="POST">
                         <div class="mb-2">
-                            <label for="fname" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="fname" name="fullname" placeholder="Full Name" required>
+                            <label for="fname" class="form-label">ชื่อ-สกุล</label>
+                            <input type="text" class="form-control" id="fname" name="fullname" placeholder="ชื่อ-สกุล" required>
                         </div>
                         <div class="mb-2">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+                            <label for="address" class="form-label">ที่อยู่</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="ที่อยู่" required>
                         </div>
                         <div class="mb-2">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                            <label for="email" class="form-label">อีเมล</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล" required>
                         </div>
                         <div class="mb-2">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label">ชื่อผู้ใช้งาน</label>
                             <input type="text" class="form-control" id="username" name="username"
-                                placeholder="Username" required>
+                                placeholder="ชื่อผู้ใช้งาน" required>
                         </div>
                         <div class="mb-2">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">รหัสผ่าน</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Password" required>
+                                    placeholder="รหัสผ่าน" required>
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="togglePassword"></i>
                                 </span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="c-password" class="form-label">Confirm Password</label>
+                            <label for="c-password" class="form-label">ยืนยันรหัสผ่าน</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="c-password" name="c-password"
-                                    placeholder="Confirm Password" required>
+                                    placeholder="ยืนยันรหัสผ่าน" required>
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="toggleConfirmPassword"></i>
                                 </span>
@@ -90,11 +95,11 @@ include '../connect.php';
                         </div>
 
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary">Create Account</button>
+                            <button type="submit" class="btn btn-primary">สร้างบัญชี</button>
                         </div>
                     </form>
                     <div class="text-center">
-                        <p class="mb-0">Already have an account? <a href="login.php" class="text-danger">Log-in</a></p>
+                        <p class="mb-0">มีบัญชีอยู่แล้ว? <a href="login.php" class="text-danger">เข้าสู่ระบบ</a></p>
                     </div>
                 </div>
             </div>
