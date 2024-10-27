@@ -21,111 +21,137 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
 ob_end_flush(); // ปิดการ buffer output
 ?>
 
-
+<!-- CSS -->
 <style>
-    body {
-        background-color: #f8f9fa;
-    }
+body {
+    background-color: #f8f9fa;
+}
 
-    .sidebar {
-        background-color: #fff;
-        border-right: 1px solid #e0e0e0;
-        min-height: auto;
-        padding-top: 20px;
-    }
 
-    .sidebar a {
-        color: #333;
-        font-weight: bold;
-        display: block;
-        padding: 10px 20px;
-        text-decoration: none;
-    }
+.buttonlogout:hover {
+    /* background-color: #f5f5f5; */
+    color: red;
+}
 
-    .btn {
-        color: #333;
-        font-weight: bold;
-        display: block;
-        padding: 10px 20px;
-        text-decoration: none;
+.user-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
 
-    }
+.btn-edit {
+    background-color: #f8d7da;
+    color: red;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
 
-    .sidebar a.active,
-    .sidebar a:hover {
-        background-color: #f5f5f5;
-        color: red;
-    }
+.btn-edit:hover {
+    background-color: #f5c2c7;
+}
 
-    .user-info {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
+.status-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+}
 
-    .btn-edit {
-        background-color: #f8d7da;
-        color: red;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-    }
+.status-card p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
 
-    .btn-edit:hover {
-        background-color: #f5c2c7;
-    }
+.status-card span {
+    display: block;
+    font-size: 14px;
+    color: #888;
+}
 
-    .status-card {
-        background-color: #fff;
-        border: 1px solid #e0e0e0;
-        padding: 10px;
-        text-align: center;
-        border-radius: 8px;
-    }
+.user-details {
+    margin-top: 20px;
+}
 
-    .status-card p {
-        margin: 0;
-        font-size: 18px;
-        font-weight: bold;
-    }
+.user-details .detail-item {
+    margin-bottom: 10px;
+}
 
-    .status-card span {
-        display: block;
-        font-size: 14px;
-        color: #888;
-    }
+.user-details .detail-item span {
+    color: #888;
+}
+.buttonlogout {
+    background-color: #dc3545; /* สีแดง */
+    color: #fff; /* สีตัวอักษร */
+    border: none; /* ลบเส้นขอบ */
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px ;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
 
-    .user-details {
-        margin-top: 20px;
-    }
+.buttonlogout:hover {
+    background-color: #c82333; /* สีแดงเข้มเมื่อ hover */
+}
+.sidebar {
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0;
+    min-height: auto;
+    padding-top: 20px;
+}
 
-    .user-details .detail-item {
-        margin-bottom: 10px;
-    }
+.sidebar a {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+}
 
-    .user-details .detail-item span {
-        color: #888;
-    }
+.btn {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background-color: #f5f5f5;
+    color: red;
+    border-radius: 5px;
+}
 </style>
 
 
 <div class="container mt-5">
     <div class="row ">
+        
         <!-- Sidebar -->
-        <div class="col-sm-3 sidebar" id="sidebar" style="min-height: 500px;">
+        <div class="col-sm-3 sidebar" id="sidebar" style="min-height: 600px;">
             <a class="nav-link" href="user_edit.php?page=infoEdit" data-page="editpage/infoEdit.php">ข้อมูลส่วนตัว</a>
             <a class="nav-link" href="user_edit.php?page=addressEdit" data-page="editpage/addressEdit.php">ที่อยู่สำหรับจัดส่ง</a>
             <a class="nav-link" href="user_edit.php?page=orderStatusEdit" data-page="editpage/orderStatusEdit.php">สถานะสินค้าของฉัน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
-            <a href="user_edit.php?logout=1" style="margin:0; padding:0;"><button type="button" class="btn btn-danger my-2 mx-3 py-2">ออกจากระบบ</button></a>
+            
+            <a href="user_edit.php?logout=1" style="margin:0; padding:0;" ><button type="button" class="buttonlogout btn btn-danger my-2 mx-0 py-2 w-100" ><p>ออกจากระบบ</p></button></a>
+            
         </div>
+            
+        
 
         <!-- Main Content -->
 
         <div class="col-sm-9 ">
-            <div class="cus rounded-sm " style="margin-left:3rem; background-color:#f8f9fa;">
+            <div class="cus rounded-sm " style="margin-left:3rem; background-color:#f8f9fa; border-radius: 5px;">
                 <div id="sidebar-content" class="p-3">
                     <!-- เนื้อหาจะถูกโหลดมาแสดงที่นี่ -->
                 </div>
