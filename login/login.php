@@ -69,7 +69,7 @@ include '../connect.php';
                         <div class="mb-3">
                             <label for="password" class="form-label">รหัสผ่าน</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="password" name="รหัสผ่าน"
+                                <input type="password" class="form-control" id="password" name="password"
                                     placeholder="รหัสผ่าน">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="togglePassword"></i>
