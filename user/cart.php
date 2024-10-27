@@ -180,7 +180,7 @@ ob_end_flush(); // ปิดการ buffer output
 </head>
 
 <body>
-    <div class="container mt-5 mb-5">
+    <div class="container mt-5 mb-5" style="min-height: 600px;">
         <h2 class="text-center">ตะกร้าสินค้า</h2>
         <div class="cart-table">
             <form action="confirm.php" method="POST">
@@ -220,7 +220,7 @@ ob_end_flush(); // ปิดการ buffer output
                         </div>
                     </div>
                 <?php endforeach; ?>
-                
+
                 <div class="total-section">
                     <span>สินค้าที่เลือกแล้ว: <span id="total-quantity">0</span> ชิ้น</span>
                     <span>ยอดรวมทั้งหมด: <span id="selected-price">฿<?php echo number_format($totalPrice, 2); ?></span></span>
@@ -339,10 +339,10 @@ ob_end_flush(); // ปิดการ buffer output
                         const cartItemBox = checkbox.closest('.cart-item-box');
                         const price = parseFloat(cartItemBox.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
                         const qty = parseInt(cartItemBox.querySelector('input[type="text"]').value);
-                        selectedTotalPrice += price * qty; 
+                        selectedTotalPrice += price * qty;
                     }
                 });
-                document.getElementById('selected-price').textContent = '฿' + selectedTotalPrice.toFixed(2); 
+                document.getElementById('selected-price').textContent = '฿' + selectedTotalPrice.toFixed(2);
             }
 
             // ตั้งค่าเริ่มต้นให้แสดง 0 ในช่วงเริ่มต้น
@@ -350,7 +350,7 @@ ob_end_flush(); // ปิดการ buffer output
         });
     </script>
 
-    <?php include('partials/footer.php'); ?>  
+    <?php include('partials/footer.php'); ?>
 </body>
 
 </html>
