@@ -180,9 +180,9 @@ ob_end_flush(); // ปิดการ buffer output
 </head>
 
 <body>
-    <div class="container mt-5 mb-5">
+    <div class="container my-5">
         <h2 class="text-center">ตะกร้าสินค้า</h2>
-        <div class="cart-table">
+        <div class="cart-table" style="margin-bottom: 250px;">
             <form action="confirm.php" method="POST">
                 <div class="header-row">
                     <div><input type="checkbox" id="select-all"></div>
@@ -223,7 +223,7 @@ ob_end_flush(); // ปิดการ buffer output
 
                 <div class="total-section">
                     <span>สินค้าที่เลือกแล้ว: <span id="total-quantity">0</span> ชิ้น</span>
-                    <span>ยอดรวมทั้งหมด: <span id="selected-price">฿<?php echo number_format($totalPrice, 2); ?></span></span>
+                    <span>ยอดรวมทั้งหมด: <span id="selected-price">฿0.00</span></span>
                     <button type="submit" class="checkout-btn">สั่งซื้อ</button>
                 </div>
             </form>
@@ -319,7 +319,10 @@ ob_end_flush(); // ปิดการ buffer output
                 const price = parseFloat(cartItemBox.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
                 const qty = parseInt(cartItemBox.querySelector('input[type="text"]').value);
                 const total = price * qty;
-                cartItemBox.querySelector('.cart-item-total').textContent = '฿' + total.toFixed(2);
+                cartItemBox.querySelector('.cart-item-total').textContent = '฿' + total.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
                 updateTotalPriceOverall(); // เรียกใช้ฟังก์ชันเพื่ออัปเดตยอดรวมทั้งหมด
             }
 
@@ -342,7 +345,10 @@ ob_end_flush(); // ปิดการ buffer output
                         selectedTotalPrice += price * qty;
                     }
                 });
-                document.getElementById('selected-price').textContent = '฿' + selectedTotalPrice.toFixed(2);
+                document.getElementById('selected-price').textContent = '฿' + selectedTotalPrice.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
             }
 
             // ตั้งค่าเริ่มต้นให้แสดง 0 ในช่วงเริ่มต้น
