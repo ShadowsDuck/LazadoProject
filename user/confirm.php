@@ -186,10 +186,10 @@ $shipping_address = $user_result->fetch_assoc();
 
         <div class="order-summary mt-4">
             <h5>สรุปคำสั่งซื้อ</h5>
-            
+
             <!-- <p>ค่าจัดส่ง: ฿<?php echo number_format($shipping_cost_per_order, 2); ?></p> -->
             <hr>
-            <p class="total">ยอดรวมทั้งสิ้น: <?php echo number_format($total_price,2); ?>
+            <p class="total">ยอดรวมทั้งสิ้น: <?php echo number_format($total_price, 2); ?>
             </p>
         </div>
 
@@ -199,7 +199,7 @@ $shipping_address = $user_result->fetch_assoc();
             <input type="hidden" name="cartItems" value="<?php echo htmlspecialchars(json_encode($cartItems), ENT_QUOTES, 'UTF-8'); ?>">
             <input type="hidden" name="total_amount" value="<?php echo $total_amount ?>">
             <input type="hidden" name="shipping_address" value="<?php echo htmlspecialchars($shipping_address['address']); ?>">
-            <input type="hidden" name="discount" value="">
+            <input type="hidden" name="discount" value="<?php echo isset($item['discount']) && $item['discount'] == 1 ? 1 : 0; ?>">
             <button type="submit" class="checkout-btn mt-3">สั่งซื้อ</button>
         </form>
     </div>
