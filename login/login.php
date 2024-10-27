@@ -52,7 +52,7 @@ include '../connect.php';
         <div class="row w-100">
             <!-- Left side: Image -->
             <div class="col-md-7 d-none d-md-flex align-items-center">
-                <img src="https://img.freepik.com/premium-photo/red-black-gaming-accessories-flat-lay_1346134-20564.jpg"
+                <img src="https://dlcdnrog.asus.com/rog/media/156718576721.webp"
                     alt="Sign Up Image" class="img-fluid rounded-end w-100">
             </div>
             <div class="col-md-5 d-md-flex align-items-center justify-content-center">

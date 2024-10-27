@@ -47,7 +47,7 @@ include '../connect.php';
         <div class="row w-100">
             <!-- Left side: Image -->
             <div class="col-md-7 d-none d-md-flex align-items-center">
-                <img src="https://img.freepik.com/premium-photo/top-view-gaming-gear_160097-847.jpg" alt="Sign Up Image"
+                <img src="https://static1.xdaimages.com/wordpress/wp-content/uploads/2022/07/ROG-Phone-6-series-wallpapers-featured.jpg" alt="Sign Up Image"
                     class="img-fluid rounded-end w-100">
             </div>
 
