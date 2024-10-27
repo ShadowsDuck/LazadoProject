@@ -94,6 +94,12 @@ body {
     border-radius: 5px;
     width: 100%;
     cursor: pointer;
+    
+}
+.buttonlogout p{
+    margin-top: 10px;
+    font-weight:bold ;
+    font-size: 1rem;
 }
 
 .buttonlogout:hover {
@@ -142,7 +148,7 @@ body {
             <a class="nav-link" href="user_edit.php?page=orderStatusEdit" data-page="editpage/orderStatusEdit.php">สถานะสินค้าของฉัน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
             
-            <a href="user_edit.php?logout=1" style="margin:0; padding:0;" ><button type="button" class="buttonlogout btn btn-danger my-2 mx-0 py-2 w-100" ><p>ออกจากระบบ</p></button></a>
+            <a href="user_edit.php?logout=1" style="margin:0; padding:0;" ><button type="button" class="buttonlogout btn btn-danger my-2 mx-0 py-2 w-100 " ><p>ออกจากระบบ</p></button></a>
             
         </div>
             

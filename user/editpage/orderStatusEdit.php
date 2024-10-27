@@ -12,13 +12,12 @@ if ($conn->connect_error) {
 $user_id = $_SESSION['id'] ?? 0;
 
 // ดึงสถานะและนับจำนวนสถานะจากตาราง orders
-$sql = "
-    SELECT u.fullname, o.status, COUNT(*) as count
-    FROM orders o
-    INNER JOIN users u ON o.user_id = u.id
-    WHERE o.user_id = ?
-    GROUP BY u.fullname, o.status
-";
+$sql = "SELECT users.fullname, orders.status, COUNT(*) as count
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.id
+        WHERE orders.user_id = ?
+        GROUP BY users.fullname, orders.status";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
