@@ -180,7 +180,7 @@ ob_end_flush(); // ปิดการ buffer output
 </head>
 
 <body>
-    <div class="container mt-5 mb-5" style="min-height: 600px;">
+    <div class="container mt-5 mb-5">
         <h2 class="text-center">ตะกร้าสินค้า</h2>
         <div class="cart-table">
             <form action="confirm.php" method="POST">
