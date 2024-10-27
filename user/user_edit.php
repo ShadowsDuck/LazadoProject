@@ -21,98 +21,36 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
 ob_end_flush(); // ปิดการ buffer output
 ?>
 
+<style>.sidebar {
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0;
+    min-height: auto;
+    padding-top: 20px;
+}
 
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
+.sidebar a {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+}
 
-    .sidebar {
-        background-color: #fff;
-        border-right: 1px solid #e0e0e0;
-        min-height: auto;
-        padding-top: 20px;
-    }
+.btn {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
 
-    .sidebar a {
-        color: #333;
-        font-weight: bold;
-        display: block;
-        padding: 10px 20px;
-        text-decoration: none;
-    }
+}
 
-    .btn {
-        color: #333;
-        font-weight: bold;
-        display: block;
-        padding: 10px 20px;
-        text-decoration: none;
-
-    }
-
-    .sidebar a.active,
-    .sidebar a:hover {
-        background-color: #f5f5f5;
-        color: red;
-    }
-    .buttonlogout:hover {
-        /* background-color: #f5f5f5; */
-        color: red;
-    }
-
-    .user-info {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-edit {
-        background-color: #f8d7da;
-        color: red;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-    }
-
-    .btn-edit:hover {
-        background-color: #f5c2c7;
-    }
-
-    .status-card {
-        background-color: #fff;
-        border: 1px solid #e0e0e0;
-        padding: 10px;
-        text-align: center;
-        border-radius: 8px;
-    }
-
-    .status-card p {
-        margin: 0;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .status-card span {
-        display: block;
-        font-size: 14px;
-        color: #888;
-    }
-
-    .user-details {
-        margin-top: 20px;
-    }
-
-    .user-details .detail-item {
-        margin-bottom: 10px;
-    }
-
-    .user-details .detail-item span {
-        color: #888;
-    }
-</style>
+.sidebar a.active,
+.sidebar a:hover {
+    background-color: #f5f5f5;
+    color: red;
+    border-radius: 5px;
+}</style>
 
 
 <div class="container mt-5">
@@ -125,9 +63,7 @@ ob_end_flush(); // ปิดการ buffer output
             <a class="nav-link" href="user_edit.php?page=orderStatusEdit" data-page="editpage/orderStatusEdit.php">สถานะสินค้าของฉัน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
             
-            <form method="POST" action="user_edit.php?logout=1" id="logoutForm" style="margin-left: 15px;">
-    <button type="submit" class="btn btn-danger my-2 mx-0 py-2 buttonlogout">ออกจากระบบ</button>
-</form>
+            <a href="user_edit.php?logout=1" style="margin:0; padding:0;" ><button type="button" class="buttonlogout btn btn-danger my-2 mx-0 py-2 w-100" ><p>ออกจากระบบ</p></button></a>
             
         </div>
             
@@ -136,7 +72,7 @@ ob_end_flush(); // ปิดการ buffer output
         <!-- Main Content -->
 
         <div class="col-sm-9 ">
-            <div class="cus rounded-sm " style="margin-left:3rem; background-color:#f8f9fa;">
+            <div class="cus rounded-sm " style="margin-left:3rem; background-color:#f8f9fa; border-radius: 5px;">
                 <div id="sidebar-content" class="p-3">
                     <!-- เนื้อหาจะถูกโหลดมาแสดงที่นี่ -->
                 </div>
@@ -286,20 +222,6 @@ ob_end_flush(); // ปิดการ buffer output
             updateaddressModal.show();
         }
         
-    });
-
-    //สำหรับปุ่มออกจากระบบ
-    document.addEventListener("DOMContentLoaded", function() {
-        const logoutForm = document.getElementById('logoutForm');
-
-        // ตรวจสอบการคลิกด้านนอกปุ่มออกจากระบบ
-        document.addEventListener('click', function(event) {
-            const isClickInside = logoutForm.contains(event.target);
-
-            if (!isClickInside) {
-                event.preventDefault(); // ยกเลิกการทำงานของการคลิกด้านนอก
-            }
-        });
     });
 </script>
 
