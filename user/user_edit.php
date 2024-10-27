@@ -56,6 +56,10 @@ ob_end_flush(); // ปิดการ buffer output
         background-color: #f5f5f5;
         color: red;
     }
+    .buttonlogout:hover {
+        /* background-color: #f5f5f5; */
+        color: red;
+    }
 
     .user-info {
         background-color: #fff;
@@ -113,14 +117,21 @@ ob_end_flush(); // ปิดการ buffer output
 
 <div class="container mt-5">
     <div class="row ">
+        
         <!-- Sidebar -->
-        <div class="col-sm-3 sidebar" id="sidebar" style="min-height: 500px;">
+        <div class="col-sm-3 sidebar" id="sidebar" style="min-height: 600px;">
             <a class="nav-link" href="user_edit.php?page=infoEdit" data-page="editpage/infoEdit.php">ข้อมูลส่วนตัว</a>
             <a class="nav-link" href="user_edit.php?page=addressEdit" data-page="editpage/addressEdit.php">ที่อยู่สำหรับจัดส่ง</a>
             <a class="nav-link" href="user_edit.php?page=orderStatusEdit" data-page="editpage/orderStatusEdit.php">สถานะสินค้าของฉัน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
-            <a href="user_edit.php?logout=1" style="margin:0; padding:0;"><button type="button" class="btn btn-danger my-2 mx-3 py-2">ออกจากระบบ</button></a>
+            
+            <form method="POST" action="user_edit.php?logout=1" id="logoutForm" style="margin-left: 15px;">
+    <button type="submit" class="btn btn-danger my-2 mx-0 py-2 buttonlogout">ออกจากระบบ</button>
+</form>
+            
         </div>
+            
+        
 
         <!-- Main Content -->
 
@@ -275,6 +286,20 @@ ob_end_flush(); // ปิดการ buffer output
             updateaddressModal.show();
         }
         
+    });
+
+    //สำหรับปุ่มออกจากระบบ
+    document.addEventListener("DOMContentLoaded", function() {
+        const logoutForm = document.getElementById('logoutForm');
+
+        // ตรวจสอบการคลิกด้านนอกปุ่มออกจากระบบ
+        document.addEventListener('click', function(event) {
+            const isClickInside = logoutForm.contains(event.target);
+
+            if (!isClickInside) {
+                event.preventDefault(); // ยกเลิกการทำงานของการคลิกด้านนอก
+            }
+        });
     });
 </script>
 
