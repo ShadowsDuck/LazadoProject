@@ -38,7 +38,7 @@
                 <a href="allitem.php?c=monitor">Monitor</a>
                 <a href="allitem.php?c=chair">Chair</a>
                 <a href="allitem.php?c=streaming">Streaming</a>
-                
+
             </div>
         </div>
 
@@ -134,7 +134,7 @@
         <div class="row">
             <?php
             // Query all featured products in one go
-            $result = mysqli_query($conn, "SELECT * FROM products WHERE id IN (3, 4, 5, 7)");
+            $result = mysqli_query($conn, "SELECT * FROM products WHERE id IN (62, 4, 5, 7)");
 
             // Loop through each product
             while ($row = mysqli_fetch_assoc($result)) {
