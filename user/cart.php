@@ -220,10 +220,10 @@ ob_end_flush(); // ปิดการ buffer output
                         </div>
                     </div>
                 <?php endforeach; ?>
-
+                
                 <div class="total-section">
                     <span>สินค้าที่เลือกแล้ว: <span id="total-quantity">0</span> ชิ้น</span>
-                    <span>ยอดรวมทั้งหมด: <span id="selected-price">฿0.00</span></span>
+                    <span>ยอดรวมทั้งหมด: <span id="selected-price">฿<?php echo number_format($totalPrice, 2); ?></span></span>
                     <button type="submit" class="checkout-btn">สั่งซื้อ</button>
                 </div>
             </form>
@@ -339,10 +339,10 @@ ob_end_flush(); // ปิดการ buffer output
                         const cartItemBox = checkbox.closest('.cart-item-box');
                         const price = parseFloat(cartItemBox.querySelector('.cart-item-price').textContent.replace('฿', '').replace(',', ''));
                         const qty = parseInt(cartItemBox.querySelector('input[type="text"]').value);
-                        selectedTotalPrice += price * qty; // คำนวณยอดรวม
+                        selectedTotalPrice += price * qty; 
                     }
                 });
-                document.getElementById('selected-price').textContent = '฿' + selectedTotalPrice.toFixed(2); // แสดงยอดรวมที่เลือก
+                document.getElementById('selected-price').textContent = '฿' + selectedTotalPrice.toFixed(2); 
             }
 
             // ตั้งค่าเริ่มต้นให้แสดง 0 ในช่วงเริ่มต้น
