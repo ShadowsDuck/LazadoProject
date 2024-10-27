@@ -76,7 +76,7 @@
 
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">โปรโมชั่นประจำเดือน</h2>
+    <h2 class="text-center mb-4">โปรโมชั่นประจำเดือนนี้</h2>
     <div class="d-flex justify-content-between align-items-center">
         <div class="container mb-4">
             <div class="row">
