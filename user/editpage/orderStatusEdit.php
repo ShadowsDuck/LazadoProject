@@ -18,7 +18,7 @@ $sql = "SELECT users.fullname, orders.status, COUNT(*) as count
         WHERE orders.user_id = ?
         GROUP BY users.fullname, orders.status";
 
-$sql1 = "SELECT fullname FROM users";
+$sql1 = "SELECT fullname FROM users WHERE id = {$_SESSION['id']}";
 $result1 = mysqli_query($conn, $sql1);
 $row1 = mysqli_fetch_assoc($result1);
 
