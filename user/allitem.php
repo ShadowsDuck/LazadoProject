@@ -50,32 +50,33 @@ require('../connect.php');
     </div>
 
     <div class="row text-center">
+        <h2 class="text-center mt-5">จัดเรียงตามประเภท</h2>
         <div class="col-md-2 py-4">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=keyboard') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=keyboard'">
                 <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
-                <p>Keyboard</p>
+                <p>คีย์บอร์ด</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=mouse') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=mouse'">
                 <i class="bi bi-mouse" style="font-size: 2rem;"></i>
-                <p>Mouse</p>
+                <p>เมาส์</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=headset') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=headset'">
                 <i class="bi bi-headset" style="font-size: 2rem;"></i>
-                <p>Headset</p>
+                <p>หูฟัง</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=monitor') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=monitor'">
                 <i class="bi bi-display" style="font-size: 2rem;"></i>
-                <p>Monitor</p>
+                <p>จอมอนิเตอร์</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
@@ -84,14 +85,14 @@ require('../connect.php');
                 <i class="bi bi-chair" style="font-size: 2rem;"><img
                         src="https://www.svgrepo.com/show/281964/desk-chair-chair.svg"
                         style="height: 2.5rem; width: 2.5rem; color:blue;"></i>
-                <p>Chair</p>
+                <p>เก้าอี้</p>
             </div>
         </div>
         <div class="col-md-2 py-4">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=streaming') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=streaming'">
                 <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
-                <p>Streaming</p>
+                <p>สตรีมมิ่ง</p>
             </div>
         </div>
     </div>
