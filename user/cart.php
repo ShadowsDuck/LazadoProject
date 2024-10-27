@@ -255,6 +255,9 @@ ob_end_flush(); // ปิดการ buffer output
                     updateTotalPrice(this.closest('.cart-item-box'));
                     updateTotalQuantity(); // อัปเดตจำนวนสินค้าทั้งหมด
                     updateSelectedTotal(); // อัปเดตยอดรวมของสินค้าที่เลือก
+
+                    // AJAX เรียก update_cart.php
+                    updateCartQty(this.closest('.cart-item-box'), qty + 1);
                 });
             });
 
@@ -267,9 +270,29 @@ ob_end_flush(); // ปิดการ buffer output
                         updateTotalPrice(this.closest('.cart-item-box'));
                         updateTotalQuantity(); // อัปเดตจำนวนสินค้าทั้งหมด
                         updateSelectedTotal(); // อัปเดตยอดรวมของสินค้าที่เลือก
+
+                        // AJAX เรียก update_cart.php
+                        updateCartQty(this.closest('.cart-item-box'), qty - 1);
                     }
                 });
             });
+
+            function updateCartQty(cartItemBox, newQty) {
+                const productId = cartItemBox.querySelector('.item-checkbox').value; // ใช้ product_id จาก checkbox
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "update_cart.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    const response = JSON.parse(this.responseText);
+                    if (response.success) {
+                        console.log(response.message); // แสดงข้อความใน console
+                    } else {
+                        alert(response.message); // แสดงข้อความเมื่อมีข้อผิดพลาด
+                    }
+                };
+                xhr.send("product_id=" + productId + "&qty=" + newQty);
+            }
+
 
             itemCheckboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
