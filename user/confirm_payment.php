@@ -30,8 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($result){
             $sql = "DELETE FROM cart WHERE id = '{$item['id']}'";
             $result = mysqli_query($conn, $sql);
+            $_SESSION['orderSuccess'] = '1';
             header("Location:{$base_url}/user/index.php?orderSuccess=1");
         } else {
+            $_SESSION['orderSuccess'] = '0';
             header("Location:{$base_url}/user/index.php?orderSuccess=0");
         }
     }
