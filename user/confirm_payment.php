@@ -8,16 +8,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cartItems = json_decode($_POST['cartItems'], true);
     $customer_address = $_POST['shipping_address'];
     $total_amount = $_POST['total_amount'];
+    $discount = $_POST['discount'];
+    $price = 0;
 
     foreach ($cartItems as $item) {
+        if ($discount == 1) {
+            $price = $item['discounted_price'];
+        } else {
+            $price = $item['price'];
+        }
+
         $sql = "INSERT INTO `orders`
             (`user_id`, `product_id`, `price`, `qty`, `total`,`order_date`, `status`, `customer_name`, `customer_email`, `customer_address`)
         SELECT 
             '$user_id', 
             '{$item['product_id']}', 
-            '{$item['price']}', 
+            '{$price}', 
             '{$item['qty']}', 
-            '{$item['qty']}' * '{$item['price']}', 
+            '{$item['qty']}' * '{$price}', 
             NOW(),
             '1', 
             users.fullname, 
@@ -27,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         WHERE users.id = '$user_id'";
 
         $result = mysqli_query($conn, $sql);
-        if ($result){
+        if ($result) {
             $sql = "DELETE FROM cart WHERE id = '{$item['id']}'";
             $result = mysqli_query($conn, $sql);
             $_SESSION['orderSuccess'] = '1';

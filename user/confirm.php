@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('partials/header.php');
 include("../connect.php");
 
@@ -15,7 +15,7 @@ if (empty($selectedProducts)) {
 }
 
 // ดึงข้อมูลสินค้าเฉพาะที่ถูกเลือก
-$sql = "SELECT cart.*, products.name, products.price, products.img 
+$sql = "SELECT cart.*, products.name, products.price, products.img, products.discount, products.discounted_price 
         FROM cart 
         INNER JOIN products ON cart.product_id = products.id 
         WHERE cart.user_id = '{$_SESSION['id']}' 
@@ -28,7 +28,11 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_array()) { // $row = mysqli_fetch_array($result)
         $cartItems[] = $row;
         // คำนวณราคาทั้งหมดโดยคูณราคากับจำนวนที่ถูกเลือก
-        $total_price += $row['price'] * $row['qty'];
+        if ($row['discount'] == 1) {
+            $total_price += $row['discounted_price'] * $row['qty'];
+        } else {
+            $total_price += $row['price'] * $row['qty'];
+        }
     }
 } else {
     echo "<p>ไม่มีสินค้าที่เลือกในตะกร้า</p>";
@@ -40,11 +44,6 @@ $user_id = $_SESSION['id'];
 $user_sql = "SELECT fullname, address FROM users WHERE id = '$user_id'";
 $user_result = $conn->query($user_sql);
 $shipping_address = $user_result->fetch_assoc();
-
-// // คำนวณค่าจัดส่ง
-// $unique_items_count = count($cartItems); // จำนวนสินค้าที่แตกต่าง
-// $shipping_cost_per_order = $unique_items_count * 25; // 25 บาทต่อรายการ
-// $total_amount = $total_price + $shipping_cost_per_order;
 ?>
 
 <!DOCTYPE html>
@@ -60,30 +59,40 @@ $shipping_address = $user_result->fetch_assoc();
             font-family: 'Helvetica Neue', sans-serif;
             background-color: #f8f9fa;
         }
-        .shipping-info, .payment-methods, .order-summary, .cart-item-box, .shipping-options {
+
+        .shipping-info,
+        .payment-methods,
+        .order-summary,
+        .cart-item-box,
+        .shipping-options {
             background-color: white;
             padding: 20px;
             margin-bottom: 20px;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
         }
+
         .cart-item-box img {
             width: 80px;
             height: 80px;
             object-fit: cover;
         }
+
         .cart-item-price {
             color: #ff4d00;
             font-weight: bold;
         }
+
         .order-summary p {
             margin: 0;
         }
+
         .order-summary .total {
             font-size: 1.5rem;
             font-weight: bold;
             color: #007bff;
         }
+
         .checkout-btn {
             background-color: #ff4d00;
             color: white;
@@ -91,9 +100,11 @@ $shipping_address = $user_result->fetch_assoc();
             border: none;
             width: 100%;
         }
+
         .checkout-btn:hover {
             background-color: #e64300;
         }
+
         .shipping-option {
             border: 1px solid #007bff;
             border-radius: 8px;
@@ -103,8 +114,10 @@ $shipping_address = $user_result->fetch_assoc();
             display: flex;
             align-items: center;
         }
+
         .shipping-option input[type="radio"] {
-            margin-right: 10px; /* เว้นระยะระหว่าง radio button กับข้อความ */
+            margin-right: 10px;
+            /* เว้นระยะระหว่าง radio button กับข้อความ */
         }
     </style>
 </head>
@@ -123,7 +136,14 @@ $shipping_address = $user_result->fetch_assoc();
                                 <span class="text-muted">จำนวน: <?php echo htmlspecialchars($item['qty']); ?></span>
                             </div>
                         </div>
-                        <span class="cart-item-price">฿<?php echo number_format($item['price'] * $item['qty'], 2); ?></span>
+                        <span class="cart-item-price"><?php
+                                                        if ($item['discount'] == 1 && !empty($item['discounted_price'])) {
+                                                            echo "฿" . number_format($item['discounted_price'] * $item['qty'], 2); // แสดงราคาที่ลดแล้ว
+                                                        } else {
+                                                            echo "฿" . number_format($item['price'] * $item['qty'], 2); // แสดงราคาปกติ
+                                                        }
+                                                        ?>
+                        </span>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -166,24 +186,27 @@ $shipping_address = $user_result->fetch_assoc();
 
         <div class="order-summary mt-4">
             <h5>สรุปคำสั่งซื้อ</h5>
-            <p>ยอดรวม: ฿<?php echo number_format($total_price, 2); ?></p>
+
             <!-- <p>ค่าจัดส่ง: ฿<?php echo number_format($shipping_cost_per_order, 2); ?></p> -->
             <hr>
-            <p class="total">ยอดรวมทั้งสิ้น: ฿<?php echo number_format($total_price, 2); ?></p>
+            <p class="total">ยอดรวมทั้งสิ้น: <?php echo number_format($total_price, 2); ?>
+            </p>
         </div>
 
         <form method="POST" action="confirm_payment.php">
-            <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']?>"> 
-                                                                                            <!-- แปลงเป็น json ให้ tag input ส่งค่าได้ -->
+            <input type="hidden" name="user_id" value="<?php echo $_SESSION['id'] ?>">
+            <!-- แปลงเป็น json ให้ tag input ส่งค่าได้ -->
             <input type="hidden" name="cartItems" value="<?php echo htmlspecialchars(json_encode($cartItems), ENT_QUOTES, 'UTF-8'); ?>">
             <input type="hidden" name="total_amount" value="<?php echo $total_amount ?>">
             <input type="hidden" name="shipping_address" value="<?php echo htmlspecialchars($shipping_address['address']); ?>">
+            <input type="hidden" name="discount" value="<?php echo isset($item['discount']) && $item['discount'] == 1 ? 1 : 0; ?>">
             <button type="submit" class="checkout-btn mt-3">สั่งซื้อ</button>
         </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
 
 <?php
