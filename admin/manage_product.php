@@ -300,6 +300,7 @@
                                     <div class="card-text text-danger" style="font-weight: bold; font-size: 1rem;">
                                         <?php
                                         if ($row['discount'] == 1 && !empty($row['discounted_price'])) {
+                                            echo "<span style='color: green; font-size: 0.9rem; font-weight: bold;'>ลดราคา</span><br>";
                                             echo "฿" . number_format($row['discounted_price'], 2); // แสดงราคาที่ลดแล้ว
                                         } else {
                                             echo "฿" . number_format($row['price'], 2); // แสดงราคาปกติ
