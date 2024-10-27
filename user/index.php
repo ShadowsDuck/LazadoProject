@@ -92,7 +92,10 @@
                                 <!-- body -->
                                 <div class="card-body" style="cursor: pointer;"
                                     onclick="window.location.href='item_details.php?id=<?php echo $row1['id'] ?>'">
-                                    <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
+                                    <?php
+                                    $imageURL = !empty($row1['file_name']) ? '../uploads/' . $row1['file_name'] : 'https://placehold.co/200';
+                                    ?>
+                                    <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
                                     <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
                                         <?php echo $row1['name']; ?></h4>
                                 </div>
@@ -130,177 +133,56 @@
         <h2 class="text-center mb-4">สินค้าขายดีประจำเดือน</h2>
         <div class="row">
             <?php
-            $result1 = mysqli_query($conn, "SELECT * FROM products WHERE id = 3");
-            $result2 = mysqli_query($conn, "SELECT * FROM products WHERE id = 4");
-            $result3 = mysqli_query($conn, "SELECT * FROM products WHERE id = 5");
-            $result4 = mysqli_query($conn, "SELECT * FROM products WHERE id = 11");
+            // Query all featured products in one go
+            $result = mysqli_query($conn, "SELECT * FROM products WHERE id IN (3, 4, 5, 7)");
 
-            $row1 = mysqli_fetch_assoc($result1);
-            $row2 = mysqli_fetch_assoc($result2);
-            $row3 = mysqli_fetch_assoc($result3);
-            $row4 = mysqli_fetch_assoc($result4);
+            // Loop through each product
+            while ($row = mysqli_fetch_assoc($result)) {
+                $imageURL = !empty($row['file_name']) ? '../uploads/' . $row['file_name'] : 'https://placehold.co/200';
             ?>
-            <!-- Product 1 -->
-            <div class="col col-md-3 mb-4">
-                <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
-                    <!-- body -->
-                    <div class="card-body" style="cursor: pointer;"
-                        onclick="window.location.href='item_details.php?id=<?php echo $row1['id'] ?>'">
-                        <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
-                        <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
-                            <?php echo $row1['name']; ?></h4>
-                    </div>
+                <div class="col col-md-3 mb-4">
+                    <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
+                        <!-- Card body with click-to-details -->
+                        <div class="card-body" style="cursor: pointer;" onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
+                            <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
+                            <h4 class="card-title" style="font-weight:600; font-size:0.8rem;">
+                                <?php echo $row['name']; ?>
+                            </h4>
+                        </div>
 
-                    <!-- footer -->
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <?php
-                        // ถ้า discount true
-                        if ($row1['discount'] == 1) { ?>
+                        <!-- Card footer with price and add-to-cart button -->
+                        <div class="card-footer d-flex justify-content-between align-items-center">
                             <div class="card-text">
-                                <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row1['price'], 2); ?></p>
-                                <p style="margin:0;  font-size: 20px; color:red;"><?php echo "฿" . number_format($row1['discounted_price'], 2); ?></p>
+                                <?php if ($row['discount'] == 1) { ?>
+                                    <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;">
+                                        <?php echo "฿" . number_format($row['price'], 2); ?>
+                                    </p>
+                                    <p style="margin:0; font-size: 20px; color:red;">
+                                        <?php echo "฿" . number_format($row['discounted_price'], 2); ?>
+                                    </p>
+                                <?php } else { ?>
+                                    <p style="font-size: 20px; color:black;">
+                                        <?php echo "฿" . number_format($row['price'], 2); ?>
+                                    </p>
+                                <?php } ?>
                             </div>
-                        <?php
-                        } else { ?>
-                            <div class="card-text" style="font-size: 20px; color:black;">
-                                <?php echo "฿" . number_format($row1['price'], 2); ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
 
-                        <button class="btn addCart"
-                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalAddCart"
-                            data-id="<?php echo $row1['id'] ?>">
-                            <i style="color:red;" class="bi bi-cart3 h4"></i>
-                        </button>
+                            <button class="btn addCart"
+                                onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalAddCart"
+                                data-id="<?php echo $row['id'] ?>">
+                                <i style="color:red;" class="bi bi-cart3 h4"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="col col-md-3 mb-4">
-                <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
-                    <!-- body -->
-                    <div class="card-body" style="cursor: pointer;"
-                        onclick="window.location.href='item_details.php?id=<?php echo $row2['id'] ?>'">
-                        <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
-                        <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
-                            <?php echo $row2['name']; ?></h4>
-                    </div>
-
-                    <!-- footer -->
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <?php
-                        // ถ้า discount true
-                        if ($row2['discount'] == 1) { ?>
-                            <div class="card-text">
-                                <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row2['price'], 2); ?></p>
-                                <p style="margin:0;  font-size: 20px; color:red;"><?php echo "฿" . number_format($row2['discounted_price'], 2); ?></p>
-                            </div>
-                        <?php
-                        } else { ?>
-                            <div class="card-text" style="font-size: 20px; color:black;">
-                                <?php echo "฿" . number_format($row2['price'], 2); ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
-
-                        <button class="btn addCart"
-                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalAddCart"
-                            data-id="<?php echo $row2['id'] ?>">
-                            <i style="color:red;" class="bi bi-cart3 h4"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="col col-md-3 mb-4">
-                <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
-                    <!-- body -->
-                    <div class="card-body" style="cursor: pointer;"
-                        onclick="window.location.href='item_details.php?id=<?php echo $row3['id'] ?>'">
-                        <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
-                        <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
-                            <?php echo $row3['name']; ?></h4>
-                    </div>
-
-                    <!-- footer -->
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <?php
-                        // ถ้า discount true
-                        if ($row3['discount'] == 1) { ?>
-                            <div class="card-text">
-                                <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row3['price'], 2); ?></p>
-                                <p style="margin:0;  font-size: 20px; color:red;"><?php echo "฿" . number_format($row3['discounted_price'], 2); ?></p>
-                            </div>
-                        <?php
-                        } else { ?>
-                            <div class="card-text" style="font-size: 20px; color:black;">
-                                <?php echo "฿" . number_format($row3['price'], 2); ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
-
-                        <button class="btn addCart"
-                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalAddCart"
-                            data-id="<?php echo $row3['id'] ?>">
-                            <i style="color:red;" class="bi bi-cart3 h4"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="col col-md-3 mb-4">
-                <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
-                    <!-- body -->
-                    <div class="card-body" style="cursor: pointer;"
-                        onclick="window.location.href='item_details.php?id=<?php echo $row4['id'] ?>'">
-                        <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
-                        <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
-                            <?php echo $row4['name']; ?></h4>
-                    </div>
-
-                    <!-- footer -->
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <?php
-                        // ถ้า discount true
-                        if ($row4['discount'] == 1) { ?>
-                            <div class="card-text">
-                                <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;"><?php echo "฿" . number_format($row4['price'], 2); ?></p>
-                                <p style="margin:0;  font-size: 20px; color:red;"><?php echo "฿" . number_format($row4['discounted_price'], 2); ?></p>
-                            </div>
-                        <?php
-                        } else { ?>
-                            <div class="card-text" style="font-size: 20px; color:black;">
-                                <?php echo "฿" . number_format($row4['price'], 2); ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
-
-                        <button class="btn addCart"
-                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalAddCart"
-                            data-id="<?php echo $row4['id'] ?>">
-                            <i style="color:red;" class="bi bi-cart3 h4"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <?php
+            }
+            ?>
         </div>
     </section>
+
     <!-- View All Products Button -->
     <div class="text-center mt-4">
         <a href="allitem.php" class="btn btn-danger">View All Products</a>

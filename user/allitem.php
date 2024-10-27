@@ -38,8 +38,7 @@ require('../connect.php');
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>คุณต้องการเพิ่มสินค้าไปยังตะกร้า?
-                        </p>
+                        <p>คุณต้องการเพิ่มสินค้าไปยังตะกร้า?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
@@ -138,7 +137,10 @@ require('../connect.php');
                             <div class="card h-100" style="background-color: rgba(0, 0, 0, 0.02);">
                                 <div class="card-body" style="cursor: pointer;"
                                     onclick="window.location.href='item_details.php?id=<?php echo $row['id'] ?>'">
-                                    <img src="https://placehold.co/200" class="card-img-top mb-3" alt="Image">
+                                    <?php
+                                    $imageURL = !empty($row['file_name']) ? '../uploads/' . $row['file_name'] : 'https://placehold.co/200';
+                                    ?>
+                                    <img src="<?php echo $imageURL ?>" class="card-img-top mb-3" alt="Image" width="200px" loading="lazy">
                                     <h4 class="card-title" style=" font-weight:600; font-size:0.8rem;">
                                         <?php echo $row['name']; ?></h4>
                                 </div>
@@ -159,7 +161,6 @@ require('../connect.php');
                                     <?php
                                     }
                                     ?>
-
                                     <button class="btn addCart"
                                         onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
                                         data-bs-toggle="modal"
