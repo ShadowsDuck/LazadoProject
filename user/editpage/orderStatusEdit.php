@@ -18,6 +18,10 @@ $sql = "SELECT users.fullname, orders.status, COUNT(*) as count
         WHERE orders.user_id = ?
         GROUP BY users.fullname, orders.status";
 
+$sql1 = "SELECT fullname FROM users";
+$result1 = mysqli_query($conn, $sql1);
+$row1 = mysqli_fetch_assoc($result1);
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -39,7 +43,7 @@ while ($row = $result->fetch_assoc()) {
 <div class="container mt-4">
     <div class="card shadow-sm border-0">
         <div class="card-header text-black" style="background-color: #dc3545;">
-            สถานะคำสั่งซื้อของผู้ใช้ ID: <?php echo $user_id; ?> คุณ <?php echo htmlspecialchars($fullname); ?>
+            สถานะคำสั่งซื้อของผู้ใช้ ID: <?php echo $user_id; ?> คุณ <?php echo $row1['fullname']; ?>
         </div>
         <div class="card-body">
             <div class="row">
