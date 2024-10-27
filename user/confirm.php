@@ -41,10 +41,10 @@ $user_sql = "SELECT fullname, address FROM users WHERE id = '$user_id'";
 $user_result = $conn->query($user_sql);
 $shipping_address = $user_result->fetch_assoc();
 
-// คำนวณค่าจัดส่ง
-$unique_items_count = count($cartItems); // จำนวนสินค้าที่แตกต่าง
-$shipping_cost_per_order = $unique_items_count * 25; // 25 บาทต่อรายการ
-$total_amount = $total_price + $shipping_cost_per_order;
+// // คำนวณค่าจัดส่ง
+// $unique_items_count = count($cartItems); // จำนวนสินค้าที่แตกต่าง
+// $shipping_cost_per_order = $unique_items_count * 25; // 25 บาทต่อรายการ
+// $total_amount = $total_price + $shipping_cost_per_order;
 ?>
 
 <!DOCTYPE html>
@@ -167,9 +167,9 @@ $total_amount = $total_price + $shipping_cost_per_order;
         <div class="order-summary mt-4">
             <h5>สรุปคำสั่งซื้อ</h5>
             <p>ยอดรวม: ฿<?php echo number_format($total_price, 2); ?></p>
-            <p>ค่าจัดส่ง: ฿<?php echo number_format($shipping_cost_per_order, 2); ?></p>
+            <!-- <p>ค่าจัดส่ง: ฿<?php echo number_format($shipping_cost_per_order, 2); ?></p> -->
             <hr>
-            <p class="total">ยอดรวมทั้งสิ้น: ฿<?php echo number_format($total_amount, 2); ?></p>
+            <p class="total">ยอดรวมทั้งสิ้น: ฿<?php echo number_format($total_price, 2); ?></p>
         </div>
 
         <form method="POST" action="confirm_payment.php">
