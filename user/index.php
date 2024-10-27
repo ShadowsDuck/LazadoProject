@@ -31,13 +31,13 @@
         <!-- Category Menu -->
         <div class="col-md-3">
             <div class="category-menu">
-                <a href="allitem.php">อุปกรณ์เกมมิ่งเกียร์<i class="bi bi-chevron-right"></i></a>
+                <a href="allitem.php">เกมมิ่งเกียร์<i class="bi bi-chevron-right"></i></a>
                 <a href="allitem.php?c=keyboard">คีย์บอร์ด</a>
                 <a href="allitem.php?c=mouse">เมาส์</a>
                 <a href="allitem.php?c=headset">หูฟัง</a>
                 <a href="allitem.php?c=monitor">จอมอนิเตอร์</a>
                 <a href="allitem.php?c=chair">เก้าอี้</a>
-                <a href="allitem.php?c=streaming">อุปกรณ์สตรีมมิ่ง</a>
+                <a href="allitem.php?c=streaming">สตรีมมิ่ง</a>
 
             </div>
         </div>
@@ -76,7 +76,7 @@
 
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">โปรโมชั่นประจำเดือน</h2>
+    <h2 class="text-center mb-4">โปรโมชั่นประจำเดือนนี้</h2>
     <div class="d-flex justify-content-between align-items-center">
         <div class="container mb-4">
             <div class="row">
@@ -259,7 +259,7 @@
         <div class="col-md-2">
             <div class="category-item p-4" onclick="window.location.href='allitem.php?c=streaming'" style="cursor: pointer;">
                 <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
-                <p>อุปกรณ์สตรีมมิ่ง</p>
+                <p>สตรีมมิ่ง</p>
             </div>
         </div>
     </div>
