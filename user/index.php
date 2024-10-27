@@ -52,13 +52,13 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://yt3.googleusercontent.com/NvH3G0-twMfxjeJLZOQvmaJ5loWfS6hOfIKPv2M_Gh5r3b7nLo8IljtEdjH_Ga27xxRtrErD=s900-c-k-c0x00ffffff-no-rj" alt="Slide 1">
+                        <img src="https://assets2.razerzone.com/images/og-image/Razer-Products-OGimage-1200x630.jpg" alt="Slide 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://s.isanook.com/ns/0/ui/1586/7930818/gal-7930818-20191022051920-a6757b1.jpg" alt="Slide 2">
+                        <img src="https://www.ceogallery.com.my/image/ceogallery/image/data/gaming%20gear%20banner.jpg" alt="Slide 2">
                     </div>
                     <div class="carousel-item">
-                        <img src="image/product/453221908_405973229124928_6954447741468252783_n.jpg" alt="Slide 3">
+                        <img src="https://lh7-us.googleusercontent.com/docsz/AD_4nXfGK3Pt7cCXtcK0BLruwQb5CGffXrTe__wi6JVkiL_-39Rw-pxC8-mQNzXFaHfvf77PEH41gBUlCX_LJLUNekCraIlccZe7T9ODq61JuQKZ4-brTFMznPGAfSEza6W1J-P5dsIqCwMffgDbgEN1XGVtun9f?key=ki8BMy9Fx1MSttNl4rVBVw" alt="Slide 3">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#topCarousel" role="button" data-bs-slide="prev">
@@ -202,13 +202,13 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="image/product/394631396_240848385637414_4855002469686348029_n.jpg" class="d-block w-100" alt="...">
+                <img src="https://img.freepik.com/premium-photo/top-view-gaming-gear_1106939-204805.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="image/product/394631396_240848385637414_4855002469686348029_n.jpg" class="d-block w-100" alt="...">
+                <img src="https://img.freepik.com/premium-photo/cyber-sportsman-cyber-defense-cyberprep-online-hacker-hacker-hacking-online-cyber_569725-17137.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="image/product/394631396_240848385637414_4855002469686348029_n.jpg" class="d-block w-100" alt="...">
+                <img src="https://img.freepik.com/premium-photo/gamer-background-gaming-background-gamer-room-gaming-room-gaming-wallpaper_569725-7347.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#bottomCarousel" data-bs-slide="prev">
