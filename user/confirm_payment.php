@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user_id = $_POST['user_id'];
     $cartItems = json_decode($_POST['cartItems'], true);
     $customer_address = $_POST['shipping_address'];
+    $total_amount = $_POST['total_amount'];
 
     foreach ($cartItems as $item) {
         $sql = "INSERT INTO `orders`
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             '{$item['product_id']}', 
             '{$item['price']}', 
             '{$item['qty']}', 
-            '{$item['qty']}' * '{$item['price']}', 
+            '{$total_amount}', 
             '1', 
             users.fullname, 
             users.email, 
@@ -26,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $result = mysqli_query($conn, $sql);
         if ($result){
+            $sql = "DELETE FROM cart WHERE id = '{$item['id']}'";
+            $result = mysqli_query($conn, $sql);
             header("Location:{$base_url}/user/index.php?orderSuccess=1");
         } else {
             header("Location:{$base_url}/user/index.php?orderSuccess=0");
