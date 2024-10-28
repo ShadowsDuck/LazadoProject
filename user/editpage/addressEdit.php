@@ -13,7 +13,7 @@ $row = $result->fetch_assoc();
         <button id="editButton" class="btn btn-danger" onclick="toggleEdit()">แก้ไขที่อยู่</button>
     </div>
 
-    <div class="user-info d-flex align-items-center">
+    <div class="container user-info  align-items-center">
         <!-- ฟอร์มสำหรับแก้ไขข้อมูล -->
         <form action="<?php echo $base_url.'/user/editpage/update_address.php' ?>" id="editForm" method="POST" style="display: none;">
             <div class="mb-3 ">
