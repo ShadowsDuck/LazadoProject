@@ -16,6 +16,17 @@ $row = $result->fetch_assoc();
     <div class="user-info d-flex align-items-center">
         <!-- ฟอร์มสำหรับเปลี่ยนรหัสผ่าน -->
         <form action="<?php echo $base_url . '/user/editpage/update_pass.php' ?>" id="editForm" method="POST">
+
+            <div class="mb-3">
+                <label for="currentPassword" class="form-label">รหัสผ่านเดิม</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" name="current_password" id="currentPassword" required>
+                    <span class="input-group-text" onclick="togglePasswordVisibility('currentPassword', this)">
+                        <i class="bi bi-eye" id="eyeIconCurrent"></i>
+                    </span>
+                </div>
+            </div>
+
             <div class="mb-3">
                 <label for="newPassword" class="form-label">รหัสผ่านใหม่</label>
                 <div class="input-group">

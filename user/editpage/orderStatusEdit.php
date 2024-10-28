@@ -41,8 +41,8 @@ while ($row = $result->fetch_assoc()) {
 ?>
 
 <div class="container mt-4 ">
-    
-    <div class="card shadow-sm border-0">
+    <!-- ปิดการ hover ของ card ใช้ style="pointer-events: none;" -->
+    <div class="card shadow-sm border-0" style="pointer-events: none;">
 
         <div class="card-header text-white bg-dark">
             <h4>สถานะคำสั่งซื้อของฉัน ID: <?php echo $user_id; ?> คุณ <?php echo $row1['fullname']; ?></h4>

@@ -19,6 +19,8 @@ require('../connect.php');
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         /* background-color: red; */
     }
+
+    
 </style>
 
 
@@ -31,9 +33,9 @@ require('../connect.php');
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        
-                            <i class="bi bi-cart3" style="font-size:50px;"></i>
-                        
+
+                        <i class="bi bi-cart3" style="font-size:50px;"></i>
+
                         <h4 class="modal-title">เพิ่มสินค้า</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -51,35 +53,43 @@ require('../connect.php');
 
     <div class="row text-center">
         <h2 class="text-center mt-5">จัดเรียงตามประเภท</h2>
-        <div class="col-md-2 py-4">
+        <div class="col">
+            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php') ? 'active' : ''; ?>"
+                onclick="window.location.href='allitem.php'">
+                <i class="bi bi-grid" style="font-size: 2rem;"></i>
+                <p>ทั้งหมด</p>
+            </div>
+        </div>
+
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=keyboard') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=keyboard'">
                 <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
                 <p>คีย์บอร์ด</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=mouse') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=mouse'">
                 <i class="bi bi-mouse" style="font-size: 2rem;"></i>
                 <p>เมาส์</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=headset') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=headset'">
                 <i class="bi bi-headset" style="font-size: 2rem;"></i>
                 <p>หูฟัง</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=monitor') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=monitor'">
                 <i class="bi bi-display" style="font-size: 2rem;"></i>
                 <p>จอมอนิเตอร์</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=chair') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=chair'">
                 <i class="bi bi-chair" style="font-size: 2rem;"><img
@@ -88,7 +98,7 @@ require('../connect.php');
                 <p>เก้าอี้</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=streaming') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=streaming'">
                 <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>

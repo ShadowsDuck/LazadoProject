@@ -1,8 +1,9 @@
 <?php
+
 ob_start(); // เริ่มการ buffer output
 
 include('partials/header.php');
-$update_status = $_SESSION['update_status'] ?? '';//เอาไว้ใช้กับmodalกดบันทึกรหัส
+$update_status = $_SESSION['update_status'] ?? ''; //เอาไว้ใช้กับmodalกดบันทึกรหัส
 unset($_SESSION['update_status']);
 
 $update_status_info = $_SESSION['update_status_info'] ?? ''; //เอาไว้ใช้กับmodalกดบันทึกข้อมูล
@@ -22,147 +23,27 @@ ob_end_flush(); // ปิดการ buffer output
 ?>
 
 <!-- CSS -->
-<style>
-body {
-    background-color: #f8f9fa;
-}
+<link rel="stylesheet" href="./CSS/user_edit_style.css">
 
 
-.buttonlogout:hover {
-    /* background-color: #f5f5f5; */
-    color: red;
-}
 
-.user-info {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.btn-edit {
-    background-color: #f8d7da;
-    color: red;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-
-.btn-edit:hover {
-    background-color: #f5c2c7;
-}
-
-.status-card {
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    padding: 10px;
-    text-align: center;
-    border-radius: 8px;
-}
-
-.status-card p {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.status-card span {
-    display: block;
-    font-size: 14px;
-    color: #888;
-}
-
-.user-details {
-    margin-top: 20px;
-}
-
-.user-details .detail-item {
-    margin-bottom: 10px;
-}
-
-.user-details .detail-item span {
-    color: #888;
-}
-.buttonlogout {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 10px 0; /* กำหนด padding ด้านบนและล่าง */
-    border-radius: 3px;
-    width: 100%; /* กำหนดให้ปุ่มยืดเต็มพื้นที่ */
-    cursor: pointer;
-    text-align: center;
-}
-.buttonlogout p{
-    margin-top: 10px;
-    font-weight:bold ;
-    font-size: 1rem;
-}
-
-.buttonlogout:hover {
-    background-color: #c82333; /* สีแดงเข้มเมื่อ hover */
-}
-.sidebar {
-    background-color: #fff;
-    border-right: 1px solid #e0e0e0;
-    min-height: auto;
-    padding-top: 20px;
-}
-
-.sidebar a {
-    color: #333;
-    font-weight: bold;
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-}
-
-.btn {
-    color: #333;
-    font-weight: bold;
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-
-}
-
-.sidebar a.active,
-.sidebar a:hover {
-    background-color: #f5f5f5;
-    color: red;
-    border-radius: 5px;
-}
-.sidebar a #buttonLogout:hover {
-
-    color: red;
-    border-radius: 5px;
-}
-#buttonLogout:hover {
-    background-color: transparent; /* ไม่มีสีพื้นหลังเมื่อ hover */
-    color: white; /* คงสีตัวอักษรไว้เหมือนเดิม */
-    cursor: default; /* เปลี่ยนให้แสดงว่าไม่สามารถคลิกได้ */
-}
-</style>
-
-
-<div class="container mt-5  " style="margin-bottom:300px;" >
+<div class="container mt-5  " style="margin-bottom:300px;">
     <div class="row ">
-        
+
         <!-- Sidebar -->
-        <div class="col-sm-3 sidebar vh-auto" id="sidebar" >
+        <div class="col-sm-3 sidebar vh-auto" id="sidebar">
             <a class="nav-link" href="user_edit.php?page=infoEdit" data-page="editpage/infoEdit.php">ข้อมูลส่วนตัว</a>
             <a class="nav-link" href="user_edit.php?page=addressEdit" data-page="editpage/addressEdit.php">ที่อยู่สำหรับจัดส่ง</a>
             <a class="nav-link" href="user_edit.php?page=orderStatusEdit" data-page="editpage/orderStatusEdit.php">สถานะสินค้าของฉัน</a>
             <a class="nav-link" href="user_edit.php?page=passEdit" data-page="editpage/passEdit.php">เปลี่ยนรหัสผ่าน</a>
-            
-            <a href="user_edit.php?logout=1" style="margin:0; padding:0; " id="buttonLogout" ><button type="button" class="buttonlogout btn btn-danger my-2 mx-0 py-2 w-100 " ><p>ออกจากระบบ</p></button></a>
-            
+
+            <a href="user_edit.php?logout=1" style="margin:0; padding:0; " id="buttonLogout"><button type="button" class="buttonlogout btn btn-danger my-2 mx-0 py-2 w-100 ">
+                    <p>ออกจากระบบ</p>
+                </button></a>
+
         </div>
-            
-        
+
+
 
         <!-- Main Content -->
 
@@ -221,16 +102,19 @@ body {
 <div class="modal fade" id="passwordUpdateModal" tabindex="-1" aria-labelledby="passwordUpdateModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title" id="passwordUpdateModalLabel">
-                    <?php echo ($update_status == 'success') ? "สำเร็จ" : "เกิดข้อผิดพลาด"; ?>
+                    <?php echo ($update_status == 'success') ? "ทำรายการสำเร็จ" : "เกิดข้อผิดพลาด"; ?>
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white " data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
                 <p>
                     <?php
                     switch ($update_status) {
+                        case 'error':
+                            echo "รหัสผ่านเดิมไม่ถูกต้อง!";
+                            break;
                         case 'success':
                             echo "เปลี่ยนรหัสผ่านสำเร็จ!";
                             break;
@@ -248,7 +132,7 @@ body {
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ตกลง</button>
             </div>
         </div>
     </div>
@@ -295,7 +179,7 @@ body {
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-        const updateStatus = "<?php echo $update_status; ?>";//ใช้กับรหัส
+        const updateStatus = "<?php echo $update_status; ?>"; //ใช้กับรหัส
         console.log(updateStatus);
         if (updateStatus) {
             const passwordUpdateModal = new bootstrap.Modal(document.getElementById('passwordUpdateModal')); //ใช้กับรหัส
@@ -303,20 +187,20 @@ body {
         }
 
 
-        const updateStatus_info = "<?php echo $update_status_info; ?>";//ใช้กับข้อมูลทั่วไป
+        const updateStatus_info = "<?php echo $update_status_info; ?>"; //ใช้กับข้อมูลทั่วไป
         console.log(updateStatus_info);
         if (updateStatus_info) {
-            const updateInfoModal = new bootstrap.Modal(document.getElementById('updateInfoModal')); 
+            const updateInfoModal = new bootstrap.Modal(document.getElementById('updateInfoModal'));
             updateInfoModal.show();
         }
 
-        const updateStatus_address = "<?php echo $update_status_address; ?>";//ใช้กับที่อยู่
+        const updateStatus_address = "<?php echo $update_status_address; ?>"; //ใช้กับที่อยู่
         console.log(updateStatus_address);
         if (updateStatus_address) {
-            const updateaddressModal = new bootstrap.Modal(document.getElementById('updateAddressModal')); 
+            const updateaddressModal = new bootstrap.Modal(document.getElementById('updateAddressModal'));
             updateaddressModal.show();
         }
-        
+
     });
 </script>
 

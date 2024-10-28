@@ -1,0 +1,125 @@
+
+/* ที่มีไฟล์นี้เพราะมีบางอันมันไปทับกับ page อื่นๆ */
+
+body {
+    background-color: #f8f9fa;
+}
+
+
+.buttonlogout:hover {
+    /* background-color: #f5f5f5; */
+    color: red;
+}
+
+.user-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+    background-color: #f8d7da;
+    color: red;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btn-edit:hover {
+    background-color: #f5c2c7;
+}
+
+.status-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.status-card p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.status-card span {
+    display: block;
+    font-size: 14px;
+    color: #888;
+}
+
+.user-details {
+    margin-top: 20px;
+}
+
+.user-details .detail-item {
+    margin-bottom: 10px;
+}
+
+.user-details .detail-item span {
+    color: #888;
+}
+.buttonlogout {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 0; /* กำหนด padding ด้านบนและล่าง */
+    border-radius: 3px;
+    width: 100%; /* กำหนดให้ปุ่มยืดเต็มพื้นที่ */
+    cursor: pointer;
+    text-align: center;
+}
+.buttonlogout p{
+    margin-top: 10px;
+    font-weight:bold ;
+    font-size: 1rem;
+}
+
+.buttonlogout:hover {
+    background-color: #c82333; /* สีแดงเข้มเมื่อ hover */
+}
+.sidebar {
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0;
+    min-height: auto;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.btn {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background-color: #f5f5f5;
+    color: red;
+    border-radius: 5px;
+}
+.sidebar a #buttonLogout:hover {
+
+    color: red;
+    border-radius: 5px;
+}
+#buttonLogout:hover {
+    background-color: transparent; /* ไม่มีสีพื้นหลังเมื่อ hover */
+    color: white; /* คงสีตัวอักษรไว้เหมือนเดิม */
+    cursor: default; /* เปลี่ยนให้แสดงว่าไม่สามารถคลิกได้ */
+}

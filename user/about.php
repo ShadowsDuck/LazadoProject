@@ -16,7 +16,7 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 bg-light  rounded-3" id="sidebar"  >
-            <div class="nav flex-column nav-pills p-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <div class="nav flex-column nav-pills p-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="font-weight: bold;">
                 <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php"><i class="bi bi-info-circle"></i> เกี่ยวกับเรา</a>
                 <a class="nav-link" href="about.php?page=contactSidebar" data-page="aboutpage/contactSidebar.php"><i class="bi bi-telephone"></i> ติดต่อเรา</a>
                 <a class="nav-link" href="about.php?page=termsSidebar" data-page="aboutpage/termsSidebar.php"><i class="bi bi-file-earmark-text"></i> ข้อกำหนดและเงื่อนไข</a>

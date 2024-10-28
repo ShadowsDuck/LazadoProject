@@ -4,13 +4,13 @@
 
 <!-- Modal for add to cart -->
 <div class="container-add-to-cart">
-    <div class="modal fade" id="modalAddCart"  data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="modalAddCart" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    
+
                     <i class="bi bi-cart3" style="font-size:50px;"></i>
-                    
+
                     <h4 class="modal-title">เพิ่มสินค้า</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -325,10 +325,11 @@ unset($_SESSION['orderSuccess']);
         }
 
 
-
-
     });
 
+
+
+    
     // ดึงปุ่มเพิ่ม และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มเพิ่มใน Modal
     document.querySelectorAll('.addCart').forEach(button => {
         button.addEventListener('click', function(event) {
