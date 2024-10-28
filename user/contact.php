@@ -34,7 +34,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h2 class="mb-4">ติดต่อเรา</h2>
-                        <form action="submit-form.php" method="POST">
+                        <form id="contactForm">
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" name="name" placeholder="ชื่อ " required>
@@ -57,7 +57,38 @@
         </div>
     </div>
 
+
+    <!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">ส่งข้อความเรียบร้อยแล้ว</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ขอบคุณที่ส่งข้อความถึงเรา เราจะติดต่อคุณภายใน 24 ชั่วโมง
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
     <script src="script/search_result.js"></script>
     <script src="http://localhost/LazadoProject/user/script/search.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#contactForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+            $('#successModal').modal('show'); // Show the modal
+        });
+    });
+</script>
 
     <?php include('partials/footer.php'); ?>
