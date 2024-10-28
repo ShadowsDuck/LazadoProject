@@ -21,7 +21,7 @@ if (!empty($_FILES['file']['name'])) {
 }
 
 // ตรวจสอบว่ามีภาพใหม่ไหม เพื่อกำหนด SQL ให้เหมาะสม
-$sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', discount = '$discount', discounted_price = '$discounted_price', category = '$category'";
+$sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', discount = '$discount', discounted_price = '$discounted_price', category = '$category', created_at = NOW()";
 
 if ($fileName) {
     $sql .= ", file_name = '$fileName'";
