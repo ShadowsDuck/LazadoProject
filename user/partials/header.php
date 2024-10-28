@@ -70,7 +70,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                             if (isset($_SESSION['id']) && isset($_SESSION['usertype'])) {
                                 echo 'จัดการบัญชีของคุณ';
                             } else {
-                                echo 'สมัครสมาชิก';
+                                echo 'เข้าสู่ระบบ';
                             }
                             ?>
                         </a>

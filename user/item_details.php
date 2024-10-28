@@ -37,10 +37,18 @@ $row = mysqli_fetch_assoc($result);
 
                 <p><?php echo $row['description'] ?></p>
 
+                <?php
+                if ($row['available'] == 1) {
+                }
+                ?>
+
                 <form action="confirm.php" method="POST">
                     <input type="hidden" name="selected_products[]" value="<?php echo $product_id; ?>">
                     <input type="hidden" name="quantities[]" value="1">
-                    <div class="mt-3 mb-3">
+
+                    <?php
+                    if ($row['available'] == 1) { ?>
+                        <div class="mt-3 mb-3">
                         <div class="input-group mb-3" style="width:135px;">
                             <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button>
                             <input type="text" id="quantity" name="quantity" class="form-control text-center" value="1" oninput="validateQuantity()">
@@ -52,6 +60,14 @@ $row = mysqli_fetch_assoc($result);
                     <button type="submit" formaction="add_to_cart.php?id=<?php echo $product_id; ?>" name="action" value="add_to_cart" class="btn btn-warning btn-lg" style="width:135px;">
                         <p style="margin:0; font-size:medium;">เพิ่มไปยังรถเข็น</p>
                     </button>
+                    <?php
+                    } else { ?>
+                        <div class="text text-danger">
+                            สินค้าหมด
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </form>
             </div>
         </div>

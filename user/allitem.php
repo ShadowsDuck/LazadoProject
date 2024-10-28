@@ -210,4 +210,7 @@ require('../connect.php');
     });
 </script>
 
-<?php include('partials/footer.php'); ?>
+<?php 
+include('partials/footer.php'); 
+$conn->close();
+?>

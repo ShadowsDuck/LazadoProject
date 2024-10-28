@@ -10,4 +10,5 @@ if (isset($_GET["id"])) {
 }else{
     die(header("Location:{$base_url}/login/error.php"));
 }
+$conn->close();
 ?>
