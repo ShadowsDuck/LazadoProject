@@ -9,7 +9,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a href="#!" class="text-white">เกี่ยวกับเรา</a>
+                        <a href="about.php?page=aboutSidebar" class="text-white">เกี่ยวกับเรา</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
@@ -17,7 +17,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a href="#!" class="text-white">สินค้าทั้งหมด</a>
+                        <a href="allitem.php" class="text-white">สินค้าทั้งหมด</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
@@ -25,7 +25,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a href="#!" class="text-white">ไม่มีอะไรใส่ไว้เท่ๆ</a>
+                        <a href="https://www.facebook.com/iamsanya.khr?locale=th_TH" class="text-white">ไม่มีอะไรใส่ไว้เท่ๆ</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
@@ -33,7 +33,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a href="#!" class="text-white">บริการลูกค้า</a>
+                        <a href="index.php" class="text-white">บริการลูกค้า</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
@@ -41,7 +41,7 @@
                 <!-- Grid column -->
                 <div class="col-md-2">
                     <h6 class="text-uppercase font-weight-bold">
-                        <a href="#!" class="text-white">ติดต่อเรา</a>
+                        <a href="contact.php" class="text-white">ติดต่อเรา</a>
                     </h6>
                 </div>
                 <!-- Grid column -->
