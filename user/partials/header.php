@@ -63,14 +63,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                             href="<?php if (isset($_SESSION['id']) && isset($_SESSION['usertype'])) {
                                         echo 'user_edit.php?page=infoEdit';
                                     } else {
-                                        echo '../login/signup.php'; // ถ้าไม่ได้เข้าสู่ระบบให้ไปหน้า login.php
+                                        echo '../login/login.php'; // ถ้าไม่ได้เข้าสู่ระบบให้ไปหน้า login.php
                                     }
                                     ?>">
                             <?php
                             if (isset($_SESSION['id']) && isset($_SESSION['usertype'])) {
                                 echo 'จัดการบัญชีของคุณ';
                             } else {
-                                echo 'สมัครสมาชิก';
+                                echo 'เข้าสู่ระบบ';
                             }
                             ?>
                         </a>

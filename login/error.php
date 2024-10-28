@@ -1,2 +1,2 @@
 <?php
-echo "Something went wrong, please contact admin or use another account!";
+echo "เกิดข้อผิดพลาด โปรดติดต่อผู้ดูแล หรือใช้บัญชีอื่น!";
