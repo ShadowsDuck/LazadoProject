@@ -1,5 +1,11 @@
 <?php include('partials/header.php'); ?>
 
+<style>
+    .swal2-popup .swal2-styled:focus {
+        box-shadow: none !important;
+    }
+</style>
+
 <!-- Body -->
 <div class="container mt-5">
     <div class="row">
@@ -316,14 +322,25 @@ unset($_SESSION['orderSuccess']);
 <script src="script/search_result.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    //Modal =eitg'bo
     document.addEventListener("DOMContentLoaded", function() {
+        const orderSuccess = "<?php echo $orderSuccess; ?>"; // รับค่าจาก PHP
 
-        const orderSuccess = "<?php echo $orderSuccess; ?>"; //ใช้กับรหัส
-        console.log(orderSuccess);
-        if (orderSuccess == 1) {
-            const paymentSuccessModal = new bootstrap.Modal(document.getElementById('paymentSuccessModal')); //ใช้กับรหัส
-            paymentSuccessModal.show();
+        if (orderSuccess == '1') {
+            Swal.fire({
+                title: "สั่งซื้อเสร็จสิ้น!",
+                text: "ขอบคุณที่สั่งซื้อ การสั่งซื้อของคุณเสร็จสมบูรณ์แล้ว!",
+                icon: "success",
+                confirmButtonText: "ตกลง",
+                confirmButtonColor: "#dc3545"
+            });
+        } else if (orderSuccess == '0') {
+            Swal.fire({
+                title: "สั่งซื้อไม่สำเร็จ!",
+                text: "เกิดข้อผิดพลาดในการสั่งซื้อ กรุณาลองใหม่อีกครั้ง",
+                icon: "error",
+                confirmButtonText: "ตกลง",
+                confirmButtonColor: "#dc3545"
+            });
         }
     });
 
@@ -341,8 +358,7 @@ unset($_SESSION['orderSuccess']);
                 text: "คุณต้องการเพิ่มสินค้าไปยังตะกร้า?",
                 icon: "question",
                 showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
+                confirmButtonColor: "#dc3545",
                 confirmButtonText: "เพิ่มสินค้า",
                 cancelButtonText: "ยกเลิก"
             }).then((result) => {

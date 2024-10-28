@@ -197,15 +197,6 @@ ob_end_flush(); // ปิดการ buffer output
 
 <body>
     <div class="container mt-5">
-        <!-- Alert message displayed above container -->
-        <?php if (!empty($_SESSION['message'])): ?>
-            <div class="alert alert-warning alert-dismissible fade show alert-overlay" id="session-alert" role="alert">
-                <?php echo $_SESSION['message']; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php unset($_SESSION['message']); ?>
-        <?php endif; ?>
-
         <h2 class="text-center">ตะกร้าสินค้า</h2>
         <div class="cart-table" style="margin-bottom: 250px;">
             <form action="confirm.php" method="POST">
@@ -258,6 +249,7 @@ ob_end_flush(); // ปิดการ buffer output
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const cartItems = <?php echo json_encode($cartItems); ?>; // ส่งข้อมูล cartItems ไปยัง JS
@@ -383,13 +375,29 @@ ob_end_flush(); // ปิดการ buffer output
             document.getElementById('total-quantity').textContent = 0;
         });
 
-        // ให้ข้อความ Alert หายไปหลังจาก 2 วินาที
-        setTimeout(() => {
-            const alert = document.getElementById('session-alert');
-            if (alert) {
-                alert.classList.remove('show'); // ลบคลาส 'show' เพื่อซ่อน Alert
-            }
-        }, 2000);
+        document.addEventListener("DOMContentLoaded", function() {
+            // เช็คข้อความในเซสชันเมื่อโหลดหน้า
+            fetch('session_message.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        Swal.fire({
+                            toast: true,
+                            icon: 'warning',
+                            title: data.message,
+                            position: 'top',
+                            showConfirmButton: false,
+                            timer: 1000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer);
+                                toast.addEventListener('mouseleave', Swal.resumeTimer);
+                            }
+                        });
+                    }
+                })
+                .catch(error => console.error('เกิดข้อผิดพลาด!:', error));
+        });
     </script>
 
     <?php include('partials/footer.php'); ?>

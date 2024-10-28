@@ -1,4 +1,3 @@
-
 /* ที่มีไฟล์นี้เพราะมีบางอันมันไปทับกับ page อื่นๆ */
 
 body {
@@ -62,27 +61,33 @@ body {
 .user-details .detail-item span {
     color: #888;
 }
+
 .buttonlogout {
     background-color: #dc3545;
     color: #fff;
     border: none;
     font-weight: bold;
     font-size: 14px;
-    padding: 10px 0; /* กำหนด padding ด้านบนและล่าง */
+    padding: 10px 0;
+    /* กำหนด padding ด้านบนและล่าง */
     border-radius: 3px;
-    width: 100%; /* กำหนดให้ปุ่มยืดเต็มพื้นที่ */
+    width: 100%;
+    /* กำหนดให้ปุ่มยืดเต็มพื้นที่ */
     cursor: pointer;
     text-align: center;
 }
-.buttonlogout p{
+
+.buttonlogout p {
     margin-top: 10px;
-    font-weight:bold ;
+    font-weight: bold;
     font-size: 1rem;
 }
 
 .buttonlogout:hover {
-    background-color: #c82333; /* สีแดงเข้มเมื่อ hover */
+    background-color: #c82333;
+    /* สีแดงเข้มเมื่อ hover */
 }
+
 .sidebar {
     background-color: #fff;
     border-right: 1px solid #e0e0e0;
@@ -113,13 +118,18 @@ body {
     color: red;
     border-radius: 5px;
 }
+
 .sidebar a #buttonLogout:hover {
 
     color: red;
     border-radius: 5px;
 }
+
 #buttonLogout:hover {
-    background-color: transparent; /* ไม่มีสีพื้นหลังเมื่อ hover */
-    color: white; /* คงสีตัวอักษรไว้เหมือนเดิม */
-    cursor: default; /* เปลี่ยนให้แสดงว่าไม่สามารถคลิกได้ */
+    background-color: transparent;
+    /* ไม่มีสีพื้นหลังเมื่อ hover */
+    color: white;
+    /* คงสีตัวอักษรไว้เหมือนเดิม */
+    cursor: default;
+    /* เปลี่ยนให้แสดงว่าไม่สามารถคลิกได้ */
 }

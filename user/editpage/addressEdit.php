@@ -15,25 +15,25 @@ $row = $result->fetch_assoc();
 
     <div class="container user-info  align-items-center">
         <!-- ฟอร์มสำหรับแก้ไขข้อมูล -->
-        <form action="<?php echo $base_url.'/user/editpage/update_address.php' ?>" id="editForm" method="POST" style="display: none;">
+        <form action="<?php echo $base_url . '/user/editpage/update_address.php' ?>" id="editForm" method="POST" style="display: none;">
             <div class="mb-3 ">
                 <label for="address" class="form-label">แก้ไขที่อยู่</label>
-                
+
                 <!-- <input type="text-area"   class="form-control" name="address" value="<?php echo $row['address']; ?>" required> -->
                 <textarea name="address" class="form-control vw-50" style=" height: 150px;" required><?php echo $row['address']; ?></textarea>
-                
+
             </div>
 
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-danger me-2">บันทึก</button>
                 <button type="button" class="btn btn-secondary" onclick="toggleEdit()">ยกเลิก</button>
             </div>
-            
+
         </form>
-        
+
 
         <!-- แสดงผลข้อมูลปัจจุบัน -->
-        <div id="userAddress" class="container" style="word-wrap: break-word; overflow-wrap: break-word;" >
+        <div id="userAddress" class="container" style="word-wrap: break-word; overflow-wrap: break-word;">
 
             <h5><?php echo $row['address']; ?></h5>
         </div>

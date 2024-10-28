@@ -156,12 +156,12 @@ $shipping_address = $user_result->fetch_assoc();
                             </div>
                         </div>
                         <span class="cart-item-price text-dark"><?php
-                                                        if ($item['discount'] == 1 && !empty($item['discounted_price'])) {
-                                                            echo "฿" . number_format($item['discounted_price'] * $item['qty'], 2); // แสดงราคาที่ลดแล้ว
-                                                        } else {
-                                                            echo "฿" . number_format($item['price'] * $item['qty'], 2); // แสดงราคาปกติ
-                                                        }
-                                                        ?>
+                                                                if ($item['discount'] == 1 && !empty($item['discounted_price'])) {
+                                                                    echo "฿" . number_format($item['discounted_price'] * $item['qty'], 2); // แสดงราคาที่ลดแล้ว
+                                                                } else {
+                                                                    echo "฿" . number_format($item['price'] * $item['qty'], 2); // แสดงราคาปกติ
+                                                                }
+                                                                ?>
                         </span>
                     </div>
                 </div>
@@ -176,7 +176,7 @@ $shipping_address = $user_result->fetch_assoc();
             <h5>ผู้รับ/ที่อยู่จัดส่ง</h5>
             <p><?php echo htmlspecialchars($shipping_address['fullname']); ?></p>
             <p><?php echo htmlspecialchars($shipping_address['address']); ?></p>
-            
+
         </div>
 
         <div class="payment-methods mt-4">
@@ -209,7 +209,7 @@ $shipping_address = $user_result->fetch_assoc();
             <!-- <p>ค่าจัดส่ง: ฿<?php echo number_format($shipping_cost_per_order, 2); ?></p> -->
             <hr>
             <p class="total text-danger">ยอดรวมทั้งสิ้น: <?php echo number_format($total_price, 2); ?>
-             บาท</p>
+                บาท</p>
         </div>
 
         <form method="POST" action="confirm_payment.php">
@@ -224,6 +224,7 @@ $shipping_address = $user_result->fetch_assoc();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

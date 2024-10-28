@@ -11,10 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (mysqli_query($conn, $update_sql)) {
         $_SESSION['update_status_address'] = 'success';
         header("Location:{$base_url}/user/user_edit.php?page=infoEdit");
-        exit; 
+        exit;
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
 }
-
-?>
