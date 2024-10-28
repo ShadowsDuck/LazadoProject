@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var productDiscountedPrice = button.getAttribute('data-discounted_price');
         var productImg = button.getAttribute('data-file');
         var productCategory = button.getAttribute('data-category');
+        var productAvailable = button.getAttribute('data-available');
 
         // เติมข้อมูลลงในฟอร์มในโมดาล
         var modal = this;
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.querySelector('input[name="price"]').value = productPrice;
         modal.querySelector('#product_image_preview').src = '../uploads/' + productImg;
         modal.querySelector('select[name="category"]').value = productCategory;
+        modal.querySelector('select[name="available"]').value = productAvailable;
 
         // ตั้งค่าและเปิด/ปิดช่อง "ราคาที่ลดแล้ว" ตามส่วนลด
         var discountSelect = modal.querySelector('#discountSelect');

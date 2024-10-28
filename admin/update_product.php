@@ -10,6 +10,7 @@ $price = mysqli_real_escape_string($conn, $_POST['price']);
 $discount = mysqli_real_escape_string($conn, $_POST['discount']);
 $discounted_price = mysqli_real_escape_string($conn, $_POST['discounted_price']);
 $category = mysqli_real_escape_string($conn, $_POST['category']);
+$available = mysqli_real_escape_string($conn, $_POST['available']);
 
 // ตรวจสอบและจัดการอัปโหลดไฟล์ภาพ
 $fileName = '';
@@ -21,7 +22,16 @@ if (!empty($_FILES['file']['name'])) {
 }
 
 // ตรวจสอบว่ามีภาพใหม่ไหม เพื่อกำหนด SQL ให้เหมาะสม
-$sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', discount = '$discount', discounted_price = '$discounted_price', category = '$category', created_at = NOW()";
+// $sql = "UPDATE products SET name = '$name', description = '$description', price = '$price', discount = '$discount', discounted_price = '$discounted_price', category = '$category', available = '$stock', created_at = NOW()";
+$sql = "UPDATE products SET 
+            name = '$name', 
+            description = '$description', 
+            price = '$price', 
+            discount = '$discount', 
+            discounted_price = '$discounted_price', 
+            category = '$category', 
+            available = '$available', 
+            created_at = NOW()";
 
 if ($fileName) {
     $sql .= ", file_name = '$fileName'";

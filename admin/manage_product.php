@@ -147,6 +147,15 @@
                                 <option value="6">สตรีมมิ่ง</option>
                             </select>
                         </div>
+
+                        <!-- Available Item field -->
+                        <div class="form-group mb-3">
+                            <label for="available">มีสินค้าในสต๊อกไหม</label>
+                            <select class="form-select" aria-label="stock" name="available">
+                                <option value="1">มีสินค้า</option>
+                                <option value="0">สินค้าหมด</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="modal-footer">
@@ -222,28 +231,28 @@
         <?php
         $c = '';
         $keyword = '';
-        $sql = "SELECT * FROM products ORDER BY discount DESC, created_at DESC";
+        $sql = "SELECT * FROM products ORDER BY available DESC, discount DESC, created_at DESC";
 
         if (isset($_GET["c"])) {
             $c = $_GET['c'];
         }
         if (isset($_GET["keyword"])) {
             $keyword = $_GET['keyword'];
-            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY discount DESC, created_at DESC";
+            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY available DESC, discount DESC, created_at DESC";
         }
 
         if ($c == 'keyboard') {
-            $sql = "SELECT * FROM products WHERE category=1 ORDER BY discount DESC, created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=1 ORDER BY available DESC, discount DESC, created_at DESC";
         } elseif ($c == 'mouse') {
-            $sql = "SELECT * FROM products WHERE category=2 ORDER BY discount DESC, created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=2 ORDER BY available DESC, discount DESC, created_at DESC";
         } elseif ($c == 'headset') {
-            $sql = "SELECT * FROM products WHERE category=3 ORDER BY discount DESC, created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=3 ORDER BY available DESC, discount DESC, created_at DESC";
         } elseif ($c == 'monitor') {
-            $sql = "SELECT * FROM products WHERE category=4 ORDER BY discount DESC, created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=4 ORDER BY available DESC, discount DESC, created_at DESC";
         } elseif ($c == 'chair') {
-            $sql = "SELECT * FROM products WHERE category=5 ORDER BY discount DESC, created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=5 ORDER BY available DESC, discount DESC, created_at DESC";
         } elseif ($c == 'streaming') {
-            $sql = "SELECT * FROM products WHERE category=6 ORDER BY discount DESC, created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=6 ORDER BY available DESC, discount DESC, created_at DESC";
         }
 
         $result = mysqli_query($conn, $sql);
@@ -268,11 +277,15 @@
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <div class="card-text text-danger" style="font-weight: bold; font-size: 1rem;">
                                         <?php
-                                        if ($row['discount'] == 1 && !empty($row['discounted_price'])) {
-                                            echo "<span style='color: green; font-size: 0.9rem; font-weight: bold;'>ลดราคา</span><br>";
-                                            echo "฿" . number_format($row['discounted_price'], 2); // แสดงราคาที่ลดแล้ว
+                                        if ($row['available'] == 1) {
+                                            if ($row['discount'] == 1 && !empty($row['discounted_price'])) {
+                                                echo "<span style='color: green; font-size: 0.9rem; font-weight: bold;'>ลดราคา</span><br>";
+                                                echo "฿" . number_format($row['discounted_price'], 2); // แสดงราคาที่ลดแล้ว
+                                            } else {
+                                                echo "฿" . number_format($row['price'], 2); // แสดงราคาปกติ
+                                            }
                                         } else {
-                                            echo "฿" . number_format($row['price'], 2); // แสดงราคาปกติ
+                                            echo "<span style='color: red; font-size: 0.9rem; font-weight: bold;'>สินค้าหมด</span>";
                                         }
                                         ?>
                                     </div>
@@ -287,7 +300,8 @@
                                             data-discount="<?php echo $row['discount']; ?>"
                                             data-discounted_price="<?php echo $row['discounted_price']; ?>"
                                             data-file="<?php echo $row['file_name']; ?>"
-                                            data-category="<?php echo $row['category']; ?>">
+                                            data-category="<?php echo $row['category']; ?>"
+                                            data-available="<?php echo $row['available']; ?>">
                                             อัปเดต
                                         </button>
                                         <a href="#" class="btn btn-danger btn-vsm delete_product" data-id="<?php echo $row['id']; ?>">ลบ</a>
