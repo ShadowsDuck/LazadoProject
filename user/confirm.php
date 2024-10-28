@@ -209,7 +209,7 @@ $shipping_address = $user_result->fetch_assoc();
             <!-- <p>ค่าจัดส่ง: ฿<?php echo number_format($shipping_cost_per_order, 2); ?></p> -->
             <hr>
             <p class="total text-danger">ยอดรวมทั้งสิ้น: <?php echo number_format($total_price, 2); ?>
-            </p>
+             บาท</p>
         </div>
 
         <form method="POST" action="confirm_payment.php">
