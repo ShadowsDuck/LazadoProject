@@ -12,10 +12,10 @@
 .nav-pills .nav-link:hover {
     background-color: #e0818a /* สีพื้นหลังเมื่อเอาเมาส์ชี้ */
 }</style>
-<div class="container mt-5">
+<div class="container mt-5 " style="margin-bottom:150px;">
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3 bg-light  rounded-3" id="sidebar"  style="min-height: 600px;">
+        <div class="col-md-3 bg-light  rounded-3" id="sidebar"  >
             <div class="nav flex-column nav-pills p-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link" href="about.php?page=aboutSidebar" data-page="aboutpage/aboutSidebar.php"><i class="bi bi-info-circle"></i> เกี่ยวกับเรา</a>
                 <a class="nav-link" href="about.php?page=contactSidebar" data-page="aboutpage/contactSidebar.php"><i class="bi bi-telephone"></i> ติดต่อเรา</a>

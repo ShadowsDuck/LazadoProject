@@ -31,9 +31,9 @@ require('../connect.php');
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="icons">
-                            <i class="icon bi bi-check-lg"></i>
-                        </div>
+                        
+                            <i class="bi bi-cart3" style="font-size:50px;"></i>
+                        
                         <h4 class="modal-title">เพิ่มสินค้า</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
