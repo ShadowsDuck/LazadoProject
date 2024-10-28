@@ -110,7 +110,7 @@ $shipping_address = $user_result->fetch_assoc();
         }
 
         .checkout-btn {
-            background-color: #ff4d00;
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -118,7 +118,7 @@ $shipping_address = $user_result->fetch_assoc();
         }
 
         .checkout-btn:hover {
-            background-color: #e64300;
+            background-color: #c82333;
         }
 
         .shipping-option {
@@ -143,7 +143,7 @@ $shipping_address = $user_result->fetch_assoc();
         <h5>สินค้าที่เลือก</h5>
         <?php if (!empty($cartItems)): ?>
             <?php foreach ($cartItems as $item): ?>
-                <div class="cart-item-box">
+                <div class="cart-item-box ">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
                             <?php
@@ -155,7 +155,7 @@ $shipping_address = $user_result->fetch_assoc();
                                 <span class="text-muted">จำนวน: <?php echo htmlspecialchars($item['qty']); ?></span>
                             </div>
                         </div>
-                        <span class="cart-item-price"><?php
+                        <span class="cart-item-price text-dark"><?php
                                                         if ($item['discount'] == 1 && !empty($item['discounted_price'])) {
                                                             echo "฿" . number_format($item['discounted_price'] * $item['qty'], 2); // แสดงราคาที่ลดแล้ว
                                                         } else {
@@ -208,7 +208,7 @@ $shipping_address = $user_result->fetch_assoc();
 
             <!-- <p>ค่าจัดส่ง: ฿<?php echo number_format($shipping_cost_per_order, 2); ?></p> -->
             <hr>
-            <p class="total">ยอดรวมทั้งสิ้น: <?php echo number_format($total_price, 2); ?>
+            <p class="total text-danger">ยอดรวมทั้งสิ้น: <?php echo number_format($total_price, 2); ?>
             </p>
         </div>
 
@@ -219,7 +219,7 @@ $shipping_address = $user_result->fetch_assoc();
             <input type="hidden" name="total_amount" value="<?php echo $total_amount ?>">
             <input type="hidden" name="shipping_address" value="<?php echo htmlspecialchars($shipping_address['address']); ?>">
             <input type="hidden" name="discount" value="<?php echo isset($item['discount']) && $item['discount'] == 1 ? 1 : 0; ?>">
-            <button type="submit" class="checkout-btn mt-3">สั่งซื้อ</button>
+            <button type="submit" class="checkout-btn btn-danger mt-3">สั่งซื้อ</button>
         </form>
     </div>
 
