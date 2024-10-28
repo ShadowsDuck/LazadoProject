@@ -9,7 +9,7 @@
 <script src="scripts/script_product.js"></script>
 <script src="scripts/all.js"></script>
 <script src="scripts/search_admin.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
