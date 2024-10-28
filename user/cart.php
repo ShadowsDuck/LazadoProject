@@ -144,7 +144,7 @@ ob_end_flush(); // ปิดการ buffer output
         }
 
         .checkout-btn {
-            background-color: #007bff;
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -154,7 +154,7 @@ ob_end_flush(); // ปิดการ buffer output
         }
 
         .checkout-btn:hover {
-            background-color: #0056b3;
+            background-color: #c82333;
         }
 
         footer {
@@ -235,13 +235,13 @@ ob_end_flush(); // ปิดการ buffer output
                             </div>
                             <div class="cart-item-info"><?php echo $item['name']; ?></div>
                         </div>
-                        <div class="cart-item-price">฿<?php echo number_format($displayPrice, 2); ?></div>
+                        <div class="cart-item-price text-dark">฿<?php echo number_format($displayPrice, 2); ?></div>
                         <div class="cart-item-quantity input-group">
                             <button type="button" class="btn btn-outline-secondary minus-btn">-</button>
                             <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['qty']; ?>" readonly>
                             <button type="button" class="btn btn-outline-secondary plus-btn">+</button>
                         </div>
-                        <div class="cart-item-total">฿<?php echo number_format($itemTotal, 2); ?></div>
+                        <div class="cart-item-total text-dark">฿<?php echo number_format($itemTotal, 2); ?></div>
                         <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['id']; ?>'">
                             <i class="bi bi-trash"></i>
                         </div>
