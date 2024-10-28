@@ -167,14 +167,24 @@ require('../connect.php');
                                         </div>
                                     <?php
                                     }
+
+                                    if ($row['available'] == 1) { ?>
+                                        <button class="btn addCart"
+                                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalAddCart"
+                                            data-id="<?php echo $row['id'] ?>">
+                                            <i style="color:red;" class="bi bi-cart3 h4"></i>
+                                        </button>
+                                    <?php
+                                    } else { ?>
+                                        <p style="display:inline; color:red; font-weight:bold; font-size: small; margin:0; margin-top:11.5px; margin-bottom:11.5px;">
+                                            สินค้าหมด
+                                        </p>
+                                    <?php
+                                    }
                                     ?>
-                                    <button class="btn addCart"
-                                        onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalAddCart"
-                                        data-id="<?php echo $row['id'] ?>">
-                                        <i style="color:red;" class="bi bi-cart3 h4"></i>
-                                    </button>
+
                                 </div>
                             </div>
                         </div>
@@ -210,7 +220,7 @@ require('../connect.php');
     });
 </script>
 
-<?php 
-include('partials/footer.php'); 
+<?php
+include('partials/footer.php');
 $conn->close();
 ?>
