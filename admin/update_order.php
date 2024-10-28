@@ -12,9 +12,11 @@ $result = mysqli_query($conn, $sql);
 
 if ($result) {
     $_SESSION['message'] = "อัปเดตออเดอร์สำเร็จแล้ว!";
+    $_SESSION['success'] = true;
     header("Location: {$base_url}/admin/manage_order.php");
 } else {
     $_SESSION['message'] = "อัปเดตออเดอร์ไม่สำเร็จ!: " . mysqli_error($conn);
+    $_SESSION['success'] = false;
     header("Location: {$base_url}/admin/manage_order.php");
 }
 

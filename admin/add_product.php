@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate category selection
     if (empty($category)) {
         $_SESSION['message'] = "กรุณาเลือกหมวดหมู่สินค้า";
+        $_SESSION['success'] = false;
         header("Location: {$base_url}/admin/add_product.php");
         exit();
     }
@@ -40,18 +41,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert product data
-    $sql = "INSERT INTO products (name, description, price, category, created_at, file_name) VALUES ('$name', '$description', '$price', '$category', NOW(), '$fileName')";
+    $sql = "INSERT INTO products (name, description, price, category, created_at, file_name, available) VALUES ('$name', '$description', '$price', '$category', NOW(), '$fileName', '1')";
 
     if (mysqli_query($conn, $sql)) {
         $_SESSION['message'] = "สินค้าเพิ่มเรียบร้อยแล้ว!";
+        $_SESSION['success'] = true;
         header("Location: {$base_url}/admin/manage_product.php");
         exit();
     } else {
         $_SESSION['message'] = "เกิดข้อผิดพลาดในการเพิ่มสินค้า: " . mysqli_error($conn);
+        $_SESSION['success'] = false;
         header("Location: {$base_url}/admin/add_product.php");
         exit();
     }
 
-    // Close the database connection
     mysqli_close($conn);
 }

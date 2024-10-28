@@ -19,6 +19,7 @@ if ($row > 0) {
 
 if (strlen($_POST['password']) < 6) {
     $_SESSION['message'] = 'รหัสผ่านต้องประกอบด้วยตัวเลขอย่างน้อย 6 หลัก!';
+    $_SESSION['success'] = false;
     header("Location: {$base_url}/admin/manage_admin.php");
     exit;
 } else {
@@ -30,13 +31,16 @@ if (strlen($_POST['password']) < 6) {
 
         if ($query) {
             $_SESSION['message'] = 'เพิ่มผู้ดูแลสำเร็จแล้ว!';
+            $_SESSION['success'] = true;
             header("Location:{$base_url}/admin/manage_admin.php");
         } else {
             $_SESSION['message'] = 'เพิ่มผู้ดูแลไม่สำเร็จ!';
+            $_SESSION['success'] = false;
             header("Location:{$base_url}/admin/manage_admin.php");
         }
     } else {
         $_SESSION['message'] = 'จำเป็นต้องมีข้อมูลครบทุกช่อง';
+        $_SESSION['success'] = false;
         header("Location:{$base_url}/admin/manage_admin.php");
     }
 }

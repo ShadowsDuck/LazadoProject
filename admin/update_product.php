@@ -42,9 +42,11 @@ $result = mysqli_query($conn, $sql);
 
 if ($result) {
     $_SESSION['message'] = "อัปเดตสินค้าสำเร็จแล้ว!";
+    $_SESSION['success'] = true;
     header("Location: {$base_url}/admin/manage_product.php");
 } else {
     $_SESSION['message'] = "อัปเดตสินค้าไม่สำเร็จ!" . mysqli_error($conn);
+    $_SESSION['success'] = false;
     header("Location: {$base_url}/admin/manage_product.php");
 }
 

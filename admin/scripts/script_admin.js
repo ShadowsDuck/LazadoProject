@@ -128,20 +128,12 @@ document.querySelectorAll('.delete_admin').forEach(button => {
             text: "หลังจากลบไปแล้วคุณไม่สามารถกู้คืนข้อมูลได้",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
+            confirmButtonColor: "#dc3545",
             confirmButtonText: "ใช่, ลบมัน!",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {
-                // หากผู้ใช้ยืนยัน จะทำการลบ
                 window.location.href = `del_admin.php?id=${adminId}`;
-
-                Swal.fire(
-                    "ลบสำเร็จ!",
-                    "ข้อมูลถูกลบเรียบร้อยแล้ว.",
-                    "success"
-                );
             }
         });
     });

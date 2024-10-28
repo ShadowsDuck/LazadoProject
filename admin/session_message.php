@@ -1,6 +1,15 @@
 <?php
 session_start();
-header('Content-Type: application/json');
-$message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
-unset($_SESSION['message']); // ล้าง session หลังจากส่งค่า
-echo json_encode(['message' => $message]);
+$response = [];
+
+if (!empty($_SESSION['message'])) {
+    $response['message'] = $_SESSION['message'];
+    // ตรวจสอบสถานะการดำเนินการและกำหนดไอคอน
+    $response['icon'] = isset($_SESSION['success']) && $_SESSION['success'] ? 'success' : 'error';
+
+    // ลบข้อความและสถานะที่ใช้แล้วออกจากเซสชัน
+    unset($_SESSION['message']);
+    unset($_SESSION['success']);
+}
+
+echo json_encode($response);
