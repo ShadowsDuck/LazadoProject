@@ -109,6 +109,7 @@ ob_end_flush(); // ปิดการ buffer output
         }
 
         .cart-item-quantity {
+            margin-left: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
