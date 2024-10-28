@@ -113,3 +113,114 @@ changePasswordAdminModal.addEventListener('hidden.bs.modal', function () {
     passwordError.style.display = 'none';
     changePasswordButton.disabled = true;
 });
+
+// ดึงปุ่มลบและเรียก SweetAlert เมื่อกดปุ่มลบ
+document.querySelectorAll('.delete_admin').forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.preventDefault(); // ป้องกันการรีเฟรชหน้า
+
+        // ดึง id ของผู้ดูแลจากปุ่มที่คลิก
+        const adminId = button.getAttribute('data-id');
+
+        // แสดง SweetAlert สำหรับยืนยันการลบ
+        Swal.fire({
+            title: "คุณแน่ใจใช่ไหม?",
+            text: "หลังจากลบไปแล้วคุณไม่สามารถกู้คืนข้อมูลได้",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่, ลบมัน!",
+            cancelButtonText: "ยกเลิก"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // หากผู้ใช้ยืนยัน จะทำการลบ
+                window.location.href = `del_admin.php?id=${adminId}`;
+
+                Swal.fire(
+                    "ลบสำเร็จ!",
+                    "ข้อมูลถูกลบเรียบร้อยแล้ว.",
+                    "success"
+                );
+            }
+        });
+    });
+});
+
+// เมื่อ modal เปลี่ยนรหัสผ่านถูกเปิดขึ้น
+var changePasswordModal = document.getElementById('changePasswordAdminModal');
+changePasswordModal.addEventListener('show.bs.modal', function (event) {
+    // ปุ่มที่ถูกกด (เปลี่ยนรหัสผ่าน)
+    var button = event.relatedTarget;
+    // ดึงค่า data-id
+    var userId = button.getAttribute('data-id');
+    // ตั้งค่า id ใน hidden input field
+    var userIdInput = changePasswordModal.querySelector('#change_password_admin_id');
+    userIdInput.value = userId;
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const fullnameInput = document.querySelector('input[name="fullname"]');
+    const usernameInput = document.querySelector('input[name="username"]');
+    const passwordInput = document.getElementById('admin_password');
+    const submitButton = document.querySelector('#addAdminModal .modal-footer .btn-primary');
+    const addAdminModal = document.getElementById('addAdminModal');
+
+    // ตรวจสอบข้อมูลทุกฟิลด์เมื่อ modal เปิด
+    addAdminModal.addEventListener('shown.bs.modal', function () {
+        validateForm(); // ตรวจสอบฟิลด์เมื่อเปิด modal
+    });
+
+    // ตรวจสอบข้อมูลเมื่อผู้ใช้พิมพ์ในแต่ละฟิลด์
+    fullnameInput.addEventListener('input', validateForm);
+    usernameInput.addEventListener('input', validateForm);
+    passwordInput.addEventListener('input', validateForm);
+
+    function validateForm() {
+        let isValid = true;
+
+        // ตรวจสอบฟิลด์ชื่อ-นามสกุล
+        if (fullnameInput.value.trim() === '') {
+            fullnameInput.classList.remove('is-valid');
+            fullnameInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            fullnameInput.classList.remove('is-invalid');
+            fullnameInput.classList.add('is-valid');
+        }
+
+        // ตรวจสอบฟิลด์ชื่อผู้ใช้
+        if (usernameInput.value.trim() === '') {
+            usernameInput.classList.remove('is-valid');
+            usernameInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            usernameInput.classList.remove('is-invalid');
+            usernameInput.classList.add('is-valid');
+        }
+
+        // ตรวจสอบฟิลด์รหัสผ่าน
+        if (passwordInput.value.length < 6) {
+            passwordInput.classList.remove('is-valid');
+            passwordInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            passwordInput.classList.remove('is-invalid');
+            passwordInput.classList.add('is-valid');
+        }
+
+        // ปิดหรือเปิดปุ่ม submit ขึ้นอยู่กับว่าข้อมูลถูกต้องหรือไม่
+        submitButton.disabled = !isValid;
+    }
+
+    // รีเซ็ตฟิลด์เมื่อ modal ปิด
+    addAdminModal.addEventListener('hidden.bs.modal', function () {
+        fullnameInput.classList.remove('is-valid', 'is-invalid');
+        usernameInput.classList.remove('is-valid', 'is-invalid');
+        passwordInput.classList.remove('is-valid', 'is-invalid');
+        fullnameInput.value = '';
+        usernameInput.value = '';
+        passwordInput.value = '';
+        submitButton.disabled = true;
+    });
+});

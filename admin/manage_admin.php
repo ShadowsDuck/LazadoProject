@@ -2,15 +2,6 @@
 
 <!-- Body -->
 <div class="container mt-5">
-    <!-- Alert message should be displayed right here -->
-    <?php if (!empty($_SESSION['message'])): ?>
-        <div class="alert alert-warning alert-dismissible fade show alert-overlay" id="session-alert" role="alert">
-            <?php echo $_SESSION['message']; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php unset($_SESSION['message']); ?>
-    <?php endif; ?>
-
     <h1>จัดการผู้ดูแล</h1>
 
     <!-- Button trigger modal -->
@@ -166,30 +157,6 @@
         </div>
     </div>
 
-    <!-- Modal for Confirm Delete -->
-    <div class="container-delete">
-        <div class="modal fade" id="confirmDelete" data-bs-backdrop="static" data-bs-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="icons">
-                            <i class="icon">&times;</i>
-                        </div>
-                        <h4 class="modal-title">คุณแน่ใจใช่ไหม?</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>คุณแน่ใจใช่ไหมที่จะลบผู้ดูแลคนนี้? <br>หลังจากลบไปแล้วคุณไม่สามารถกู้คืนข้อมูลได้</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                        <a href="#" class="btn btn-danger" id="confirmDeleteBtn">ลบ</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -226,8 +193,7 @@
                                 data-username="<?php echo $username; ?>">
                                 อัปเดต
                             </button>
-                            <a href="#" class="btn btn-danger btn-sm ms-2 me-2 delete_admin" data-id="<?php echo $id; ?>" data-bs-toggle="modal"
-                                data-bs-target="#confirmDelete"> ลบ </a>
+                            <a href="#" class="btn btn-danger btn-sm ms-2 me-2 delete_admin" data-id="<?php echo $id; ?>">ลบ</a>
                             <button type="button" class="btn btn-info btn-sm"
                                 data-bs-toggle="modal"
                                 data-bs-target="#changePasswordAdminModal"
@@ -253,99 +219,5 @@
         </tbody>
     </table>
 </div>
-
-<script>
-    // เมื่อ modal เปลี่ยนรหัสผ่านถูกเปิดขึ้น
-    var changePasswordModal = document.getElementById('changePasswordAdminModal');
-    changePasswordModal.addEventListener('show.bs.modal', function(event) {
-        // ปุ่มที่ถูกกด (เปลี่ยนรหัสผ่าน)
-        var button = event.relatedTarget;
-        // ดึงค่า data-id
-        var userId = button.getAttribute('data-id');
-        // ตั้งค่า id ใน hidden input field
-        var userIdInput = changePasswordModal.querySelector('#change_password_admin_id');
-        userIdInput.value = userId;
-    });
-
-    // ดึงปุ่มลบหลัก และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มลบใน Modal
-    document.querySelectorAll('.delete_admin').forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            // ดึง id ของผู้ดูแลจากปุ่มที่คลิก
-            const adminId = button.getAttribute('data-id');
-
-            // อัปเดตลิงก์ของปุ่มลบใน Modal
-            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-            confirmDeleteBtn.href = `del_admin.php?id=${adminId}`;
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const fullnameInput = document.querySelector('input[name="fullname"]');
-        const usernameInput = document.querySelector('input[name="username"]');
-        const passwordInput = document.getElementById('admin_password');
-        const submitButton = document.querySelector('#addAdminModal .modal-footer .btn-primary');
-        const addAdminModal = document.getElementById('addAdminModal');
-
-        // ตรวจสอบข้อมูลทุกฟิลด์เมื่อ modal เปิด
-        addAdminModal.addEventListener('shown.bs.modal', function() {
-            validateForm(); // ตรวจสอบฟิลด์เมื่อเปิด modal
-        });
-
-        // ตรวจสอบข้อมูลเมื่อผู้ใช้พิมพ์ในแต่ละฟิลด์
-        fullnameInput.addEventListener('input', validateForm);
-        usernameInput.addEventListener('input', validateForm);
-        passwordInput.addEventListener('input', validateForm);
-
-        function validateForm() {
-            let isValid = true;
-
-            // ตรวจสอบฟิลด์ชื่อ-นามสกุล
-            if (fullnameInput.value.trim() === '') {
-                fullnameInput.classList.remove('is-valid');
-                fullnameInput.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                fullnameInput.classList.remove('is-invalid');
-                fullnameInput.classList.add('is-valid');
-            }
-
-            // ตรวจสอบฟิลด์ชื่อผู้ใช้
-            if (usernameInput.value.trim() === '') {
-                usernameInput.classList.remove('is-valid');
-                usernameInput.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                usernameInput.classList.remove('is-invalid');
-                usernameInput.classList.add('is-valid');
-            }
-
-            // ตรวจสอบฟิลด์รหัสผ่าน
-            if (passwordInput.value.length < 6) {
-                passwordInput.classList.remove('is-valid');
-                passwordInput.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                passwordInput.classList.remove('is-invalid');
-                passwordInput.classList.add('is-valid');
-            }
-
-            // ปิดหรือเปิดปุ่ม submit ขึ้นอยู่กับว่าข้อมูลถูกต้องหรือไม่
-            submitButton.disabled = !isValid;
-        }
-
-        // รีเซ็ตฟิลด์เมื่อ modal ปิด
-        addAdminModal.addEventListener('hidden.bs.modal', function() {
-            fullnameInput.classList.remove('is-valid', 'is-invalid');
-            usernameInput.classList.remove('is-valid', 'is-invalid');
-            passwordInput.classList.remove('is-valid', 'is-invalid');
-            fullnameInput.value = '';
-            usernameInput.value = '';
-            passwordInput.value = '';
-            submitButton.disabled = true;
-        });
-    });
-</script>
 
 <?php include('partials/footer.php'); ?>

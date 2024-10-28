@@ -68,16 +68,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// สคริปต์สำหรับตั้งค่าลิงก์การลบสินค้าใน Modal ยืนยันการลบเมื่อคลิกปุ่มลบสินค้า
+// ดึงปุ่มลบและเรียก SweetAlert เมื่อกดปุ่มลบ
 document.querySelectorAll('.delete_product').forEach(button => {
     button.addEventListener('click', function (event) {
-        event.preventDefault();
+        event.preventDefault(); // ป้องกันการรีเฟรชหน้า
 
-        // ดึง id ของสินค้าจากปุ่มที่คลิก
+        // ดึง id ของผู้ดูแลจากปุ่มที่คลิก
         const productId = button.getAttribute('data-id');
 
-        // ตั้งค่า href สำหรับปุ่มลบใน Modal
-        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-        confirmDeleteBtn.href = `del_product.php?id=${productId}`;
+        // แสดง SweetAlert สำหรับยืนยันการลบ
+        Swal.fire({
+            title: "คุณแน่ใจใช่ไหม?",
+            text: "หลังจากลบไปแล้วคุณไม่สามารถกู้คืนข้อมูลได้",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่, ลบมัน!",
+            cancelButtonText: "ยกเลิก"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // หากผู้ใช้ยืนยัน จะทำการลบ
+                window.location.href = `del_product.php?id=${productId}`;
+
+                Swal.fire(
+                    "ลบสำเร็จ!",
+                    "ข้อมูลถูกลบเรียบร้อยแล้ว.",
+                    "success"
+                );
+            }
+        });
     });
 });
