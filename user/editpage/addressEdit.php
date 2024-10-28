@@ -16,11 +16,12 @@ $row = $result->fetch_assoc();
     <div class="user-info d-flex align-items-center">
         <!-- ฟอร์มสำหรับแก้ไขข้อมูล -->
         <form action="<?php echo $base_url.'/user/editpage/update_address.php' ?>" id="editForm" method="POST" style="display: none;">
-            <div class="mb-3">
+            <div class="mb-3 ">
                 <label for="address" class="form-label">แก้ไขที่อยู่</label>
                 
-                <input type="text-area" class="form-control" name="address" value="<?php echo $row['address']; ?>"
-                    required>
+                <!-- <input type="text-area"   class="form-control" name="address" value="<?php echo $row['address']; ?>" required> -->
+                <textarea name="address" class="form-control vw-50" style=" height: 150px;" required><?php echo $row['address']; ?></textarea>
+                
             </div>
 
             <div class="d-flex justify-content-end">
@@ -32,7 +33,8 @@ $row = $result->fetch_assoc();
         
 
         <!-- แสดงผลข้อมูลปัจจุบัน -->
-        <div id="userAddress">
+        <div id="userAddress" class="container" style="word-wrap: break-word; overflow-wrap: break-word;" >
+
             <h5><?php echo $row['address']; ?></h5>
         </div>
     </div>
