@@ -15,6 +15,7 @@ include '../connect.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="../user/partials/LAZADO.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         * {
             font-family: "Noto Sans Thai", "Helvetica Neue", sans-serif;
@@ -31,24 +32,7 @@ include '../connect.php';
 </head>
 
 <body>
-
     <div class="container d-flex justify-content-center align-items-center min-vh-100 min-vw-100">
-        <div class="alert-container">
-            <?php if (!empty($_SESSION['message'])): ?>
-                <?php
-                $alert_class = 'alert-warning';
-                if (strpos($_SESSION['message'], 'successful') !== false) {
-                    $alert_class = 'alert-success';
-                }
-                ?>
-                <div class="alert <?php echo $alert_class; ?> alert-dismissible fade show " role="alert">
-                    <?php echo $_SESSION['message']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php unset($_SESSION['message']); ?>
-            <?php endif; ?>
-        </div>
-
         <div class="row w-100">
             <!-- Left side: Image -->
             <div class="col-md-7 d-none d-md-flex align-items-center">
@@ -95,6 +79,7 @@ include '../connect.php';
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
 </body>
 

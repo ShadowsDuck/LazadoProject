@@ -23,3 +23,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('session_message.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                Swal.fire({
+                    toast: true,
+                    icon: data.icon || 'warning', // ใช้ icon จากเซิร์ฟเวอร์ หรือ warning เป็นค่าเริ่มต้น
+                    title: data.message,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer);
+                        toast.addEventListener('mouseleave', Swal.resumeTimer);
+                    }
+                });
+            }
+        })
+        .catch(error => console.error('เกิดข้อผิดพลาด!:', error));
+});
