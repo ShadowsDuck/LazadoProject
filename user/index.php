@@ -4,7 +4,7 @@
 
 <!-- Modal for add to cart -->
 <div class="container-add-to-cart">
-    <div class="modal fade" id="modalAddCart" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="modalAddCart"  data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
