@@ -236,10 +236,10 @@ ob_end_flush(); // ปิดการ buffer output
                             <div class="cart-item-info"><?php echo $item['name']; ?></div>
                         </div>
                         <div class="cart-item-price">฿<?php echo number_format($displayPrice, 2); ?></div>
-                        <div class="cart-item-quantity">
-                            <button type="button" class="minus-btn">-</button>
+                        <div class="cart-item-quantity input-group">
+                            <button type="button" class="btn btn-outline-secondary minus-btn">-</button>
                             <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['qty']; ?>" readonly>
-                            <button type="button" class="plus-btn">+</button>
+                            <button type="button" class="btn btn-outline-secondary plus-btn">+</button>
                         </div>
                         <div class="cart-item-total">฿<?php echo number_format($itemTotal, 2); ?></div>
                         <div class="remove-btn" onclick="window.location.href='del_cart.php?id=<?php echo $item['id']; ?>'">
