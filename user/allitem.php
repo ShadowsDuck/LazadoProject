@@ -107,28 +107,28 @@ require('../connect.php');
         <?php
         $c = '';
         $keyword = '';
-        $sql = "SELECT * FROM products ORDER BY created_at DESC";
+        $sql = "SELECT * FROM products ORDER BY available DESC, created_at DESC";
 
         if (isset($_GET["c"])) {
             $c = $_GET['c'];
         }
         if (isset($_GET["keyword"])) {
             $keyword = $_GET['keyword'];
-            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%' ORDER BY available DESC, created_at DESC";
         }
 
         if ($c == 'keyboard') {
-            $sql = "SELECT * FROM products WHERE category=1 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=1 ORDER BY available DESC, created_at DESC";
         } elseif ($c == 'mouse') {
-            $sql = "SELECT * FROM products WHERE category=2 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=2 ORDER BY available DESC, created_at DESC";
         } elseif ($c == 'headset') {
-            $sql = "SELECT * FROM products WHERE category=3 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=3 ORDER BY available DESC, created_at DESC";
         } elseif ($c == 'monitor') {
-            $sql = "SELECT * FROM products WHERE category=4 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=4 ORDER BY available DESC, created_at DESC";
         } elseif ($c == 'chair') {
-            $sql = "SELECT * FROM products WHERE category=5 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=5 ORDER BY available DESC, created_at DESC";
         } elseif ($c == 'streaming') {
-            $sql = "SELECT * FROM products WHERE category=6 ORDER BY created_at DESC";
+            $sql = "SELECT * FROM products WHERE category=6 ORDER BY available DESC, created_at DESC";
         }
 
         $result = mysqli_query($conn, $sql);
@@ -167,14 +167,24 @@ require('../connect.php');
                                         </div>
                                     <?php
                                     }
+
+                                    if ($row['available'] == 1) { ?>
+                                        <button class="btn addCart"
+                                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalAddCart"
+                                            data-id="<?php echo $row['id'] ?>">
+                                            <i style="color:red;" class="bi bi-cart3 h4"></i>
+                                        </button>
+                                    <?php
+                                    } else { ?>
+                                        <p style="display:inline; color:red; font-weight:bold; font-size: small; margin:0; margin-top:11.5px; margin-bottom:11.5px;">
+                                            สินค้าหมด
+                                        </p>
+                                    <?php
+                                    }
                                     ?>
-                                    <button class="btn addCart"
-                                        onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalAddCart"
-                                        data-id="<?php echo $row['id'] ?>">
-                                        <i style="color:red;" class="bi bi-cart3 h4"></i>
-                                    </button>
+
                                 </div>
                             </div>
                         </div>
@@ -210,7 +220,7 @@ require('../connect.php');
     });
 </script>
 
-<?php 
-include('partials/footer.php'); 
+<?php
+include('partials/footer.php');
 $conn->close();
 ?>
