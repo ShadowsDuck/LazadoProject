@@ -20,15 +20,6 @@
                         <a href="allitem.php" class="text-white">สินค้าทั้งหมด</a>
                     </h6>
                 </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <a href="https://www.facebook.com/iamsanya.khr?locale=th_TH" class="text-white">ไม่มีอะไรใส่ไว้เท่ๆ</a>
-                    </h6>
-                </div>
-                <!-- Grid column -->
 
                 <!-- Grid column -->
                 <div class="col-md-2">
@@ -112,7 +103,3 @@
 </body>
 
 </html>
-
-<?php
-$conn->close();
-?>

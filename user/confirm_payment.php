@@ -48,3 +48,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     die(header("Location:{$base_url}/login/error.php"));
 }
+
+$conn->close();
