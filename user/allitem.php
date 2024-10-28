@@ -19,8 +19,6 @@ require('../connect.php');
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         /* background-color: red; */
     }
-
-    
 </style>
 
 
@@ -54,13 +52,12 @@ require('../connect.php');
     <div class="row text-center">
         <h2 class="text-center mt-5">จัดเรียงตามประเภท</h2>
         <div class="col">
-            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php') ? 'active' : ''; ?>"
+            <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php' || strpos($currentPage, 'allitem.php?keyword=') === 0) ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php'">
                 <i class="bi bi-grid" style="font-size: 2rem;"></i>
                 <p>ทั้งหมด</p>
             </div>
         </div>
-
         <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'allitem.php?c=keyboard') ? 'active' : ''; ?>"
                 onclick="window.location.href='allitem.php?c=keyboard'">

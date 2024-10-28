@@ -195,37 +195,45 @@
 
 <!-- Icon หมวดหมู่-->
 <section class="container">
-    <h2 class="text-center mt-4">จัดเรียงตามประเภท</h2>
     <div class="row text-center">
-        <div class="col-md-2 py-4">
+        <h2 class="text-center mt-5">จัดเรียงตามประเภท</h2>
+        <div class="col">
+            <div class="category-item m-4 <?php echo ($currentPage === 'manage_product.php' || strpos($currentPage, 'manage_product.php?keyword=') === 0) ? 'active' : ''; ?>"
+                onclick="window.location.href='manage_product.php'">
+                <i class="bi bi-grid" style="font-size: 2rem;"></i>
+                <p>ทั้งหมด</p>
+            </div>
+        </div>
+
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'manage_product.php?c=keyboard') ? 'active' : ''; ?>"
                 onclick="window.location.href='manage_product.php?c=keyboard'">
                 <i class="bi bi-keyboard" style="font-size: 2rem;"></i>
                 <p>คีย์บอร์ด</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'manage_product.php?c=mouse') ? 'active' : ''; ?>"
                 onclick="window.location.href='manage_product.php?c=mouse'">
                 <i class="bi bi-mouse" style="font-size: 2rem;"></i>
                 <p>เมาส์</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'manage_product.php?c=headset') ? 'active' : ''; ?>"
                 onclick="window.location.href='manage_product.php?c=headset'">
                 <i class="bi bi-headset" style="font-size: 2rem;"></i>
                 <p>หูฟัง</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'manage_product.php?c=monitor') ? 'active' : ''; ?>"
                 onclick="window.location.href='manage_product.php?c=monitor'">
                 <i class="bi bi-display" style="font-size: 2rem;"></i>
                 <p>จอมอนิเตอร์</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'manage_product.php?c=chair') ? 'active' : ''; ?>"
                 onclick="window.location.href='manage_product.php?c=chair'">
                 <i class="bi bi-chair" style="font-size: 2rem;"><img
@@ -234,7 +242,7 @@
                 <p>เก้าอี้</p>
             </div>
         </div>
-        <div class="col-md-2 py-4">
+        <div class="col">
             <div class="category-item m-4 <?php echo ($currentPage === 'manage_product.php?c=streaming') ? 'active' : ''; ?>"
                 onclick="window.location.href='manage_product.php?c=streaming'">
                 <i class="bi bi-broadcast-pin" style="font-size: 2rem;"></i>
@@ -243,7 +251,7 @@
         </div>
     </div>
 
-    <div class="row search-container">
+    <div class="row search-container my-4">
         <?php
         $c = '';
         $keyword = '';
