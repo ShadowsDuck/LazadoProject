@@ -33,6 +33,7 @@ $currentCategory = isset($_GET['c']) ? $_GET['c'] : (isset($keyword) ? $keyword 
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="partials/LAZADO.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <body>

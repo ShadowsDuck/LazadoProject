@@ -2,15 +2,6 @@
 
 <!-- Body -->
 <div class="container mt-5">
-    <!-- Alert message should be displayed right here -->
-    <?php if (!empty($_SESSION['message'])): ?>
-        <div class="alert alert-warning alert-dismissible fade show alert-overlay" id="session-alert" role="alert">
-            <?php echo $_SESSION['message']; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php unset($_SESSION['message']); ?>
-    <?php endif; ?>
-
     <h1>จัดการคำสั่งซื้อ</h1>
 
     <!-- Date range filter button -->
@@ -82,7 +73,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
-                        <button type="submit" class="btn btn-primary">อัปเดตคำสั่งซื้อ</button>
+                        <button type="submit" class="btn btn-primary second">อัปเดตคำสั่งซื้อ</button>
                     </div>
                 </form>
             </div>
@@ -172,7 +163,7 @@
             } else {
                 ?>
                 <tr>
-                    <td colspan="12" class="text-center">ไม่พบข้อมูลคำสั่งซื้อในช่วงเวลาที่เลือก</td>
+                    <td colspan="11" class="text-center">ไม่พบข้อมูลคำสั่งซื้อในช่วงเวลาที่เลือก</td>
                 </tr>
             <?php
             }
@@ -183,7 +174,6 @@
 </div>
 
 <?php include('partials/footer.php'); ?>
-
 <script>
     var updateOrderModal = document.getElementById('updateOrderModal');
     updateOrderModal.addEventListener('show.bs.modal', function(event) {

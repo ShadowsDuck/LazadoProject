@@ -102,20 +102,41 @@
 
                                 <!-- footer -->
                                 <div class="card-footer d-flex justify-content-between align-items-center" style="background-color:white; border-top:none;">
-                                    <div>
+                                    <?php
+                                    if ($row1['discount'] == 1) { ?>
                                         <div class="card-text">
-                                            <p style="text-decoration: line-through; margin:0; font-size: 12px;"><?php echo "฿" . number_format($row1['price'], 2); ?></p>
-                                            <p style="margin:0; font-size: 20px; color:red;"><?php echo "฿" . number_format($row1['discounted_price'], 2); ?></p>
+                                            <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;">
+                                                <?php echo "฿" . number_format($row1['price'], 2); ?>
+                                            </p>
+                                            <p style="margin:0; font-size: 20px; color:red;">
+                                                <?php echo "฿" . number_format($row1['discounted_price'], 2); ?>
+                                            </p>
                                         </div>
-                                    </div>
 
-                                    <button class="btn addCart"
-                                        onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalAddCart"
-                                        data-id="<?php echo $row1['id'] ?>">
-                                        <i style="color:red;" class="bi bi-cart3 h4"></i>
-                                    </button>
+                                    <?php
+                                    } else { ?>
+                                        <div class="card-text" style="font-size: 20px; color:black;">
+                                            <?php echo "฿" . number_format($row1['price'], 2); ?>
+                                        </div>
+                                    <?php
+                                    }
+
+                                    if ($row1['available'] == 1) { ?>
+                                        <button class="btn addCart"
+                                            onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalAddCart"
+                                            data-id="<?php echo $row1['id'] ?>">
+                                            <i style="color:red;" class="bi bi-cart3 h4"></i>
+                                        </button>
+                                    <?php
+                                    } else { ?>
+                                        <p style="display:inline; color:red; font-weight:bold; font-size: medium; margin:0; margin-top:11.5px; margin-bottom:11.5px;">
+                                            สินค้าหมด
+                                        </p>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +174,8 @@
                         <!-- Card footer with price and add-to-cart button -->
                         <div class="card-footer d-flex justify-content-between align-items-center" style="background-color:white; border-top:none;">
 
-                            <?php if ($row['discount'] == 1) { ?>
+                            <?php
+                            if ($row['discount'] == 1) { ?>
                                 <div class="card-text">
                                     <p style="text-decoration: line-through; margin:0; font-size: 12px; color:black;">
                                         <?php echo "฿" . number_format($row['price'], 2); ?>
@@ -163,20 +185,33 @@
                                     </p>
                                 </div>
 
-                            <?php } else { ?>
+                            <?php
+                            } else { ?>
                                 <div class="card-text" style="font-size: 20px; color:black;">
                                     <?php echo "฿" . number_format($row['price'], 2); ?>
                                 </div>
-                            <?php } ?>
+                            <?php
+                            }
+
+                            if ($row['available'] == 1) { ?>
+                                <button class="btn addCart"
+                                    onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalAddCart"
+                                    data-id="<?php echo $row['id'] ?>">
+                                    <i style="color:red;" class="bi bi-cart3 h4"></i>
+                                </button>
+                            <?php
+                            } else { ?>
+                                <p style="display:inline; color:red; font-weight:bold; font-size: medium; margin:0; margin-top:11.5px; margin-bottom:11.5px;">
+                                    สินค้าหมด
+                                </p>
+                            <?php
+                            }
+                            ?>
 
 
-                            <button class="btn addCart"
-                                onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalAddCart"
-                                data-id="<?php echo $row['id'] ?>">
-                                <i style="color:red;" class="bi bi-cart3 h4"></i>
-                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -329,7 +364,7 @@ unset($_SESSION['orderSuccess']);
 
 
 
-    
+
     // ดึงปุ่มเพิ่ม และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มเพิ่มใน Modal
     document.querySelectorAll('.addCart').forEach(button => {
         button.addEventListener('click', function(event) {

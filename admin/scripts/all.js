@@ -21,10 +21,25 @@ document.addEventListener('DOMContentLoaded', function () {
     })()
 });
 
-// ให้ข้อความ Alert หายไปหลังจาก 2 วินาที
-setTimeout(() => {
-    const alert = document.getElementById('session-alert');
-    if (alert) {
-        alert.classList.remove('show'); // ลบคลาส 'show' เพื่อซ่อน Alert
-    }
-}, 2000);
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('session_message.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                Swal.fire({
+                    toast: true,
+                    icon: 'success',
+                    title: data.message,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+            }
+        })
+        .catch(error => console.error('เกิดข้อผิดพลาด!:', error));
+});
