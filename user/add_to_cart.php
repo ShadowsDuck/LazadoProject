@@ -28,6 +28,13 @@ if (isset($_SESSION["id"]) && isset($_SESSION["usertype"])) {
         // เพิ่มจำนวนสินค้าลงในเซสชัน
         $_SESSION['cart'][$product_id] = ($_SESSION['cart'][$product_id] ?? 0) + $qty;
 
+        if ($result) {
+            $_SESSION['message'] = "เพิ่มสินค้าสำเร็จ!";
+            header("location:{$_SESSION['currentpage']}");
+        } else {
+            $_SESSION['message'] = "เพิ่มสินค้าไม่สำเร็จ!: " . mysqli_error($conn);
+            header("location:{$_SESSION['currentpage']}");
+        }
         // เปลี่ยนเส้นทางไปที่หน้า cart.php
         header("location:{$_SESSION['currentpage']}"); // เปลี่ยนเส้นทางไปยัง cart.php
         exit();
@@ -39,4 +46,3 @@ if (isset($_SESSION["id"]) && isset($_SESSION["usertype"])) {
 }
 
 $conn->close();
-?>

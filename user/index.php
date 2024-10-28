@@ -1,31 +1,6 @@
 <?php include('partials/header.php'); ?>
 
 <!-- Body -->
-
-<!-- Modal for add to cart -->
-<div class="container-add-to-cart">
-    <div class="modal fade" id="modalAddCart" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <i class="bi bi-cart3" style="font-size:50px;"></i>
-
-                    <h4 class="modal-title">เพิ่มสินค้า</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>คุณต้องการเพิ่มสินค้าไปยังตะกร้า?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                    <a href="#" id="confirmAdd" class="btn btn-danger ">เพิ่มสินค้า</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container mt-5">
     <div class="row">
         <!-- Category Menu -->
@@ -38,7 +13,6 @@
                 <a href="allitem.php?c=monitor">จอมอนิเตอร์</a>
                 <a href="allitem.php?c=chair">เก้าอี้</a>
                 <a href="allitem.php?c=streaming">สตรีมมิ่ง</a>
-
             </div>
         </div>
 
@@ -124,8 +98,6 @@
                                     if ($row1['available'] == 1) { ?>
                                         <button class="btn addCart"
                                             onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modalAddCart"
                                             data-id="<?php echo $row1['id'] ?>">
                                             <i style="color:red;" class="bi bi-cart3 h4"></i>
                                         </button>
@@ -196,8 +168,6 @@
                             if ($row['available'] == 1) { ?>
                                 <button class="btn addCart"
                                     onclick="<?php $_SESSION['currentpage'] = basename($_SERVER['REQUEST_URI']); ?>"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalAddCart"
                                     data-id="<?php echo $row['id'] ?>">
                                     <i style="color:red;" class="bi bi-cart3 h4"></i>
                                 </button>
@@ -209,9 +179,6 @@
                             <?php
                             }
                             ?>
-
-
-
                         </div>
                     </div>
                 </div>
@@ -344,10 +311,10 @@ unset($_SESSION['orderSuccess']);
     </div>
 </div>
 
-
 <script src="script/flash_sale.js"></script>
 <script src="script/search.js"></script>
 <script src="script/search_result.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     //Modal =eitg'bo
     document.addEventListener("DOMContentLoaded", function() {
@@ -358,25 +325,55 @@ unset($_SESSION['orderSuccess']);
             const paymentSuccessModal = new bootstrap.Modal(document.getElementById('paymentSuccessModal')); //ใช้กับรหัส
             paymentSuccessModal.show();
         }
-
-
     });
 
-
-
-
-    // ดึงปุ่มเพิ่ม และเมื่อกดจะเปิด Modal พร้อมส่งค่า id ไปยังปุ่มเพิ่มใน Modal
+    // ดึงปุ่มลบและเรียก SweetAlert เมื่อกดปุ่มลบ
     document.querySelectorAll('.addCart').forEach(button => {
         button.addEventListener('click', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // ป้องกันการรีเฟรชหน้า
 
-            // ดึง id สินค้า
+            // ดึง id ของผู้ดูแลจากปุ่มที่คลิก
             const productId = button.getAttribute('data-id');
 
-            // อัปเดตลิงก์ของปุ่มลบใน Modal
-            const confirmDeleteBtn = document.getElementById('confirmAdd');
-            confirmDeleteBtn.href = `add_to_cart.php?id=${productId}`;
+            // แสดง SweetAlert สำหรับยืนยันการลบ
+            Swal.fire({
+                title: "เพิ่มสินค้า",
+                text: "คุณต้องการเพิ่มสินค้าไปยังตะกร้า?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "เพิ่มสินค้า",
+                cancelButtonText: "ยกเลิก"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `add_to_cart.php?id=${productId}`;
+                }
+            });
         });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('session_message.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    Swal.fire({
+                        toast: true,
+                        icon: 'success',
+                        title: data.message,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error('เกิดข้อผิดพลาด!:', error));
     });
 </script>
 
