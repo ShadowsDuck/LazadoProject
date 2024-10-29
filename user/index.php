@@ -344,7 +344,7 @@ unset($_SESSION['orderSuccess']);
         }
     });
 
-    // ดึงปุ่มลบและเรียก SweetAlert เมื่อกดปุ่มลบ
+    // ดึงปุ่มลบและเรียก SweetAlert เมื่อกดปุ่ม
     document.querySelectorAll('.addCart').forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault(); // ป้องกันการรีเฟรชหน้า
@@ -360,7 +360,8 @@ unset($_SESSION['orderSuccess']);
                 showCancelButton: true,
                 confirmButtonColor: "#dc3545",
                 confirmButtonText: "เพิ่มสินค้า",
-                cancelButtonText: "ยกเลิก"
+                cancelButtonText: "ยกเลิก",
+                scrollbarPadding: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = `add_to_cart.php?id=${productId}`;
@@ -382,6 +383,7 @@ unset($_SESSION['orderSuccess']);
                         showConfirmButton: false,
                         timer: 1500,
                         timerProgressBar: true,
+                        scrollbarPadding: false,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
