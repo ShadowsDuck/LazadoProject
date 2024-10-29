@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2024 at 02:14 AM
+-- Generation Time: Oct 29, 2024 at 08:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,12 +39,9 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `product_id`, `qty`) VALUES
-(1, 35, 1, 2),
-(3, 35, 3, 10),
-(4, 35, 2, 2),
-(5, 35, 4, 4),
-(6, 35, 8, 20),
-(7, 37, 8, 5);
+(10, 40, 3, 1),
+(14, 35, 5, 1),
+(120, 37, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -77,14 +74,14 @@ INSERT INTO `category` (`id`, `name`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `product` varchar(255) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `product_id` int(10) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `qty` int(40) NOT NULL,
   `total` decimal(10,2) NOT NULL,
   `order_date` datetime NOT NULL,
   `status` varchar(50) NOT NULL,
   `customer_name` varchar(255) NOT NULL,
-  `customer_contact` varchar(255) NOT NULL,
   `customer_email` varchar(255) NOT NULL,
   `customer_address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -93,8 +90,13 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `product`, `price`, `qty`, `total`, `order_date`, `status`, `customer_name`, `customer_contact`, `customer_email`, `customer_address`) VALUES
-(1, 'mouse', 2000.00, 1, 2000.00, '2024-10-25 05:43:13', 'จัดส่งสำเร็จ', 'Tanaphat Partoom', '0650208419', 'ommykung2033@gmail.com', 'home 16/9 Sukhothai Thailand');
+INSERT INTO `orders` (`id`, `user_id`, `product_id`, `price`, `qty`, `total`, `order_date`, `status`, `customer_name`, `customer_email`, `customer_address`) VALUES
+(35, 44, 4, 8490.00, 5, 42450.00, '2024-10-28 21:41:28', '2', 'aphidet phonwen', 'F_Phonwen@hotmail.com', 'Yanyao Sawankhalok Sukhothai 64110'),
+(36, 44, 1, 3950.00, 1, 3950.00, '2024-10-28 21:42:03', '2', 'aphidet phonwen', 'F_Phonwen@hotmail.com', 'Yanyao Sawankhalok Sukhothai 64110'),
+(37, 44, 9, 5490.00, 1, 5490.00, '2024-10-28 21:42:03', '0', 'aphidet phonwen', 'F_Phonwen@hotmail.com', 'Yanyao Sawankhalok Sukhothai 64110'),
+(38, 44, 7, 7990.00, 1, 7990.00, '2024-10-28 21:42:03', '1', 'aphidet phonwen', 'F_Phonwen@hotmail.com', 'Yanyao Sawankhalok Sukhothai 64110'),
+(39, 45, 10, 5990.00, 5, 29950.00, '2024-10-29 01:46:16', '2', 'Tanaphat Partoom', '', ''),
+(40, 44, 1, 3690.00, 1, 3690.00, '2024-10-29 13:44:25', '1', 'aphidet phonwen', 'F_Phonwen@hotmail.com', 'Yanyao Sawankhalok Sukhothai 64110');
 
 -- --------------------------------------------------------
 
@@ -107,27 +109,31 @@ CREATE TABLE `products` (
   `name` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `img` varchar(255) NOT NULL,
+  `discount` varchar(1) NOT NULL DEFAULT '0',
+  `discounted_price` decimal(10,2) NOT NULL,
   `category` int(2) NOT NULL,
-  `featured` varchar(10) NOT NULL,
-  `active` varchar(10) NOT NULL
+  `available` varchar(1) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `file_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `img`, `category`, `featured`, `active`) VALUES
-(1, 'MONITOR (จอมอนิเตอร์) LG ULTRAGEAR 24GS50F-B - 23.7 VA FHD 180Hz', 'Brands	LG\r\nDisplay Size (in.)	24\"\r\nPanel Size (in.)	23.7\" VA\r\nResolution	1920 x 1080\r\nResolution Type	FHD\r\nDisplay color	16.7 Million 8 bits (6bits+FRC)\r\nBrightness	\r\n200 cd/m² (Min)\r\n250 cd/m² (Typ.)\r\nContrast ratio	\r\n3000 : 1 (Typ.)\r\n1800 : 1 (Min.)\r\nResponse Time	\r\n1ms (MBR)\r\n5ms (GtG at Faster)\r\nAspect Ratio	16 : 9\r\nRefresh Rate	180Hz\r\nScreen Curvature	Flat screen\r\nPixel Pitch (H x V)	0.2739 x 0.2739 mm\r\nViewing Angle (CR≧10)	178° (H) / 178° (V)\r\nColor Gamut	NTSC : 72% (CIE1931) (Typ)\r\nHDR Support	HDR10\r\nAdaptive Sync	AMD FreeSync™\r\nDisplay Surface	Anti-Glare\r\nFlicker free	Yes\r\nLow Blue Light	Yes\r\nConnectivity	\r\n1 x DisplayPort™ 1.4\r\n2 x HDMI™ 2.0\r\nBuilt-in Speaker	No\r\nPower Consumption	\r\nPower Input : 100-240 V 50/60Hz\r\nDC Output : 19V 1.3A\r\nPower Type : External Power Adaptor\r\nConsumption (DC Off) : 0.3 Watt\r\nConsumption (Sleep Mode) : 0.5 Watt\r\nConsumption (typical) : 15.7 Watt\r\nConsumption (max) : 16 Watt\r\nConsumption (Energy Star) : 18 Watt\r\nMechanical	\r\nDisplay Position Adjustments : Tilt\r\nWall Mountable : 100x100mm\r\nDimension (W x H x D)	539.5 x 414.2 x 195.6 mm\r\nWeight (Esti.)	\r\nNet Weight without stand : 2.9 kg\r\nNet Weight with stand : 3.5 kg\r\nNet Weight with Packaging : 5.3 kg\r\nColor	BLACK\r\nWarranty	3 Years', 3890.00, '', 4, '', ''),
-(2, 'MOUSE (เมาส์) PULSAR X2 MINI WIRELESS WHITE (PX202S)', 'Dimensions W x D x H	116 x 61 x37 mm\r\nClick life span	N/A\r\nScroll Whell	YES\r\nNumber of buttons	5 buttons\r\nInterface	2.4GHz Wireless\r\nSensor Resolution	26,000 DPI\r\nSensor technology	PAW 3395\r\nWireless technology	2.4GHz Wireless Techology\r\nColor	WHITE\r\nWarranty	2 Years', 2390.00, '', 2, '', ''),
-(3, 'KEYBOARD (คีย์บอร์ด) LOGITECH G PRO X TKL LIGHTSPEED WIRELESS (TACTILE) (BLACK) (EN/TH)', '', 6590.00, '', 1, '', ''),
-(4, 'GAMING CHAIR (เก้าอี้เกมมิ่ง) COOLER MASTER CALIBER X2 STREET FIGHTER 6 (CHUNLI)', 'Brand	COOLER MASTER\r\nMaterial	PU Leather\r\nType	Gaming Chair\r\nWeight	24.7 kg\r\nColor	CHUN-LI\r\nWarranty	2 Years', 8490.00, '', 5, '', ''),
-(5, 'HEADSET (หูฟัง) STEELSERIES ARCTIS 1 WIRELESS (BLACK) (2Y)', 'Brand	STEELSERIES\r\nColor	BLACK\r\nConnector	\r\n4-pole 3.5 mm.\r\n2.4 GHz lossless\r\nDriver Unit	40mm.\r\nFrequency Response	20Hz ~ 20000 Hz.\r\nSensitivity	98 db\r\nInput Impedance	32 Ohms\r\nMic. Frequency Response	100Hz - 6500Hz\r\nMic. Sensitivity	-38dBV/Pa\r\nWarranty	2 Years', 2990.00, '', 3, '', ''),
-(6, 'HEADSET (หูฟัง) STEELSERIES ARCTIS 7+ WIRELESS (BLACK) (2Y)', 'Brand	STEELSERIES\r\nColor	BLACK\r\nConnector	\r\n4-pole 3.5 mm.\r\n2.4 GHz lossless\r\nDriver Unit	40mm.\r\nFrequency Response	20Hz ~ 20000 Hz.\r\nSensitivity	98 db\r\nInput Impedance	32 Ohms\r\nMic. Frequency Response	100Hz - 6500Hz\r\nMic. Sensitivity	-38 dB\r\nWarranty	2 Years', 4490.00, '', 3, '', ''),
-(7, 'MONITOR (จอมอนิเตอร์) BENQ ZOWIE XL2411K - 24 TN FHD 144Hz', 'Brands	BENQ\r\nDisplay Size (in.)	24\"\r\nPanel Type	TN\r\nPanel Size (in.)	24\"\r\nResolution	1920 x 1080\r\nResolution Type	FHD\r\nBrightness	320 cd/m²\r\nContrast ratio	1000 : 1\r\nResponse Time	1ms\r\nAspect Ratio	16 : 9\r\nRefresh Rate	144Hz\r\nScreen Curvature	Flat screen\r\nViewing Angle (CR≧10)	178° (H) / 178° (V)\r\nFlicker free	Yes\r\nLow Blue Light	Yes\r\nConnectivity	\r\n2 x HDMI™\r\n1 x DisplayPort™\r\n1 x 3.5mm Audio Out\r\nPower Consumption	45 Watt\r\nDimension (W x H x D)	517 - 362 x 576 x 209 mm\r\nWeight (Esti.)	10 kg\r\nColor	BLACK\r\nWarranty	3 Years', 7190.00, '', 4, '', ''),
-(8, 'KEYBOARD (คีย์บอร์ด) NEOLUTION E-SPORT THUNDER (BLUE SWITCH) (EN/TH)', 'Brand	NEOLUTION\r\nSwitch Name	BLUE SWITCH\r\nConnectivity	USB\r\nLighting	RGB\r\nLocalization	EN/TH\r\nDimension	310 x 100 x 40 mm.\r\nWeight.	0.600 Kg\r\nType	MECHANICAL KEYBOARD\r\nWIRED/WIRELESS	WIRED\r\nWarranty	2 Years', 1990.00, '', 1, '', ''),
-(9, 'MOUSE (เมาส์) GLORIOUS MODEL O 2 PRO 4K/8KHz EDITION WIRELESS (BLACK)', 'Dimensions W x D x H	128 x 67 x 62 mm\r\nClick life span	100 MILLION\r\nScroll Whell	YES\r\nNumber of buttons	6 buttons\r\nBattery Life	80 hours\r\nBattery Type	N/A\r\nInterface	\r\nWIRED\r\n2.4GHz Wireless\r\nSensor Resolution	26,000 DPI\r\nSensor technology	BAMF 2.0\r\nWireless technology	Wireless 2.4G\r\nColor	BLACK\r\nWarranty	2 Years', 5490.00, '', 2, '', ''),
-(10, 'CAPTURE CARD (อุปกรณ์จับภาพหน้าจอ) AVERMEDIA LIVE GAMER EXTREME 3 GC551G2', 'อินเทอร์เฟซ: USB 3.2 (Gen 1) Type-C (plug and play, UVC)\r\nช่องอินพุตวิดีโอ: HDMI 2.0\r\nช่องเอาต์พุตวิดีโอ (ส่งผ่านสัญญาณ): HDMI 2.0\r\nช่องอินพุตเสียง: HDMI 2.0 / สายสัญญาณเสียงอินพุต 3.5 มม. (แบบ 3-Pole)\r\nช่องอินพุตเสียง (ส่งผ่านสัญญาณ): HDMI 2.0 / สายสัญญาณเสียงเอาต์พุต 3.5 มม. (แบบ 3-Pole)\r\nความละเอียดสูงสุดของ HDR Pass-Through: 2160p60 / 1440p120 / 1080p240\r\nความละเอียดสูงสุดของ VRR Pass-Through: 1440p120 / 1080p120\r\nความละเอียดที่รองรับ (อินพุตวิดีโอ): 2160p, 1440p, 1080p, 1080i, 720p, 576p, 480p\r\nความละเอียดในการจับภาพสูงสุด: 2160p30 / 1440p60 / 1080p60\r\nขนาด (กว้าง x ยาว xสูง) 112.5 x 66.1 x 20.9 มม. (4.43 x 2.6 x 0.82 นิ้ว)\r\nน้ำหนัก: 85 ก. (3 ออนซ์)', 7590.00, '', 6, '', '');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `discount`, `discounted_price`, `category`, `available`, `created_at`, `file_name`) VALUES
+(1, 'MONITOR (จอมอนิเตอร์) LG ULTRAGEAR 24GS50F-B - 23.7 VA FHD 180Hz', 'Brands	LG\r\nDisplay Size (in.)	24', 3950.00, '1', 3690.00, 4, '1', '2024-10-26 08:23:56', 'MONITOR (จอมอนิเตอร์) LG ULTRAGEAR 24GS50F-B - 23.7 VA FHD 180Hz.jpg'),
+(2, 'WIRELESS MOUSE (เมาส์ไร้สาย) PULSAR X2 WIRELESS MINI (PX202S) WHITE', 'Dimensions W x D x H	116 x 61 x37 mm\r\nClick life span	N/A\r\nScroll Whell	YES\r\nNumber of buttons	5 buttons\r\nInterface	2.4GHz Wireless\r\nSensor Resolution	26,000 DPI\r\nSensor technology	PAW 3395\r\nWireless technology	2.4GHz Wireless Techology\r\nColor	WHITE\r\nWarranty	2 Years', 3990.00, '1', 2990.00, 2, '0', '2024-10-26 08:23:56', 'WIRELESS MOUSE (เมาส์ไร้สาย) PULSAR X2 WIRELESS MINI (PX202S) WHITE.png'),
+(4, 'GAMING CHAIR (เก้าอี้เกมมิ่ง) COOLER MASTER CALIBER X2 STREET FIGHTER 6 (CHUNLI)', 'Brand	COOLER MASTER\r\nMaterial	PU Leather\r\nType	Gaming Chair\r\nWeight	24.7 kg\r\nColor	CHUN-LI\r\nWarranty	2 Years', 8490.00, '0', 0.00, 5, '1', '2024-10-26 08:23:56', 'GAMING CHAIR (เก้าอี้เกมมิ่ง) COOLER MASTER CALIBER X2 STREET FIGHTER 6 (CHUNLI).png'),
+(5, 'HEADSET (หูฟัง) STEELSERIES ARCTIS 1 WIRELESS (BLACK)', 'รายละเอียดสินค้าโดยย่อ\r\n• Headset Response : 20 Hz - 20000 Hz\r\n• Mic Response : 100 Hz - 6500 Hz', 4290.00, '0', 0.00, 3, '0', '2024-10-26 08:23:56', 'HEADSET (หูฟัง) STEELSERIES ARCTIS 1 WIRELESS (BLACK).jpg'),
+(6, 'WIRELESS HEADSET (หูฟังไร้สาย) STEELSERIES ARCTIS 7+ (BLACK)', 'รายละเอียดสินค้าโดยย่อ\r\n• Headset Response : 20 Hz - 20000 Hz\r\n• Mic Response : 100 Hz - 6500 Hz', 7990.00, '1', 7490.00, 3, '1', '2024-10-26 08:23:56', 'WIRELESS HEADSET (หูฟังไร้สาย) STEELSERIES ARCTIS 7+ (BLACK).png'),
+(7, 'MONITOR (จอมอนิเตอร์) BENQ ZOWIE XL2411K - 24 INCH TN FHD 144Hz', 'รายละเอียดสินค้าโดยย่อ\r\n• Color gamut : 98% sRGB\r\n• Color Support : 16.7 Million\r\n• Response Time : 1 ms(GTG)\r\n• Brightness : 320 Nits\r\n• Aspect Ratio : 16:9\r\n• DyAc™ Technology', 7990.00, '0', 0.00, 4, '1', '2024-10-26 08:23:56', 'MONITOR (จอมอนิเตอร์) BENQ ZOWIE XL2411K - 24 INCH TN FHD 144Hz.png'),
+(8, 'WIRELESS KEYBOARD (คีย์บอร์ดไร้สาย) NEOLUTION E-SPORT THUNDER (BLACK) (BLUE SWITCH - RGB - EN/TH)', 'รายละเอียดสินค้าโดยย่อ\r\n• Blue Switch (Clicky)\r\n• RGB LED\r\n• English / Thai Keycap\r\n• ANSI\r\n• Wired USB (Detachable USB-C to USB-A)\r\n• Bluetooth', 1590.00, '0', 0.00, 1, '1', '2024-10-26 08:23:56', 'WIRELESS KEYBOARD (คีย์บอร์ดไร้สาย) NEOLUTION E-SPORT THUNDER (BLACK) (BLUE SWITCH - RGB - EN-TH).jpg'),
+(9, 'WIRELESS MOUSE (เมาส์ไร้สาย) GLORIOUS MODEL O 2 PRO WIRELESS 4K/8KHz EDITION (BLACK)', 'รายละเอียดสินค้าโดยย่อ\r\n• Up to 26,000 DPI\r\n• 2.4GHz Wireless / Wired\r\n• BAMF 2.0 26K Sensor\r\n• Polling Rate 8,000 Hz (Wired)\r\n• Glorious Optical Switches\r\n• Switch Lifecycle 100M Clicks\r\n• Speed 650 IPS\r\n• Acceleration 50 G\r\n• Programmable Buttons 6\r\n• Windows / MacOS / Linux', 5490.00, '0', 0.00, 2, '1', '2024-10-26 08:23:56', 'WIRELESS MOUSE (เมาส์ไร้สาย) GLORIOUS MODEL O 2 PRO WIRELESS 4K-8KHz EDITION (BLACK).jpg'),
+(10, 'VIDEO CAPTURE DEVICE (อุปกรณ์จับภาพหน้าจอ) AVERMEDIA LIVE GAMER EXTREME 3 (GC551G2)', 'รายละเอียดสินค้าโดยย่อ\r\n• การบันทึกแบบ 4Kp30\r\n• ปรับอัตรารีเฟรชได้อย่างอิสระ\r\n• สตรีมหลายช่องทางด้วย RECentral\r\n• เวลาหน่วงแบบต่ำเป็นพิเศษ', 6190.00, '1', 5990.00, 6, '1', '2024-10-26 08:23:56', 'VIDEO CAPTURE DEVICE (อุปกรณ์จับภาพหน้าจอ) AVERMEDIA LIVE GAMER EXTREME 3 (GC551G2).jpg'),
+(62, 'WIRELESS MOUSE (เมาส์ไร้สาย) RAZER VIPER V3 PRO - BLACK', 'รายละเอียดสินค้าโดยย่อ\r\n\r\n• Up to 35,000 DPI\r\n• Razer HyperSpeed Wireless, Wired connection\r\n• Focus Pro 35K Optical Sensor Gen-2\r\n• Programmable Button 6\r\n• Speed 750 IPS\r\n• Acceleration 70 G\r\n• Optical Mouse Switches Gen-3\r\n• Switch Lifecycle 90-million Clicks', 5290.00, '0', 0.00, 2, '1', '2024-10-27 03:26:30', 'WIRELESS MOUSE (เมาส์ไร้สาย) RAZER VIPER V3 PRO - BLACK.png'),
+(63, 'WIRELESS KEYBOARD (คีย์บอร์ดไร้สาย) LOGITECH G PRO X TKL (BLACK) (LOGITECH GX BROWN SWITCH - LIGHTSY', 'รายละเอียดสินค้าโดยย่อ\r\n\r\n• Logitech GX Brown Switch (Tactile)\r\n• Lightsync RGB\r\n• English / Thai Keycap\r\n• ANSI\r\n• Wired (Detachable USB-C to USB-A)\r\n• Lightspeed Wireless (USB Receiver Included)\r\n• Bluetooth', 6490.00, '0', 0.00, 1, '1', '2024-10-27 03:32:54', 'WIRELESS KEYBOARD (คีย์บอร์ดไร้สาย) LOGITECH G PRO X TKL (BLACK) (LOGITECH GX BROWN SWITCH - LIGHTSY.png'),
+(79, 'WIRELESS HEADSET (หูฟังไร้สาย) HYPERX CLOUD MINI (BLACK)', 'รายละเอียดสินค้าโดยย่อ\r\n• ระดับเสียงต่ำกว่า 85dB\r\n• คุณภาพเสียงที่เต็มอิ่ม\r\n• ไมโครโฟนบูมความทนทานสูงแบบพับเก็บได้\r\n• น้ำหนักเบาสบาย', 1890.00, '0', 0.00, 3, '1', '2024-10-27 12:20:31', 'WIRELESS HEADSET (หูฟังไร้สาย) HYPERX CLOUD MINI (BLACK).png');
 
 -- --------------------------------------------------------
 
@@ -150,10 +156,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `fullname`, `address`, `usertype`) VALUES
-(34, 'admin', '$2y$10$izlKsQAUwONwg9R3ppnNAOJrt2a4sNh6/suriA/lskIeX1q46.FT.', 'test@test.com', 'aphidet phonwen', NULL, 'admin'),
-(35, 'user', '$2y$10$pInI3fPEnqh8jT2wY3MPPeNY7F.mRi5OJUNaObFWWY310/FjoL8V6', 'test@test.com', 'fahaph p', '64110', 'user'),
-(37, 'fahaph', '$2y$10$hJ13mqIR0yurXcZ7yHahq..XbYLcYj3bvJIn/pVQ5RraSJ5BJ3ley', 'fahaph@something.com', 'aphidet phonwen', 'Yanyao Sawankhalok Sukhothai 64110', 'user'),
-(39, 'fahaph1', '$2y$10$y.isETpn6Lnc9MZFTWFOfe2gCqyQPgLOzMEplaNkLjtlkPO83OOo6', 'kuykuyku1141@gmail.com', 'aphidet asdasdasdasdasdads', 'Yanyao Sawankhalok Sukhothai 64110', 'user');
+(40, 'admin', '$2y$10$iV81cDBCOwQRSTizg5rD/Oitignye3a2n/HUrT/QpUgcU50PID/wq', 'boombasuagr1141@gmail.com', 'aphidet phonwen', 'Yanyao Sawankhalok Sukhothai 64110', 'admin'),
+(44, 'user', '$2y$10$8kUBVULJPMaG65qktplSt.p2ABleRFk.RuiKH91QmNiGmFvZ429Pa', 'F_Phonwen@hotmail.com', 'aphidet phonwen', 'Yanyao Sawankhalok Sukhothai 64110', 'user'),
+(45, 'admin1', '$2y$10$u8glVbXCs5sUx0wAbED.veMRYKMMx2T1Tu1Vv/vJnN8veTIXtxojy', '', 'Tanaphat Partoom', NULL, 'admin'),
+(46, 'admin2', '$2y$10$XAY0.XCmoktuOx4hBcuU6.OaUH4V5sypUSDPxi4252HXXHSiVPyHG', '', 'Ratchanon Ar-sasri', NULL, 'admin'),
+(47, 'admin3', '$2y$10$i/OdoY9yeYyT5LK5cEUGL.ufl6q6I3rTDly8L7aK4gh0FtsMMSjpi', '', 'Sawatcharat Lamdap', NULL, 'admin');
 
 --
 -- Indexes for dumped tables
@@ -181,8 +188,7 @@ ALTER TABLE `orders`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category` (`category`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -198,7 +204,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -210,29 +216,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
