@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $customer_address = $_POST['shipping_address'];
     $total_amount = $_POST['total_amount'];
     $discount = $_POST['discount'];
-    $price = 0;
 
     foreach ($cartItems as $item) {
         if ($discount == 1) {

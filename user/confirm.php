@@ -25,7 +25,7 @@ if (empty($selectedProducts)) {
 ob_end_flush();
 
 // ดึงข้อมูลสินค้าเฉพาะที่ถูกเลือก
-$sql = "SELECT cart.*, products.name, products.price, products.file_name, products.discount, products.discounted_price 
+$sql = "SELECT cart.*, products.*
         FROM cart 
         INNER JOIN products ON cart.product_id = products.id 
         WHERE cart.user_id = '{$_SESSION['id']}' 
@@ -220,7 +220,7 @@ $shipping_address = $user_result->fetch_assoc();
             <input type="hidden" name="cartItems" value="<?php echo htmlspecialchars(json_encode($cartItems), ENT_QUOTES, 'UTF-8'); ?>">
             <input type="hidden" name="total_amount" value="<?php echo $total_amount ?>">
             <input type="hidden" name="shipping_address" value="<?php echo htmlspecialchars($shipping_address['address']); ?>">
-            <input type="hidden" name="discount" value="<?php echo isset($item['discount']) && $item['discount'] == 1 ? 1 : 0; ?>">
+            <input type="hidden" name="discount" value="<?php echo $item['discount'] == 1 ? 1 : 0; ?>">
             <button type="submit" class="checkout-btn btn-danger mt-3">สั่งซื้อ</button>
         </form>
     </div>
