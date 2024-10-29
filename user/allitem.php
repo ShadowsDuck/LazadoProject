@@ -206,8 +206,7 @@ require('../connect.php');
                 text: "คุณต้องการเพิ่มสินค้าไปยังตะกร้า?",
                 icon: "question",
                 showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
+                confirmButtonColor: "#dc3545",
                 confirmButtonText: "เพิ่มสินค้า",
                 cancelButtonText: "ยกเลิก",
                 scrollbarPadding: false 
