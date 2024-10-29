@@ -23,7 +23,7 @@
                     </div>
                     <h4 class="card-title">ส่งข้อความถึงเรา</h4>
                     <p>กรอกแบบฟอร์มของเราแล้วเราจะติดต่อคุณภายใน 24 ชั่วโมง</p>
-                    <p><strong>Emails: lazadowebsite@gmail.com</strong></p>
+                    <p><strong>อีเมล: lazadowebsite@gmail.com</strong></p>
                 </div>
             </div>
         </div>
