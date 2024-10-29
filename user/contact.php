@@ -112,7 +112,8 @@
                         Swal.fire({
                             title: 'ส่งข้อความเรียบร้อยแล้ว!',
                             text: 'ขอบคุณที่ส่งข้อความถึงเรา เราจะติดต่อคุณภายใน 24 ชั่วโมง',
-                            icon: 'success'
+                            icon: 'success',
+                            confirmButtonColor: "#dc3545",
                         });
                         $('#contactForm')[0].reset(); // รีเซ็ตฟอร์มหลังจากส่งสำเร็จ
                     } else {
