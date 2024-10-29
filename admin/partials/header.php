@@ -4,8 +4,10 @@ $open_connect = 1;
 require('../connect.php');
 
 if (!isset($_SESSION['id']) || !isset($_SESSION['usertype'])) {
+    $_SESSION['message'] = 'เกิดข้อผิดพลาด โปรดติดต่อผู้ดูแล หรือใช้บัญชีอื่น!';
     die(header("location:{$base_url}/login/login.php")); //ถ้าไม่มี session id || usertype จะถูกส่งไป login.php
 } elseif ($_SESSION['usertype'] == 'user') {
+    $_SESSION['message'] = 'เกิดข้อผิดพลาด โปรดติดต่อผู้ดูแล หรือใช้บัญชีอื่น!';
     die(header("location:{$base_url}/login/login.php"));
 }
 
