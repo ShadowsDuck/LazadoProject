@@ -23,8 +23,7 @@
                     </div>
                     <h4 class="card-title">ส่งข้อความถึงเรา</h4>
                     <p>กรอกแบบฟอร์มของเราแล้วเราจะติดต่อคุณภายใน 24 ชั่วโมง</p>
-                    <p><strong>Emails: customer@lazado.com</strong></p>
-                    <p><strong>Emails: support@lazado.com</strong></p>
+                    <p><strong>Emails: lazadowebsite@gmail.com</strong></p>
                 </div>
             </div>
         </div>
