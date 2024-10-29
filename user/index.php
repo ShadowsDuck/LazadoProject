@@ -331,7 +331,8 @@ unset($_SESSION['orderSuccess']);
                 text: "ขอบคุณที่สั่งซื้อ การสั่งซื้อของคุณเสร็จสมบูรณ์แล้ว!",
                 icon: "success",
                 confirmButtonText: "ตกลง",
-                confirmButtonColor: "#dc3545"
+                confirmButtonColor: "#dc3545",
+                scrollbarPadding: false,
             });
         } else if (orderSuccess == '0') {
             Swal.fire({
@@ -339,7 +340,8 @@ unset($_SESSION['orderSuccess']);
                 text: "เกิดข้อผิดพลาดในการสั่งซื้อ กรุณาลองใหม่อีกครั้ง",
                 icon: "error",
                 confirmButtonText: "ตกลง",
-                confirmButtonColor: "#dc3545"
+                confirmButtonColor: "#dc3545",
+                scrollbarPadding: false,
             });
         }
     });
