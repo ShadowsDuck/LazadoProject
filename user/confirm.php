@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include('partials/header.php');
 include("../connect.php");
 
@@ -21,6 +22,7 @@ if (empty($selectedProducts)) {
     }
     exit;
 }
+ob_end_flush();
 
 // ดึงข้อมูลสินค้าเฉพาะที่ถูกเลือก
 $sql = "SELECT cart.*, products.name, products.price, products.file_name, products.discount, products.discounted_price 
