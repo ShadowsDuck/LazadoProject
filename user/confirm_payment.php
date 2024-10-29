@@ -8,17 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cartItems = json_decode($_POST['cartItems'], true);
     $customer_address = $_POST['shipping_address'];
     $total_amount = $_POST['total_amount'];
-    $discount = $_POST['discount'];
 
     foreach ($cartItems as $item) {
-        if ($discount == 1) {
-            $price = $item['discounted_price'];
-        } else {
-            $price = $item['price'];
-        }
+        $price = $item['discount'] == 1 ? $item['discounted_price'] : $item['price'];
 
-        $sql = "INSERT INTO `orders`
-            (`user_id`, `product_id`, `price`, `qty`, `total`,`order_date`, `status`, `customer_name`, `customer_email`, `customer_address`)
+        $sql = "INSERT INTO orders
+            (user_id, product_id, price, qty, total,order_date, status, customer_name, customer_email, customer_address)
         SELECT 
             '$user_id', 
             '{$item['product_id']}', 
