@@ -42,6 +42,8 @@ if (isset($_SESSION["id"]) && isset($_SESSION["usertype"])) {
         echo "Error: " . mysqli_error($conn);
     }
 } else {
+    $_SESSION['success'] = false;
+    $_SESSION['message'] = 'กรุณาเข้าสู่ระบบ!';
     die(header("location:{$base_url}/login/login.php"));
 }
 
