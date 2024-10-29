@@ -209,7 +209,8 @@ require('../connect.php');
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "เพิ่มสินค้า",
-                cancelButtonText: "ยกเลิก"
+                cancelButtonText: "ยกเลิก",
+                scrollbarPadding: false 
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = `add_to_cart.php?id=${productId}`;
