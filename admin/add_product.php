@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['message'] = "กรุณาเลือกหมวดหมู่สินค้า";
         $_SESSION['success'] = false;
         header("Location: {$base_url}/admin/add_product.php");
-        exit();
     }
 
     // Handle file upload if provided
@@ -31,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $_SESSION['message'] = "File upload failed. Please try again.";
                 header("Location: {$base_url}/admin/add_product.php");
-                exit();
+    
             }
         } else {
             $_SESSION['message'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
             header("Location: {$base_url}/admin/add_product.php");
-            exit();
+
         }
     }
 
@@ -47,17 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['message'] = "สินค้าเพิ่มเรียบร้อยแล้ว!";
         $_SESSION['success'] = true;
         header("Location: {$base_url}/admin/manage_product.php");
-        exit();
     } else {
         $_SESSION['message'] = "เกิดข้อผิดพลาดในการเพิ่มสินค้า: " . mysqli_error($conn);
         $_SESSION['success'] = false;
         header("Location: {$base_url}/admin/add_product.php");
-        exit();
     }
 
-    mysqli_close($conn);
 } else {
     $_SESSION['success'] = false;
     $_SESSION['message'] = 'เกิดข้อผิดพลาด โปรดติดต่อผู้ดูแล หรือใช้บัญชีอื่น!';
     die(header("location:{$base_url}/login/login.php"));
 }
+$conn->close();

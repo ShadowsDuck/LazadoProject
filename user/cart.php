@@ -7,6 +7,12 @@ if ($conn->connect_error) {
     die("การเชื่อมต่อล้มเหลว: " . $conn->connect_error);
 }
 
+if (!isset($_SESSION['id']) and !isset($_SESSION['usertype'])) {
+    $_SESSION['success'] = false;
+    $_SESSION['message'] = 'กรุณาเข้าสู่ระบบ!';
+    die(header("location:{$base_url}/login/login.php"));
+}
+
 // ปรับการ Query ข้อมูลให้รวมข้อมูล discount และ discounted_price
 $sql = "SELECT cart.*, products.name, products.price, products.discount, products.discounted_price, products.file_name 
         FROM cart 
