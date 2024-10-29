@@ -196,7 +196,7 @@ $shipping_address = $user_result->fetch_assoc();
         <div class="shipping-options">
             <h5>ตัวเลือกการจัดส่ง</h5>
             <div class="shipping-option">
-                <input type="radio" id="standard_shipping" name="shipping_method" value="standard">
+                <input type="radio" id="standard_shipping" name="shipping_method" value="standard" checked>
                 <label for="standard_shipping">ส่งแบบธรรมดา (ได้รับของภายในสองวันหลังสั่งของ)</label>
             </div>
             <div class="shipping-option">
