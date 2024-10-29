@@ -56,4 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     mysqli_close($conn);
+} else {
+    $_SESSION['success'] = false;
+    $_SESSION['message'] = 'เกิดข้อผิดพลาด โปรดติดต่อผู้ดูแล หรือใช้บัญชีอื่น!';
+    die(header("location:{$base_url}/login/login.php"));
 }
